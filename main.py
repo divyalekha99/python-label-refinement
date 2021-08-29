@@ -2,6 +2,10 @@ import editdistance
 import pandas as pd
 import pm4py
 from pm4py.objects.log.exporter.xes import exporter as xes_exporter
+from pm4py.algo.discovery.inductive import algorithm as inductive_miner
+from pm4py.visualization.process_tree import visualizer as pt_visualizer
+from pm4py.objects.conversion.process_tree import converter
+
 
 from label_splitter import LabelSplitter
 from log_generator import LogGenerator
@@ -23,8 +27,18 @@ def main() -> None:
 
     label_splitter = LabelSplitter()
     split_log = label_splitter.split_labels(log)
+    xes_exporter.apply(split_log, '/home/jonas/repositories/pm-label-splitting/test_files/test.xes')
 
-    # xes_exporter.apply(log, '/home/jonas/projects/ba_thesis/test.xes')
+    net, initial_marking, final_marking = inductive_miner.apply(split_log)
+    print(net)
+    tree = pm4py.discover_process_tree_inductive(log)
+
+    bpmn_graph = converter.apply(tree, variant=converter.Variants.TO_BPMN)
+    pm4py.write_bpmn(bpmn_graph, '/home/jonas/repositories/pm-label-splitting/test_files/test.bpmn', enable_layout=True)
+
+    # gviz = pt_visualizer.apply(tree)
+    # pt_visualizer.view(gviz)
+
 
 
 main()

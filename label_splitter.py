@@ -50,6 +50,14 @@ class LabelSplitter:
         print(len(temp_1))
         print(temp_1)
 
+        for event in event_graphs['D'].nodes:
+            log[event['case_id']][event['position']]['concept:name'] = event['label']
+
+        print('log:')
+        print(log)
+
+        return log
+
 
         #       variants = variants_filter.get_variants(log)
 
@@ -135,11 +143,16 @@ class LabelSplitter:
 
     def get_event_graphs_from_event_log(self, log) -> dict[str, Graph]:
         event_graphs = {}
-        for trace in log:
+        for case_id, trace in enumerate(log):
+            print('trace')
+            print(trace)
+            # print(trace['attributes']['concept:name'])
             prefix = ''
             processed_events = []
-            for event in trace:
+            for position, event in enumerate(trace):
                 label = event['concept:name']
+                event['case_id'] = case_id
+                event['position'] = position
                 if label not in event_graphs.keys():
                     event_graphs[label] = nx.Graph()
 
