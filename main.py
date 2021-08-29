@@ -6,10 +6,11 @@ from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 from pm4py.visualization.process_tree import visualizer as pt_visualizer
 from pm4py.objects.conversion.process_tree import converter
 from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
-
+from pm4py.objects.log.importer.xes import importer as xes_importer
 
 from label_splitter import LabelSplitter
 from log_generator import LogGenerator
+from performance_evaluator import PerformanceEvaluator
 from post_processor import PostProcessor
 
 
@@ -22,10 +23,11 @@ def import_csv(file_path):
 
 def main() -> None:
     import_csv('/mnt/c/Users/Jonas/Downloads/running-example.csv')
-    bpmn_graph = pm4py.read_bpmn('/mnt/c/Users/Jonas/Downloads/diagram.bpmn')
+    bpmn_graph = pm4py.read_bpmn('/mnt/c/Users/Jonas/Downloads/simple_example.bpmn')
 
     log_generator = LogGenerator()
     log = log_generator.get_log_from_bpmn(bpmn_graph)
+    xes_exporter.apply(log, '/home/jonas/repositories/pm-label-splitting/original_log.xes')
 
     label_splitter = LabelSplitter()
     split_log = label_splitter.split_labels(log)
@@ -33,9 +35,26 @@ def main() -> None:
 
     net, initial_marking, final_marking = inductive_miner.apply(split_log)
     post_processor = PostProcessor()
-    net = post_processor.post_process_petri_net(net)
+    final_net = post_processor.post_process_petri_net(net)
+    pnml_exporter.apply(final_net, initial_marking,
+                        '/home/jonas/repositories/pm-label-splitting/test_files/petri_net.pnml',
+                        final_marking=final_marking)
 
-    pnml_exporter.apply(net, initial_marking, '/home/jonas/repositories/pm-label-splitting/test_files/petri_net.pnml', final_marking=final_marking)
+
+    print('split_log:')
+    original_log = xes_importer.apply('/home/jonas/repositories/pm-label-splitting/original_log.xes')
+    performance_evaluator = PerformanceEvaluator(final_net, initial_marking, final_marking, original_log)
+    performance_evaluator.evaluate_performance()
+
+    print('original_log:')
+    original_net, initial_marking, final_marking = inductive_miner.apply(original_log)
+    performance_evaluator = PerformanceEvaluator(original_net, initial_marking, final_marking, original_log)
+    performance_evaluator.evaluate_performance()
+    pnml_exporter.apply(original_net, initial_marking,
+                        '/home/jonas/repositories/pm-label-splitting/test_files/original_petri_net.pnml',
+                        final_marking=final_marking)
+
+
     # export_bpmn_model(log)
 
 
