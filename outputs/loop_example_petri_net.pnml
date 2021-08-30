@@ -2,14 +2,27 @@
 <pnml>
   <net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
     <page id="n0">
-      <place id="p_5">
+      <place id="source">
         <name>
-          <text>p_5</text>
+          <text>source</text>
         </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
       </place>
       <place id="p_4">
         <name>
           <text>p_4</text>
+        </name>
+      </place>
+      <place id="p_11">
+        <name>
+          <text>p_11</text>
+        </name>
+      </place>
+      <place id="p_5">
+        <name>
+          <text>p_5</text>
         </name>
       </place>
       <place id="sink">
@@ -17,9 +30,24 @@
           <text>sink</text>
         </name>
       </place>
+      <place id="p_3">
+        <name>
+          <text>p_3</text>
+        </name>
+      </place>
+      <place id="p_6">
+        <name>
+          <text>p_6</text>
+        </name>
+      </place>
       <place id="p_8">
         <name>
           <text>p_8</text>
+        </name>
+      </place>
+      <place id="p_9">
+        <name>
+          <text>p_9</text>
         </name>
       </place>
       <place id="p_10">
@@ -32,119 +60,91 @@
           <text>p_13</text>
         </name>
       </place>
-      <place id="source">
-        <name>
-          <text>source</text>
-        </name>
-        <initialMarking>
-          <text>1</text>
-        </initialMarking>
-      </place>
-      <place id="p_3">
-        <name>
-          <text>p_3</text>
-        </name>
-      </place>
-      <place id="p_6">
-        <name>
-          <text>p_6</text>
-        </name>
-      </place>
-      <place id="p_9">
-        <name>
-          <text>p_9</text>
-        </name>
-      </place>
-      <place id="p_11">
-        <name>
-          <text>p_11</text>
-        </name>
-      </place>
-      <transition id="fb29197b-8648-40da-b5a4-a4dfdf95aeff">
+      <transition id="8db616a3-8149-4d2e-b29b-0c8ac5ae48af">
         <name>
           <text>A</text>
         </name>
       </transition>
-      <transition id="e7272059-5dec-40c7-a1bd-04c2605cef9f">
-        <name>
-          <text>B</text>
-        </name>
-      </transition>
-      <transition id="e56cb9b3-3926-421d-8230-5799a0602bfd">
+      <transition id="5c7a483f-0a58-4835-9942-2863ee2fdb90">
         <name>
           <text>G</text>
+        </name>
+      </transition>
+      <transition id="9e012b24-5353-4b93-878d-eb725f392550">
+        <name>
+          <text>I</text>
+        </name>
+      </transition>
+      <transition id="83f3c0e3-83d2-4c93-99bc-56bf53496252">
+        <name>
+          <text>E</text>
+        </name>
+      </transition>
+      <transition id="f7d1afa5-4f7a-48a2-be7a-f58170eb1707">
+        <name>
+          <text>F</text>
+        </name>
+      </transition>
+      <transition id="f0d263ce-f7b0-4cfc-bb36-1a89f2dc735c">
+        <name>
+          <text>C</text>
+        </name>
+      </transition>
+      <transition id="62fd92e7-9e60-4099-ae3b-e96022767296">
+        <name>
+          <text>D</text>
+        </name>
+      </transition>
+      <transition id="51087578-4e5f-45da-bd1f-8c25ef1eec59">
+        <name>
+          <text>B</text>
         </name>
       </transition>
       <transition id="init_loop_1">
         <name>
           <text>init_loop_1</text>
         </name>
-        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="508e39e0-6054-49dd-bc26-a6ca59521ad7"/>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="81af83c8-c182-4d50-a804-fdb8c428a29d"/>
       </transition>
-      <transition id="2bcbd5e4-7512-4683-989d-0bb9c6417005">
-        <name>
-          <text>E</text>
-        </name>
-      </transition>
-      <transition id="376119a4-b209-4ed1-a364-67e99c83f01d">
-        <name>
-          <text>F</text>
-        </name>
-      </transition>
-      <transition id="1e8c6649-3b36-4d7c-8a65-0147dde2c259">
+      <transition id="48fdde3b-9f88-4ba7-b224-b67d9a562ae3">
         <name>
           <text>D</text>
         </name>
       </transition>
-      <transition id="0fedb35d-f9a6-47fa-9def-c40719df6bad">
+      <transition id="292f7ec3-e9b7-4ade-bc27-775934f0eba4">
         <name>
           <text>D</text>
         </name>
       </transition>
-      <transition id="a3892172-049f-4b5f-98d3-a54db923d40d">
-        <name>
-          <text>C</text>
-        </name>
-      </transition>
-      <transition id="9f076af7-efd2-4a09-af12-4e824fab40dd">
-        <name>
-          <text>I</text>
-        </name>
-      </transition>
-      <transition id="c7e1f5ad-eed6-4ded-99ab-9c3392b85947">
-        <name>
-          <text>D</text>
-        </name>
-      </transition>
-      <transition id="f59d1d5c-6708-40cf-8abf-6438dcdcb517">
+      <transition id="cdbfa120-e78f-4912-ad28-149c712fe5a9">
         <name>
           <text>H</text>
         </name>
       </transition>
-      <arc id="139865482311424" source="init_loop_1" target="p_8"/>
-      <arc id="139865482312960" source="2bcbd5e4-7512-4683-989d-0bb9c6417005" target="p_11"/>
-      <arc id="139865482310656" source="1e8c6649-3b36-4d7c-8a65-0147dde2c259" target="p_8"/>
-      <arc id="139865491738000" source="fb29197b-8648-40da-b5a4-a4dfdf95aeff" target="p_3"/>
-      <arc id="139865482356240" source="c7e1f5ad-eed6-4ded-99ab-9c3392b85947" target="p_13"/>
-      <arc id="139865482309792" source="0fedb35d-f9a6-47fa-9def-c40719df6bad" target="p_6"/>
-      <arc id="139865482313248" source="p_11" target="376119a4-b209-4ed1-a364-67e99c83f01d"/>
-      <arc id="139865482354848" source="p_9" target="c7e1f5ad-eed6-4ded-99ab-9c3392b85947"/>
-      <arc id="139865482310704" source="p_4" target="a3892172-049f-4b5f-98d3-a54db923d40d"/>
-      <arc id="139865482310320" source="e7272059-5dec-40c7-a1bd-04c2605cef9f" target="p_4"/>
-      <arc id="139865482311088" source="a3892172-049f-4b5f-98d3-a54db923d40d" target="p_5"/>
-      <arc id="139865482311472" source="p_5" target="0fedb35d-f9a6-47fa-9def-c40719df6bad"/>
-      <arc id="139865482312624" source="p_8" target="9f076af7-efd2-4a09-af12-4e824fab40dd"/>
-      <arc id="139865482312240" source="376119a4-b209-4ed1-a364-67e99c83f01d" target="p_9"/>
-      <arc id="139865482356528" source="p_13" target="f59d1d5c-6708-40cf-8abf-6438dcdcb517"/>
-      <arc id="139865482310080" source="p_3" target="e7272059-5dec-40c7-a1bd-04c2605cef9f"/>
-      <arc id="139865482310464" source="e56cb9b3-3926-421d-8230-5799a0602bfd" target="sink"/>
-      <arc id="139865482311232" source="p_3" target="init_loop_1"/>
-      <arc id="139865482312384" source="p_10" target="2bcbd5e4-7512-4683-989d-0bb9c6417005"/>
-      <arc id="139865482312768" source="p_9" target="1e8c6649-3b36-4d7c-8a65-0147dde2c259"/>
-      <arc id="139865482309984" source="p_6" target="e56cb9b3-3926-421d-8230-5799a0602bfd"/>
-      <arc id="139865491738096" source="source" target="fb29197b-8648-40da-b5a4-a4dfdf95aeff"/>
-      <arc id="139865482313200" source="9f076af7-efd2-4a09-af12-4e824fab40dd" target="p_10"/>
-      <arc id="139865482357104" source="f59d1d5c-6708-40cf-8abf-6438dcdcb517" target="sink"/>
+      <arc id="140328601673344" source="p_11" target="f7d1afa5-4f7a-48a2-be7a-f58170eb1707"/>
+      <arc id="140328601609600" source="p_9" target="292f7ec3-e9b7-4ade-bc27-775934f0eba4"/>
+      <arc id="140328601670032" source="8db616a3-8149-4d2e-b29b-0c8ac5ae48af" target="p_3"/>
+      <arc id="140328601671328" source="p_6" target="5c7a483f-0a58-4835-9942-2863ee2fdb90"/>
+      <arc id="140328601672864" source="9e012b24-5353-4b93-878d-eb725f392550" target="p_10"/>
+      <arc id="140328601673248" source="83f3c0e3-83d2-4c93-99bc-56bf53496252" target="p_11"/>
+      <arc id="140328601670704" source="p_4" target="f0d263ce-f7b0-4cfc-bb36-1a89f2dc735c"/>
+      <arc id="140328601669936" source="f0d263ce-f7b0-4cfc-bb36-1a89f2dc735c" target="p_5"/>
+      <arc id="140328601671088" source="62fd92e7-9e60-4099-ae3b-e96022767296" target="p_6"/>
+      <arc id="140328601609264" source="p_13" target="cdbfa120-e78f-4912-ad28-149c712fe5a9"/>
+      <arc id="140328601669696" source="source" target="8db616a3-8149-4d2e-b29b-0c8ac5ae48af"/>
+      <arc id="140328601673536" source="f7d1afa5-4f7a-48a2-be7a-f58170eb1707" target="p_9"/>
+      <arc id="140328601608256" source="p_9" target="48fdde3b-9f88-4ba7-b224-b67d9a562ae3"/>
+      <arc id="140328601672144" source="init_loop_1" target="p_8"/>
+      <arc id="140328601609168" source="292f7ec3-e9b7-4ade-bc27-775934f0eba4" target="p_13"/>
+      <arc id="140328601671760" source="48fdde3b-9f88-4ba7-b224-b67d9a562ae3" target="p_8"/>
+      <arc id="140328601672672" source="p_8" target="9e012b24-5353-4b93-878d-eb725f392550"/>
+      <arc id="140328601673056" source="p_10" target="83f3c0e3-83d2-4c93-99bc-56bf53496252"/>
+      <arc id="140328601670128" source="51087578-4e5f-45da-bd1f-8c25ef1eec59" target="p_4"/>
+      <arc id="140328601670896" source="p_3" target="51087578-4e5f-45da-bd1f-8c25ef1eec59"/>
+      <arc id="140328601670512" source="p_5" target="62fd92e7-9e60-4099-ae3b-e96022767296"/>
+      <arc id="140328601671664" source="5c7a483f-0a58-4835-9942-2863ee2fdb90" target="sink"/>
+      <arc id="140328601672048" source="p_3" target="init_loop_1"/>
+      <arc id="140328601609456" source="cdbfa120-e78f-4912-ad28-149c712fe5a9" target="sink"/>
     </page>
     <finalmarkings>
       <marking>

@@ -27,10 +27,18 @@ def import_csv(file_path):
 def main() -> None:
     apply_pipeline_to_bpmn('loop_example', threshold=0.75,
                            window_size=3)  # threshold=0 also works, 0.5 produces wrong results
-    c_1_log = xes_importer.apply(
+    c_1_0_log = xes_importer.apply(
         '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes')
 
-    apply_pipeline('c_1', c_1_log, get_imprecise_labels(c_1_log), threshold=0.5, window_size=3)
+    apply_pipeline('c_1_0', c_1_0_log, get_imprecise_labels(c_1_0_log), threshold=0.5, window_size=3)
+
+    c_1_1_log = xes_importer.apply(
+        '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes')
+    apply_pipeline('c_1_1', c_1_1_log, get_imprecise_labels(c_1_1_log), threshold=0.75, window_size=3)
+
+    c_1_2_log = xes_importer.apply(
+        '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes')
+    apply_pipeline('c_1_2', c_1_2_log, get_imprecise_labels(c_1_2_log), threshold=0, window_size=3)
 
 
 def get_imprecise_labels(log: EventLog) -> list[str]:

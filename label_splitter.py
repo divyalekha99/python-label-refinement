@@ -44,7 +44,7 @@ class LabelSplitter:
         event_graphs = self.get_event_graphs_from_event_log(log)
 
         self.calculate_edges(event_graphs)
-        self.get_connected_components(event_graphs=event_graphs)
+        # self.get_connected_components(event_graphs=event_graphs)
         self.get_communities_louvain(event_graphs=event_graphs)
         self.set_split_labels(event_graphs, log)
 
@@ -68,8 +68,8 @@ class LabelSplitter:
     def get_communities_louvain(self, event_graphs) -> None:
         for (label, graph) in event_graphs.items():
             partition = community_louvain.best_partition(graph)
-            print('Partition:')
-            print(partition)
+            # print('Partition:')
+            # print(partition)
 
             for community in partition.values():
                 self._split_labels_to_original_labels[f'{label}_{community}'] = label
@@ -113,8 +113,8 @@ class LabelSplitter:
             for (event_a, event_b) in combinations(graph.nodes(), 2):
                 edit_distance = self.get_edit_distance(event_a, event_b)
                 weight = 1 - edit_distance / self.window_size
-                print('weight')
-                print(weight)
+                # print('weight')
+                # print(weight)
                 if weight > self.threshold:
                     graph.add_edge(event_a, event_b, weight=weight)
                     # print(edit_distance)
@@ -131,8 +131,8 @@ class LabelSplitter:
     def get_event_graphs_from_event_log(self, log) -> dict[str, Graph]:
         event_graphs = {}
         for case_id, trace in enumerate(log):
-            print('trace')
-            print(trace)
+            # print('trace')
+            # print(trace)
             # print(trace['attributes']['concept:name'])
             prefix = ''
             processed_events = []
@@ -145,8 +145,8 @@ class LabelSplitter:
                     event_graphs[label] = nx.Graph()
 
                 for preceding_event in processed_events:
-                    print('Event:')
-                    print(preceding_event)
+                    # print('Event:')
+                    # print(preceding_event)
                     preceding_event['suffix'] = preceding_event['suffix'] + label
 
                 event['prefix'] = prefix
@@ -156,7 +156,7 @@ class LabelSplitter:
 
                 # graph.add_node(event, prefix=prefix, suffix='')
                 prefix = prefix + label
-                print(event)
+                # print(event)
             for event in processed_events:
                 label = event['concept:name']
                 if label in self.labels_to_split:
