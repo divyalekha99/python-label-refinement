@@ -32,6 +32,13 @@ class LabelSplitter:
         self.labels_to_split = labels_to_split
         self.window_size = window_size
         self.threshold = threshold
+        self.prefix_weight = prefix_weight
+        self._split_labels_to_original_labels = {}
+
+    def get_split_labels_to_original_labels(self) -> dict[str, str]:
+        print('Map:')
+        print(self._split_labels_to_original_labels)
+        return self._split_labels_to_original_labels
 
     def split_labels(self, log: EventLog) -> EventLog:
         event_graphs = self.get_event_graphs_from_event_log(log)
@@ -64,7 +71,8 @@ class LabelSplitter:
             print('Partition:')
             print(partition)
 
-            partitions = {}
+            for community in partition.values():
+                self._split_labels_to_original_labels[f'{label}_{community}'] = label
 
             for event in graph.nodes:
                 event['label'] = f'{label}_{partition[event]}'
@@ -104,10 +112,10 @@ class LabelSplitter:
             # TODO: Evaluate if combinations is correct here
             for (event_a, event_b) in combinations(graph.nodes(), 2):
                 edit_distance = self.get_edit_distance(event_a, event_b)
-                weight = 1 - edit_distance / 3
+                weight = 1 - edit_distance / self.window_size
                 print('weight')
                 print(weight)
-                if weight > 0.5:
+                if weight > self.threshold:
                     graph.add_edge(event_a, event_b, weight=weight)
                     # print(edit_distance)
 

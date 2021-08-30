@@ -56,106 +56,13 @@
 			<int key="case_id" value="1" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDIEFDH" />
-			<string key="label" value="A" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:46:46" />
-			<int key="case_id" value="1" />
-			<int key="position" value="1" />
-			<string key="prefix" value="A" />
-			<string key="suffix" value="EFDIEFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:46:47" />
-			<int key="case_id" value="1" />
-			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
-			<string key="suffix" value="FDIEFDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:46:48" />
-			<int key="case_id" value="1" />
-			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
-			<string key="suffix" value="DIEFDH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:46:49" />
-			<int key="case_id" value="1" />
-			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
-			<string key="suffix" value="IEFDH" />
-			<string key="label" value="D_2" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:46:50" />
-			<int key="case_id" value="1" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
-			<string key="suffix" value="EFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:46:51" />
-			<int key="case_id" value="1" />
-			<int key="position" value="6" />
-			<string key="prefix" value="AIEFDI" />
-			<string key="suffix" value="FDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:46:52" />
-			<int key="case_id" value="1" />
-			<int key="position" value="7" />
-			<string key="prefix" value="AIEFDIE" />
-			<string key="suffix" value="DH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:46:53" />
-			<int key="case_id" value="1" />
-			<int key="position" value="8" />
-			<string key="prefix" value="AIEFDIEF" />
-			<string key="suffix" value="H" />
-			<string key="label" value="D_0" />
-		</event>
-		<event>
-			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:46:54" />
-			<int key="case_id" value="1" />
-			<int key="position" value="9" />
-			<string key="prefix" value="AIEFDIEFD" />
-			<string key="suffix" value="" />
-			<string key="label" value="H" />
-		</event>
-	</trace>
-	<trace>
-		<string key="concept:name" value="2" />
-		<event>
-			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:46:55" />
-			<int key="case_id" value="2" />
-			<int key="position" value="0" />
-			<string key="prefix" value="" />
 			<string key="suffix" value="BCDG" />
 			<string key="label" value="A" />
 		</event>
 		<event>
 			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:46:56" />
-			<int key="case_id" value="2" />
+			<date key="time:timestamp" value="1970-04-26T18:46:46" />
+			<int key="case_id" value="1" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
 			<string key="suffix" value="CDG" />
@@ -163,8 +70,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:46:57" />
-			<int key="case_id" value="2" />
+			<date key="time:timestamp" value="1970-04-26T18:46:47" />
+			<int key="case_id" value="1" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AB" />
 			<string key="suffix" value="DG" />
@@ -172,8 +79,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:46:58" />
-			<int key="case_id" value="2" />
+			<date key="time:timestamp" value="1970-04-26T18:46:48" />
+			<int key="case_id" value="1" />
 			<int key="position" value="3" />
 			<string key="prefix" value="ABC" />
 			<string key="suffix" value="G" />
@@ -181,8 +88,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:46:59" />
-			<int key="case_id" value="2" />
+			<date key="time:timestamp" value="1970-04-26T18:46:49" />
+			<int key="case_id" value="1" />
 			<int key="position" value="4" />
 			<string key="prefix" value="ABCD" />
 			<string key="suffix" value="" />
@@ -190,10 +97,67 @@
 		</event>
 	</trace>
 	<trace>
+		<string key="concept:name" value="2" />
+		<event>
+			<string key="concept:name" value="A" />
+			<date key="time:timestamp" value="1970-04-26T18:46:50" />
+			<int key="case_id" value="2" />
+			<int key="position" value="0" />
+			<string key="prefix" value="" />
+			<string key="suffix" value="IEFDH" />
+			<string key="label" value="A" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:46:51" />
+			<int key="case_id" value="2" />
+			<int key="position" value="1" />
+			<string key="prefix" value="A" />
+			<string key="suffix" value="EFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:46:52" />
+			<int key="case_id" value="2" />
+			<int key="position" value="2" />
+			<string key="prefix" value="AI" />
+			<string key="suffix" value="FDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:46:53" />
+			<int key="case_id" value="2" />
+			<int key="position" value="3" />
+			<string key="prefix" value="AIE" />
+			<string key="suffix" value="DH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_0" />
+			<date key="time:timestamp" value="1970-04-26T18:46:54" />
+			<int key="case_id" value="2" />
+			<int key="position" value="4" />
+			<string key="prefix" value="AIEF" />
+			<string key="suffix" value="H" />
+			<string key="label" value="D_0" />
+		</event>
+		<event>
+			<string key="concept:name" value="H" />
+			<date key="time:timestamp" value="1970-04-26T18:46:55" />
+			<int key="case_id" value="2" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
+			<string key="suffix" value="" />
+			<string key="label" value="H" />
+		</event>
+	</trace>
+	<trace>
 		<string key="concept:name" value="3" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:47:00" />
+			<date key="time:timestamp" value="1970-04-26T18:46:56" />
 			<int key="case_id" value="3" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
@@ -202,7 +166,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:47:01" />
+			<date key="time:timestamp" value="1970-04-26T18:46:57" />
 			<int key="case_id" value="3" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
@@ -211,7 +175,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:47:02" />
+			<date key="time:timestamp" value="1970-04-26T18:46:58" />
 			<int key="case_id" value="3" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AB" />
@@ -220,7 +184,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:47:03" />
+			<date key="time:timestamp" value="1970-04-26T18:46:59" />
 			<int key="case_id" value="3" />
 			<int key="position" value="3" />
 			<string key="prefix" value="ABC" />
@@ -229,7 +193,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:47:04" />
+			<date key="time:timestamp" value="1970-04-26T18:47:00" />
 			<int key="case_id" value="3" />
 			<int key="position" value="4" />
 			<string key="prefix" value="ABCD" />
@@ -241,55 +205,64 @@
 		<string key="concept:name" value="4" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:47:05" />
+			<date key="time:timestamp" value="1970-04-26T18:47:01" />
 			<int key="case_id" value="4" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="BCDG" />
+			<string key="suffix" value="IEFDH" />
 			<string key="label" value="A" />
 		</event>
 		<event>
-			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:47:06" />
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:47:02" />
 			<int key="case_id" value="4" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
-			<string key="suffix" value="CDG" />
-			<string key="label" value="B" />
+			<string key="suffix" value="EFDH" />
+			<string key="label" value="I" />
 		</event>
 		<event>
-			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:47:07" />
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:47:03" />
 			<int key="case_id" value="4" />
 			<int key="position" value="2" />
-			<string key="prefix" value="AB" />
-			<string key="suffix" value="DG" />
-			<string key="label" value="C" />
+			<string key="prefix" value="AI" />
+			<string key="suffix" value="FDH" />
+			<string key="label" value="E" />
 		</event>
 		<event>
-			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:47:08" />
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:47:04" />
 			<int key="case_id" value="4" />
 			<int key="position" value="3" />
-			<string key="prefix" value="ABC" />
-			<string key="suffix" value="G" />
-			<string key="label" value="D_1" />
+			<string key="prefix" value="AIE" />
+			<string key="suffix" value="DH" />
+			<string key="label" value="F" />
 		</event>
 		<event>
-			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:47:09" />
+			<string key="concept:name" value="D_0" />
+			<date key="time:timestamp" value="1970-04-26T18:47:05" />
 			<int key="case_id" value="4" />
 			<int key="position" value="4" />
-			<string key="prefix" value="ABCD" />
+			<string key="prefix" value="AIEF" />
+			<string key="suffix" value="H" />
+			<string key="label" value="D_0" />
+		</event>
+		<event>
+			<string key="concept:name" value="H" />
+			<date key="time:timestamp" value="1970-04-26T18:47:06" />
+			<int key="case_id" value="4" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
 			<string key="suffix" value="" />
-			<string key="label" value="G" />
+			<string key="label" value="H" />
 		</event>
 	</trace>
 	<trace>
 		<string key="concept:name" value="5" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:47:10" />
+			<date key="time:timestamp" value="1970-04-26T18:47:07" />
 			<int key="case_id" value="5" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
@@ -298,7 +271,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:47:11" />
+			<date key="time:timestamp" value="1970-04-26T18:47:08" />
 			<int key="case_id" value="5" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
@@ -307,7 +280,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:47:12" />
+			<date key="time:timestamp" value="1970-04-26T18:47:09" />
 			<int key="case_id" value="5" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AB" />
@@ -316,7 +289,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:47:13" />
+			<date key="time:timestamp" value="1970-04-26T18:47:10" />
 			<int key="case_id" value="5" />
 			<int key="position" value="3" />
 			<string key="prefix" value="ABC" />
@@ -325,7 +298,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:47:14" />
+			<date key="time:timestamp" value="1970-04-26T18:47:11" />
 			<int key="case_id" value="5" />
 			<int key="position" value="4" />
 			<string key="prefix" value="ABCD" />
@@ -337,76 +310,103 @@
 		<string key="concept:name" value="6" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:47:15" />
+			<date key="time:timestamp" value="1970-04-26T18:47:12" />
 			<int key="case_id" value="6" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDH" />
+			<string key="suffix" value="BCDG" />
 			<string key="label" value="A" />
 		</event>
 		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:47:16" />
+			<string key="concept:name" value="B" />
+			<date key="time:timestamp" value="1970-04-26T18:47:13" />
 			<int key="case_id" value="6" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
-			<string key="suffix" value="EFDH" />
-			<string key="label" value="I" />
+			<string key="suffix" value="CDG" />
+			<string key="label" value="B" />
 		</event>
 		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:47:17" />
+			<string key="concept:name" value="C" />
+			<date key="time:timestamp" value="1970-04-26T18:47:14" />
 			<int key="case_id" value="6" />
 			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
-			<string key="suffix" value="FDH" />
-			<string key="label" value="E" />
+			<string key="prefix" value="AB" />
+			<string key="suffix" value="DG" />
+			<string key="label" value="C" />
 		</event>
 		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:47:18" />
+			<string key="concept:name" value="D_1" />
+			<date key="time:timestamp" value="1970-04-26T18:47:15" />
 			<int key="case_id" value="6" />
 			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
-			<string key="suffix" value="DH" />
-			<string key="label" value="F" />
+			<string key="prefix" value="ABC" />
+			<string key="suffix" value="G" />
+			<string key="label" value="D_1" />
 		</event>
 		<event>
-			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:47:19" />
+			<string key="concept:name" value="G" />
+			<date key="time:timestamp" value="1970-04-26T18:47:16" />
 			<int key="case_id" value="6" />
 			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
-			<string key="suffix" value="H" />
-			<string key="label" value="D_0" />
-		</event>
-		<event>
-			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:47:20" />
-			<int key="case_id" value="6" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
+			<string key="prefix" value="ABCD" />
 			<string key="suffix" value="" />
-			<string key="label" value="H" />
+			<string key="label" value="G" />
 		</event>
 	</trace>
 	<trace>
 		<string key="concept:name" value="7" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:47:21" />
+			<date key="time:timestamp" value="1970-04-26T18:47:17" />
 			<int key="case_id" value="7" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDIEFDIEFDH" />
+			<string key="suffix" value="IEFDIEFDIEFDIEFDH" />
 			<string key="label" value="A" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:47:18" />
+			<int key="case_id" value="7" />
+			<int key="position" value="1" />
+			<string key="prefix" value="A" />
+			<string key="suffix" value="EFDIEFDIEFDIEFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:47:19" />
+			<int key="case_id" value="7" />
+			<int key="position" value="2" />
+			<string key="prefix" value="AI" />
+			<string key="suffix" value="FDIEFDIEFDIEFDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:47:20" />
+			<int key="case_id" value="7" />
+			<int key="position" value="3" />
+			<string key="prefix" value="AIE" />
+			<string key="suffix" value="DIEFDIEFDIEFDH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_2" />
+			<date key="time:timestamp" value="1970-04-26T18:47:21" />
+			<int key="case_id" value="7" />
+			<int key="position" value="4" />
+			<string key="prefix" value="AIEF" />
+			<string key="suffix" value="IEFDIEFDIEFDH" />
+			<string key="label" value="D_2" />
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
 			<date key="time:timestamp" value="1970-04-26T18:47:22" />
 			<int key="case_id" value="7" />
-			<int key="position" value="1" />
-			<string key="prefix" value="A" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
 			<string key="suffix" value="EFDIEFDIEFDH" />
 			<string key="label" value="I" />
 		</event>
@@ -414,8 +414,8 @@
 			<string key="concept:name" value="E" />
 			<date key="time:timestamp" value="1970-04-26T18:47:23" />
 			<int key="case_id" value="7" />
-			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
+			<int key="position" value="6" />
+			<string key="prefix" value="AIEFDI" />
 			<string key="suffix" value="FDIEFDIEFDH" />
 			<string key="label" value="E" />
 		</event>
@@ -423,8 +423,8 @@
 			<string key="concept:name" value="F" />
 			<date key="time:timestamp" value="1970-04-26T18:47:24" />
 			<int key="case_id" value="7" />
-			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
+			<int key="position" value="7" />
+			<string key="prefix" value="AIEFDIE" />
 			<string key="suffix" value="DIEFDIEFDH" />
 			<string key="label" value="F" />
 		</event>
@@ -432,8 +432,8 @@
 			<string key="concept:name" value="D_2" />
 			<date key="time:timestamp" value="1970-04-26T18:47:25" />
 			<int key="case_id" value="7" />
-			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
+			<int key="position" value="8" />
+			<string key="prefix" value="AIEFDIEF" />
 			<string key="suffix" value="IEFDIEFDH" />
 			<string key="label" value="D_2" />
 		</event>
@@ -441,8 +441,8 @@
 			<string key="concept:name" value="I" />
 			<date key="time:timestamp" value="1970-04-26T18:47:26" />
 			<int key="case_id" value="7" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
+			<int key="position" value="9" />
+			<string key="prefix" value="AIEFDIEFD" />
 			<string key="suffix" value="EFDIEFDH" />
 			<string key="label" value="I" />
 		</event>
@@ -450,8 +450,8 @@
 			<string key="concept:name" value="E" />
 			<date key="time:timestamp" value="1970-04-26T18:47:27" />
 			<int key="case_id" value="7" />
-			<int key="position" value="6" />
-			<string key="prefix" value="AIEFDI" />
+			<int key="position" value="10" />
+			<string key="prefix" value="AIEFDIEFDI" />
 			<string key="suffix" value="FDIEFDH" />
 			<string key="label" value="E" />
 		</event>
@@ -459,8 +459,8 @@
 			<string key="concept:name" value="F" />
 			<date key="time:timestamp" value="1970-04-26T18:47:28" />
 			<int key="case_id" value="7" />
-			<int key="position" value="7" />
-			<string key="prefix" value="AIEFDIE" />
+			<int key="position" value="11" />
+			<string key="prefix" value="AIEFDIEFDIE" />
 			<string key="suffix" value="DIEFDH" />
 			<string key="label" value="F" />
 		</event>
@@ -468,8 +468,8 @@
 			<string key="concept:name" value="D_2" />
 			<date key="time:timestamp" value="1970-04-26T18:47:29" />
 			<int key="case_id" value="7" />
-			<int key="position" value="8" />
-			<string key="prefix" value="AIEFDIEF" />
+			<int key="position" value="12" />
+			<string key="prefix" value="AIEFDIEFDIEF" />
 			<string key="suffix" value="IEFDH" />
 			<string key="label" value="D_2" />
 		</event>
@@ -477,8 +477,8 @@
 			<string key="concept:name" value="I" />
 			<date key="time:timestamp" value="1970-04-26T18:47:30" />
 			<int key="case_id" value="7" />
-			<int key="position" value="9" />
-			<string key="prefix" value="AIEFDIEFD" />
+			<int key="position" value="13" />
+			<string key="prefix" value="AIEFDIEFDIEFD" />
 			<string key="suffix" value="EFDH" />
 			<string key="label" value="I" />
 		</event>
@@ -486,8 +486,8 @@
 			<string key="concept:name" value="E" />
 			<date key="time:timestamp" value="1970-04-26T18:47:31" />
 			<int key="case_id" value="7" />
-			<int key="position" value="10" />
-			<string key="prefix" value="AIEFDIEFDI" />
+			<int key="position" value="14" />
+			<string key="prefix" value="AIEFDIEFDIEFDI" />
 			<string key="suffix" value="FDH" />
 			<string key="label" value="E" />
 		</event>
@@ -495,8 +495,8 @@
 			<string key="concept:name" value="F" />
 			<date key="time:timestamp" value="1970-04-26T18:47:32" />
 			<int key="case_id" value="7" />
-			<int key="position" value="11" />
-			<string key="prefix" value="AIEFDIEFDIE" />
+			<int key="position" value="15" />
+			<string key="prefix" value="AIEFDIEFDIEFDIE" />
 			<string key="suffix" value="DH" />
 			<string key="label" value="F" />
 		</event>
@@ -504,8 +504,8 @@
 			<string key="concept:name" value="D_0" />
 			<date key="time:timestamp" value="1970-04-26T18:47:33" />
 			<int key="case_id" value="7" />
-			<int key="position" value="12" />
-			<string key="prefix" value="AIEFDIEFDIEF" />
+			<int key="position" value="16" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEF" />
 			<string key="suffix" value="H" />
 			<string key="label" value="D_0" />
 		</event>
@@ -513,8 +513,8 @@
 			<string key="concept:name" value="H" />
 			<date key="time:timestamp" value="1970-04-26T18:47:34" />
 			<int key="case_id" value="7" />
-			<int key="position" value="13" />
-			<string key="prefix" value="AIEFDIEFDIEFD" />
+			<int key="position" value="17" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFD" />
 			<string key="suffix" value="" />
 			<string key="label" value="H" />
 		</event>
@@ -575,51 +575,204 @@
 			<int key="case_id" value="9" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="BCDG" />
+			<string key="suffix" value="IEFDIEFDIEFDIEFDIEFDH" />
 			<string key="label" value="A" />
 		</event>
 		<event>
-			<string key="concept:name" value="B" />
+			<string key="concept:name" value="I" />
 			<date key="time:timestamp" value="1970-04-26T18:47:41" />
 			<int key="case_id" value="9" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
-			<string key="suffix" value="CDG" />
-			<string key="label" value="B" />
+			<string key="suffix" value="EFDIEFDIEFDIEFDIEFDH" />
+			<string key="label" value="I" />
 		</event>
 		<event>
-			<string key="concept:name" value="C" />
+			<string key="concept:name" value="E" />
 			<date key="time:timestamp" value="1970-04-26T18:47:42" />
 			<int key="case_id" value="9" />
 			<int key="position" value="2" />
-			<string key="prefix" value="AB" />
-			<string key="suffix" value="DG" />
-			<string key="label" value="C" />
+			<string key="prefix" value="AI" />
+			<string key="suffix" value="FDIEFDIEFDIEFDIEFDH" />
+			<string key="label" value="E" />
 		</event>
 		<event>
-			<string key="concept:name" value="D_1" />
+			<string key="concept:name" value="F" />
 			<date key="time:timestamp" value="1970-04-26T18:47:43" />
 			<int key="case_id" value="9" />
 			<int key="position" value="3" />
-			<string key="prefix" value="ABC" />
-			<string key="suffix" value="G" />
-			<string key="label" value="D_1" />
+			<string key="prefix" value="AIE" />
+			<string key="suffix" value="DIEFDIEFDIEFDIEFDH" />
+			<string key="label" value="F" />
 		</event>
 		<event>
-			<string key="concept:name" value="G" />
+			<string key="concept:name" value="D_2" />
 			<date key="time:timestamp" value="1970-04-26T18:47:44" />
 			<int key="case_id" value="9" />
 			<int key="position" value="4" />
-			<string key="prefix" value="ABCD" />
+			<string key="prefix" value="AIEF" />
+			<string key="suffix" value="IEFDIEFDIEFDIEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:47:45" />
+			<int key="case_id" value="9" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
+			<string key="suffix" value="EFDIEFDIEFDIEFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:47:46" />
+			<int key="case_id" value="9" />
+			<int key="position" value="6" />
+			<string key="prefix" value="AIEFDI" />
+			<string key="suffix" value="FDIEFDIEFDIEFDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:47:47" />
+			<int key="case_id" value="9" />
+			<int key="position" value="7" />
+			<string key="prefix" value="AIEFDIE" />
+			<string key="suffix" value="DIEFDIEFDIEFDH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_2" />
+			<date key="time:timestamp" value="1970-04-26T18:47:48" />
+			<int key="case_id" value="9" />
+			<int key="position" value="8" />
+			<string key="prefix" value="AIEFDIEF" />
+			<string key="suffix" value="IEFDIEFDIEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:47:49" />
+			<int key="case_id" value="9" />
+			<int key="position" value="9" />
+			<string key="prefix" value="AIEFDIEFD" />
+			<string key="suffix" value="EFDIEFDIEFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:47:50" />
+			<int key="case_id" value="9" />
+			<int key="position" value="10" />
+			<string key="prefix" value="AIEFDIEFDI" />
+			<string key="suffix" value="FDIEFDIEFDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:47:51" />
+			<int key="case_id" value="9" />
+			<int key="position" value="11" />
+			<string key="prefix" value="AIEFDIEFDIE" />
+			<string key="suffix" value="DIEFDIEFDH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_2" />
+			<date key="time:timestamp" value="1970-04-26T18:47:52" />
+			<int key="case_id" value="9" />
+			<int key="position" value="12" />
+			<string key="prefix" value="AIEFDIEFDIEF" />
+			<string key="suffix" value="IEFDIEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:47:53" />
+			<int key="case_id" value="9" />
+			<int key="position" value="13" />
+			<string key="prefix" value="AIEFDIEFDIEFD" />
+			<string key="suffix" value="EFDIEFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:47:54" />
+			<int key="case_id" value="9" />
+			<int key="position" value="14" />
+			<string key="prefix" value="AIEFDIEFDIEFDI" />
+			<string key="suffix" value="FDIEFDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:47:55" />
+			<int key="case_id" value="9" />
+			<int key="position" value="15" />
+			<string key="prefix" value="AIEFDIEFDIEFDIE" />
+			<string key="suffix" value="DIEFDH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_2" />
+			<date key="time:timestamp" value="1970-04-26T18:47:56" />
+			<int key="case_id" value="9" />
+			<int key="position" value="16" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEF" />
+			<string key="suffix" value="IEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:47:57" />
+			<int key="case_id" value="9" />
+			<int key="position" value="17" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFD" />
+			<string key="suffix" value="EFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:47:58" />
+			<int key="case_id" value="9" />
+			<int key="position" value="18" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFDI" />
+			<string key="suffix" value="FDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:47:59" />
+			<int key="case_id" value="9" />
+			<int key="position" value="19" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFDIE" />
+			<string key="suffix" value="DH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_0" />
+			<date key="time:timestamp" value="1970-04-26T18:48:00" />
+			<int key="case_id" value="9" />
+			<int key="position" value="20" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFDIEF" />
+			<string key="suffix" value="H" />
+			<string key="label" value="D_0" />
+		</event>
+		<event>
+			<string key="concept:name" value="H" />
+			<date key="time:timestamp" value="1970-04-26T18:48:01" />
+			<int key="case_id" value="9" />
+			<int key="position" value="21" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFDIEFD" />
 			<string key="suffix" value="" />
-			<string key="label" value="G" />
+			<string key="label" value="H" />
 		</event>
 	</trace>
 	<trace>
 		<string key="concept:name" value="10" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:47:45" />
+			<date key="time:timestamp" value="1970-04-26T18:48:02" />
 			<int key="case_id" value="10" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
@@ -628,7 +781,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:47:46" />
+			<date key="time:timestamp" value="1970-04-26T18:48:03" />
 			<int key="case_id" value="10" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
@@ -637,7 +790,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:47:47" />
+			<date key="time:timestamp" value="1970-04-26T18:48:04" />
 			<int key="case_id" value="10" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AI" />
@@ -646,7 +799,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:47:48" />
+			<date key="time:timestamp" value="1970-04-26T18:48:05" />
 			<int key="case_id" value="10" />
 			<int key="position" value="3" />
 			<string key="prefix" value="AIE" />
@@ -655,7 +808,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:47:49" />
+			<date key="time:timestamp" value="1970-04-26T18:48:06" />
 			<int key="case_id" value="10" />
 			<int key="position" value="4" />
 			<string key="prefix" value="AIEF" />
@@ -664,7 +817,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:47:50" />
+			<date key="time:timestamp" value="1970-04-26T18:48:07" />
 			<int key="case_id" value="10" />
 			<int key="position" value="5" />
 			<string key="prefix" value="AIEFD" />
@@ -676,7 +829,7 @@
 		<string key="concept:name" value="11" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:47:51" />
+			<date key="time:timestamp" value="1970-04-26T18:48:08" />
 			<int key="case_id" value="11" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
@@ -685,7 +838,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:47:52" />
+			<date key="time:timestamp" value="1970-04-26T18:48:09" />
 			<int key="case_id" value="11" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
@@ -694,7 +847,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:47:53" />
+			<date key="time:timestamp" value="1970-04-26T18:48:10" />
 			<int key="case_id" value="11" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AB" />
@@ -703,7 +856,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:47:54" />
+			<date key="time:timestamp" value="1970-04-26T18:48:11" />
 			<int key="case_id" value="11" />
 			<int key="position" value="3" />
 			<string key="prefix" value="ABC" />
@@ -712,7 +865,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:47:55" />
+			<date key="time:timestamp" value="1970-04-26T18:48:12" />
 			<int key="case_id" value="11" />
 			<int key="position" value="4" />
 			<string key="prefix" value="ABCD" />
@@ -724,101 +877,104 @@
 		<string key="concept:name" value="12" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:47:56" />
+			<date key="time:timestamp" value="1970-04-26T18:48:13" />
 			<int key="case_id" value="12" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDIEFDH" />
+			<string key="suffix" value="BCDG" />
 			<string key="label" value="A" />
 		</event>
 		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:47:57" />
+			<string key="concept:name" value="B" />
+			<date key="time:timestamp" value="1970-04-26T18:48:14" />
 			<int key="case_id" value="12" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
-			<string key="suffix" value="EFDIEFDH" />
-			<string key="label" value="I" />
+			<string key="suffix" value="CDG" />
+			<string key="label" value="B" />
 		</event>
 		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:47:58" />
+			<string key="concept:name" value="C" />
+			<date key="time:timestamp" value="1970-04-26T18:48:15" />
 			<int key="case_id" value="12" />
 			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
-			<string key="suffix" value="FDIEFDH" />
-			<string key="label" value="E" />
+			<string key="prefix" value="AB" />
+			<string key="suffix" value="DG" />
+			<string key="label" value="C" />
 		</event>
 		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:47:59" />
+			<string key="concept:name" value="D_1" />
+			<date key="time:timestamp" value="1970-04-26T18:48:16" />
 			<int key="case_id" value="12" />
 			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
-			<string key="suffix" value="DIEFDH" />
-			<string key="label" value="F" />
+			<string key="prefix" value="ABC" />
+			<string key="suffix" value="G" />
+			<string key="label" value="D_1" />
 		</event>
 		<event>
-			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:48:00" />
+			<string key="concept:name" value="G" />
+			<date key="time:timestamp" value="1970-04-26T18:48:17" />
 			<int key="case_id" value="12" />
 			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
-			<string key="suffix" value="IEFDH" />
-			<string key="label" value="D_2" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:48:01" />
-			<int key="case_id" value="12" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
-			<string key="suffix" value="EFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:48:02" />
-			<int key="case_id" value="12" />
-			<int key="position" value="6" />
-			<string key="prefix" value="AIEFDI" />
-			<string key="suffix" value="FDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:48:03" />
-			<int key="case_id" value="12" />
-			<int key="position" value="7" />
-			<string key="prefix" value="AIEFDIE" />
-			<string key="suffix" value="DH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:48:04" />
-			<int key="case_id" value="12" />
-			<int key="position" value="8" />
-			<string key="prefix" value="AIEFDIEF" />
-			<string key="suffix" value="H" />
-			<string key="label" value="D_0" />
-		</event>
-		<event>
-			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:48:05" />
-			<int key="case_id" value="12" />
-			<int key="position" value="9" />
-			<string key="prefix" value="AIEFDIEFD" />
+			<string key="prefix" value="ABCD" />
 			<string key="suffix" value="" />
-			<string key="label" value="H" />
+			<string key="label" value="G" />
 		</event>
 	</trace>
 	<trace>
 		<string key="concept:name" value="13" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:48:06" />
+			<date key="time:timestamp" value="1970-04-26T18:48:18" />
 			<int key="case_id" value="13" />
+			<int key="position" value="0" />
+			<string key="prefix" value="" />
+			<string key="suffix" value="BCDG" />
+			<string key="label" value="A" />
+		</event>
+		<event>
+			<string key="concept:name" value="B" />
+			<date key="time:timestamp" value="1970-04-26T18:48:19" />
+			<int key="case_id" value="13" />
+			<int key="position" value="1" />
+			<string key="prefix" value="A" />
+			<string key="suffix" value="CDG" />
+			<string key="label" value="B" />
+		</event>
+		<event>
+			<string key="concept:name" value="C" />
+			<date key="time:timestamp" value="1970-04-26T18:48:20" />
+			<int key="case_id" value="13" />
+			<int key="position" value="2" />
+			<string key="prefix" value="AB" />
+			<string key="suffix" value="DG" />
+			<string key="label" value="C" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_1" />
+			<date key="time:timestamp" value="1970-04-26T18:48:21" />
+			<int key="case_id" value="13" />
+			<int key="position" value="3" />
+			<string key="prefix" value="ABC" />
+			<string key="suffix" value="G" />
+			<string key="label" value="D_1" />
+		</event>
+		<event>
+			<string key="concept:name" value="G" />
+			<date key="time:timestamp" value="1970-04-26T18:48:22" />
+			<int key="case_id" value="13" />
+			<int key="position" value="4" />
+			<string key="prefix" value="ABCD" />
+			<string key="suffix" value="" />
+			<string key="label" value="G" />
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="14" />
+		<event>
+			<string key="concept:name" value="A" />
+			<date key="time:timestamp" value="1970-04-26T18:48:23" />
+			<int key="case_id" value="14" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
 			<string key="suffix" value="IEFDIEFDH" />
@@ -826,8 +982,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:48:07" />
-			<int key="case_id" value="13" />
+			<date key="time:timestamp" value="1970-04-26T18:48:24" />
+			<int key="case_id" value="14" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
 			<string key="suffix" value="EFDIEFDH" />
@@ -835,8 +991,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:48:08" />
-			<int key="case_id" value="13" />
+			<date key="time:timestamp" value="1970-04-26T18:48:25" />
+			<int key="case_id" value="14" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AI" />
 			<string key="suffix" value="FDIEFDH" />
@@ -844,8 +1000,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:48:09" />
-			<int key="case_id" value="13" />
+			<date key="time:timestamp" value="1970-04-26T18:48:26" />
+			<int key="case_id" value="14" />
 			<int key="position" value="3" />
 			<string key="prefix" value="AIE" />
 			<string key="suffix" value="DIEFDH" />
@@ -853,8 +1009,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:48:10" />
-			<int key="case_id" value="13" />
+			<date key="time:timestamp" value="1970-04-26T18:48:27" />
+			<int key="case_id" value="14" />
 			<int key="position" value="4" />
 			<string key="prefix" value="AIEF" />
 			<string key="suffix" value="IEFDH" />
@@ -862,8 +1018,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:48:11" />
-			<int key="case_id" value="13" />
+			<date key="time:timestamp" value="1970-04-26T18:48:28" />
+			<int key="case_id" value="14" />
 			<int key="position" value="5" />
 			<string key="prefix" value="AIEFD" />
 			<string key="suffix" value="EFDH" />
@@ -871,8 +1027,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:48:12" />
-			<int key="case_id" value="13" />
+			<date key="time:timestamp" value="1970-04-26T18:48:29" />
+			<int key="case_id" value="14" />
 			<int key="position" value="6" />
 			<string key="prefix" value="AIEFDI" />
 			<string key="suffix" value="FDH" />
@@ -880,8 +1036,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:48:13" />
-			<int key="case_id" value="13" />
+			<date key="time:timestamp" value="1970-04-26T18:48:30" />
+			<int key="case_id" value="14" />
 			<int key="position" value="7" />
 			<string key="prefix" value="AIEFDIE" />
 			<string key="suffix" value="DH" />
@@ -889,8 +1045,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:48:14" />
-			<int key="case_id" value="13" />
+			<date key="time:timestamp" value="1970-04-26T18:48:31" />
+			<int key="case_id" value="14" />
 			<int key="position" value="8" />
 			<string key="prefix" value="AIEFDIEF" />
 			<string key="suffix" value="H" />
@@ -898,8 +1054,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:48:15" />
-			<int key="case_id" value="13" />
+			<date key="time:timestamp" value="1970-04-26T18:48:32" />
+			<int key="case_id" value="14" />
 			<int key="position" value="9" />
 			<string key="prefix" value="AIEFDIEFD" />
 			<string key="suffix" value="" />
@@ -907,106 +1063,67 @@
 		</event>
 	</trace>
 	<trace>
-		<string key="concept:name" value="14" />
-		<event>
-			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:48:16" />
-			<int key="case_id" value="14" />
-			<int key="position" value="0" />
-			<string key="prefix" value="" />
-			<string key="suffix" value="BCDG" />
-			<string key="label" value="A" />
-		</event>
-		<event>
-			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:48:17" />
-			<int key="case_id" value="14" />
-			<int key="position" value="1" />
-			<string key="prefix" value="A" />
-			<string key="suffix" value="CDG" />
-			<string key="label" value="B" />
-		</event>
-		<event>
-			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:48:18" />
-			<int key="case_id" value="14" />
-			<int key="position" value="2" />
-			<string key="prefix" value="AB" />
-			<string key="suffix" value="DG" />
-			<string key="label" value="C" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:48:19" />
-			<int key="case_id" value="14" />
-			<int key="position" value="3" />
-			<string key="prefix" value="ABC" />
-			<string key="suffix" value="G" />
-			<string key="label" value="D_1" />
-		</event>
-		<event>
-			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:48:20" />
-			<int key="case_id" value="14" />
-			<int key="position" value="4" />
-			<string key="prefix" value="ABCD" />
-			<string key="suffix" value="" />
-			<string key="label" value="G" />
-		</event>
-	</trace>
-	<trace>
 		<string key="concept:name" value="15" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:48:21" />
+			<date key="time:timestamp" value="1970-04-26T18:48:33" />
 			<int key="case_id" value="15" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="BCDG" />
+			<string key="suffix" value="IEFDH" />
 			<string key="label" value="A" />
 		</event>
 		<event>
-			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:48:22" />
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:48:34" />
 			<int key="case_id" value="15" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
-			<string key="suffix" value="CDG" />
-			<string key="label" value="B" />
+			<string key="suffix" value="EFDH" />
+			<string key="label" value="I" />
 		</event>
 		<event>
-			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:48:23" />
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:48:35" />
 			<int key="case_id" value="15" />
 			<int key="position" value="2" />
-			<string key="prefix" value="AB" />
-			<string key="suffix" value="DG" />
-			<string key="label" value="C" />
+			<string key="prefix" value="AI" />
+			<string key="suffix" value="FDH" />
+			<string key="label" value="E" />
 		</event>
 		<event>
-			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:48:24" />
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:48:36" />
 			<int key="case_id" value="15" />
 			<int key="position" value="3" />
-			<string key="prefix" value="ABC" />
-			<string key="suffix" value="G" />
-			<string key="label" value="D_1" />
+			<string key="prefix" value="AIE" />
+			<string key="suffix" value="DH" />
+			<string key="label" value="F" />
 		</event>
 		<event>
-			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:48:25" />
+			<string key="concept:name" value="D_0" />
+			<date key="time:timestamp" value="1970-04-26T18:48:37" />
 			<int key="case_id" value="15" />
 			<int key="position" value="4" />
-			<string key="prefix" value="ABCD" />
+			<string key="prefix" value="AIEF" />
+			<string key="suffix" value="H" />
+			<string key="label" value="D_0" />
+		</event>
+		<event>
+			<string key="concept:name" value="H" />
+			<date key="time:timestamp" value="1970-04-26T18:48:38" />
+			<int key="case_id" value="15" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
 			<string key="suffix" value="" />
-			<string key="label" value="G" />
+			<string key="label" value="H" />
 		</event>
 	</trace>
 	<trace>
 		<string key="concept:name" value="16" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:48:26" />
+			<date key="time:timestamp" value="1970-04-26T18:48:39" />
 			<int key="case_id" value="16" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
@@ -1015,7 +1132,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:48:27" />
+			<date key="time:timestamp" value="1970-04-26T18:48:40" />
 			<int key="case_id" value="16" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
@@ -1024,7 +1141,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:48:28" />
+			<date key="time:timestamp" value="1970-04-26T18:48:41" />
 			<int key="case_id" value="16" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AI" />
@@ -1033,7 +1150,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:48:29" />
+			<date key="time:timestamp" value="1970-04-26T18:48:42" />
 			<int key="case_id" value="16" />
 			<int key="position" value="3" />
 			<string key="prefix" value="AIE" />
@@ -1042,7 +1159,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:48:30" />
+			<date key="time:timestamp" value="1970-04-26T18:48:43" />
 			<int key="case_id" value="16" />
 			<int key="position" value="4" />
 			<string key="prefix" value="AIEF" />
@@ -1051,7 +1168,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:48:31" />
+			<date key="time:timestamp" value="1970-04-26T18:48:44" />
 			<int key="case_id" value="16" />
 			<int key="position" value="5" />
 			<string key="prefix" value="AIEFD" />
@@ -1063,8 +1180,65 @@
 		<string key="concept:name" value="17" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:48:32" />
+			<date key="time:timestamp" value="1970-04-26T18:48:45" />
 			<int key="case_id" value="17" />
+			<int key="position" value="0" />
+			<string key="prefix" value="" />
+			<string key="suffix" value="IEFDH" />
+			<string key="label" value="A" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:48:46" />
+			<int key="case_id" value="17" />
+			<int key="position" value="1" />
+			<string key="prefix" value="A" />
+			<string key="suffix" value="EFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:48:47" />
+			<int key="case_id" value="17" />
+			<int key="position" value="2" />
+			<string key="prefix" value="AI" />
+			<string key="suffix" value="FDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:48:48" />
+			<int key="case_id" value="17" />
+			<int key="position" value="3" />
+			<string key="prefix" value="AIE" />
+			<string key="suffix" value="DH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_0" />
+			<date key="time:timestamp" value="1970-04-26T18:48:49" />
+			<int key="case_id" value="17" />
+			<int key="position" value="4" />
+			<string key="prefix" value="AIEF" />
+			<string key="suffix" value="H" />
+			<string key="label" value="D_0" />
+		</event>
+		<event>
+			<string key="concept:name" value="H" />
+			<date key="time:timestamp" value="1970-04-26T18:48:50" />
+			<int key="case_id" value="17" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
+			<string key="suffix" value="" />
+			<string key="label" value="H" />
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="18" />
+		<event>
+			<string key="concept:name" value="A" />
+			<date key="time:timestamp" value="1970-04-26T18:48:51" />
+			<int key="case_id" value="18" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
 			<string key="suffix" value="BCDG" />
@@ -1072,8 +1246,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:48:33" />
-			<int key="case_id" value="17" />
+			<date key="time:timestamp" value="1970-04-26T18:48:52" />
+			<int key="case_id" value="18" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
 			<string key="suffix" value="CDG" />
@@ -1081,8 +1255,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:48:34" />
-			<int key="case_id" value="17" />
+			<date key="time:timestamp" value="1970-04-26T18:48:53" />
+			<int key="case_id" value="18" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AB" />
 			<string key="suffix" value="DG" />
@@ -1090,8 +1264,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:48:35" />
-			<int key="case_id" value="17" />
+			<date key="time:timestamp" value="1970-04-26T18:48:54" />
+			<int key="case_id" value="18" />
 			<int key="position" value="3" />
 			<string key="prefix" value="ABC" />
 			<string key="suffix" value="G" />
@@ -1099,8 +1273,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:48:36" />
-			<int key="case_id" value="17" />
+			<date key="time:timestamp" value="1970-04-26T18:48:55" />
+			<int key="case_id" value="18" />
 			<int key="position" value="4" />
 			<string key="prefix" value="ABCD" />
 			<string key="suffix" value="" />
@@ -1108,223 +1282,94 @@
 		</event>
 	</trace>
 	<trace>
-		<string key="concept:name" value="18" />
-		<event>
-			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:48:37" />
-			<int key="case_id" value="18" />
-			<int key="position" value="0" />
-			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDIEFDH" />
-			<string key="label" value="A" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:48:38" />
-			<int key="case_id" value="18" />
-			<int key="position" value="1" />
-			<string key="prefix" value="A" />
-			<string key="suffix" value="EFDIEFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:48:39" />
-			<int key="case_id" value="18" />
-			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
-			<string key="suffix" value="FDIEFDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:48:40" />
-			<int key="case_id" value="18" />
-			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
-			<string key="suffix" value="DIEFDH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:48:41" />
-			<int key="case_id" value="18" />
-			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
-			<string key="suffix" value="IEFDH" />
-			<string key="label" value="D_2" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:48:42" />
-			<int key="case_id" value="18" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
-			<string key="suffix" value="EFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:48:43" />
-			<int key="case_id" value="18" />
-			<int key="position" value="6" />
-			<string key="prefix" value="AIEFDI" />
-			<string key="suffix" value="FDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:48:44" />
-			<int key="case_id" value="18" />
-			<int key="position" value="7" />
-			<string key="prefix" value="AIEFDIE" />
-			<string key="suffix" value="DH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:48:45" />
-			<int key="case_id" value="18" />
-			<int key="position" value="8" />
-			<string key="prefix" value="AIEFDIEF" />
-			<string key="suffix" value="H" />
-			<string key="label" value="D_0" />
-		</event>
-		<event>
-			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:48:46" />
-			<int key="case_id" value="18" />
-			<int key="position" value="9" />
-			<string key="prefix" value="AIEFDIEFD" />
-			<string key="suffix" value="" />
-			<string key="label" value="H" />
-		</event>
-	</trace>
-	<trace>
 		<string key="concept:name" value="19" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:48:47" />
+			<date key="time:timestamp" value="1970-04-26T18:48:56" />
 			<int key="case_id" value="19" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDIEFDIEFDH" />
+			<string key="suffix" value="IEFDIEFDH" />
 			<string key="label" value="A" />
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:48:48" />
+			<date key="time:timestamp" value="1970-04-26T18:48:57" />
 			<int key="case_id" value="19" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
-			<string key="suffix" value="EFDIEFDIEFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:48:49" />
-			<int key="case_id" value="19" />
-			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
-			<string key="suffix" value="FDIEFDIEFDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:48:50" />
-			<int key="case_id" value="19" />
-			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
-			<string key="suffix" value="DIEFDIEFDH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:48:51" />
-			<int key="case_id" value="19" />
-			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
-			<string key="suffix" value="IEFDIEFDH" />
-			<string key="label" value="D_2" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:48:52" />
-			<int key="case_id" value="19" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
 			<string key="suffix" value="EFDIEFDH" />
 			<string key="label" value="I" />
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:48:53" />
+			<date key="time:timestamp" value="1970-04-26T18:48:58" />
 			<int key="case_id" value="19" />
-			<int key="position" value="6" />
-			<string key="prefix" value="AIEFDI" />
+			<int key="position" value="2" />
+			<string key="prefix" value="AI" />
 			<string key="suffix" value="FDIEFDH" />
 			<string key="label" value="E" />
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:48:54" />
+			<date key="time:timestamp" value="1970-04-26T18:48:59" />
 			<int key="case_id" value="19" />
-			<int key="position" value="7" />
-			<string key="prefix" value="AIEFDIE" />
+			<int key="position" value="3" />
+			<string key="prefix" value="AIE" />
 			<string key="suffix" value="DIEFDH" />
 			<string key="label" value="F" />
 		</event>
 		<event>
 			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:48:55" />
+			<date key="time:timestamp" value="1970-04-26T18:49:00" />
 			<int key="case_id" value="19" />
-			<int key="position" value="8" />
-			<string key="prefix" value="AIEFDIEF" />
+			<int key="position" value="4" />
+			<string key="prefix" value="AIEF" />
 			<string key="suffix" value="IEFDH" />
 			<string key="label" value="D_2" />
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:48:56" />
+			<date key="time:timestamp" value="1970-04-26T18:49:01" />
 			<int key="case_id" value="19" />
-			<int key="position" value="9" />
-			<string key="prefix" value="AIEFDIEFD" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
 			<string key="suffix" value="EFDH" />
 			<string key="label" value="I" />
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:48:57" />
+			<date key="time:timestamp" value="1970-04-26T18:49:02" />
 			<int key="case_id" value="19" />
-			<int key="position" value="10" />
-			<string key="prefix" value="AIEFDIEFDI" />
+			<int key="position" value="6" />
+			<string key="prefix" value="AIEFDI" />
 			<string key="suffix" value="FDH" />
 			<string key="label" value="E" />
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:48:58" />
+			<date key="time:timestamp" value="1970-04-26T18:49:03" />
 			<int key="case_id" value="19" />
-			<int key="position" value="11" />
-			<string key="prefix" value="AIEFDIEFDIE" />
+			<int key="position" value="7" />
+			<string key="prefix" value="AIEFDIE" />
 			<string key="suffix" value="DH" />
 			<string key="label" value="F" />
 		</event>
 		<event>
 			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:48:59" />
+			<date key="time:timestamp" value="1970-04-26T18:49:04" />
 			<int key="case_id" value="19" />
-			<int key="position" value="12" />
-			<string key="prefix" value="AIEFDIEFDIEF" />
+			<int key="position" value="8" />
+			<string key="prefix" value="AIEFDIEF" />
 			<string key="suffix" value="H" />
 			<string key="label" value="D_0" />
 		</event>
 		<event>
 			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:49:00" />
+			<date key="time:timestamp" value="1970-04-26T18:49:05" />
 			<int key="case_id" value="19" />
-			<int key="position" value="13" />
-			<string key="prefix" value="AIEFDIEFDIEFD" />
+			<int key="position" value="9" />
+			<string key="prefix" value="AIEFDIEFD" />
 			<string key="suffix" value="" />
 			<string key="label" value="H" />
 		</event>
@@ -1333,7 +1378,7 @@
 		<string key="concept:name" value="20" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:49:01" />
+			<date key="time:timestamp" value="1970-04-26T18:49:06" />
 			<int key="case_id" value="20" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
@@ -1342,7 +1387,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:49:02" />
+			<date key="time:timestamp" value="1970-04-26T18:49:07" />
 			<int key="case_id" value="20" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
@@ -1351,7 +1396,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:49:03" />
+			<date key="time:timestamp" value="1970-04-26T18:49:08" />
 			<int key="case_id" value="20" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AB" />
@@ -1360,7 +1405,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:49:04" />
+			<date key="time:timestamp" value="1970-04-26T18:49:09" />
 			<int key="case_id" value="20" />
 			<int key="position" value="3" />
 			<string key="prefix" value="ABC" />
@@ -1369,7 +1414,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:49:05" />
+			<date key="time:timestamp" value="1970-04-26T18:49:10" />
 			<int key="case_id" value="20" />
 			<int key="position" value="4" />
 			<string key="prefix" value="ABCD" />
@@ -1381,7 +1426,7 @@
 		<string key="concept:name" value="21" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:49:06" />
+			<date key="time:timestamp" value="1970-04-26T18:49:11" />
 			<int key="case_id" value="21" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
@@ -1390,7 +1435,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:49:07" />
+			<date key="time:timestamp" value="1970-04-26T18:49:12" />
 			<int key="case_id" value="21" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
@@ -1399,7 +1444,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:49:08" />
+			<date key="time:timestamp" value="1970-04-26T18:49:13" />
 			<int key="case_id" value="21" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AI" />
@@ -1408,7 +1453,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:49:09" />
+			<date key="time:timestamp" value="1970-04-26T18:49:14" />
 			<int key="case_id" value="21" />
 			<int key="position" value="3" />
 			<string key="prefix" value="AIE" />
@@ -1417,7 +1462,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:49:10" />
+			<date key="time:timestamp" value="1970-04-26T18:49:15" />
 			<int key="case_id" value="21" />
 			<int key="position" value="4" />
 			<string key="prefix" value="AIEF" />
@@ -1426,7 +1471,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:49:11" />
+			<date key="time:timestamp" value="1970-04-26T18:49:16" />
 			<int key="case_id" value="21" />
 			<int key="position" value="5" />
 			<string key="prefix" value="AIEFD" />
@@ -1438,65 +1483,8 @@
 		<string key="concept:name" value="22" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:49:12" />
-			<int key="case_id" value="22" />
-			<int key="position" value="0" />
-			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDH" />
-			<string key="label" value="A" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:49:13" />
-			<int key="case_id" value="22" />
-			<int key="position" value="1" />
-			<string key="prefix" value="A" />
-			<string key="suffix" value="EFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:49:14" />
-			<int key="case_id" value="22" />
-			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
-			<string key="suffix" value="FDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:49:15" />
-			<int key="case_id" value="22" />
-			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
-			<string key="suffix" value="DH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:49:16" />
-			<int key="case_id" value="22" />
-			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
-			<string key="suffix" value="H" />
-			<string key="label" value="D_0" />
-		</event>
-		<event>
-			<string key="concept:name" value="H" />
 			<date key="time:timestamp" value="1970-04-26T18:49:17" />
 			<int key="case_id" value="22" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
-			<string key="suffix" value="" />
-			<string key="label" value="H" />
-		</event>
-	</trace>
-	<trace>
-		<string key="concept:name" value="23" />
-		<event>
-			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:49:18" />
-			<int key="case_id" value="23" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
 			<string key="suffix" value="BCDG" />
@@ -1504,8 +1492,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:49:19" />
-			<int key="case_id" value="23" />
+			<date key="time:timestamp" value="1970-04-26T18:49:18" />
+			<int key="case_id" value="22" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
 			<string key="suffix" value="CDG" />
@@ -1513,8 +1501,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:49:20" />
-			<int key="case_id" value="23" />
+			<date key="time:timestamp" value="1970-04-26T18:49:19" />
+			<int key="case_id" value="22" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AB" />
 			<string key="suffix" value="DG" />
@@ -1522,8 +1510,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:49:21" />
-			<int key="case_id" value="23" />
+			<date key="time:timestamp" value="1970-04-26T18:49:20" />
+			<int key="case_id" value="22" />
 			<int key="position" value="3" />
 			<string key="prefix" value="ABC" />
 			<string key="suffix" value="G" />
@@ -1531,8 +1519,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:49:22" />
-			<int key="case_id" value="23" />
+			<date key="time:timestamp" value="1970-04-26T18:49:21" />
+			<int key="case_id" value="22" />
 			<int key="position" value="4" />
 			<string key="prefix" value="ABCD" />
 			<string key="suffix" value="" />
@@ -1540,139 +1528,295 @@
 		</event>
 	</trace>
 	<trace>
-		<string key="concept:name" value="24" />
+		<string key="concept:name" value="23" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:49:23" />
-			<int key="case_id" value="24" />
+			<date key="time:timestamp" value="1970-04-26T18:49:22" />
+			<int key="case_id" value="23" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDIEFDIEFDH" />
+			<string key="suffix" value="IEFDIEFDIEFDIEFDIEFDIEFDH" />
 			<string key="label" value="A" />
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:49:24" />
-			<int key="case_id" value="24" />
+			<date key="time:timestamp" value="1970-04-26T18:49:23" />
+			<int key="case_id" value="23" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
+			<string key="suffix" value="EFDIEFDIEFDIEFDIEFDIEFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:49:24" />
+			<int key="case_id" value="23" />
+			<int key="position" value="2" />
+			<string key="prefix" value="AI" />
+			<string key="suffix" value="FDIEFDIEFDIEFDIEFDIEFDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:49:25" />
+			<int key="case_id" value="23" />
+			<int key="position" value="3" />
+			<string key="prefix" value="AIE" />
+			<string key="suffix" value="DIEFDIEFDIEFDIEFDIEFDH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_2" />
+			<date key="time:timestamp" value="1970-04-26T18:49:26" />
+			<int key="case_id" value="23" />
+			<int key="position" value="4" />
+			<string key="prefix" value="AIEF" />
+			<string key="suffix" value="IEFDIEFDIEFDIEFDIEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:49:27" />
+			<int key="case_id" value="23" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
+			<string key="suffix" value="EFDIEFDIEFDIEFDIEFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:49:28" />
+			<int key="case_id" value="23" />
+			<int key="position" value="6" />
+			<string key="prefix" value="AIEFDI" />
+			<string key="suffix" value="FDIEFDIEFDIEFDIEFDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:49:29" />
+			<int key="case_id" value="23" />
+			<int key="position" value="7" />
+			<string key="prefix" value="AIEFDIE" />
+			<string key="suffix" value="DIEFDIEFDIEFDIEFDH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_2" />
+			<date key="time:timestamp" value="1970-04-26T18:49:30" />
+			<int key="case_id" value="23" />
+			<int key="position" value="8" />
+			<string key="prefix" value="AIEFDIEF" />
+			<string key="suffix" value="IEFDIEFDIEFDIEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:49:31" />
+			<int key="case_id" value="23" />
+			<int key="position" value="9" />
+			<string key="prefix" value="AIEFDIEFD" />
+			<string key="suffix" value="EFDIEFDIEFDIEFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:49:32" />
+			<int key="case_id" value="23" />
+			<int key="position" value="10" />
+			<string key="prefix" value="AIEFDIEFDI" />
+			<string key="suffix" value="FDIEFDIEFDIEFDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:49:33" />
+			<int key="case_id" value="23" />
+			<int key="position" value="11" />
+			<string key="prefix" value="AIEFDIEFDIE" />
+			<string key="suffix" value="DIEFDIEFDIEFDH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_2" />
+			<date key="time:timestamp" value="1970-04-26T18:49:34" />
+			<int key="case_id" value="23" />
+			<int key="position" value="12" />
+			<string key="prefix" value="AIEFDIEFDIEF" />
+			<string key="suffix" value="IEFDIEFDIEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:49:35" />
+			<int key="case_id" value="23" />
+			<int key="position" value="13" />
+			<string key="prefix" value="AIEFDIEFDIEFD" />
 			<string key="suffix" value="EFDIEFDIEFDH" />
 			<string key="label" value="I" />
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:49:25" />
-			<int key="case_id" value="24" />
-			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
+			<date key="time:timestamp" value="1970-04-26T18:49:36" />
+			<int key="case_id" value="23" />
+			<int key="position" value="14" />
+			<string key="prefix" value="AIEFDIEFDIEFDI" />
 			<string key="suffix" value="FDIEFDIEFDH" />
 			<string key="label" value="E" />
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:49:26" />
-			<int key="case_id" value="24" />
-			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
+			<date key="time:timestamp" value="1970-04-26T18:49:37" />
+			<int key="case_id" value="23" />
+			<int key="position" value="15" />
+			<string key="prefix" value="AIEFDIEFDIEFDIE" />
 			<string key="suffix" value="DIEFDIEFDH" />
 			<string key="label" value="F" />
 		</event>
 		<event>
 			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:49:27" />
-			<int key="case_id" value="24" />
-			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
+			<date key="time:timestamp" value="1970-04-26T18:49:38" />
+			<int key="case_id" value="23" />
+			<int key="position" value="16" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEF" />
 			<string key="suffix" value="IEFDIEFDH" />
 			<string key="label" value="D_2" />
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:49:28" />
-			<int key="case_id" value="24" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
+			<date key="time:timestamp" value="1970-04-26T18:49:39" />
+			<int key="case_id" value="23" />
+			<int key="position" value="17" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFD" />
 			<string key="suffix" value="EFDIEFDH" />
 			<string key="label" value="I" />
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:49:29" />
-			<int key="case_id" value="24" />
-			<int key="position" value="6" />
-			<string key="prefix" value="AIEFDI" />
+			<date key="time:timestamp" value="1970-04-26T18:49:40" />
+			<int key="case_id" value="23" />
+			<int key="position" value="18" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFDI" />
 			<string key="suffix" value="FDIEFDH" />
 			<string key="label" value="E" />
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:49:30" />
-			<int key="case_id" value="24" />
-			<int key="position" value="7" />
-			<string key="prefix" value="AIEFDIE" />
+			<date key="time:timestamp" value="1970-04-26T18:49:41" />
+			<int key="case_id" value="23" />
+			<int key="position" value="19" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFDIE" />
 			<string key="suffix" value="DIEFDH" />
 			<string key="label" value="F" />
 		</event>
 		<event>
 			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:49:31" />
-			<int key="case_id" value="24" />
-			<int key="position" value="8" />
-			<string key="prefix" value="AIEFDIEF" />
+			<date key="time:timestamp" value="1970-04-26T18:49:42" />
+			<int key="case_id" value="23" />
+			<int key="position" value="20" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFDIEF" />
 			<string key="suffix" value="IEFDH" />
 			<string key="label" value="D_2" />
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:49:32" />
-			<int key="case_id" value="24" />
-			<int key="position" value="9" />
-			<string key="prefix" value="AIEFDIEFD" />
+			<date key="time:timestamp" value="1970-04-26T18:49:43" />
+			<int key="case_id" value="23" />
+			<int key="position" value="21" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFDIEFD" />
 			<string key="suffix" value="EFDH" />
 			<string key="label" value="I" />
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:49:33" />
-			<int key="case_id" value="24" />
-			<int key="position" value="10" />
-			<string key="prefix" value="AIEFDIEFDI" />
+			<date key="time:timestamp" value="1970-04-26T18:49:44" />
+			<int key="case_id" value="23" />
+			<int key="position" value="22" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFDIEFDI" />
 			<string key="suffix" value="FDH" />
 			<string key="label" value="E" />
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:49:34" />
-			<int key="case_id" value="24" />
-			<int key="position" value="11" />
-			<string key="prefix" value="AIEFDIEFDIE" />
+			<date key="time:timestamp" value="1970-04-26T18:49:45" />
+			<int key="case_id" value="23" />
+			<int key="position" value="23" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFDIEFDIE" />
 			<string key="suffix" value="DH" />
 			<string key="label" value="F" />
 		</event>
 		<event>
 			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:49:35" />
-			<int key="case_id" value="24" />
-			<int key="position" value="12" />
-			<string key="prefix" value="AIEFDIEFDIEF" />
+			<date key="time:timestamp" value="1970-04-26T18:49:46" />
+			<int key="case_id" value="23" />
+			<int key="position" value="24" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFDIEFDIEF" />
 			<string key="suffix" value="H" />
 			<string key="label" value="D_0" />
 		</event>
 		<event>
 			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:49:36" />
-			<int key="case_id" value="24" />
-			<int key="position" value="13" />
-			<string key="prefix" value="AIEFDIEFDIEFD" />
+			<date key="time:timestamp" value="1970-04-26T18:49:47" />
+			<int key="case_id" value="23" />
+			<int key="position" value="25" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFDIEFDIEFD" />
 			<string key="suffix" value="" />
 			<string key="label" value="H" />
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="24" />
+		<event>
+			<string key="concept:name" value="A" />
+			<date key="time:timestamp" value="1970-04-26T18:49:48" />
+			<int key="case_id" value="24" />
+			<int key="position" value="0" />
+			<string key="prefix" value="" />
+			<string key="suffix" value="BCDG" />
+			<string key="label" value="A" />
+		</event>
+		<event>
+			<string key="concept:name" value="B" />
+			<date key="time:timestamp" value="1970-04-26T18:49:49" />
+			<int key="case_id" value="24" />
+			<int key="position" value="1" />
+			<string key="prefix" value="A" />
+			<string key="suffix" value="CDG" />
+			<string key="label" value="B" />
+		</event>
+		<event>
+			<string key="concept:name" value="C" />
+			<date key="time:timestamp" value="1970-04-26T18:49:50" />
+			<int key="case_id" value="24" />
+			<int key="position" value="2" />
+			<string key="prefix" value="AB" />
+			<string key="suffix" value="DG" />
+			<string key="label" value="C" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_1" />
+			<date key="time:timestamp" value="1970-04-26T18:49:51" />
+			<int key="case_id" value="24" />
+			<int key="position" value="3" />
+			<string key="prefix" value="ABC" />
+			<string key="suffix" value="G" />
+			<string key="label" value="D_1" />
+		</event>
+		<event>
+			<string key="concept:name" value="G" />
+			<date key="time:timestamp" value="1970-04-26T18:49:52" />
+			<int key="case_id" value="24" />
+			<int key="position" value="4" />
+			<string key="prefix" value="ABCD" />
+			<string key="suffix" value="" />
+			<string key="label" value="G" />
 		</event>
 	</trace>
 	<trace>
 		<string key="concept:name" value="25" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:49:37" />
+			<date key="time:timestamp" value="1970-04-26T18:49:53" />
 			<int key="case_id" value="25" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
@@ -1681,7 +1825,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:49:38" />
+			<date key="time:timestamp" value="1970-04-26T18:49:54" />
 			<int key="case_id" value="25" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
@@ -1690,7 +1834,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:49:39" />
+			<date key="time:timestamp" value="1970-04-26T18:49:55" />
 			<int key="case_id" value="25" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AI" />
@@ -1699,7 +1843,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:49:40" />
+			<date key="time:timestamp" value="1970-04-26T18:49:56" />
 			<int key="case_id" value="25" />
 			<int key="position" value="3" />
 			<string key="prefix" value="AIE" />
@@ -1708,7 +1852,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:49:41" />
+			<date key="time:timestamp" value="1970-04-26T18:49:57" />
 			<int key="case_id" value="25" />
 			<int key="position" value="4" />
 			<string key="prefix" value="AIEF" />
@@ -1717,7 +1861,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:49:42" />
+			<date key="time:timestamp" value="1970-04-26T18:49:58" />
 			<int key="case_id" value="25" />
 			<int key="position" value="5" />
 			<string key="prefix" value="AIEFD" />
@@ -1726,7 +1870,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:49:43" />
+			<date key="time:timestamp" value="1970-04-26T18:49:59" />
 			<int key="case_id" value="25" />
 			<int key="position" value="6" />
 			<string key="prefix" value="AIEFDI" />
@@ -1735,7 +1879,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:49:44" />
+			<date key="time:timestamp" value="1970-04-26T18:50:00" />
 			<int key="case_id" value="25" />
 			<int key="position" value="7" />
 			<string key="prefix" value="AIEFDIE" />
@@ -1744,7 +1888,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:49:45" />
+			<date key="time:timestamp" value="1970-04-26T18:50:01" />
 			<int key="case_id" value="25" />
 			<int key="position" value="8" />
 			<string key="prefix" value="AIEFDIEF" />
@@ -1753,7 +1897,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:49:46" />
+			<date key="time:timestamp" value="1970-04-26T18:50:02" />
 			<int key="case_id" value="25" />
 			<int key="position" value="9" />
 			<string key="prefix" value="AIEFDIEFD" />
@@ -1762,7 +1906,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:49:47" />
+			<date key="time:timestamp" value="1970-04-26T18:50:03" />
 			<int key="case_id" value="25" />
 			<int key="position" value="10" />
 			<string key="prefix" value="AIEFDIEFDI" />
@@ -1771,7 +1915,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:49:48" />
+			<date key="time:timestamp" value="1970-04-26T18:50:04" />
 			<int key="case_id" value="25" />
 			<int key="position" value="11" />
 			<string key="prefix" value="AIEFDIEFDIE" />
@@ -1780,7 +1924,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:49:49" />
+			<date key="time:timestamp" value="1970-04-26T18:50:05" />
 			<int key="case_id" value="25" />
 			<int key="position" value="12" />
 			<string key="prefix" value="AIEFDIEFDIEF" />
@@ -1789,7 +1933,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:49:50" />
+			<date key="time:timestamp" value="1970-04-26T18:50:06" />
 			<int key="case_id" value="25" />
 			<int key="position" value="13" />
 			<string key="prefix" value="AIEFDIEFDIEFD" />
@@ -1801,55 +1945,163 @@
 		<string key="concept:name" value="26" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:49:51" />
+			<date key="time:timestamp" value="1970-04-26T18:50:07" />
 			<int key="case_id" value="26" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDH" />
+			<string key="suffix" value="IEFDIEFDIEFDIEFDH" />
 			<string key="label" value="A" />
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:49:52" />
+			<date key="time:timestamp" value="1970-04-26T18:50:08" />
 			<int key="case_id" value="26" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
+			<string key="suffix" value="EFDIEFDIEFDIEFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:50:09" />
+			<int key="case_id" value="26" />
+			<int key="position" value="2" />
+			<string key="prefix" value="AI" />
+			<string key="suffix" value="FDIEFDIEFDIEFDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:50:10" />
+			<int key="case_id" value="26" />
+			<int key="position" value="3" />
+			<string key="prefix" value="AIE" />
+			<string key="suffix" value="DIEFDIEFDIEFDH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_2" />
+			<date key="time:timestamp" value="1970-04-26T18:50:11" />
+			<int key="case_id" value="26" />
+			<int key="position" value="4" />
+			<string key="prefix" value="AIEF" />
+			<string key="suffix" value="IEFDIEFDIEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:50:12" />
+			<int key="case_id" value="26" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
+			<string key="suffix" value="EFDIEFDIEFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:50:13" />
+			<int key="case_id" value="26" />
+			<int key="position" value="6" />
+			<string key="prefix" value="AIEFDI" />
+			<string key="suffix" value="FDIEFDIEFDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:50:14" />
+			<int key="case_id" value="26" />
+			<int key="position" value="7" />
+			<string key="prefix" value="AIEFDIE" />
+			<string key="suffix" value="DIEFDIEFDH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_2" />
+			<date key="time:timestamp" value="1970-04-26T18:50:15" />
+			<int key="case_id" value="26" />
+			<int key="position" value="8" />
+			<string key="prefix" value="AIEFDIEF" />
+			<string key="suffix" value="IEFDIEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:50:16" />
+			<int key="case_id" value="26" />
+			<int key="position" value="9" />
+			<string key="prefix" value="AIEFDIEFD" />
+			<string key="suffix" value="EFDIEFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:50:17" />
+			<int key="case_id" value="26" />
+			<int key="position" value="10" />
+			<string key="prefix" value="AIEFDIEFDI" />
+			<string key="suffix" value="FDIEFDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:50:18" />
+			<int key="case_id" value="26" />
+			<int key="position" value="11" />
+			<string key="prefix" value="AIEFDIEFDIE" />
+			<string key="suffix" value="DIEFDH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_2" />
+			<date key="time:timestamp" value="1970-04-26T18:50:19" />
+			<int key="case_id" value="26" />
+			<int key="position" value="12" />
+			<string key="prefix" value="AIEFDIEFDIEF" />
+			<string key="suffix" value="IEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:50:20" />
+			<int key="case_id" value="26" />
+			<int key="position" value="13" />
+			<string key="prefix" value="AIEFDIEFDIEFD" />
 			<string key="suffix" value="EFDH" />
 			<string key="label" value="I" />
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:49:53" />
+			<date key="time:timestamp" value="1970-04-26T18:50:21" />
 			<int key="case_id" value="26" />
-			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
+			<int key="position" value="14" />
+			<string key="prefix" value="AIEFDIEFDIEFDI" />
 			<string key="suffix" value="FDH" />
 			<string key="label" value="E" />
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:49:54" />
+			<date key="time:timestamp" value="1970-04-26T18:50:22" />
 			<int key="case_id" value="26" />
-			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
+			<int key="position" value="15" />
+			<string key="prefix" value="AIEFDIEFDIEFDIE" />
 			<string key="suffix" value="DH" />
 			<string key="label" value="F" />
 		</event>
 		<event>
 			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:49:55" />
+			<date key="time:timestamp" value="1970-04-26T18:50:23" />
 			<int key="case_id" value="26" />
-			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
+			<int key="position" value="16" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEF" />
 			<string key="suffix" value="H" />
 			<string key="label" value="D_0" />
 		</event>
 		<event>
 			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:49:56" />
+			<date key="time:timestamp" value="1970-04-26T18:50:24" />
 			<int key="case_id" value="26" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
+			<int key="position" value="17" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFD" />
 			<string key="suffix" value="" />
 			<string key="label" value="H" />
 		</event>
@@ -1858,241 +2110,187 @@
 		<string key="concept:name" value="27" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:49:57" />
+			<date key="time:timestamp" value="1970-04-26T18:50:25" />
 			<int key="case_id" value="27" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDIEFDIEFDH" />
+			<string key="suffix" value="BCDG" />
 			<string key="label" value="A" />
 		</event>
 		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:49:58" />
+			<string key="concept:name" value="B" />
+			<date key="time:timestamp" value="1970-04-26T18:50:26" />
 			<int key="case_id" value="27" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
-			<string key="suffix" value="EFDIEFDIEFDH" />
-			<string key="label" value="I" />
+			<string key="suffix" value="CDG" />
+			<string key="label" value="B" />
 		</event>
 		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:49:59" />
+			<string key="concept:name" value="C" />
+			<date key="time:timestamp" value="1970-04-26T18:50:27" />
 			<int key="case_id" value="27" />
 			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
-			<string key="suffix" value="FDIEFDIEFDH" />
-			<string key="label" value="E" />
+			<string key="prefix" value="AB" />
+			<string key="suffix" value="DG" />
+			<string key="label" value="C" />
 		</event>
 		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:50:00" />
+			<string key="concept:name" value="D_1" />
+			<date key="time:timestamp" value="1970-04-26T18:50:28" />
 			<int key="case_id" value="27" />
 			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
-			<string key="suffix" value="DIEFDIEFDH" />
-			<string key="label" value="F" />
+			<string key="prefix" value="ABC" />
+			<string key="suffix" value="G" />
+			<string key="label" value="D_1" />
 		</event>
 		<event>
-			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:50:01" />
+			<string key="concept:name" value="G" />
+			<date key="time:timestamp" value="1970-04-26T18:50:29" />
 			<int key="case_id" value="27" />
 			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
-			<string key="suffix" value="IEFDIEFDH" />
-			<string key="label" value="D_2" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:50:02" />
-			<int key="case_id" value="27" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
-			<string key="suffix" value="EFDIEFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:50:03" />
-			<int key="case_id" value="27" />
-			<int key="position" value="6" />
-			<string key="prefix" value="AIEFDI" />
-			<string key="suffix" value="FDIEFDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:50:04" />
-			<int key="case_id" value="27" />
-			<int key="position" value="7" />
-			<string key="prefix" value="AIEFDIE" />
-			<string key="suffix" value="DIEFDH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:50:05" />
-			<int key="case_id" value="27" />
-			<int key="position" value="8" />
-			<string key="prefix" value="AIEFDIEF" />
-			<string key="suffix" value="IEFDH" />
-			<string key="label" value="D_2" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:50:06" />
-			<int key="case_id" value="27" />
-			<int key="position" value="9" />
-			<string key="prefix" value="AIEFDIEFD" />
-			<string key="suffix" value="EFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:50:07" />
-			<int key="case_id" value="27" />
-			<int key="position" value="10" />
-			<string key="prefix" value="AIEFDIEFDI" />
-			<string key="suffix" value="FDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:50:08" />
-			<int key="case_id" value="27" />
-			<int key="position" value="11" />
-			<string key="prefix" value="AIEFDIEFDIE" />
-			<string key="suffix" value="DH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:50:09" />
-			<int key="case_id" value="27" />
-			<int key="position" value="12" />
-			<string key="prefix" value="AIEFDIEFDIEF" />
-			<string key="suffix" value="H" />
-			<string key="label" value="D_0" />
-		</event>
-		<event>
-			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:50:10" />
-			<int key="case_id" value="27" />
-			<int key="position" value="13" />
-			<string key="prefix" value="AIEFDIEFDIEFD" />
+			<string key="prefix" value="ABCD" />
 			<string key="suffix" value="" />
-			<string key="label" value="H" />
+			<string key="label" value="G" />
 		</event>
 	</trace>
 	<trace>
 		<string key="concept:name" value="28" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:50:11" />
+			<date key="time:timestamp" value="1970-04-26T18:50:30" />
 			<int key="case_id" value="28" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDH" />
+			<string key="suffix" value="BCDG" />
 			<string key="label" value="A" />
 		</event>
 		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:50:12" />
+			<string key="concept:name" value="B" />
+			<date key="time:timestamp" value="1970-04-26T18:50:31" />
 			<int key="case_id" value="28" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
-			<string key="suffix" value="EFDH" />
-			<string key="label" value="I" />
+			<string key="suffix" value="CDG" />
+			<string key="label" value="B" />
 		</event>
 		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:50:13" />
+			<string key="concept:name" value="C" />
+			<date key="time:timestamp" value="1970-04-26T18:50:32" />
 			<int key="case_id" value="28" />
 			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
-			<string key="suffix" value="FDH" />
-			<string key="label" value="E" />
+			<string key="prefix" value="AB" />
+			<string key="suffix" value="DG" />
+			<string key="label" value="C" />
 		</event>
 		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:50:14" />
+			<string key="concept:name" value="D_1" />
+			<date key="time:timestamp" value="1970-04-26T18:50:33" />
 			<int key="case_id" value="28" />
 			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
-			<string key="suffix" value="DH" />
-			<string key="label" value="F" />
+			<string key="prefix" value="ABC" />
+			<string key="suffix" value="G" />
+			<string key="label" value="D_1" />
 		</event>
 		<event>
-			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:50:15" />
+			<string key="concept:name" value="G" />
+			<date key="time:timestamp" value="1970-04-26T18:50:34" />
 			<int key="case_id" value="28" />
 			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
-			<string key="suffix" value="H" />
-			<string key="label" value="D_0" />
-		</event>
-		<event>
-			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:50:16" />
-			<int key="case_id" value="28" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
+			<string key="prefix" value="ABCD" />
 			<string key="suffix" value="" />
-			<string key="label" value="H" />
+			<string key="label" value="G" />
 		</event>
 	</trace>
 	<trace>
 		<string key="concept:name" value="29" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:50:17" />
+			<date key="time:timestamp" value="1970-04-26T18:50:35" />
 			<int key="case_id" value="29" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDH" />
+			<string key="suffix" value="IEFDIEFDH" />
 			<string key="label" value="A" />
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:50:18" />
+			<date key="time:timestamp" value="1970-04-26T18:50:36" />
 			<int key="case_id" value="29" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
+			<string key="suffix" value="EFDIEFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:50:37" />
+			<int key="case_id" value="29" />
+			<int key="position" value="2" />
+			<string key="prefix" value="AI" />
+			<string key="suffix" value="FDIEFDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:50:38" />
+			<int key="case_id" value="29" />
+			<int key="position" value="3" />
+			<string key="prefix" value="AIE" />
+			<string key="suffix" value="DIEFDH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_2" />
+			<date key="time:timestamp" value="1970-04-26T18:50:39" />
+			<int key="case_id" value="29" />
+			<int key="position" value="4" />
+			<string key="prefix" value="AIEF" />
+			<string key="suffix" value="IEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:50:40" />
+			<int key="case_id" value="29" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
 			<string key="suffix" value="EFDH" />
 			<string key="label" value="I" />
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:50:19" />
+			<date key="time:timestamp" value="1970-04-26T18:50:41" />
 			<int key="case_id" value="29" />
-			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
+			<int key="position" value="6" />
+			<string key="prefix" value="AIEFDI" />
 			<string key="suffix" value="FDH" />
 			<string key="label" value="E" />
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:50:20" />
+			<date key="time:timestamp" value="1970-04-26T18:50:42" />
 			<int key="case_id" value="29" />
-			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
+			<int key="position" value="7" />
+			<string key="prefix" value="AIEFDIE" />
 			<string key="suffix" value="DH" />
 			<string key="label" value="F" />
 		</event>
 		<event>
 			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:50:21" />
+			<date key="time:timestamp" value="1970-04-26T18:50:43" />
 			<int key="case_id" value="29" />
-			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
+			<int key="position" value="8" />
+			<string key="prefix" value="AIEFDIEF" />
 			<string key="suffix" value="H" />
 			<string key="label" value="D_0" />
 		</event>
 		<event>
 			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:50:22" />
+			<date key="time:timestamp" value="1970-04-26T18:50:44" />
 			<int key="case_id" value="29" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
+			<int key="position" value="9" />
+			<string key="prefix" value="AIEFDIEFD" />
 			<string key="suffix" value="" />
 			<string key="label" value="H" />
 		</event>
@@ -2101,7 +2299,7 @@
 		<string key="concept:name" value="30" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:50:23" />
+			<date key="time:timestamp" value="1970-04-26T18:50:45" />
 			<int key="case_id" value="30" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
@@ -2110,7 +2308,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:50:24" />
+			<date key="time:timestamp" value="1970-04-26T18:50:46" />
 			<int key="case_id" value="30" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
@@ -2119,7 +2317,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:50:25" />
+			<date key="time:timestamp" value="1970-04-26T18:50:47" />
 			<int key="case_id" value="30" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AB" />
@@ -2128,7 +2326,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:50:26" />
+			<date key="time:timestamp" value="1970-04-26T18:50:48" />
 			<int key="case_id" value="30" />
 			<int key="position" value="3" />
 			<string key="prefix" value="ABC" />
@@ -2137,7 +2335,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:50:27" />
+			<date key="time:timestamp" value="1970-04-26T18:50:49" />
 			<int key="case_id" value="30" />
 			<int key="position" value="4" />
 			<string key="prefix" value="ABCD" />
@@ -2149,8 +2347,137 @@
 		<string key="concept:name" value="31" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:50:28" />
+			<date key="time:timestamp" value="1970-04-26T18:50:50" />
 			<int key="case_id" value="31" />
+			<int key="position" value="0" />
+			<string key="prefix" value="" />
+			<string key="suffix" value="IEFDIEFDIEFDH" />
+			<string key="label" value="A" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:50:51" />
+			<int key="case_id" value="31" />
+			<int key="position" value="1" />
+			<string key="prefix" value="A" />
+			<string key="suffix" value="EFDIEFDIEFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:50:52" />
+			<int key="case_id" value="31" />
+			<int key="position" value="2" />
+			<string key="prefix" value="AI" />
+			<string key="suffix" value="FDIEFDIEFDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:50:53" />
+			<int key="case_id" value="31" />
+			<int key="position" value="3" />
+			<string key="prefix" value="AIE" />
+			<string key="suffix" value="DIEFDIEFDH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_2" />
+			<date key="time:timestamp" value="1970-04-26T18:50:54" />
+			<int key="case_id" value="31" />
+			<int key="position" value="4" />
+			<string key="prefix" value="AIEF" />
+			<string key="suffix" value="IEFDIEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:50:55" />
+			<int key="case_id" value="31" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
+			<string key="suffix" value="EFDIEFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:50:56" />
+			<int key="case_id" value="31" />
+			<int key="position" value="6" />
+			<string key="prefix" value="AIEFDI" />
+			<string key="suffix" value="FDIEFDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:50:57" />
+			<int key="case_id" value="31" />
+			<int key="position" value="7" />
+			<string key="prefix" value="AIEFDIE" />
+			<string key="suffix" value="DIEFDH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_2" />
+			<date key="time:timestamp" value="1970-04-26T18:50:58" />
+			<int key="case_id" value="31" />
+			<int key="position" value="8" />
+			<string key="prefix" value="AIEFDIEF" />
+			<string key="suffix" value="IEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:50:59" />
+			<int key="case_id" value="31" />
+			<int key="position" value="9" />
+			<string key="prefix" value="AIEFDIEFD" />
+			<string key="suffix" value="EFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:51:00" />
+			<int key="case_id" value="31" />
+			<int key="position" value="10" />
+			<string key="prefix" value="AIEFDIEFDI" />
+			<string key="suffix" value="FDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:51:01" />
+			<int key="case_id" value="31" />
+			<int key="position" value="11" />
+			<string key="prefix" value="AIEFDIEFDIE" />
+			<string key="suffix" value="DH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_0" />
+			<date key="time:timestamp" value="1970-04-26T18:51:02" />
+			<int key="case_id" value="31" />
+			<int key="position" value="12" />
+			<string key="prefix" value="AIEFDIEFDIEF" />
+			<string key="suffix" value="H" />
+			<string key="label" value="D_0" />
+		</event>
+		<event>
+			<string key="concept:name" value="H" />
+			<date key="time:timestamp" value="1970-04-26T18:51:03" />
+			<int key="case_id" value="31" />
+			<int key="position" value="13" />
+			<string key="prefix" value="AIEFDIEFDIEFD" />
+			<string key="suffix" value="" />
+			<string key="label" value="H" />
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="32" />
+		<event>
+			<string key="concept:name" value="A" />
+			<date key="time:timestamp" value="1970-04-26T18:51:04" />
+			<int key="case_id" value="32" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
 			<string key="suffix" value="BCDG" />
@@ -2158,8 +2485,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:50:29" />
-			<int key="case_id" value="31" />
+			<date key="time:timestamp" value="1970-04-26T18:51:05" />
+			<int key="case_id" value="32" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
 			<string key="suffix" value="CDG" />
@@ -2167,8 +2494,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:50:30" />
-			<int key="case_id" value="31" />
+			<date key="time:timestamp" value="1970-04-26T18:51:06" />
+			<int key="case_id" value="32" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AB" />
 			<string key="suffix" value="DG" />
@@ -2176,8 +2503,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:50:31" />
-			<int key="case_id" value="31" />
+			<date key="time:timestamp" value="1970-04-26T18:51:07" />
+			<int key="case_id" value="32" />
 			<int key="position" value="3" />
 			<string key="prefix" value="ABC" />
 			<string key="suffix" value="G" />
@@ -2185,8 +2512,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:50:32" />
-			<int key="case_id" value="31" />
+			<date key="time:timestamp" value="1970-04-26T18:51:08" />
+			<int key="case_id" value="32" />
 			<int key="position" value="4" />
 			<string key="prefix" value="ABCD" />
 			<string key="suffix" value="" />
@@ -2194,103 +2521,10 @@
 		</event>
 	</trace>
 	<trace>
-		<string key="concept:name" value="32" />
-		<event>
-			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:50:33" />
-			<int key="case_id" value="32" />
-			<int key="position" value="0" />
-			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDIEFDH" />
-			<string key="label" value="A" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:50:34" />
-			<int key="case_id" value="32" />
-			<int key="position" value="1" />
-			<string key="prefix" value="A" />
-			<string key="suffix" value="EFDIEFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:50:35" />
-			<int key="case_id" value="32" />
-			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
-			<string key="suffix" value="FDIEFDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:50:36" />
-			<int key="case_id" value="32" />
-			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
-			<string key="suffix" value="DIEFDH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:50:37" />
-			<int key="case_id" value="32" />
-			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
-			<string key="suffix" value="IEFDH" />
-			<string key="label" value="D_2" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:50:38" />
-			<int key="case_id" value="32" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
-			<string key="suffix" value="EFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:50:39" />
-			<int key="case_id" value="32" />
-			<int key="position" value="6" />
-			<string key="prefix" value="AIEFDI" />
-			<string key="suffix" value="FDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:50:40" />
-			<int key="case_id" value="32" />
-			<int key="position" value="7" />
-			<string key="prefix" value="AIEFDIE" />
-			<string key="suffix" value="DH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:50:41" />
-			<int key="case_id" value="32" />
-			<int key="position" value="8" />
-			<string key="prefix" value="AIEFDIEF" />
-			<string key="suffix" value="H" />
-			<string key="label" value="D_0" />
-		</event>
-		<event>
-			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:50:42" />
-			<int key="case_id" value="32" />
-			<int key="position" value="9" />
-			<string key="prefix" value="AIEFDIEFD" />
-			<string key="suffix" value="" />
-			<string key="label" value="H" />
-		</event>
-	</trace>
-	<trace>
 		<string key="concept:name" value="33" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:50:43" />
+			<date key="time:timestamp" value="1970-04-26T18:51:09" />
 			<int key="case_id" value="33" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
@@ -2299,7 +2533,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:50:44" />
+			<date key="time:timestamp" value="1970-04-26T18:51:10" />
 			<int key="case_id" value="33" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
@@ -2308,7 +2542,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:50:45" />
+			<date key="time:timestamp" value="1970-04-26T18:51:11" />
 			<int key="case_id" value="33" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AI" />
@@ -2317,7 +2551,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:50:46" />
+			<date key="time:timestamp" value="1970-04-26T18:51:12" />
 			<int key="case_id" value="33" />
 			<int key="position" value="3" />
 			<string key="prefix" value="AIE" />
@@ -2326,7 +2560,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:50:47" />
+			<date key="time:timestamp" value="1970-04-26T18:51:13" />
 			<int key="case_id" value="33" />
 			<int key="position" value="4" />
 			<string key="prefix" value="AIEF" />
@@ -2335,7 +2569,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:50:48" />
+			<date key="time:timestamp" value="1970-04-26T18:51:14" />
 			<int key="case_id" value="33" />
 			<int key="position" value="5" />
 			<string key="prefix" value="AIEFD" />
@@ -2347,7 +2581,7 @@
 		<string key="concept:name" value="34" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:50:49" />
+			<date key="time:timestamp" value="1970-04-26T18:51:15" />
 			<int key="case_id" value="34" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
@@ -2356,7 +2590,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:50:50" />
+			<date key="time:timestamp" value="1970-04-26T18:51:16" />
 			<int key="case_id" value="34" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
@@ -2365,7 +2599,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:50:51" />
+			<date key="time:timestamp" value="1970-04-26T18:51:17" />
 			<int key="case_id" value="34" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AB" />
@@ -2374,7 +2608,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:50:52" />
+			<date key="time:timestamp" value="1970-04-26T18:51:18" />
 			<int key="case_id" value="34" />
 			<int key="position" value="3" />
 			<string key="prefix" value="ABC" />
@@ -2383,7 +2617,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:50:53" />
+			<date key="time:timestamp" value="1970-04-26T18:51:19" />
 			<int key="case_id" value="34" />
 			<int key="position" value="4" />
 			<string key="prefix" value="ABCD" />
@@ -2395,7 +2629,7 @@
 		<string key="concept:name" value="35" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:50:54" />
+			<date key="time:timestamp" value="1970-04-26T18:51:20" />
 			<int key="case_id" value="35" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
@@ -2404,7 +2638,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:50:55" />
+			<date key="time:timestamp" value="1970-04-26T18:51:21" />
 			<int key="case_id" value="35" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
@@ -2413,7 +2647,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:50:56" />
+			<date key="time:timestamp" value="1970-04-26T18:51:22" />
 			<int key="case_id" value="35" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AB" />
@@ -2422,7 +2656,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:50:57" />
+			<date key="time:timestamp" value="1970-04-26T18:51:23" />
 			<int key="case_id" value="35" />
 			<int key="position" value="3" />
 			<string key="prefix" value="ABC" />
@@ -2431,7 +2665,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:50:58" />
+			<date key="time:timestamp" value="1970-04-26T18:51:24" />
 			<int key="case_id" value="35" />
 			<int key="position" value="4" />
 			<string key="prefix" value="ABCD" />
@@ -2443,55 +2677,64 @@
 		<string key="concept:name" value="36" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:50:59" />
+			<date key="time:timestamp" value="1970-04-26T18:51:25" />
 			<int key="case_id" value="36" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="BCDG" />
+			<string key="suffix" value="IEFDH" />
 			<string key="label" value="A" />
 		</event>
 		<event>
-			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:51:00" />
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:51:26" />
 			<int key="case_id" value="36" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
-			<string key="suffix" value="CDG" />
-			<string key="label" value="B" />
+			<string key="suffix" value="EFDH" />
+			<string key="label" value="I" />
 		</event>
 		<event>
-			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:51:01" />
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:51:27" />
 			<int key="case_id" value="36" />
 			<int key="position" value="2" />
-			<string key="prefix" value="AB" />
-			<string key="suffix" value="DG" />
-			<string key="label" value="C" />
+			<string key="prefix" value="AI" />
+			<string key="suffix" value="FDH" />
+			<string key="label" value="E" />
 		</event>
 		<event>
-			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:51:02" />
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:51:28" />
 			<int key="case_id" value="36" />
 			<int key="position" value="3" />
-			<string key="prefix" value="ABC" />
-			<string key="suffix" value="G" />
-			<string key="label" value="D_1" />
+			<string key="prefix" value="AIE" />
+			<string key="suffix" value="DH" />
+			<string key="label" value="F" />
 		</event>
 		<event>
-			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:51:03" />
+			<string key="concept:name" value="D_0" />
+			<date key="time:timestamp" value="1970-04-26T18:51:29" />
 			<int key="case_id" value="36" />
 			<int key="position" value="4" />
-			<string key="prefix" value="ABCD" />
+			<string key="prefix" value="AIEF" />
+			<string key="suffix" value="H" />
+			<string key="label" value="D_0" />
+		</event>
+		<event>
+			<string key="concept:name" value="H" />
+			<date key="time:timestamp" value="1970-04-26T18:51:30" />
+			<int key="case_id" value="36" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
 			<string key="suffix" value="" />
-			<string key="label" value="G" />
+			<string key="label" value="H" />
 		</event>
 	</trace>
 	<trace>
 		<string key="concept:name" value="37" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:51:04" />
+			<date key="time:timestamp" value="1970-04-26T18:51:31" />
 			<int key="case_id" value="37" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
@@ -2500,7 +2743,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:51:05" />
+			<date key="time:timestamp" value="1970-04-26T18:51:32" />
 			<int key="case_id" value="37" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
@@ -2509,7 +2752,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:51:06" />
+			<date key="time:timestamp" value="1970-04-26T18:51:33" />
 			<int key="case_id" value="37" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AB" />
@@ -2518,7 +2761,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:51:07" />
+			<date key="time:timestamp" value="1970-04-26T18:51:34" />
 			<int key="case_id" value="37" />
 			<int key="position" value="3" />
 			<string key="prefix" value="ABC" />
@@ -2527,7 +2770,7 @@
 		</event>
 		<event>
 			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:51:08" />
+			<date key="time:timestamp" value="1970-04-26T18:51:35" />
 			<int key="case_id" value="37" />
 			<int key="position" value="4" />
 			<string key="prefix" value="ABCD" />
@@ -2539,256 +2782,211 @@
 		<string key="concept:name" value="38" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:51:09" />
+			<date key="time:timestamp" value="1970-04-26T18:51:36" />
 			<int key="case_id" value="38" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDIEFDIEFDH" />
+			<string key="suffix" value="BCDG" />
 			<string key="label" value="A" />
 		</event>
 		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:51:10" />
+			<string key="concept:name" value="B" />
+			<date key="time:timestamp" value="1970-04-26T18:51:37" />
 			<int key="case_id" value="38" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
-			<string key="suffix" value="EFDIEFDIEFDH" />
-			<string key="label" value="I" />
+			<string key="suffix" value="CDG" />
+			<string key="label" value="B" />
 		</event>
 		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:51:11" />
+			<string key="concept:name" value="C" />
+			<date key="time:timestamp" value="1970-04-26T18:51:38" />
 			<int key="case_id" value="38" />
 			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
-			<string key="suffix" value="FDIEFDIEFDH" />
-			<string key="label" value="E" />
+			<string key="prefix" value="AB" />
+			<string key="suffix" value="DG" />
+			<string key="label" value="C" />
 		</event>
 		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:51:12" />
+			<string key="concept:name" value="D_1" />
+			<date key="time:timestamp" value="1970-04-26T18:51:39" />
 			<int key="case_id" value="38" />
 			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
-			<string key="suffix" value="DIEFDIEFDH" />
-			<string key="label" value="F" />
+			<string key="prefix" value="ABC" />
+			<string key="suffix" value="G" />
+			<string key="label" value="D_1" />
 		</event>
 		<event>
-			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:51:13" />
+			<string key="concept:name" value="G" />
+			<date key="time:timestamp" value="1970-04-26T18:51:40" />
 			<int key="case_id" value="38" />
 			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
-			<string key="suffix" value="IEFDIEFDH" />
-			<string key="label" value="D_2" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:51:14" />
-			<int key="case_id" value="38" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
-			<string key="suffix" value="EFDIEFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:51:15" />
-			<int key="case_id" value="38" />
-			<int key="position" value="6" />
-			<string key="prefix" value="AIEFDI" />
-			<string key="suffix" value="FDIEFDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:51:16" />
-			<int key="case_id" value="38" />
-			<int key="position" value="7" />
-			<string key="prefix" value="AIEFDIE" />
-			<string key="suffix" value="DIEFDH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:51:17" />
-			<int key="case_id" value="38" />
-			<int key="position" value="8" />
-			<string key="prefix" value="AIEFDIEF" />
-			<string key="suffix" value="IEFDH" />
-			<string key="label" value="D_2" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:51:18" />
-			<int key="case_id" value="38" />
-			<int key="position" value="9" />
-			<string key="prefix" value="AIEFDIEFD" />
-			<string key="suffix" value="EFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:51:19" />
-			<int key="case_id" value="38" />
-			<int key="position" value="10" />
-			<string key="prefix" value="AIEFDIEFDI" />
-			<string key="suffix" value="FDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:51:20" />
-			<int key="case_id" value="38" />
-			<int key="position" value="11" />
-			<string key="prefix" value="AIEFDIEFDIE" />
-			<string key="suffix" value="DH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:51:21" />
-			<int key="case_id" value="38" />
-			<int key="position" value="12" />
-			<string key="prefix" value="AIEFDIEFDIEF" />
-			<string key="suffix" value="H" />
-			<string key="label" value="D_0" />
-		</event>
-		<event>
-			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:51:22" />
-			<int key="case_id" value="38" />
-			<int key="position" value="13" />
-			<string key="prefix" value="AIEFDIEFDIEFD" />
+			<string key="prefix" value="ABCD" />
 			<string key="suffix" value="" />
-			<string key="label" value="H" />
+			<string key="label" value="G" />
 		</event>
 	</trace>
 	<trace>
 		<string key="concept:name" value="39" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:51:23" />
+			<date key="time:timestamp" value="1970-04-26T18:51:41" />
 			<int key="case_id" value="39" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDIEFDIEFDH" />
+			<string key="suffix" value="IEFDIEFDIEFDIEFDH" />
 			<string key="label" value="A" />
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:51:24" />
+			<date key="time:timestamp" value="1970-04-26T18:51:42" />
 			<int key="case_id" value="39" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
+			<string key="suffix" value="EFDIEFDIEFDIEFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:51:43" />
+			<int key="case_id" value="39" />
+			<int key="position" value="2" />
+			<string key="prefix" value="AI" />
+			<string key="suffix" value="FDIEFDIEFDIEFDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:51:44" />
+			<int key="case_id" value="39" />
+			<int key="position" value="3" />
+			<string key="prefix" value="AIE" />
+			<string key="suffix" value="DIEFDIEFDIEFDH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_2" />
+			<date key="time:timestamp" value="1970-04-26T18:51:45" />
+			<int key="case_id" value="39" />
+			<int key="position" value="4" />
+			<string key="prefix" value="AIEF" />
+			<string key="suffix" value="IEFDIEFDIEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:51:46" />
+			<int key="case_id" value="39" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
 			<string key="suffix" value="EFDIEFDIEFDH" />
 			<string key="label" value="I" />
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:51:25" />
+			<date key="time:timestamp" value="1970-04-26T18:51:47" />
 			<int key="case_id" value="39" />
-			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
+			<int key="position" value="6" />
+			<string key="prefix" value="AIEFDI" />
 			<string key="suffix" value="FDIEFDIEFDH" />
 			<string key="label" value="E" />
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:51:26" />
+			<date key="time:timestamp" value="1970-04-26T18:51:48" />
 			<int key="case_id" value="39" />
-			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
+			<int key="position" value="7" />
+			<string key="prefix" value="AIEFDIE" />
 			<string key="suffix" value="DIEFDIEFDH" />
 			<string key="label" value="F" />
 		</event>
 		<event>
 			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:51:27" />
+			<date key="time:timestamp" value="1970-04-26T18:51:49" />
 			<int key="case_id" value="39" />
-			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
+			<int key="position" value="8" />
+			<string key="prefix" value="AIEFDIEF" />
 			<string key="suffix" value="IEFDIEFDH" />
 			<string key="label" value="D_2" />
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:51:28" />
+			<date key="time:timestamp" value="1970-04-26T18:51:50" />
 			<int key="case_id" value="39" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
+			<int key="position" value="9" />
+			<string key="prefix" value="AIEFDIEFD" />
 			<string key="suffix" value="EFDIEFDH" />
 			<string key="label" value="I" />
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:51:29" />
+			<date key="time:timestamp" value="1970-04-26T18:51:51" />
 			<int key="case_id" value="39" />
-			<int key="position" value="6" />
-			<string key="prefix" value="AIEFDI" />
+			<int key="position" value="10" />
+			<string key="prefix" value="AIEFDIEFDI" />
 			<string key="suffix" value="FDIEFDH" />
 			<string key="label" value="E" />
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:51:30" />
+			<date key="time:timestamp" value="1970-04-26T18:51:52" />
 			<int key="case_id" value="39" />
-			<int key="position" value="7" />
-			<string key="prefix" value="AIEFDIE" />
+			<int key="position" value="11" />
+			<string key="prefix" value="AIEFDIEFDIE" />
 			<string key="suffix" value="DIEFDH" />
 			<string key="label" value="F" />
 		</event>
 		<event>
 			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:51:31" />
+			<date key="time:timestamp" value="1970-04-26T18:51:53" />
 			<int key="case_id" value="39" />
-			<int key="position" value="8" />
-			<string key="prefix" value="AIEFDIEF" />
+			<int key="position" value="12" />
+			<string key="prefix" value="AIEFDIEFDIEF" />
 			<string key="suffix" value="IEFDH" />
 			<string key="label" value="D_2" />
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:51:32" />
+			<date key="time:timestamp" value="1970-04-26T18:51:54" />
 			<int key="case_id" value="39" />
-			<int key="position" value="9" />
-			<string key="prefix" value="AIEFDIEFD" />
+			<int key="position" value="13" />
+			<string key="prefix" value="AIEFDIEFDIEFD" />
 			<string key="suffix" value="EFDH" />
 			<string key="label" value="I" />
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:51:33" />
+			<date key="time:timestamp" value="1970-04-26T18:51:55" />
 			<int key="case_id" value="39" />
-			<int key="position" value="10" />
-			<string key="prefix" value="AIEFDIEFDI" />
+			<int key="position" value="14" />
+			<string key="prefix" value="AIEFDIEFDIEFDI" />
 			<string key="suffix" value="FDH" />
 			<string key="label" value="E" />
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:51:34" />
+			<date key="time:timestamp" value="1970-04-26T18:51:56" />
 			<int key="case_id" value="39" />
-			<int key="position" value="11" />
-			<string key="prefix" value="AIEFDIEFDIE" />
+			<int key="position" value="15" />
+			<string key="prefix" value="AIEFDIEFDIEFDIE" />
 			<string key="suffix" value="DH" />
 			<string key="label" value="F" />
 		</event>
 		<event>
 			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:51:35" />
+			<date key="time:timestamp" value="1970-04-26T18:51:57" />
 			<int key="case_id" value="39" />
-			<int key="position" value="12" />
-			<string key="prefix" value="AIEFDIEFDIEF" />
+			<int key="position" value="16" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEF" />
 			<string key="suffix" value="H" />
 			<string key="label" value="D_0" />
 		</event>
 		<event>
 			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:51:36" />
+			<date key="time:timestamp" value="1970-04-26T18:51:58" />
 			<int key="case_id" value="39" />
-			<int key="position" value="13" />
-			<string key="prefix" value="AIEFDIEFDIEFD" />
+			<int key="position" value="17" />
+			<string key="prefix" value="AIEFDIEFDIEFDIEFD" />
 			<string key="suffix" value="" />
 			<string key="label" value="H" />
 		</event>
@@ -2797,101 +2995,8 @@
 		<string key="concept:name" value="40" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:51:37" />
+			<date key="time:timestamp" value="1970-04-26T18:51:59" />
 			<int key="case_id" value="40" />
-			<int key="position" value="0" />
-			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDIEFDH" />
-			<string key="label" value="A" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:51:38" />
-			<int key="case_id" value="40" />
-			<int key="position" value="1" />
-			<string key="prefix" value="A" />
-			<string key="suffix" value="EFDIEFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:51:39" />
-			<int key="case_id" value="40" />
-			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
-			<string key="suffix" value="FDIEFDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:51:40" />
-			<int key="case_id" value="40" />
-			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
-			<string key="suffix" value="DIEFDH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:51:41" />
-			<int key="case_id" value="40" />
-			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
-			<string key="suffix" value="IEFDH" />
-			<string key="label" value="D_2" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:51:42" />
-			<int key="case_id" value="40" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
-			<string key="suffix" value="EFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:51:43" />
-			<int key="case_id" value="40" />
-			<int key="position" value="6" />
-			<string key="prefix" value="AIEFDI" />
-			<string key="suffix" value="FDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:51:44" />
-			<int key="case_id" value="40" />
-			<int key="position" value="7" />
-			<string key="prefix" value="AIEFDIE" />
-			<string key="suffix" value="DH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:51:45" />
-			<int key="case_id" value="40" />
-			<int key="position" value="8" />
-			<string key="prefix" value="AIEFDIEF" />
-			<string key="suffix" value="H" />
-			<string key="label" value="D_0" />
-		</event>
-		<event>
-			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:51:46" />
-			<int key="case_id" value="40" />
-			<int key="position" value="9" />
-			<string key="prefix" value="AIEFDIEFD" />
-			<string key="suffix" value="" />
-			<string key="label" value="H" />
-		</event>
-	</trace>
-	<trace>
-		<string key="concept:name" value="41" />
-		<event>
-			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:51:47" />
-			<int key="case_id" value="41" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
 			<string key="suffix" value="BCDG" />
@@ -2899,8 +3004,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:51:48" />
-			<int key="case_id" value="41" />
+			<date key="time:timestamp" value="1970-04-26T18:52:00" />
+			<int key="case_id" value="40" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
 			<string key="suffix" value="CDG" />
@@ -2908,8 +3013,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:51:49" />
-			<int key="case_id" value="41" />
+			<date key="time:timestamp" value="1970-04-26T18:52:01" />
+			<int key="case_id" value="40" />
 			<int key="position" value="2" />
 			<string key="prefix" value="AB" />
 			<string key="suffix" value="DG" />
@@ -2917,8 +3022,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:51:50" />
-			<int key="case_id" value="41" />
+			<date key="time:timestamp" value="1970-04-26T18:52:02" />
+			<int key="case_id" value="40" />
 			<int key="position" value="3" />
 			<string key="prefix" value="ABC" />
 			<string key="suffix" value="G" />
@@ -2926,8 +3031,8 @@
 		</event>
 		<event>
 			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:51:51" />
-			<int key="case_id" value="41" />
+			<date key="time:timestamp" value="1970-04-26T18:52:03" />
+			<int key="case_id" value="40" />
 			<int key="position" value="4" />
 			<string key="prefix" value="ABCD" />
 			<string key="suffix" value="" />
@@ -2935,409 +3040,295 @@
 		</event>
 	</trace>
 	<trace>
-		<string key="concept:name" value="42" />
+		<string key="concept:name" value="41" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:51:52" />
-			<int key="case_id" value="42" />
+			<date key="time:timestamp" value="1970-04-26T18:52:04" />
+			<int key="case_id" value="41" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDH" />
+			<string key="suffix" value="IEFDIEFDH" />
 			<string key="label" value="A" />
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:51:53" />
-			<int key="case_id" value="42" />
+			<date key="time:timestamp" value="1970-04-26T18:52:05" />
+			<int key="case_id" value="41" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
+			<string key="suffix" value="EFDIEFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:52:06" />
+			<int key="case_id" value="41" />
+			<int key="position" value="2" />
+			<string key="prefix" value="AI" />
+			<string key="suffix" value="FDIEFDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:52:07" />
+			<int key="case_id" value="41" />
+			<int key="position" value="3" />
+			<string key="prefix" value="AIE" />
+			<string key="suffix" value="DIEFDH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_2" />
+			<date key="time:timestamp" value="1970-04-26T18:52:08" />
+			<int key="case_id" value="41" />
+			<int key="position" value="4" />
+			<string key="prefix" value="AIEF" />
+			<string key="suffix" value="IEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:52:09" />
+			<int key="case_id" value="41" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
 			<string key="suffix" value="EFDH" />
 			<string key="label" value="I" />
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:51:54" />
-			<int key="case_id" value="42" />
-			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
+			<date key="time:timestamp" value="1970-04-26T18:52:10" />
+			<int key="case_id" value="41" />
+			<int key="position" value="6" />
+			<string key="prefix" value="AIEFDI" />
 			<string key="suffix" value="FDH" />
 			<string key="label" value="E" />
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:51:55" />
-			<int key="case_id" value="42" />
-			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
+			<date key="time:timestamp" value="1970-04-26T18:52:11" />
+			<int key="case_id" value="41" />
+			<int key="position" value="7" />
+			<string key="prefix" value="AIEFDIE" />
 			<string key="suffix" value="DH" />
 			<string key="label" value="F" />
 		</event>
 		<event>
 			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:51:56" />
-			<int key="case_id" value="42" />
-			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
+			<date key="time:timestamp" value="1970-04-26T18:52:12" />
+			<int key="case_id" value="41" />
+			<int key="position" value="8" />
+			<string key="prefix" value="AIEFDIEF" />
 			<string key="suffix" value="H" />
 			<string key="label" value="D_0" />
 		</event>
 		<event>
 			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:51:57" />
-			<int key="case_id" value="42" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
+			<date key="time:timestamp" value="1970-04-26T18:52:13" />
+			<int key="case_id" value="41" />
+			<int key="position" value="9" />
+			<string key="prefix" value="AIEFDIEFD" />
 			<string key="suffix" value="" />
 			<string key="label" value="H" />
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="42" />
+		<event>
+			<string key="concept:name" value="A" />
+			<date key="time:timestamp" value="1970-04-26T18:52:14" />
+			<int key="case_id" value="42" />
+			<int key="position" value="0" />
+			<string key="prefix" value="" />
+			<string key="suffix" value="BCDG" />
+			<string key="label" value="A" />
+		</event>
+		<event>
+			<string key="concept:name" value="B" />
+			<date key="time:timestamp" value="1970-04-26T18:52:15" />
+			<int key="case_id" value="42" />
+			<int key="position" value="1" />
+			<string key="prefix" value="A" />
+			<string key="suffix" value="CDG" />
+			<string key="label" value="B" />
+		</event>
+		<event>
+			<string key="concept:name" value="C" />
+			<date key="time:timestamp" value="1970-04-26T18:52:16" />
+			<int key="case_id" value="42" />
+			<int key="position" value="2" />
+			<string key="prefix" value="AB" />
+			<string key="suffix" value="DG" />
+			<string key="label" value="C" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_1" />
+			<date key="time:timestamp" value="1970-04-26T18:52:17" />
+			<int key="case_id" value="42" />
+			<int key="position" value="3" />
+			<string key="prefix" value="ABC" />
+			<string key="suffix" value="G" />
+			<string key="label" value="D_1" />
+		</event>
+		<event>
+			<string key="concept:name" value="G" />
+			<date key="time:timestamp" value="1970-04-26T18:52:18" />
+			<int key="case_id" value="42" />
+			<int key="position" value="4" />
+			<string key="prefix" value="ABCD" />
+			<string key="suffix" value="" />
+			<string key="label" value="G" />
 		</event>
 	</trace>
 	<trace>
 		<string key="concept:name" value="43" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:51:58" />
+			<date key="time:timestamp" value="1970-04-26T18:52:19" />
 			<int key="case_id" value="43" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDIEFDIEFDIEFDH" />
+			<string key="suffix" value="BCDG" />
 			<string key="label" value="A" />
 		</event>
 		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:51:59" />
+			<string key="concept:name" value="B" />
+			<date key="time:timestamp" value="1970-04-26T18:52:20" />
 			<int key="case_id" value="43" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
-			<string key="suffix" value="EFDIEFDIEFDIEFDH" />
-			<string key="label" value="I" />
+			<string key="suffix" value="CDG" />
+			<string key="label" value="B" />
 		</event>
 		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:52:00" />
+			<string key="concept:name" value="C" />
+			<date key="time:timestamp" value="1970-04-26T18:52:21" />
 			<int key="case_id" value="43" />
 			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
-			<string key="suffix" value="FDIEFDIEFDIEFDH" />
-			<string key="label" value="E" />
+			<string key="prefix" value="AB" />
+			<string key="suffix" value="DG" />
+			<string key="label" value="C" />
 		</event>
 		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:52:01" />
+			<string key="concept:name" value="D_1" />
+			<date key="time:timestamp" value="1970-04-26T18:52:22" />
 			<int key="case_id" value="43" />
 			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
-			<string key="suffix" value="DIEFDIEFDIEFDH" />
-			<string key="label" value="F" />
+			<string key="prefix" value="ABC" />
+			<string key="suffix" value="G" />
+			<string key="label" value="D_1" />
 		</event>
 		<event>
-			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:52:02" />
+			<string key="concept:name" value="G" />
+			<date key="time:timestamp" value="1970-04-26T18:52:23" />
 			<int key="case_id" value="43" />
 			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
-			<string key="suffix" value="IEFDIEFDIEFDH" />
-			<string key="label" value="D_2" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:52:03" />
-			<int key="case_id" value="43" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
-			<string key="suffix" value="EFDIEFDIEFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:52:04" />
-			<int key="case_id" value="43" />
-			<int key="position" value="6" />
-			<string key="prefix" value="AIEFDI" />
-			<string key="suffix" value="FDIEFDIEFDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:52:05" />
-			<int key="case_id" value="43" />
-			<int key="position" value="7" />
-			<string key="prefix" value="AIEFDIE" />
-			<string key="suffix" value="DIEFDIEFDH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:52:06" />
-			<int key="case_id" value="43" />
-			<int key="position" value="8" />
-			<string key="prefix" value="AIEFDIEF" />
-			<string key="suffix" value="IEFDIEFDH" />
-			<string key="label" value="D_2" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:52:07" />
-			<int key="case_id" value="43" />
-			<int key="position" value="9" />
-			<string key="prefix" value="AIEFDIEFD" />
-			<string key="suffix" value="EFDIEFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:52:08" />
-			<int key="case_id" value="43" />
-			<int key="position" value="10" />
-			<string key="prefix" value="AIEFDIEFDI" />
-			<string key="suffix" value="FDIEFDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:52:09" />
-			<int key="case_id" value="43" />
-			<int key="position" value="11" />
-			<string key="prefix" value="AIEFDIEFDIE" />
-			<string key="suffix" value="DIEFDH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:52:10" />
-			<int key="case_id" value="43" />
-			<int key="position" value="12" />
-			<string key="prefix" value="AIEFDIEFDIEF" />
-			<string key="suffix" value="IEFDH" />
-			<string key="label" value="D_2" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:52:11" />
-			<int key="case_id" value="43" />
-			<int key="position" value="13" />
-			<string key="prefix" value="AIEFDIEFDIEFD" />
-			<string key="suffix" value="EFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:52:12" />
-			<int key="case_id" value="43" />
-			<int key="position" value="14" />
-			<string key="prefix" value="AIEFDIEFDIEFDI" />
-			<string key="suffix" value="FDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:52:13" />
-			<int key="case_id" value="43" />
-			<int key="position" value="15" />
-			<string key="prefix" value="AIEFDIEFDIEFDIE" />
-			<string key="suffix" value="DH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:52:14" />
-			<int key="case_id" value="43" />
-			<int key="position" value="16" />
-			<string key="prefix" value="AIEFDIEFDIEFDIEF" />
-			<string key="suffix" value="H" />
-			<string key="label" value="D_0" />
-		</event>
-		<event>
-			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:52:15" />
-			<int key="case_id" value="43" />
-			<int key="position" value="17" />
-			<string key="prefix" value="AIEFDIEFDIEFDIEFD" />
+			<string key="prefix" value="ABCD" />
 			<string key="suffix" value="" />
-			<string key="label" value="H" />
+			<string key="label" value="G" />
 		</event>
 	</trace>
 	<trace>
 		<string key="concept:name" value="44" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:52:16" />
+			<date key="time:timestamp" value="1970-04-26T18:52:24" />
 			<int key="case_id" value="44" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDIEFDH" />
+			<string key="suffix" value="BCDG" />
 			<string key="label" value="A" />
 		</event>
 		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:52:17" />
+			<string key="concept:name" value="B" />
+			<date key="time:timestamp" value="1970-04-26T18:52:25" />
 			<int key="case_id" value="44" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
-			<string key="suffix" value="EFDIEFDH" />
-			<string key="label" value="I" />
+			<string key="suffix" value="CDG" />
+			<string key="label" value="B" />
 		</event>
 		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:52:18" />
+			<string key="concept:name" value="C" />
+			<date key="time:timestamp" value="1970-04-26T18:52:26" />
 			<int key="case_id" value="44" />
 			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
-			<string key="suffix" value="FDIEFDH" />
-			<string key="label" value="E" />
+			<string key="prefix" value="AB" />
+			<string key="suffix" value="DG" />
+			<string key="label" value="C" />
 		</event>
 		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:52:19" />
+			<string key="concept:name" value="D_1" />
+			<date key="time:timestamp" value="1970-04-26T18:52:27" />
 			<int key="case_id" value="44" />
 			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
-			<string key="suffix" value="DIEFDH" />
-			<string key="label" value="F" />
+			<string key="prefix" value="ABC" />
+			<string key="suffix" value="G" />
+			<string key="label" value="D_1" />
 		</event>
 		<event>
-			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:52:20" />
+			<string key="concept:name" value="G" />
+			<date key="time:timestamp" value="1970-04-26T18:52:28" />
 			<int key="case_id" value="44" />
 			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
-			<string key="suffix" value="IEFDH" />
-			<string key="label" value="D_2" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:52:21" />
-			<int key="case_id" value="44" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
-			<string key="suffix" value="EFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:52:22" />
-			<int key="case_id" value="44" />
-			<int key="position" value="6" />
-			<string key="prefix" value="AIEFDI" />
-			<string key="suffix" value="FDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:52:23" />
-			<int key="case_id" value="44" />
-			<int key="position" value="7" />
-			<string key="prefix" value="AIEFDIE" />
-			<string key="suffix" value="DH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:52:24" />
-			<int key="case_id" value="44" />
-			<int key="position" value="8" />
-			<string key="prefix" value="AIEFDIEF" />
-			<string key="suffix" value="H" />
-			<string key="label" value="D_0" />
-		</event>
-		<event>
-			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:52:25" />
-			<int key="case_id" value="44" />
-			<int key="position" value="9" />
-			<string key="prefix" value="AIEFDIEFD" />
+			<string key="prefix" value="ABCD" />
 			<string key="suffix" value="" />
-			<string key="label" value="H" />
+			<string key="label" value="G" />
 		</event>
 	</trace>
 	<trace>
 		<string key="concept:name" value="45" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:52:26" />
+			<date key="time:timestamp" value="1970-04-26T18:52:29" />
 			<int key="case_id" value="45" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDIEFDH" />
+			<string key="suffix" value="IEFDH" />
 			<string key="label" value="A" />
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:52:27" />
+			<date key="time:timestamp" value="1970-04-26T18:52:30" />
 			<int key="case_id" value="45" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
-			<string key="suffix" value="EFDIEFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:52:28" />
-			<int key="case_id" value="45" />
-			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
-			<string key="suffix" value="FDIEFDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:52:29" />
-			<int key="case_id" value="45" />
-			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
-			<string key="suffix" value="DIEFDH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:52:30" />
-			<int key="case_id" value="45" />
-			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
-			<string key="suffix" value="IEFDH" />
-			<string key="label" value="D_2" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:52:31" />
-			<int key="case_id" value="45" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
 			<string key="suffix" value="EFDH" />
 			<string key="label" value="I" />
 		</event>
 		<event>
 			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:52:32" />
+			<date key="time:timestamp" value="1970-04-26T18:52:31" />
 			<int key="case_id" value="45" />
-			<int key="position" value="6" />
-			<string key="prefix" value="AIEFDI" />
+			<int key="position" value="2" />
+			<string key="prefix" value="AI" />
 			<string key="suffix" value="FDH" />
 			<string key="label" value="E" />
 		</event>
 		<event>
 			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:52:33" />
+			<date key="time:timestamp" value="1970-04-26T18:52:32" />
 			<int key="case_id" value="45" />
-			<int key="position" value="7" />
-			<string key="prefix" value="AIEFDIE" />
+			<int key="position" value="3" />
+			<string key="prefix" value="AIE" />
 			<string key="suffix" value="DH" />
 			<string key="label" value="F" />
 		</event>
 		<event>
 			<string key="concept:name" value="D_0" />
-			<date key="time:timestamp" value="1970-04-26T18:52:34" />
+			<date key="time:timestamp" value="1970-04-26T18:52:33" />
 			<int key="case_id" value="45" />
-			<int key="position" value="8" />
-			<string key="prefix" value="AIEFDIEF" />
+			<int key="position" value="4" />
+			<string key="prefix" value="AIEF" />
 			<string key="suffix" value="H" />
 			<string key="label" value="D_0" />
 		</event>
 		<event>
 			<string key="concept:name" value="H" />
-			<date key="time:timestamp" value="1970-04-26T18:52:35" />
+			<date key="time:timestamp" value="1970-04-26T18:52:34" />
 			<int key="case_id" value="45" />
-			<int key="position" value="9" />
-			<string key="prefix" value="AIEFDIEFD" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
 			<string key="suffix" value="" />
 			<string key="label" value="H" />
 		</event>
@@ -3346,103 +3337,112 @@
 		<string key="concept:name" value="46" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:52:36" />
+			<date key="time:timestamp" value="1970-04-26T18:52:35" />
 			<int key="case_id" value="46" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="BCDG" />
+			<string key="suffix" value="IEFDIEFDH" />
 			<string key="label" value="A" />
 		</event>
 		<event>
-			<string key="concept:name" value="B" />
-			<date key="time:timestamp" value="1970-04-26T18:52:37" />
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:52:36" />
 			<int key="case_id" value="46" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
-			<string key="suffix" value="CDG" />
-			<string key="label" value="B" />
+			<string key="suffix" value="EFDIEFDH" />
+			<string key="label" value="I" />
 		</event>
 		<event>
-			<string key="concept:name" value="C" />
-			<date key="time:timestamp" value="1970-04-26T18:52:38" />
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:52:37" />
 			<int key="case_id" value="46" />
 			<int key="position" value="2" />
-			<string key="prefix" value="AB" />
-			<string key="suffix" value="DG" />
-			<string key="label" value="C" />
+			<string key="prefix" value="AI" />
+			<string key="suffix" value="FDIEFDH" />
+			<string key="label" value="E" />
 		</event>
 		<event>
-			<string key="concept:name" value="D_1" />
-			<date key="time:timestamp" value="1970-04-26T18:52:39" />
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:52:38" />
 			<int key="case_id" value="46" />
 			<int key="position" value="3" />
-			<string key="prefix" value="ABC" />
-			<string key="suffix" value="G" />
-			<string key="label" value="D_1" />
+			<string key="prefix" value="AIE" />
+			<string key="suffix" value="DIEFDH" />
+			<string key="label" value="F" />
 		</event>
 		<event>
-			<string key="concept:name" value="G" />
-			<date key="time:timestamp" value="1970-04-26T18:52:40" />
+			<string key="concept:name" value="D_2" />
+			<date key="time:timestamp" value="1970-04-26T18:52:39" />
 			<int key="case_id" value="46" />
 			<int key="position" value="4" />
-			<string key="prefix" value="ABCD" />
+			<string key="prefix" value="AIEF" />
+			<string key="suffix" value="IEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:52:40" />
+			<int key="case_id" value="46" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
+			<string key="suffix" value="EFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:52:41" />
+			<int key="case_id" value="46" />
+			<int key="position" value="6" />
+			<string key="prefix" value="AIEFDI" />
+			<string key="suffix" value="FDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:52:42" />
+			<int key="case_id" value="46" />
+			<int key="position" value="7" />
+			<string key="prefix" value="AIEFDIE" />
+			<string key="suffix" value="DH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_0" />
+			<date key="time:timestamp" value="1970-04-26T18:52:43" />
+			<int key="case_id" value="46" />
+			<int key="position" value="8" />
+			<string key="prefix" value="AIEFDIEF" />
+			<string key="suffix" value="H" />
+			<string key="label" value="D_0" />
+		</event>
+		<event>
+			<string key="concept:name" value="H" />
+			<date key="time:timestamp" value="1970-04-26T18:52:44" />
+			<int key="case_id" value="46" />
+			<int key="position" value="9" />
+			<string key="prefix" value="AIEFDIEFD" />
 			<string key="suffix" value="" />
-			<string key="label" value="G" />
+			<string key="label" value="H" />
 		</event>
 	</trace>
 	<trace>
 		<string key="concept:name" value="47" />
 		<event>
 			<string key="concept:name" value="A" />
-			<date key="time:timestamp" value="1970-04-26T18:52:41" />
+			<date key="time:timestamp" value="1970-04-26T18:52:45" />
 			<int key="case_id" value="47" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="IEFDIEFDIEFDIEFDH" />
-			<string key="label" value="A" />
-		</event>
-		<event>
-			<string key="concept:name" value="I" />
-			<date key="time:timestamp" value="1970-04-26T18:52:42" />
-			<int key="case_id" value="47" />
-			<int key="position" value="1" />
-			<string key="prefix" value="A" />
-			<string key="suffix" value="EFDIEFDIEFDIEFDH" />
-			<string key="label" value="I" />
-		</event>
-		<event>
-			<string key="concept:name" value="E" />
-			<date key="time:timestamp" value="1970-04-26T18:52:43" />
-			<int key="case_id" value="47" />
-			<int key="position" value="2" />
-			<string key="prefix" value="AI" />
-			<string key="suffix" value="FDIEFDIEFDIEFDH" />
-			<string key="label" value="E" />
-		</event>
-		<event>
-			<string key="concept:name" value="F" />
-			<date key="time:timestamp" value="1970-04-26T18:52:44" />
-			<int key="case_id" value="47" />
-			<int key="position" value="3" />
-			<string key="prefix" value="AIE" />
-			<string key="suffix" value="DIEFDIEFDIEFDH" />
-			<string key="label" value="F" />
-		</event>
-		<event>
-			<string key="concept:name" value="D_2" />
-			<date key="time:timestamp" value="1970-04-26T18:52:45" />
-			<int key="case_id" value="47" />
-			<int key="position" value="4" />
-			<string key="prefix" value="AIEF" />
 			<string key="suffix" value="IEFDIEFDIEFDH" />
-			<string key="label" value="D_2" />
+			<string key="label" value="A" />
 		</event>
 		<event>
 			<string key="concept:name" value="I" />
 			<date key="time:timestamp" value="1970-04-26T18:52:46" />
 			<int key="case_id" value="47" />
-			<int key="position" value="5" />
-			<string key="prefix" value="AIEFD" />
+			<int key="position" value="1" />
+			<string key="prefix" value="A" />
 			<string key="suffix" value="EFDIEFDIEFDH" />
 			<string key="label" value="I" />
 		</event>
@@ -3450,8 +3450,8 @@
 			<string key="concept:name" value="E" />
 			<date key="time:timestamp" value="1970-04-26T18:52:47" />
 			<int key="case_id" value="47" />
-			<int key="position" value="6" />
-			<string key="prefix" value="AIEFDI" />
+			<int key="position" value="2" />
+			<string key="prefix" value="AI" />
 			<string key="suffix" value="FDIEFDIEFDH" />
 			<string key="label" value="E" />
 		</event>
@@ -3459,8 +3459,8 @@
 			<string key="concept:name" value="F" />
 			<date key="time:timestamp" value="1970-04-26T18:52:48" />
 			<int key="case_id" value="47" />
-			<int key="position" value="7" />
-			<string key="prefix" value="AIEFDIE" />
+			<int key="position" value="3" />
+			<string key="prefix" value="AIE" />
 			<string key="suffix" value="DIEFDIEFDH" />
 			<string key="label" value="F" />
 		</event>
@@ -3468,8 +3468,8 @@
 			<string key="concept:name" value="D_2" />
 			<date key="time:timestamp" value="1970-04-26T18:52:49" />
 			<int key="case_id" value="47" />
-			<int key="position" value="8" />
-			<string key="prefix" value="AIEFDIEF" />
+			<int key="position" value="4" />
+			<string key="prefix" value="AIEF" />
 			<string key="suffix" value="IEFDIEFDH" />
 			<string key="label" value="D_2" />
 		</event>
@@ -3477,8 +3477,8 @@
 			<string key="concept:name" value="I" />
 			<date key="time:timestamp" value="1970-04-26T18:52:50" />
 			<int key="case_id" value="47" />
-			<int key="position" value="9" />
-			<string key="prefix" value="AIEFDIEFD" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
 			<string key="suffix" value="EFDIEFDH" />
 			<string key="label" value="I" />
 		</event>
@@ -3486,8 +3486,8 @@
 			<string key="concept:name" value="E" />
 			<date key="time:timestamp" value="1970-04-26T18:52:51" />
 			<int key="case_id" value="47" />
-			<int key="position" value="10" />
-			<string key="prefix" value="AIEFDIEFDI" />
+			<int key="position" value="6" />
+			<string key="prefix" value="AIEFDI" />
 			<string key="suffix" value="FDIEFDH" />
 			<string key="label" value="E" />
 		</event>
@@ -3495,8 +3495,8 @@
 			<string key="concept:name" value="F" />
 			<date key="time:timestamp" value="1970-04-26T18:52:52" />
 			<int key="case_id" value="47" />
-			<int key="position" value="11" />
-			<string key="prefix" value="AIEFDIEFDIE" />
+			<int key="position" value="7" />
+			<string key="prefix" value="AIEFDIE" />
 			<string key="suffix" value="DIEFDH" />
 			<string key="label" value="F" />
 		</event>
@@ -3504,8 +3504,8 @@
 			<string key="concept:name" value="D_2" />
 			<date key="time:timestamp" value="1970-04-26T18:52:53" />
 			<int key="case_id" value="47" />
-			<int key="position" value="12" />
-			<string key="prefix" value="AIEFDIEFDIEF" />
+			<int key="position" value="8" />
+			<string key="prefix" value="AIEFDIEF" />
 			<string key="suffix" value="IEFDH" />
 			<string key="label" value="D_2" />
 		</event>
@@ -3513,8 +3513,8 @@
 			<string key="concept:name" value="I" />
 			<date key="time:timestamp" value="1970-04-26T18:52:54" />
 			<int key="case_id" value="47" />
-			<int key="position" value="13" />
-			<string key="prefix" value="AIEFDIEFDIEFD" />
+			<int key="position" value="9" />
+			<string key="prefix" value="AIEFDIEFD" />
 			<string key="suffix" value="EFDH" />
 			<string key="label" value="I" />
 		</event>
@@ -3522,8 +3522,8 @@
 			<string key="concept:name" value="E" />
 			<date key="time:timestamp" value="1970-04-26T18:52:55" />
 			<int key="case_id" value="47" />
-			<int key="position" value="14" />
-			<string key="prefix" value="AIEFDIEFDIEFDI" />
+			<int key="position" value="10" />
+			<string key="prefix" value="AIEFDIEFDI" />
 			<string key="suffix" value="FDH" />
 			<string key="label" value="E" />
 		</event>
@@ -3531,8 +3531,8 @@
 			<string key="concept:name" value="F" />
 			<date key="time:timestamp" value="1970-04-26T18:52:56" />
 			<int key="case_id" value="47" />
-			<int key="position" value="15" />
-			<string key="prefix" value="AIEFDIEFDIEFDIE" />
+			<int key="position" value="11" />
+			<string key="prefix" value="AIEFDIEFDIE" />
 			<string key="suffix" value="DH" />
 			<string key="label" value="F" />
 		</event>
@@ -3540,8 +3540,8 @@
 			<string key="concept:name" value="D_0" />
 			<date key="time:timestamp" value="1970-04-26T18:52:57" />
 			<int key="case_id" value="47" />
-			<int key="position" value="16" />
-			<string key="prefix" value="AIEFDIEFDIEFDIEF" />
+			<int key="position" value="12" />
+			<string key="prefix" value="AIEFDIEFDIEF" />
 			<string key="suffix" value="H" />
 			<string key="label" value="D_0" />
 		</event>
@@ -3549,8 +3549,8 @@
 			<string key="concept:name" value="H" />
 			<date key="time:timestamp" value="1970-04-26T18:52:58" />
 			<int key="case_id" value="47" />
-			<int key="position" value="17" />
-			<string key="prefix" value="AIEFDIEFDIEFDIEFD" />
+			<int key="position" value="13" />
+			<string key="prefix" value="AIEFDIEFDIEFD" />
 			<string key="suffix" value="" />
 			<string key="label" value="H" />
 		</event>
@@ -3656,44 +3656,89 @@
 			<int key="case_id" value="49" />
 			<int key="position" value="0" />
 			<string key="prefix" value="" />
-			<string key="suffix" value="BCDG" />
+			<string key="suffix" value="IEFDIEFDH" />
 			<string key="label" value="A" />
 		</event>
 		<event>
-			<string key="concept:name" value="B" />
+			<string key="concept:name" value="I" />
 			<date key="time:timestamp" value="1970-04-26T18:53:10" />
 			<int key="case_id" value="49" />
 			<int key="position" value="1" />
 			<string key="prefix" value="A" />
-			<string key="suffix" value="CDG" />
-			<string key="label" value="B" />
+			<string key="suffix" value="EFDIEFDH" />
+			<string key="label" value="I" />
 		</event>
 		<event>
-			<string key="concept:name" value="C" />
+			<string key="concept:name" value="E" />
 			<date key="time:timestamp" value="1970-04-26T18:53:11" />
 			<int key="case_id" value="49" />
 			<int key="position" value="2" />
-			<string key="prefix" value="AB" />
-			<string key="suffix" value="DG" />
-			<string key="label" value="C" />
+			<string key="prefix" value="AI" />
+			<string key="suffix" value="FDIEFDH" />
+			<string key="label" value="E" />
 		</event>
 		<event>
-			<string key="concept:name" value="D_1" />
+			<string key="concept:name" value="F" />
 			<date key="time:timestamp" value="1970-04-26T18:53:12" />
 			<int key="case_id" value="49" />
 			<int key="position" value="3" />
-			<string key="prefix" value="ABC" />
-			<string key="suffix" value="G" />
-			<string key="label" value="D_1" />
+			<string key="prefix" value="AIE" />
+			<string key="suffix" value="DIEFDH" />
+			<string key="label" value="F" />
 		</event>
 		<event>
-			<string key="concept:name" value="G" />
+			<string key="concept:name" value="D_2" />
 			<date key="time:timestamp" value="1970-04-26T18:53:13" />
 			<int key="case_id" value="49" />
 			<int key="position" value="4" />
-			<string key="prefix" value="ABCD" />
+			<string key="prefix" value="AIEF" />
+			<string key="suffix" value="IEFDH" />
+			<string key="label" value="D_2" />
+		</event>
+		<event>
+			<string key="concept:name" value="I" />
+			<date key="time:timestamp" value="1970-04-26T18:53:14" />
+			<int key="case_id" value="49" />
+			<int key="position" value="5" />
+			<string key="prefix" value="AIEFD" />
+			<string key="suffix" value="EFDH" />
+			<string key="label" value="I" />
+		</event>
+		<event>
+			<string key="concept:name" value="E" />
+			<date key="time:timestamp" value="1970-04-26T18:53:15" />
+			<int key="case_id" value="49" />
+			<int key="position" value="6" />
+			<string key="prefix" value="AIEFDI" />
+			<string key="suffix" value="FDH" />
+			<string key="label" value="E" />
+		</event>
+		<event>
+			<string key="concept:name" value="F" />
+			<date key="time:timestamp" value="1970-04-26T18:53:16" />
+			<int key="case_id" value="49" />
+			<int key="position" value="7" />
+			<string key="prefix" value="AIEFDIE" />
+			<string key="suffix" value="DH" />
+			<string key="label" value="F" />
+		</event>
+		<event>
+			<string key="concept:name" value="D_0" />
+			<date key="time:timestamp" value="1970-04-26T18:53:17" />
+			<int key="case_id" value="49" />
+			<int key="position" value="8" />
+			<string key="prefix" value="AIEFDIEF" />
+			<string key="suffix" value="H" />
+			<string key="label" value="D_0" />
+		</event>
+		<event>
+			<string key="concept:name" value="H" />
+			<date key="time:timestamp" value="1970-04-26T18:53:18" />
+			<int key="case_id" value="49" />
+			<int key="position" value="9" />
+			<string key="prefix" value="AIEFDIEFD" />
 			<string key="suffix" value="" />
-			<string key="label" value="G" />
+			<string key="label" value="H" />
 		</event>
 	</trace>
 </log>

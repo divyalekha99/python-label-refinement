@@ -3,6 +3,7 @@ import pandas as pd
 import pm4py
 from pm4py.objects.log.exporter.xes import exporter as xes_exporter
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
+from pm4py.objects.log.obj import EventLog
 from pm4py.visualization.process_tree import visualizer as pt_visualizer
 from pm4py.objects.conversion.process_tree import converter
 from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
@@ -22,20 +23,26 @@ def import_csv(file_path):
 
 
 def main() -> None:
-    apply_pipeline('loop_example', ['D'])
+    apply_pipeline_to_bpmn('loop_example', threshold=0.75,
+                           window_size=3)  # threshold=0 also works, 0.5 produces wrong results
 
 
-def apply_pipeline(input_type: str, labels_to_split: list[str]):
+def apply_pipeline_to_bpmn(input_type: str, threshold: float = 0.5,
+                           window_size: int = 3):
     bpmn_graph = pm4py.read_bpmn(f'/home/jonas/repositories/pm-label-splitting/bpmn_files/{input_type}.bpmn')
     log_generator = LogGenerator()
     log = log_generator.get_log_from_bpmn(bpmn_graph)
     xes_exporter.apply(log, f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_original_log.xes')
+    apply_pipeline(f'{input_type}', log, ['D'], threshold=threshold, window_size=window_size)
 
-    label_splitter = LabelSplitter(labels_to_split)
+
+def apply_pipeline(input_type: str, log: EventLog, labels_to_split: list[str], threshold: float = 0.5,
+                   window_size: int = 3):
+    label_splitter = LabelSplitter(labels_to_split, threshold=threshold, window_size=window_size)
     split_log = label_splitter.split_labels(log)
     xes_exporter.apply(split_log, f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_split_log.xes')
     net, initial_marking, final_marking = inductive_miner.apply(split_log)
-    post_processor = PostProcessor()
+    post_processor = PostProcessor(label_splitter.get_split_labels_to_original_labels())
     final_net = post_processor.post_process_petri_net(net)
     pnml_exporter.apply(final_net, initial_marking,
                         f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_petri_net.pnml',
