@@ -22,7 +22,7 @@ def import_csv(file_path):
 
 
 def main() -> None:
-    apply_pipeline('simple_example', ['D'])
+    apply_pipeline('loop_example', ['D'])
 
 
 def apply_pipeline(input_type: str, labels_to_split: list[str]):

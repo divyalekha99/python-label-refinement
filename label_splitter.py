@@ -27,7 +27,8 @@ class LabelSplitter:
     # Use community detection or other heuristic to find labels that should be split
     # Generate new event log with split events
 
-    def __init__(self, labels_to_split: list[str], window_size: int = 3, threshold: float = 0.75):
+    def __init__(self, labels_to_split: list[str], window_size: int = 3, threshold: float = 0.75,
+                 prefix_weight: float = 0.5):
         self.labels_to_split = labels_to_split
         self.window_size = window_size
         self.threshold = threshold
@@ -38,11 +39,7 @@ class LabelSplitter:
         self.calculate_edges(event_graphs)
         self.get_connected_components(event_graphs=event_graphs)
         self.get_communities_louvain(event_graphs=event_graphs)
-
-        for label in self.labels_to_split:
-            # temp = list(filter(lambda event: event['label'] == f'{label}_0', event_graphs[label].nodes))
-            for event in event_graphs[label].nodes:
-                log[event['case_id']][event['position']]['concept:name'] = event['label']
+        self.set_split_labels(event_graphs, log)
 
         return log
         #       variants = variants_filter.get_variants(log)
@@ -54,6 +51,12 @@ class LabelSplitter:
         #    print(variants.keys())
         # filtered_keys = [key.replace(',', '') for key in variants.keys()]
         # print(filtered_keys)
+
+    def set_split_labels(self, event_graphs, log):
+        for label in self.labels_to_split:
+            # temp = list(filter(lambda event: event['label'] == f'{label}_0', event_graphs[label].nodes))
+            for event in event_graphs[label].nodes:
+                log[event['case_id']][event['position']]['concept:name'] = event['label']
 
     def get_communities_louvain(self, event_graphs) -> None:
         for (label, graph) in event_graphs.items():
@@ -104,16 +107,16 @@ class LabelSplitter:
                 weight = 1 - edit_distance / 3
                 print('weight')
                 print(weight)
-                if weight > self.threshold:
+                if weight > 0.5:
                     graph.add_edge(event_a, event_b, weight=weight)
                     # print(edit_distance)
 
     def get_edit_distance(self, event_a, event_b) -> integer:
-        prefix_distance = editdistance.eval(event_a['prefix'][min(self.window_size, len(event_a['prefix'])):],
-                                            event_b['prefix'][min(self.window_size, len(event_b['prefix'])):])
+        prefix_distance = editdistance.eval(event_a['prefix'][(-1) * min(self.window_size, len(event_a['prefix'])):],
+                                            event_b['prefix'][(-1) * min(self.window_size, len(event_b['prefix'])):])
         # print(prefix_distance)
-        suffix_distance = editdistance.eval(event_a['suffix'][:min(self.window_size, len(event_a['suffix']))],
-                                            event_b['suffix'][:min(self.window_size, len(event_b['suffix']))])
+        suffix_distance = editdistance.eval(event_a['suffix'][:min(self.window_size, len(event_a['suffix'])) - 1],
+                                            event_b['suffix'][:min(self.window_size, len(event_b['suffix'])) - 1])
         # print(suffix_distance)
         return prefix_distance * 0.5 + suffix_distance * 0.5
 

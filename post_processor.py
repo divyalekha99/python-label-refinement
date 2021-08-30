@@ -7,6 +7,6 @@ class PostProcessor:
 
     def post_process_petri_net(self, net: PetriNet) -> PetriNet:
         for transition in net.transitions:
-            if transition.label == 'D_0' or transition.label == 'D_1':
+            if transition.label == 'D_0' or transition.label == 'D_1' or transition.label == 'D_2':
                 transition.label = 'D'
         return net
