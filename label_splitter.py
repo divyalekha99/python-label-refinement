@@ -27,11 +27,10 @@ class LabelSplitter:
     # Use community detection or other heuristic to find labels that should be split
     # Generate new event log with split events
 
-    def __init__(self):
-        pass
+    def __init__(self, labels_to_split: list[str]):
+        self.labels_to_split = labels_to_split
 
     def split_labels(self, log: EventLog) -> EventLog:
-        print(log)
         event_graphs = self.get_event_graphs_from_event_log(log)
 
         threshold = 0.75
@@ -40,25 +39,12 @@ class LabelSplitter:
         self.get_connected_components(event_graphs=event_graphs)
         self.get_communities_louvain(event_graphs=event_graphs)
 
-        print(event_graphs.keys())
-
-        print(event_graphs['D'].nodes)
-        temp_0 = list(filter(lambda event: event['label'] == 'D_0', event_graphs['D'].nodes))
-        print(len(temp_0))
-        print(temp_0)
-        temp_1 = list(filter(lambda event: event['label'] == 'D_1', event_graphs['D'].nodes))
-        print(len(temp_1))
-        print(temp_1)
-
-        for event in event_graphs['D'].nodes:
-            log[event['case_id']][event['position']]['concept:name'] = event['label']
-
-        print('log:')
-        print(log)
+        for label in self.labels_to_split:
+            # temp = list(filter(lambda event: event['label'] == f'{label}_0', event_graphs[label].nodes))
+            for event in event_graphs[label].nodes:
+                log[event['case_id']][event['position']]['concept:name'] = event['label']
 
         return log
-
-
         #       variants = variants_filter.get_variants(log)
 
         #        print('Variants')
@@ -71,22 +57,22 @@ class LabelSplitter:
 
     def get_communities_louvain(self, event_graphs) -> None:
         for (label, graph) in event_graphs.items():
-            if label != 'D':
-                print('label not D')
-                print(label)
-                continue
-            print(label)
             partition = community_louvain.best_partition(graph)
             print('Partition:')
             print(partition)
 
+            partitions = {}
+
             for event in graph.nodes:
-                if partition[event] == 0:
-                    print('D_0')
-                    event['label'] = 'D_0'
+                event['label'] = f'{label}_{partition[event]}'
+                if partitions[partition[event]]:
+                    partitions[partition[event]].append(event)
                 else:
-                    print('D_1')
-                    event['label'] = 'D_1'
+                    partitions[partition[event]] = [event]
+
+            for key in partitions.keys():
+                print(partitions[key])
+                print(len(partitions[key]))
             print('Reassigned labels')
             print(graph.nodes)
 
@@ -112,27 +98,16 @@ class LabelSplitter:
 
     def calculate_edges(self, event_graphs, threshold) -> None:
         for (label, graph) in event_graphs.items():
-            if label != 'D':
-                continue
             print(label)
             # TODO: Evaluate if combinations is correct here
             for (event_a, event_b) in combinations(graph.nodes(), 2):
-                # print(event_a)
-                # print(event_b)
                 edit_distance = self.get_edit_distance(event_a, event_b)
-                # print('edit_distance')
-                # print(edit_distance)
                 weight = 1 - edit_distance / 3
                 print('weight')
                 print(weight)
                 if weight > 0:
                     graph.add_edge(event_a, event_b, weight=weight)
                     # print(edit_distance)
-
-            print(label)
-            print(nx.is_connected(graph))
-            print(nx.number_connected_components(graph))
-            print([len(c) for c in sorted(nx.connected_components(graph), key=len, reverse=True)])
 
     def get_edit_distance(self, event_a, event_b, window_size=3) -> integer:
         prefix_distance = editdistance.eval(event_a['prefix'], event_b['prefix'])
@@ -151,9 +126,10 @@ class LabelSplitter:
             processed_events = []
             for position, event in enumerate(trace):
                 label = event['concept:name']
+
                 event['case_id'] = case_id
                 event['position'] = position
-                if label not in event_graphs.keys():
+                if label not in event_graphs.keys() + self.labels_to_split:
                     event_graphs[label] = nx.Graph()
 
                 for preceding_event in processed_events:
@@ -171,7 +147,6 @@ class LabelSplitter:
                 print(event)
             for event in processed_events:
                 label = event['concept:name']
-                event_graphs[label].add_node(event)
-        for label in event_graphs.keys():
-            print(event_graphs[label].nodes.data())
+                if label in self.labels_to_split:
+                    event_graphs[label].add_node(event)
         return event_graphs
