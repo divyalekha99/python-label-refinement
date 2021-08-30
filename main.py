@@ -1,3 +1,5 @@
+import random
+
 import editdistance
 import pandas as pd
 import pm4py
@@ -25,6 +27,20 @@ def import_csv(file_path):
 def main() -> None:
     apply_pipeline_to_bpmn('loop_example', threshold=0.75,
                            window_size=3)  # threshold=0 also works, 0.5 produces wrong results
+    c_1_log = xes_importer.apply(
+        '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes')
+
+    apply_pipeline('c_1', c_1_log, get_imprecise_labels(c_1_log), threshold=0.5, window_size=3)
+
+
+def get_imprecise_labels(log: EventLog) -> list[str]:
+    imprecise_labels = set()
+    for trace in log:
+        for event in trace:
+            if event['OrgLabel'] != event['concept:name']:
+                imprecise_labels.add(event['concept:name'])
+    print(imprecise_labels)
+    return list(imprecise_labels)
 
 
 def apply_pipeline_to_bpmn(input_type: str, threshold: float = 0.5,
@@ -32,12 +48,13 @@ def apply_pipeline_to_bpmn(input_type: str, threshold: float = 0.5,
     bpmn_graph = pm4py.read_bpmn(f'/home/jonas/repositories/pm-label-splitting/bpmn_files/{input_type}.bpmn')
     log_generator = LogGenerator()
     log = log_generator.get_log_from_bpmn(bpmn_graph)
-    xes_exporter.apply(log, f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_original_log.xes')
+
     apply_pipeline(f'{input_type}', log, ['D'], threshold=threshold, window_size=window_size)
 
 
 def apply_pipeline(input_type: str, log: EventLog, labels_to_split: list[str], threshold: float = 0.5,
                    window_size: int = 3):
+    xes_exporter.apply(log, f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_original_log.xes')
     label_splitter = LabelSplitter(labels_to_split, threshold=threshold, window_size=window_size)
     split_log = label_splitter.split_labels(log)
     xes_exporter.apply(split_log, f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_split_log.xes')
