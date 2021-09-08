@@ -1,0 +1,32 @@
+
+        ----------------------------------------------------------------------------------------------
+        Output from 2021-09-09
+        ----------------------------------------------------------------------------------------------
+        Reassigned labelsMap:{"Payment_7": "Payment", "Payment_0": "Payment", "Payment_5": "Payment", "Payment_6": "Payment", "Payment_1": "Payment", "Payment_9": "Payment", "Payment_8": "Payment", "Payment_4": "Payment", "Payment_2": "Payment", "Payment_3": "Payment"}Performance split_log:alignment_fitness{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}precision0.8156533382021788simplicity0.6190476190476191generalization0.7098741493935421Performance original_log:alignment_fitness{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}precision0.26449575685810145simplicity0.6140350877192983generalization0.8757468343101801
+        
+        
+        
+        ----------------------------------------------------------------------------------------------
+        Output from 2021-09-09 00:43:58.275141
+        ----------------------------------------------------------------------------------------------
+        Reassigned labels
+Map:
+{"Payment_8": "Payment", "Payment_5": "Payment", "Payment_9": "Payment", "Payment_1": "Payment", "Payment_3": "Payment", "Payment_7": "Payment", "Payment_2": "Payment", "Payment_0": "Payment", "Payment_6": "Payment", "Payment_4": "Payment"}
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.8156533382021788
+simplicity
+0.6190476190476191
+generalization
+0.6662216231501148
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.26449575685810145
+simplicity
+0.6140350877192983
+generalization
+0.8757468343101801

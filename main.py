@@ -1,5 +1,6 @@
 import random
 
+import dateutil.utils
 import editdistance
 import pandas as pd
 import pm4py
@@ -11,6 +12,7 @@ from pm4py.objects.conversion.process_tree import converter
 from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
 from pm4py.objects.log.importer.xes import importer as xes_importer
 
+from datetime import datetime
 from label_splitter import LabelSplitter
 from log_generator import LogGenerator
 from performance_evaluator import PerformanceEvaluator
@@ -25,20 +27,40 @@ def import_csv(file_path):
 
 
 def main() -> None:
-    apply_pipeline_to_bpmn('loop_example', threshold=0.75,
-                           window_size=3)  # threshold=0 also works, 0.5 produces wrong results
-    c_1_0_log = xes_importer.apply(
-        '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes')
+    # apply_pipeline_to_bpmn('loop_example_th_0', threshold=0, window_size=3)
+    # apply_pipeline_to_bpmn('loop_example_th_0_75', threshold=0.75, window_size=3)
 
-    apply_pipeline('c_1_0', c_1_0_log, get_imprecise_labels(c_1_0_log), threshold=0.5, window_size=3)
+    # road_traffic_fines_log = xes_importer.apply(
+    #      '/home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz', parameters={
+    #           xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: 2000})
+    # 0.8156 Precision
+    # apply_pipeline('road_traffic_fines', road_traffic_fines_log, ['Payment'], threshold=0.75, window_size=3)
 
-    c_1_1_log = xes_importer.apply(
-        '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes')
-    apply_pipeline('c_1_1', c_1_1_log, get_imprecise_labels(c_1_1_log), threshold=0.75, window_size=3)
+    road_traffic_fines_log = xes_importer.apply(
+        '/home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz',
+        parameters={
+            xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: 2000})
 
-    c_1_2_log = xes_importer.apply(
-        '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes')
-    apply_pipeline('c_1_2', c_1_2_log, get_imprecise_labels(c_1_2_log), threshold=0, window_size=3)
+    apply_pipeline('road_traffic_fines', road_traffic_fines_log, ['Payment'], threshold=0.75, window_size=3)
+
+    # c_1_0_log = xes_importer.apply(
+    #      '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes',
+    #      parameters={
+    #          xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: 200})
+    #
+    # apply_pipeline('c_1_0_small', c_1_0_log, get_imprecise_labels(c_1_0_log), threshold=0.5, window_size=3)
+    #
+    # c_1_1_log = xes_importer.apply(
+    #     '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes',
+    #     parameters={
+    #         xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: 200})
+    # apply_pipeline('c_1_1_small', c_1_1_log, get_imprecise_labels(c_1_1_log), threshold=0.75, window_size=3)
+    #
+    # c_1_2_log = xes_importer.apply(
+    #     '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes',
+    #     parameters={
+    #         xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: 200})
+    # apply_pipeline('c_1_2_small', c_1_2_log, get_imprecise_labels(c_1_2_log), threshold=0, window_size=3)
 
 
 def get_imprecise_labels(log: EventLog) -> list[str]:
@@ -47,7 +69,7 @@ def get_imprecise_labels(log: EventLog) -> list[str]:
         for event in trace:
             if event['OrgLabel'] != event['concept:name']:
                 imprecise_labels.add(event['concept:name'])
-    print(imprecise_labels)
+    # print(imprecise_labels)
     return list(imprecise_labels)
 
 
@@ -62,29 +84,44 @@ def apply_pipeline_to_bpmn(input_type: str, threshold: float = 0.5,
 
 def apply_pipeline(input_type: str, log: EventLog, labels_to_split: list[str], threshold: float = 0.5,
                    window_size: int = 3):
-    xes_exporter.apply(log, f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_original_log.xes')
-    label_splitter = LabelSplitter(labels_to_split, threshold=threshold, window_size=window_size)
-    split_log = label_splitter.split_labels(log)
-    xes_exporter.apply(split_log, f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_split_log.xes')
-    net, initial_marking, final_marking = inductive_miner.apply(split_log)
-    post_processor = PostProcessor(label_splitter.get_split_labels_to_original_labels())
-    final_net = post_processor.post_process_petri_net(net)
-    pnml_exporter.apply(final_net, initial_marking,
-                        f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_petri_net.pnml',
-                        final_marking=final_marking)
-    print('split_log:')
-    original_log = xes_importer.apply(
-        f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_original_log.xes')
-    performance_evaluator = PerformanceEvaluator(final_net, initial_marking, final_marking, original_log)
-    performance_evaluator.evaluate_performance()
-    print('original_log:')
-    original_net, initial_marking, final_marking = inductive_miner.apply(original_log)
-    performance_evaluator = PerformanceEvaluator(original_net, initial_marking, final_marking, original_log)
-    performance_evaluator.evaluate_performance()
-    pnml_exporter.apply(original_net, initial_marking,
-                        f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_original_petri_net.pnml',
-                        final_marking=final_marking)
-    # export_bpmn_model(log)
+    with open(f'./outputs/{input_type}.txt', 'a') as outfile:
+        outfile.write('''
+        
+        
+        
+        ----------------------------------------------------------------------------------------------
+        Output from {date}
+        ----------------------------------------------------------------------------------------------
+        '''.format(date=datetime.now()))
+
+        # TODO: Print current parameters!!!
+
+        xes_exporter.apply(log, f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_original_log.xes')
+        label_splitter = LabelSplitter(outfile, labels_to_split, threshold=threshold, window_size=window_size)
+        split_log = label_splitter.split_labels(log)
+        xes_exporter.apply(split_log, f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_split_log.xes')
+
+        net, initial_marking, final_marking = inductive_miner.apply(split_log)
+        post_processor = PostProcessor(label_splitter.get_split_labels_to_original_labels())
+        final_net = post_processor.post_process_petri_net(net)
+        pnml_exporter.apply(final_net, initial_marking,
+                            f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_petri_net.pnml',
+                            final_marking=final_marking)
+
+        outfile.write('Performance split_log:\n')
+        original_log = xes_importer.apply(
+            f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_original_log.xes')
+
+        performance_evaluator = PerformanceEvaluator(final_net, initial_marking, final_marking, original_log, outfile)
+        performance_evaluator.evaluate_performance()
+        outfile.write('Performance original_log:\n')
+        original_net, initial_marking, final_marking = inductive_miner.apply(original_log)
+        performance_evaluator = PerformanceEvaluator(original_net, initial_marking, final_marking, original_log, outfile)
+        performance_evaluator.evaluate_performance()
+        pnml_exporter.apply(original_net, initial_marking,
+                            f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_original_petri_net.pnml',
+                            final_marking=final_marking)
+        # export_bpmn_model(log)
 
 
 def export_bpmn_model(log):
