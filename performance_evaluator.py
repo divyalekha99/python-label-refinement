@@ -33,6 +33,7 @@ class PerformanceEvaluator:
         self.get_generalization()
 
     def get_fitness(self) -> dict[str, Any]:
+        # Models expected to have fitness 1 (Inductive miner)
         # self._write(log)
         # token_fitness = replay_fitness_evaluator.apply(log, net, im, fm, variant=replay_fitness_evaluator.Variants.TOKEN_BASED)
         # self._write(token_fitness)

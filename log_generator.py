@@ -25,6 +25,3 @@ class LogGenerator:
         num_cases = len(event_log)
         print(num_cases)
         return event_log
-
-    def calculate_distance(self) -> None:
-        pass
