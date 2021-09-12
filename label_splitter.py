@@ -56,7 +56,7 @@ class LabelSplitter:
         if distance_variant is DistanceVariant.EDIT_DISTANCE:
             self.get_distance = self.distance_calculator.get_edit_distance
         elif distance_variant is DistanceVariant.SET_DISTANCE:
-            self.get_distance = self.distance_calculatorg.get_set_distance
+            self.get_distance = self.distance_calculator.get_set_distance
         elif distance_variant is DistanceVariant.SET_DISTANCE:
             self.get_distance = self.distance_calculator.get_multiset_distance
         else:
@@ -134,8 +134,10 @@ class LabelSplitter:
             print(f'Calculating edges for {label}')
             # self._write(label)
             print(len(graph.nodes()))
+            edges = []
+            # TODO Check performance of combinations
             for (hash_a, hash_b) in combinations(graph.nodes(), 2):
-                if i % 10000 == 0:
+                if i % 100000 == 0:
                     print(i)
                 # edit_distance = self.get_edit_distance(self.hash_to_event[hash_a], self.hash_to_event[hash_b])
                 edit_distance = self.get_distance(self.hash_to_event[hash_a], self.hash_to_event[hash_b])
@@ -143,15 +145,19 @@ class LabelSplitter:
                 # self._write('weight')
                 # self._write(weight)
                 if weight > self.threshold:
-                    graph.add_edge(hash_a, hash_b, weight=weight)
+                    # TODO Try adding multiple edges at once
+                    # Try first fully connected graph, then edges?
+                    edges.append((hash_a, hash_b, weight))
+                    # graph.add_edge(hash_a, hash_b, weight=weight)
                     # self._write(edit_distance)
                 i += 1
+            graph.add_weighted_edges_from(edges)
         print('Finished calculating edges')
 
     def get_communities_louvain(self, event_graphs) -> None:
         for (label, graph) in event_graphs.items():
             print(f'Getting communities for {label}')
-            partition = community_louvain.best_partition(graph)
+            partition = community_louvain.best_partition(graph, weight="weight")
             # self._write('Partition:')
             # self._write(partition)
 

@@ -11,6 +11,7 @@ from pm4py.visualization.process_tree import visualizer as pt_visualizer
 from pm4py.objects.conversion.process_tree import converter
 from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
 from pm4py.objects.log.importer.xes import importer as xes_importer
+from pm4py.visualization.petri_net import visualizer as pn_visualizer
 
 from datetime import datetime
 
@@ -39,31 +40,32 @@ def main() -> None:
     # 0.8156 Precision
     # apply_pipeline('road_traffic_fines', road_traffic_fines_log, ['Payment'], threshold=0.75, window_size=3)
 
-    road_traffic_fines_max = 10000
-    road_traffic_fines_log = xes_importer.apply(
-        '/home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz',
-        parameters={
-            xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: road_traffic_fines_max})
-
-    apply_pipeline('road_traffic_fines',
-                   road_traffic_fines_log,
-                   ['Payment'],
-                   threshold=0,
-                   window_size=3,
-                   number_of_traces=road_traffic_fines_max)
-
-    # c_1_0_number_of_traces = 1000
-    # c_1_0_log = xes_importer.apply(
-    #     '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes',
+    # road_traffic_fines_max = 1000
+    # road_traffic_fines_log = xes_importer.apply(
+    #     '/home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz',
     #     parameters={
-    #         xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: c_1_0_number_of_traces})
+    #         xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: road_traffic_fines_max})
     #
-    # apply_pipeline('c_1_0_small',
-    #                c_1_0_log,
-    #                get_imprecise_labels(c_1_0_log),
-    #                threshold=0.5,
+    # apply_pipeline('road_traffic_fines',
+    #                road_traffic_fines_log,
+    #                ['Payment'],
+    #                threshold=0,
     #                window_size=3,
-    #                number_of_traces=c_1_0_number_of_traces)
+    #                number_of_traces=road_traffic_fines_max,
+    #                distance_variant=DistanceVariant.EDIT_DISTANCE)
+
+    c_1_0_number_of_traces = 1000
+    c_1_0_log = xes_importer.apply(
+        '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes',
+        parameters={
+            xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: c_1_0_number_of_traces})
+
+    apply_pipeline('c_1_0_small',
+                   c_1_0_log,
+                   get_imprecise_labels(c_1_0_log),
+                   threshold=0.5,
+                   window_size=3,
+                   number_of_traces=c_1_0_number_of_traces)
     #
     # c_1_1_log = xes_importer.apply(
     #     '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes',
@@ -141,6 +143,7 @@ Method for finding clusters: {clustering_variant}
         xes_exporter.apply(split_log, f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_split_log.xes')
 
         net, initial_marking, final_marking = inductive_miner.apply(split_log)
+        tree = inductive_miner.apply_tree(split_log)
         post_processor = PostProcessor(label_splitter.get_split_labels_to_original_labels())
         final_net = post_processor.post_process_petri_net(net)
         pnml_exporter.apply(final_net, initial_marking,
@@ -161,15 +164,25 @@ Method for finding clusters: {clustering_variant}
         pnml_exporter.apply(original_net, initial_marking,
                             f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_original_petri_net.pnml',
                             final_marking=final_marking)
-        # export_bpmn_model(log)
+        save_models_as_png(input_type, final_marking, initial_marking, net, tree)
+
+
+def save_models_as_png(input_type, final_marking, initial_marking, net, tree):
+    gviz = pt_visualizer.apply(tree)
+    # pt_visualizer.view(gviz)
+    pt_visualizer.save(gviz, f'/mnt/c/Users/Jonas/Desktop/pm-label-splitting/result_pngs/{input_type}_refined_process_tree.png')
+    # export_bpmn_model(log)
+    parameters = {pn_visualizer.Variants.WO_DECORATION.value.Parameters.FORMAT: "png"}
+    gviz_petri_net = pn_visualizer.apply(net, initial_marking, final_marking, parameters=parameters)
+    pn_visualizer.save(gviz_petri_net, f'/mnt/c/Users/Jonas/Desktop/pm-label-splitting/result_pngs/{input_type}_refined_petri_net.png')
 
 
 def export_bpmn_model(log):
     tree = pm4py.discover_process_tree_inductive(log)
     bpmn_graph = converter.apply(tree, variant=converter.Variants.TO_BPMN)
     pm4py.write_bpmn(bpmn_graph, '/home/jonas/repositories/pm-label-splitting/test_files/test.bpmn', enable_layout=True)
-    # gviz = pt_visualizer.apply(tree)
-    # pt_visualizer.view(gviz)
+    gviz = pt_visualizer.apply(tree)
+    pt_visualizer.view(gviz)
 
 
 main()

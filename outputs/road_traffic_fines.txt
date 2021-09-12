@@ -91,3 +91,440 @@ Method for distance calculation: DistanceVariant.EDIT_DISTANCE
 Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
         
         
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-11 00:32:27.390737
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 10000
+Method for distance calculation: DistanceVariant.SET_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+        
+        
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-11 00:32:06.201752
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 10000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+        
+        
+Reassigned labels
+Map:
+{"Payment_1": "Payment", "Payment_0": "Payment", "Payment_2": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5125075364409084
+simplicity
+0.6263736263736264
+generalization
+0.8765266942500956
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5292666996294737
+simplicity
+0.6000000000000001
+generalization
+0.91590738195728
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-11 00:33:09.323492
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 10000
+Method for distance calculation: DistanceVariant.SET_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+        
+        
+Reassigned labels
+Map:
+{"Payment_0": "Payment", "Payment_1": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5125075364409084
+simplicity
+0.5897435897435898
+generalization
+0.8324553105200927
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5292666996294737
+simplicity
+0.6000000000000001
+generalization
+0.91590738195728
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-11 01:23:45.030409
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 10000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+        
+        
+Reassigned labels
+Map:
+{"Payment_0": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5292666996294737
+simplicity
+0.6000000000000001
+generalization
+0.91590738195728
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5292666996294737
+simplicity
+0.6000000000000001
+generalization
+0.91590738195728
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-11 01:47:42.491194
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 10000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+        
+        
+Reassigned labels
+Map:
+{"Payment_1": "Payment", "Payment_0": "Payment", "Payment_2": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5125075364409084
+simplicity
+0.6263736263736264
+generalization
+0.8765266942500956
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5292666996294737
+simplicity
+0.6000000000000001
+generalization
+0.91590738195728
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-11 01:48:55.090853
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 10000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+        
+        
+Reassigned labels
+Map:
+{"Payment_2": "Payment", "Payment_0": "Payment", "Payment_1": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5125075364409084
+simplicity
+0.6263736263736264
+generalization
+0.8765266942500956
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5292666996294737
+simplicity
+0.6000000000000001
+generalization
+0.91590738195728
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-11 01:53:32.942338
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 10000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+        
+        
+Reassigned labels
+Map:
+{"Payment_0": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5292666996294737
+simplicity
+0.6000000000000001
+generalization
+0.91590738195728
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5292666996294737
+simplicity
+0.6000000000000001
+generalization
+0.91590738195728
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-11 18:20:27.899620
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.75
+Split candidates: Payment
+Max number of traces: 10000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+        
+        
+Reassigned labels
+Map:
+{"Payment_3": "Payment", "Payment_0": "Payment", "Payment_1": "Payment", "Payment_6": "Payment", "Payment_4": "Payment", "Payment_11": "Payment", "Payment_8": "Payment", "Payment_5": "Payment", "Payment_7": "Payment", "Payment_9": "Payment", "Payment_2": "Payment", "Payment_12": "Payment", "Payment_13": "Payment", "Payment_14": "Payment", "Payment_10": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.3575107313834722
+simplicity
+0.5
+generalization
+0.6139539390597061
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5292666996294737
+simplicity
+0.6000000000000001
+generalization
+0.91590738195728
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-11 18:33:56.453713
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.75
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+        
+        
+Reassigned labels
+Map:
+{"Payment_0": "Payment", "Payment_6": "Payment", "Payment_8": "Payment", "Payment_1": "Payment", "Payment_3": "Payment", "Payment_7": "Payment", "Payment_4": "Payment", "Payment_2": "Payment", "Payment_9": "Payment", "Payment_5": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.8156533382021788
+simplicity
+0.6190476190476191
+generalization
+0.6844180972241539
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.26449575685810145
+simplicity
+0.6140350877192983
+generalization
+0.8757468343101801
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-11 18:34:56.875290
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.75
+Split candidates: Payment
+Max number of traces: 1000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+        
+        
+Reassigned labels
+Map:
+{"Payment_7": "Payment", "Payment_5": "Payment", "Payment_3": "Payment", "Payment_6": "Payment", "Payment_1": "Payment", "Payment_4": "Payment", "Payment_2": "Payment", "Payment_0": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.8160215580597746
+simplicity
+0.6338028169014084
+generalization
+0.6677496691426229
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.32701747496563915
+simplicity
+0.6428571428571429
+generalization
+0.8977897610009421
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-11 18:36:00.437950
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 1000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+        
+        
+Reassigned labels
+Map:
+{"Payment_1": "Payment", "Payment_2": "Payment", "Payment_0": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.3277898051564653
+simplicity
+0.6140350877192983
+generalization
+0.8353953801808783
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.32701747496563915
+simplicity
+0.6428571428571429
+generalization
+0.8977897610009421
