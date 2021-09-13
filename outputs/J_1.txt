@@ -1,0 +1,352 @@
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 03:17:17.207680
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: C
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb18-1515/logs/J_1_LogD_Sequence_feb18-1515.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"C_1": "C", "C_0": "C"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6316667245752405
+simplicity
+0.6888888888888889
+generalization
+0.660634554785262
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.4707771188854649
+simplicity
+0.6585365853658536
+generalization
+0.9640641165933446
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 03:18:39.692576
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.25
+Split candidates: C
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb18-1515/logs/J_1_LogD_Sequence_feb18-1515.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"C_0": "C", "C_1": "C"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6316667245752405
+simplicity
+0.6888888888888889
+generalization
+0.9036209228903576
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.4707771188854649
+simplicity
+0.6585365853658536
+generalization
+0.9640641165933446
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 03:19:44.071204
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.5
+Split candidates: C
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb18-1515/logs/J_1_LogD_Sequence_feb18-1515.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"C_0": "C", "C_1": "C", "C_2": "C", "C_3": "C"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5866787143410352
+simplicity
+0.6716417910447761
+generalization
+0.7233843945956608
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.4707771188854649
+simplicity
+0.6585365853658536
+generalization
+0.9640641165933446
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 03:20:15.953979
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.75
+Split candidates: C
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb18-1515/logs/J_1_LogD_Sequence_feb18-1515.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"C_0": "C", "C_1": "C", "C_2": "C", "C_6": "C", "C_4": "C", "C_5": "C", "C_3": "C"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5405256386693622
+simplicity
+0.6470588235294118
+generalization
+0.6332165399426192
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.4707771188854649
+simplicity
+0.6585365853658536
+generalization
+0.9640641165933446
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 03:20:41.720106
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: C
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.SET_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb18-1515/logs/J_1_LogD_Sequence_feb18-1515.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"C_0": "C", "C_1": "C", "C_2": "C"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6497033807447645
+simplicity
+0.6842105263157894
+generalization
+0.7344986201666299
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.4707771188854649
+simplicity
+0.6585365853658536
+generalization
+0.9640641165933446
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 03:21:58.395789
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.25
+Split candidates: C
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.SET_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb18-1515/logs/J_1_LogD_Sequence_feb18-1515.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"C_0": "C", "C_1": "C", "C_2": "C"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5866787143410352
+simplicity
+0.6774193548387096
+generalization
+0.7858895859570187
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.4707771188854649
+simplicity
+0.6585365853658536
+generalization
+0.9640641165933446
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 03:23:14.502554
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.5
+Split candidates: C
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.SET_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb18-1515/logs/J_1_LogD_Sequence_feb18-1515.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"C_2": "C", "C_1": "C", "C_0": "C"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6497033807447645
+simplicity
+0.6774193548387096
+generalization
+0.6145123737445664
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.4707771188854649
+simplicity
+0.6585365853658536
+generalization
+0.9640641165933446
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 03:24:03.433982
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.75
+Split candidates: C
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.SET_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb18-1515/logs/J_1_LogD_Sequence_feb18-1515.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"C_4": "C", "C_1": "C", "C_2": "C", "C_5": "C", "C_3": "C", "C_0": "C"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6995536401416038
+simplicity
+0.6818181818181818
+generalization
+0.5528433345139412
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.4707771188854649
+simplicity
+0.6585365853658536
+generalization
+0.9640641165933446

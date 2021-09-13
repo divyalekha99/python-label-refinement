@@ -1,0 +1,938 @@
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:11:36.856993
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 4
+Threshold for edges: 0
+Split candidates: 
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+Map:
+{}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:11:48.504034
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 4
+Threshold for edges: 0.5
+Split candidates: 
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+Map:
+{}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:12:00.232154
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 4
+Threshold for edges: 0.75
+Split candidates: 
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+Map:
+{}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:13:29.292464
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 4
+Threshold for edges: 0
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_0": "K", "K_1": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.480256456348493
+simplicity
+0.6623376623376623
+generalization
+0.921372332206493
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:14:11.312028
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 4
+Threshold for edges: 0.5
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_0": "K", "K_1": "K", "K_2": "K", "K_3": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.36778708271194216
+simplicity
+0.6190476190476191
+generalization
+0.9187185345069986
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:14:45.965876
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 4
+Threshold for edges: 0.75
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_0": "K", "K_1": "K", "K_25": "K", "K_3": "K", "K_31": "K", "K_5": "K", "K_6": "K", "K_7": "K", "K_8": "K", "K_9": "K", "K_10": "K", "K_11": "K", "K_12": "K", "K_13": "K", "K_17": "K", "K_15": "K", "K_16": "K", "K_18": "K", "K_19": "K", "K_20": "K", "K_21": "K", "K_22": "K", "K_26": "K", "K_27": "K", "K_28": "K", "K_29": "K", "K_30": "K", "K_49": "K", "K_34": "K", "K_35": "K", "K_36": "K", "K_37": "K", "K_38": "K", "K_39": "K", "K_40": "K", "K_41": "K", "K_42": "K", "K_43": "K", "K_44": "K", "K_4": "K", "K_14": "K", "K_48": "K", "K_50": "K", "K_51": "K", "K_32": "K", "K_33": "K", "K_2": "K", "K_45": "K", "K_46": "K", "K_47": "K", "K_23": "K", "K_24": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.35637269069162536
+simplicity
+0.4434782608695652
+generalization
+0.3878459710589547
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:17:04.352254
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_1": "K", "K_2": "K", "K_0": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.8886794544849762
+simplicity
+0.7142857142857143
+generalization
+0.9469971953633374
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:17:41.406673
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.5
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_0": "K", "K_3": "K", "K_2": "K", "K_1": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.884023603375062
+simplicity
+0.6842105263157894
+generalization
+0.8562080485149433
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:18:06.672513
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.75
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_0": "K", "K_1": "K", "K_14": "K", "K_4": "K", "K_6": "K", "K_7": "K", "K_8": "K", "K_10": "K", "K_9": "K", "K_13": "K", "K_11": "K", "K_15": "K", "K_16": "K", "K_17": "K", "K_18": "K", "K_2": "K", "K_3": "K", "K_5": "K", "K_12": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.3529437667884979
+simplicity
+0.5428571428571428
+generalization
+0.6727704284574215
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:21:01.109622
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_0": "K", "K_1": "K", "K_2": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.742370212568888
+simplicity
+0.6666666666666666
+generalization
+0.8799400222217059
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:24:27.304216
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_1": "K", "K_2": "K", "K_0": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.7725301204819277
+simplicity
+0.6716417910447761
+generalization
+0.8765385914072208
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:25:06.410073
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.5
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_0": "K", "K_1": "K", "K_2": "K", "K_3": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.764753590000477
+simplicity
+0.6875
+generalization
+0.9074742204627582
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:25:31.423990
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.75
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_0": "K", "K_1": "K", "K_2": "K", "K_4": "K", "K_5": "K", "K_6": "K", "K_7": "K", "K_15": "K", "K_10": "K", "K_11": "K", "K_13": "K", "K_14": "K", "K_16": "K", "K_17": "K", "K_18": "K", "K_9": "K", "K_3": "K", "K_12": "K", "K_8": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.3536055412172149
+simplicity
+0.5294117647058824
+generalization
+0.642965944534694
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:35:43.593695
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_0": "K", "K_1": "K", "K_2": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.742370212568888
+simplicity
+0.6666666666666666
+generalization
+0.8796368672908003
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:36:46.489049
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.5
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_1": "K", "K_2": "K", "K_3": "K", "K_0": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.36778708271194216
+simplicity
+0.6190476190476191
+generalization
+0.9187185345069986
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:37:22.522439
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.75
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_0": "K", "K_1": "K", "K_3": "K", "K_4": "K", "K_6": "K", "K_7": "K", "K_8": "K", "K_9": "K", "K_10": "K", "K_11": "K", "K_12": "K", "K_13": "K", "K_14": "K", "K_15": "K", "K_16": "K", "K_17": "K", "K_2": "K", "K_5": "K", "K_18": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.3529437667884979
+simplicity
+0.5428571428571428
+generalization
+0.6729642137346317
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:37:31.576090
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_0": "K", "K_2": "K", "K_1": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.8886794544849762
+simplicity
+0.7142857142857143
+generalization
+0.9469971953633374
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:38:15.085389
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.5
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_0": "K", "K_1": "K", "K_2": "K", "K_3": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.884023603375062
+simplicity
+0.6842105263157894
+generalization
+0.8562080485149433
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:38:34.319057
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.75
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_18": "K", "K_1": "K", "K_11": "K", "K_4": "K", "K_5": "K", "K_6": "K", "K_7": "K", "K_9": "K", "K_10": "K", "K_12": "K", "K_13": "K", "K_14": "K", "K_15": "K", "K_16": "K", "K_17": "K", "K_3": "K", "K_0": "K", "K_2": "K", "K_8": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.3529437667884979
+simplicity
+0.5428571428571428
+generalization
+0.6729642137346317
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:39:33.942820
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_2": "K", "K_0": "K", "K_1": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.8490016418621895
+simplicity
+0.7049180327868854
+generalization
+0.9482464940622466
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:41:10.937641
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:43:17.797902
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: K
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz
+        
+        Connected components:
+
+Reassigned labels
+Map:
+{"K_0": "K", "K_1": "K", "K_2": "K"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.8490016418621895
+simplicity
+0.7049180327868854
+generalization
+0.9476354246300288
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5842049637377456
+simplicity
+0.6923076923076922
+generalization
+0.9467390115090224

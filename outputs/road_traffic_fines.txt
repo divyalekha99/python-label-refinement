@@ -528,3 +528,1084 @@ simplicity
 0.6428571428571429
 generalization
 0.8977897610009421
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 00:40:41.148214
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 1000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+        
+        
+Reassigned labels
+Map:
+{"Payment_2": "Payment", "Payment_1": "Payment", "Payment_0": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.3277898051564653
+simplicity
+0.6140350877192983
+generalization
+0.8353953801808783
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.32701747496563915
+simplicity
+0.6428571428571429
+generalization
+0.8977897610009421
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 00:41:56.181320
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+        
+        
+Reassigned labels
+Map:
+{"Payment_1": "Payment", "Payment_0": "Payment", "Payment_2": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.26520233501533585
+simplicity
+0.6097560975609756
+generalization
+0.7117053111236894
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.26449575685810145
+simplicity
+0.6140350877192983
+generalization
+0.8757468343101801
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 00:43:10.108941
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 10000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+        
+        
+Reassigned labels
+Map:
+{"Payment_0": "Payment", "Payment_2": "Payment", "Payment_1": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5125075364409084
+simplicity
+0.6263736263736264
+generalization
+0.8765266942500956
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.5292666996294737
+simplicity
+0.6000000000000001
+generalization
+0.91590738195728
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 00:50:51.457444
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.75
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+        
+        
+Reassigned labels
+Map:
+{"Payment_8": "Payment", "Payment_5": "Payment", "Payment_9": "Payment", "Payment_3": "Payment", "Payment_1": "Payment", "Payment_6": "Payment", "Payment_7": "Payment", "Payment_2": "Payment", "Payment_0": "Payment", "Payment_4": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.06297798763052, "averageFitness": 0.9981354929761825, "percentage_of_fitting_traces": 99.06297798763052, "average_trace_fitness": 0.9981354929761825}
+precision
+0.8262220137886213
+simplicity
+0.6190476190476191
+generalization
+0.833726995902988
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 00:59:00.854483
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.75
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        
+Reassigned labels
+Map:
+{"Payment_0": "Payment", "Payment_9": "Payment", "Payment_6": "Payment", "Payment_5": "Payment", "Payment_1": "Payment", "Payment_8": "Payment", "Payment_2": "Payment", "Payment_4": "Payment", "Payment_7": "Payment", "Payment_3": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.06297798763052, "averageFitness": 0.9981354929761825, "percentage_of_fitting_traces": 99.06297798763052, "average_trace_fitness": 0.9981354929761825}
+precision
+0.8262220137886213
+simplicity
+0.6190476190476191
+generalization
+0.8329294252581441
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:03:28.198931
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.75
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.SET_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        
+Reassigned labels
+Map:
+{"Payment_0": "Payment", "Payment_4": "Payment", "Payment_7": "Payment", "Payment_1": "Payment", "Payment_8": "Payment", "Payment_6": "Payment", "Payment_2": "Payment", "Payment_3": "Payment", "Payment_5": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.0855888807608, "averageFitness": 0.9983709257101127, "percentage_of_fitting_traces": 99.0855888807608, "average_trace_fitness": 0.9983709257101127}
+precision
+0.6167584118720204
+simplicity
+0.6000000000000001
+generalization
+0.8142963231075143
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:12:50.824810
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.SET_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        
+Reassigned labels
+Map:
+{"Payment_1": "Payment", "Payment_0": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.4393828556228, "averageFitness": 0.9993118160103898, "percentage_of_fitting_traces": 99.4393828556228, "average_trace_fitness": 0.9993118160103898}
+precision
+0.510882538691342
+simplicity
+0.6202531645569621
+generalization
+0.8306862018783554
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:14:14.471880
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.5
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.SET_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:13:44.247386
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.SET_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        
+Reassigned labels
+Map:
+{"Payment_1": "Payment", "Payment_0": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.4393828556228, "averageFitness": 0.9993118160103898, "percentage_of_fitting_traces": 99.4393828556228, "average_trace_fitness": 0.9993118160103898}
+precision
+0.510882538691342
+simplicity
+0.6202531645569621
+generalization
+0.9855643282466341
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:15:02.542322
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.5
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.SET_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:20:52.236866
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.SET_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        
+Reassigned labels
+Map:
+{"Payment_1": "Payment", "Payment_0": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.4393828556228, "averageFitness": 0.9993118160103898, "percentage_of_fitting_traces": 99.4393828556228, "average_trace_fitness": 0.9993118160103898}
+precision
+0.510882538691342
+simplicity
+0.6202531645569621
+generalization
+0.9855643282466341
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:22:20.439032
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.5
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.SET_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:21:05.003391
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        
+Reassigned labels
+Map:
+{"Payment_2": "Payment", "Payment_0": "Payment", "Payment_1": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.4393828556228, "averageFitness": 0.9993112618218327, "percentage_of_fitting_traces": 99.4393828556228, "average_trace_fitness": 0.9993112618218327}
+precision
+0.5108723446582341
+simplicity
+0.6097560975609756
+generalization
+0.8617188571612578
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:22:26.805756
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.5
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:25:23.098237
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        
+Reassigned labels
+Map:
+{"Payment_1": "Payment", "Payment_0": "Payment", "Payment_2": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.4393828556228, "averageFitness": 0.9993112618218327, "percentage_of_fitting_traces": 99.4393828556228, "average_trace_fitness": 0.9993112618218327}
+precision
+0.5108723446582341
+simplicity
+0.6097560975609756
+generalization
+0.864069655190651
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:26:34.380508
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.5
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        
+Reassigned labels
+Map:
+{"Payment_0": "Payment", "Payment_1": "Payment", "Payment_3": "Payment", "Payment_4": "Payment", "Payment_2": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.1141850103079, "averageFitness": 0.9986297087935821, "percentage_of_fitting_traces": 99.1141850103079, "average_trace_fitness": 0.9986297087935821}
+precision
+0.6957736126797719
+simplicity
+0.6216216216216216
+generalization
+0.948344567974661
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:27:44.431185
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.75
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        
+Reassigned labels
+Map:
+{"Payment_5": "Payment", "Payment_2": "Payment", "Payment_8": "Payment", "Payment_9": "Payment", "Payment_0": "Payment", "Payment_7": "Payment", "Payment_3": "Payment", "Payment_1": "Payment", "Payment_6": "Payment", "Payment_4": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.06297798763052, "averageFitness": 0.9981354929761825, "percentage_of_fitting_traces": 99.06297798763052, "average_trace_fitness": 0.9981354929761825}
+precision
+0.8262220137886213
+simplicity
+0.6190476190476191
+generalization
+0.8036885394192016
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:31:05.962189
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.9
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        
+Reassigned labels
+Map:
+{"Payment_8": "Payment", "Payment_7": "Payment", "Payment_2": "Payment", "Payment_1": "Payment", "Payment_4": "Payment", "Payment_9": "Payment", "Payment_3": "Payment", "Payment_0": "Payment", "Payment_5": "Payment", "Payment_6": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.06297798763052, "averageFitness": 0.9981354929761825, "percentage_of_fitting_traces": 99.06297798763052, "average_trace_fitness": 0.9981354929761825}
+precision
+0.8262220137886213
+simplicity
+0.6190476190476191
+generalization
+0.8328635745344846
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:30:55.971132
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 1
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        
+Reassigned labels
+Map:
+{"Payment_0": "Payment", "Payment_1": "Payment", "Payment_2": "Payment", "Payment_3": "Payment", "Payment_4": "Payment", "Payment_5": "Payment", "Payment_6": "Payment", "Payment_7": "Payment", "Payment_8": "Payment", "Payment_9": "Payment", "Payment_10": "Payment", "Payment_11": "Payment", "Payment_12": "Payment", "Payment_13": "Payment", "Payment_14": "Payment", "Payment_15": "Payment", "Payment_16": "Payment", "Payment_17": "Payment", "Payment_18": "Payment", "Payment_19": "Payment", "Payment_20": "Payment", "Payment_21": "Payment", "Payment_22": "Payment", "Payment_23": "Payment", "Payment_24": "Payment", "Payment_25": "Payment", "Payment_26": "Payment", "Payment_27": "Payment", "Payment_28": "Payment", "Payment_29": "Payment", "Payment_30": "Payment", "Payment_31": "Payment", "Payment_32": "Payment", "Payment_33": "Payment", "Payment_34": "Payment", "Payment_35": "Payment", "Payment_36": "Payment", "Payment_37": "Payment", "Payment_38": "Payment", "Payment_39": "Payment", "Payment_40": "Payment", "Payment_41": "Payment", "Payment_42": "Payment", "Payment_43": "Payment", "Payment_44": "Payment", "Payment_45": "Payment", "Payment_46": "Payment", "Payment_47": "Payment", "Payment_48": "Payment", "Payment_49": "Payment", "Payment_50": "Payment", "Payment_51": "Payment", "Payment_52": "Payment", "Payment_53": "Payment", "Payment_54": "Payment", "Payment_55": "Payment", "Payment_56": "Payment", "Payment_57": "Payment", "Payment_58": "Payment", "Payment_59": "Payment", "Payment_60": "Payment", "Payment_61": "Payment", "Payment_62": "Payment", "Payment_63": "Payment", "Payment_64": "Payment", "Payment_65": "Payment", "Payment_66": "Payment", "Payment_67": "Payment", "Payment_68": "Payment", "Payment_69": "Payment", "Payment_70": "Payment", "Payment_71": "Payment", "Payment_72": "Payment", "Payment_73": "Payment", "Payment_74": "Payment", "Payment_75": "Payment", "Payment_76": "Payment", "Payment_77": "Payment", "Payment_78": "Payment", "Payment_79": "Payment", "Payment_80": "Payment", "Payment_81": "Payment", "Payment_82": "Payment", "Payment_83": "Payment", "Payment_84": "Payment", "Payment_85": "Payment", "Payment_86": "Payment", "Payment_87": "Payment", "Payment_88": "Payment", "Payment_89": "Payment", "Payment_90": "Payment", "Payment_91": "Payment", "Payment_92": "Payment", "Payment_93": "Payment", "Payment_94": "Payment", "Payment_95": "Payment", "Payment_96": "Payment", "Payment_97": "Payment", "Payment_98": "Payment", "Payment_99": "Payment", "Payment_100": "Payment", "Payment_101": "Payment", "Payment_102": "Payment", "Payment_103": "Payment", "Payment_104": "Payment", "Payment_105": "Payment", "Payment_106": "Payment", "Payment_107": "Payment", "Payment_108": "Payment", "Payment_109": "Payment", "Payment_110": "Payment", "Payment_111": "Payment", "Payment_112": "Payment", "Payment_113": "Payment", "Payment_114": "Payment", "Payment_115": "Payment", "Payment_116": "Payment", "Payment_117": "Payment", "Payment_118": "Payment", "Payment_119": "Payment", "Payment_120": "Payment", "Payment_121": "Payment", "Payment_122": "Payment", "Payment_123": "Payment", "Payment_124": "Payment", "Payment_125": "Payment", "Payment_126": "Payment", "Payment_127": "Payment", "Payment_128": "Payment", "Payment_129": "Payment", "Payment_130": "Payment", "Payment_131": "Payment", "Payment_132": "Payment", "Payment_133": "Payment", "Payment_134": "Payment", "Payment_135": "Payment", "Payment_136": "Payment", "Payment_137": "Payment", "Payment_138": "Payment", "Payment_139": "Payment", "Payment_140": "Payment", "Payment_141": "Payment", "Payment_142": "Payment", "Payment_143": "Payment", "Payment_144": "Payment", "Payment_145": "Payment", "Payment_146": "Payment", "Payment_147": "Payment", "Payment_148": "Payment", "Payment_149": "Payment", "Payment_150": "Payment", "Payment_151": "Payment", "Payment_152": "Payment", "Payment_153": "Payment", "Payment_154": "Payment", "Payment_155": "Payment", "Payment_156": "Payment", "Payment_157": "Payment", "Payment_158": "Payment", "Payment_159": "Payment", "Payment_160": "Payment", "Payment_161": "Payment", "Payment_162": "Payment", "Payment_163": "Payment", "Payment_164": "Payment", "Payment_165": "Payment", "Payment_166": "Payment", "Payment_167": "Payment", "Payment_168": "Payment", "Payment_169": "Payment", "Payment_170": "Payment", "Payment_171": "Payment", "Payment_172": "Payment", "Payment_173": "Payment", "Payment_174": "Payment", "Payment_175": "Payment", "Payment_176": "Payment", "Payment_177": "Payment", "Payment_178": "Payment", "Payment_179": "Payment", "Payment_180": "Payment", "Payment_181": "Payment", "Payment_182": "Payment", "Payment_183": "Payment", "Payment_184": "Payment", "Payment_185": "Payment", "Payment_186": "Payment", "Payment_187": "Payment", "Payment_188": "Payment", "Payment_189": "Payment", "Payment_190": "Payment", "Payment_191": "Payment", "Payment_192": "Payment", "Payment_193": "Payment", "Payment_194": "Payment", "Payment_195": "Payment", "Payment_196": "Payment", "Payment_197": "Payment", "Payment_198": "Payment", "Payment_199": "Payment", "Payment_200": "Payment", "Payment_201": "Payment", "Payment_202": "Payment", "Payment_203": "Payment", "Payment_204": "Payment", "Payment_205": "Payment", "Payment_206": "Payment", "Payment_207": "Payment", "Payment_208": "Payment", "Payment_209": "Payment", "Payment_210": "Payment", "Payment_211": "Payment", "Payment_212": "Payment", "Payment_213": "Payment", "Payment_214": "Payment", "Payment_215": "Payment", "Payment_216": "Payment", "Payment_217": "Payment", "Payment_218": "Payment", "Payment_219": "Payment", "Payment_220": "Payment", "Payment_221": "Payment", "Payment_222": "Payment", "Payment_223": "Payment", "Payment_224": "Payment", "Payment_225": "Payment", "Payment_226": "Payment", "Payment_227": "Payment", "Payment_228": "Payment", "Payment_229": "Payment", "Payment_230": "Payment", "Payment_231": "Payment", "Payment_232": "Payment", "Payment_233": "Payment", "Payment_234": "Payment", "Payment_235": "Payment", "Payment_236": "Payment", "Payment_237": "Payment", "Payment_238": "Payment", "Payment_239": "Payment", "Payment_240": "Payment", "Payment_241": "Payment", "Payment_242": "Payment", "Payment_243": "Payment", "Payment_244": "Payment", "Payment_245": "Payment", "Payment_246": "Payment", "Payment_247": "Payment", "Payment_248": "Payment", "Payment_249": "Payment", "Payment_250": "Payment", "Payment_251": "Payment", "Payment_252": "Payment", "Payment_253": "Payment", "Payment_254": "Payment", "Payment_255": "Payment", "Payment_256": "Payment", "Payment_257": "Payment", "Payment_258": "Payment", "Payment_259": "Payment", "Payment_260": "Payment", "Payment_261": "Payment", "Payment_262": "Payment", "Payment_263": "Payment", "Payment_264": "Payment", "Payment_265": "Payment", "Payment_266": "Payment", "Payment_267": "Payment", "Payment_268": "Payment", "Payment_269": "Payment", "Payment_270": "Payment", "Payment_271": "Payment", "Payment_272": "Payment", "Payment_273": "Payment", "Payment_274": "Payment", "Payment_275": "Payment", "Payment_276": "Payment", "Payment_277": "Payment", "Payment_278": "Payment", "Payment_279": "Payment", "Payment_280": "Payment", "Payment_281": "Payment", "Payment_282": "Payment", "Payment_283": "Payment", "Payment_284": "Payment", "Payment_285": "Payment", "Payment_286": "Payment", "Payment_287": "Payment", "Payment_288": "Payment", "Payment_289": "Payment", "Payment_290": "Payment", "Payment_291": "Payment", "Payment_292": "Payment", "Payment_293": "Payment", "Payment_294": "Payment", "Payment_295": "Payment", "Payment_296": "Payment", "Payment_297": "Payment", "Payment_298": "Payment", "Payment_299": "Payment", "Payment_300": "Payment", "Payment_301": "Payment", "Payment_302": "Payment", "Payment_303": "Payment", "Payment_304": "Payment", "Payment_305": "Payment", "Payment_306": "Payment", "Payment_307": "Payment", "Payment_308": "Payment", "Payment_309": "Payment", "Payment_310": "Payment", "Payment_311": "Payment", "Payment_312": "Payment", "Payment_313": "Payment", "Payment_314": "Payment", "Payment_315": "Payment", "Payment_316": "Payment", "Payment_317": "Payment", "Payment_318": "Payment", "Payment_319": "Payment", "Payment_320": "Payment", "Payment_321": "Payment", "Payment_322": "Payment", "Payment_323": "Payment", "Payment_324": "Payment", "Payment_325": "Payment", "Payment_326": "Payment", "Payment_327": "Payment", "Payment_328": "Payment", "Payment_329": "Payment", "Payment_330": "Payment", "Payment_331": "Payment", "Payment_332": "Payment", "Payment_333": "Payment", "Payment_334": "Payment", "Payment_335": "Payment", "Payment_336": "Payment", "Payment_337": "Payment", "Payment_338": "Payment", "Payment_339": "Payment", "Payment_340": "Payment", "Payment_341": "Payment", "Payment_342": "Payment", "Payment_343": "Payment", "Payment_344": "Payment", "Payment_345": "Payment", "Payment_346": "Payment", "Payment_347": "Payment", "Payment_348": "Payment", "Payment_349": "Payment", "Payment_350": "Payment", "Payment_351": "Payment", "Payment_352": "Payment", "Payment_353": "Payment", "Payment_354": "Payment", "Payment_355": "Payment", "Payment_356": "Payment", "Payment_357": "Payment", "Payment_358": "Payment", "Payment_359": "Payment", "Payment_360": "Payment", "Payment_361": "Payment", "Payment_362": "Payment", "Payment_363": "Payment", "Payment_364": "Payment", "Payment_365": "Payment", "Payment_366": "Payment", "Payment_367": "Payment", "Payment_368": "Payment", "Payment_369": "Payment", "Payment_370": "Payment", "Payment_371": "Payment", "Payment_372": "Payment", "Payment_373": "Payment", "Payment_374": "Payment", "Payment_375": "Payment", "Payment_376": "Payment", "Payment_377": "Payment", "Payment_378": "Payment", "Payment_379": "Payment", "Payment_380": "Payment", "Payment_381": "Payment", "Payment_382": "Payment", "Payment_383": "Payment", "Payment_384": "Payment", "Payment_385": "Payment", "Payment_386": "Payment", "Payment_387": "Payment", "Payment_388": "Payment", "Payment_389": "Payment", "Payment_390": "Payment", "Payment_391": "Payment", "Payment_392": "Payment", "Payment_393": "Payment", "Payment_394": "Payment", "Payment_395": "Payment", "Payment_396": "Payment", "Payment_397": "Payment", "Payment_398": "Payment", "Payment_399": "Payment", "Payment_400": "Payment", "Payment_401": "Payment", "Payment_402": "Payment", "Payment_403": "Payment", "Payment_404": "Payment", "Payment_405": "Payment", "Payment_406": "Payment", "Payment_407": "Payment", "Payment_408": "Payment", "Payment_409": "Payment", "Payment_410": "Payment", "Payment_411": "Payment", "Payment_412": "Payment", "Payment_413": "Payment", "Payment_414": "Payment", "Payment_415": "Payment", "Payment_416": "Payment", "Payment_417": "Payment", "Payment_418": "Payment", "Payment_419": "Payment", "Payment_420": "Payment", "Payment_421": "Payment", "Payment_422": "Payment", "Payment_423": "Payment", "Payment_424": "Payment", "Payment_425": "Payment", "Payment_426": "Payment", "Payment_427": "Payment", "Payment_428": "Payment", "Payment_429": "Payment", "Payment_430": "Payment", "Payment_431": "Payment", "Payment_432": "Payment", "Payment_433": "Payment", "Payment_434": "Payment", "Payment_435": "Payment", "Payment_436": "Payment", "Payment_437": "Payment", "Payment_438": "Payment", "Payment_439": "Payment", "Payment_440": "Payment", "Payment_441": "Payment", "Payment_442": "Payment", "Payment_443": "Payment", "Payment_444": "Payment", "Payment_445": "Payment", "Payment_446": "Payment", "Payment_447": "Payment", "Payment_448": "Payment", "Payment_449": "Payment", "Payment_450": "Payment", "Payment_451": "Payment", "Payment_452": "Payment", "Payment_453": "Payment", "Payment_454": "Payment", "Payment_455": "Payment", "Payment_456": "Payment", "Payment_457": "Payment", "Payment_458": "Payment", "Payment_459": "Payment", "Payment_460": "Payment", "Payment_461": "Payment", "Payment_462": "Payment", "Payment_463": "Payment", "Payment_464": "Payment", "Payment_465": "Payment", "Payment_466": "Payment", "Payment_467": "Payment", "Payment_468": "Payment", "Payment_469": "Payment", "Payment_470": "Payment", "Payment_471": "Payment", "Payment_472": "Payment", "Payment_473": "Payment", "Payment_474": "Payment", "Payment_475": "Payment", "Payment_476": "Payment", "Payment_477": "Payment", "Payment_478": "Payment", "Payment_479": "Payment", "Payment_480": "Payment", "Payment_481": "Payment", "Payment_482": "Payment", "Payment_483": "Payment", "Payment_484": "Payment", "Payment_485": "Payment", "Payment_486": "Payment", "Payment_487": "Payment", "Payment_488": "Payment", "Payment_489": "Payment", "Payment_490": "Payment", "Payment_491": "Payment", "Payment_492": "Payment", "Payment_493": "Payment", "Payment_494": "Payment", "Payment_495": "Payment", "Payment_496": "Payment", "Payment_497": "Payment", "Payment_498": "Payment", "Payment_499": "Payment", "Payment_500": "Payment", "Payment_501": "Payment", "Payment_502": "Payment", "Payment_503": "Payment", "Payment_504": "Payment", "Payment_505": "Payment", "Payment_506": "Payment", "Payment_507": "Payment", "Payment_508": "Payment", "Payment_509": "Payment", "Payment_510": "Payment", "Payment_511": "Payment", "Payment_512": "Payment", "Payment_513": "Payment", "Payment_514": "Payment", "Payment_515": "Payment", "Payment_516": "Payment", "Payment_517": "Payment", "Payment_518": "Payment", "Payment_519": "Payment", "Payment_520": "Payment", "Payment_521": "Payment", "Payment_522": "Payment", "Payment_523": "Payment", "Payment_524": "Payment", "Payment_525": "Payment", "Payment_526": "Payment", "Payment_527": "Payment", "Payment_528": "Payment", "Payment_529": "Payment", "Payment_530": "Payment", "Payment_531": "Payment", "Payment_532": "Payment", "Payment_533": "Payment", "Payment_534": "Payment", "Payment_535": "Payment", "Payment_536": "Payment", "Payment_537": "Payment", "Payment_538": "Payment", "Payment_539": "Payment", "Payment_540": "Payment", "Payment_541": "Payment", "Payment_542": "Payment", "Payment_543": "Payment", "Payment_544": "Payment", "Payment_545": "Payment", "Payment_546": "Payment", "Payment_547": "Payment", "Payment_548": "Payment", "Payment_549": "Payment", "Payment_550": "Payment", "Payment_551": "Payment", "Payment_552": "Payment", "Payment_553": "Payment", "Payment_554": "Payment", "Payment_555": "Payment", "Payment_556": "Payment", "Payment_557": "Payment", "Payment_558": "Payment", "Payment_559": "Payment", "Payment_560": "Payment", "Payment_561": "Payment", "Payment_562": "Payment", "Payment_563": "Payment", "Payment_564": "Payment", "Payment_565": "Payment", "Payment_566": "Payment", "Payment_567": "Payment", "Payment_568": "Payment", "Payment_569": "Payment", "Payment_570": "Payment", "Payment_571": "Payment", "Payment_572": "Payment", "Payment_573": "Payment", "Payment_574": "Payment", "Payment_575": "Payment", "Payment_576": "Payment", "Payment_577": "Payment", "Payment_578": "Payment", "Payment_579": "Payment", "Payment_580": "Payment", "Payment_581": "Payment", "Payment_582": "Payment", "Payment_583": "Payment", "Payment_584": "Payment", "Payment_585": "Payment", "Payment_586": "Payment", "Payment_587": "Payment", "Payment_588": "Payment", "Payment_589": "Payment", "Payment_590": "Payment", "Payment_591": "Payment", "Payment_592": "Payment", "Payment_593": "Payment", "Payment_594": "Payment", "Payment_595": "Payment", "Payment_596": "Payment", "Payment_597": "Payment", "Payment_598": "Payment", "Payment_599": "Payment", "Payment_600": "Payment", "Payment_601": "Payment", "Payment_602": "Payment", "Payment_603": "Payment", "Payment_604": "Payment", "Payment_605": "Payment", "Payment_606": "Payment", "Payment_607": "Payment", "Payment_608": "Payment", "Payment_609": "Payment", "Payment_610": "Payment", "Payment_611": "Payment", "Payment_612": "Payment", "Payment_613": "Payment", "Payment_614": "Payment", "Payment_615": "Payment", "Payment_616": "Payment", "Payment_617": "Payment", "Payment_618": "Payment", "Payment_619": "Payment", "Payment_620": "Payment", "Payment_621": "Payment", "Payment_622": "Payment", "Payment_623": "Payment", "Payment_624": "Payment", "Payment_625": "Payment", "Payment_626": "Payment", "Payment_627": "Payment", "Payment_628": "Payment", "Payment_629": "Payment", "Payment_630": "Payment", "Payment_631": "Payment", "Payment_632": "Payment", "Payment_633": "Payment", "Payment_634": "Payment", "Payment_635": "Payment", "Payment_636": "Payment", "Payment_637": "Payment", "Payment_638": "Payment", "Payment_639": "Payment", "Payment_640": "Payment", "Payment_641": "Payment", "Payment_642": "Payment", "Payment_643": "Payment", "Payment_644": "Payment", "Payment_645": "Payment", "Payment_646": "Payment", "Payment_647": "Payment", "Payment_648": "Payment", "Payment_649": "Payment", "Payment_650": "Payment", "Payment_651": "Payment", "Payment_652": "Payment", "Payment_653": "Payment", "Payment_654": "Payment", "Payment_655": "Payment", "Payment_656": "Payment", "Payment_657": "Payment", "Payment_658": "Payment", "Payment_659": "Payment", "Payment_660": "Payment", "Payment_661": "Payment", "Payment_662": "Payment", "Payment_663": "Payment", "Payment_664": "Payment", "Payment_665": "Payment", "Payment_666": "Payment", "Payment_667": "Payment", "Payment_668": "Payment", "Payment_669": "Payment", "Payment_670": "Payment", "Payment_671": "Payment", "Payment_672": "Payment", "Payment_673": "Payment", "Payment_674": "Payment", "Payment_675": "Payment", "Payment_676": "Payment", "Payment_677": "Payment", "Payment_678": "Payment", "Payment_679": "Payment", "Payment_680": "Payment", "Payment_681": "Payment", "Payment_682": "Payment", "Payment_683": "Payment", "Payment_684": "Payment", "Payment_685": "Payment", "Payment_686": "Payment", "Payment_687": "Payment", "Payment_688": "Payment", "Payment_689": "Payment", "Payment_690": "Payment", "Payment_691": "Payment", "Payment_692": "Payment", "Payment_693": "Payment", "Payment_694": "Payment", "Payment_695": "Payment", "Payment_696": "Payment", "Payment_697": "Payment", "Payment_698": "Payment", "Payment_699": "Payment", "Payment_700": "Payment", "Payment_701": "Payment", "Payment_702": "Payment", "Payment_703": "Payment", "Payment_704": "Payment", "Payment_705": "Payment", "Payment_706": "Payment", "Payment_707": "Payment", "Payment_708": "Payment", "Payment_709": "Payment", "Payment_710": "Payment", "Payment_711": "Payment", "Payment_712": "Payment", "Payment_713": "Payment", "Payment_714": "Payment", "Payment_715": "Payment", "Payment_716": "Payment", "Payment_717": "Payment", "Payment_718": "Payment", "Payment_719": "Payment", "Payment_720": "Payment", "Payment_721": "Payment", "Payment_722": "Payment", "Payment_723": "Payment", "Payment_724": "Payment", "Payment_725": "Payment", "Payment_726": "Payment", "Payment_727": "Payment", "Payment_728": "Payment", "Payment_729": "Payment", "Payment_730": "Payment", "Payment_731": "Payment", "Payment_732": "Payment", "Payment_733": "Payment", "Payment_734": "Payment", "Payment_735": "Payment", "Payment_736": "Payment", "Payment_737": "Payment", "Payment_738": "Payment", "Payment_739": "Payment", "Payment_740": "Payment", "Payment_741": "Payment", "Payment_742": "Payment", "Payment_743": "Payment", "Payment_744": "Payment", "Payment_745": "Payment", "Payment_746": "Payment", "Payment_747": "Payment", "Payment_748": "Payment", "Payment_749": "Payment", "Payment_750": "Payment", "Payment_751": "Payment", "Payment_752": "Payment", "Payment_753": "Payment", "Payment_754": "Payment", "Payment_755": "Payment", "Payment_756": "Payment", "Payment_757": "Payment", "Payment_758": "Payment", "Payment_759": "Payment", "Payment_760": "Payment", "Payment_761": "Payment", "Payment_762": "Payment", "Payment_763": "Payment", "Payment_764": "Payment", "Payment_765": "Payment", "Payment_766": "Payment", "Payment_767": "Payment", "Payment_768": "Payment", "Payment_769": "Payment", "Payment_770": "Payment", "Payment_771": "Payment", "Payment_772": "Payment", "Payment_773": "Payment", "Payment_774": "Payment", "Payment_775": "Payment", "Payment_776": "Payment", "Payment_777": "Payment", "Payment_778": "Payment", "Payment_779": "Payment", "Payment_780": "Payment", "Payment_781": "Payment", "Payment_782": "Payment", "Payment_783": "Payment", "Payment_784": "Payment", "Payment_785": "Payment", "Payment_786": "Payment", "Payment_787": "Payment", "Payment_788": "Payment", "Payment_789": "Payment", "Payment_790": "Payment", "Payment_791": "Payment", "Payment_792": "Payment", "Payment_793": "Payment", "Payment_794": "Payment", "Payment_795": "Payment", "Payment_796": "Payment", "Payment_797": "Payment", "Payment_798": "Payment", "Payment_799": "Payment", "Payment_800": "Payment", "Payment_801": "Payment", "Payment_802": "Payment", "Payment_803": "Payment", "Payment_804": "Payment", "Payment_805": "Payment", "Payment_806": "Payment", "Payment_807": "Payment", "Payment_808": "Payment", "Payment_809": "Payment", "Payment_810": "Payment", "Payment_811": "Payment", "Payment_812": "Payment", "Payment_813": "Payment", "Payment_814": "Payment", "Payment_815": "Payment", "Payment_816": "Payment", "Payment_817": "Payment", "Payment_818": "Payment", "Payment_819": "Payment", "Payment_820": "Payment", "Payment_821": "Payment", "Payment_822": "Payment", "Payment_823": "Payment", "Payment_824": "Payment", "Payment_825": "Payment", "Payment_826": "Payment", "Payment_827": "Payment", "Payment_828": "Payment", "Payment_829": "Payment", "Payment_830": "Payment", "Payment_831": "Payment", "Payment_832": "Payment", "Payment_833": "Payment", "Payment_834": "Payment", "Payment_835": "Payment", "Payment_836": "Payment", "Payment_837": "Payment", "Payment_838": "Payment", "Payment_839": "Payment", "Payment_840": "Payment", "Payment_841": "Payment", "Payment_842": "Payment", "Payment_843": "Payment", "Payment_844": "Payment", "Payment_845": "Payment", "Payment_846": "Payment", "Payment_847": "Payment", "Payment_848": "Payment", "Payment_849": "Payment", "Payment_850": "Payment", "Payment_851": "Payment", "Payment_852": "Payment", "Payment_853": "Payment", "Payment_854": "Payment", "Payment_855": "Payment", "Payment_856": "Payment", "Payment_857": "Payment", "Payment_858": "Payment", "Payment_859": "Payment", "Payment_860": "Payment", "Payment_861": "Payment", "Payment_862": "Payment", "Payment_863": "Payment", "Payment_864": "Payment", "Payment_865": "Payment", "Payment_866": "Payment", "Payment_867": "Payment", "Payment_868": "Payment", "Payment_869": "Payment", "Payment_870": "Payment", "Payment_871": "Payment", "Payment_872": "Payment", "Payment_873": "Payment", "Payment_874": "Payment", "Payment_875": "Payment", "Payment_876": "Payment", "Payment_877": "Payment", "Payment_878": "Payment", "Payment_879": "Payment", "Payment_880": "Payment", "Payment_881": "Payment", "Payment_882": "Payment", "Payment_883": "Payment", "Payment_884": "Payment", "Payment_885": "Payment", "Payment_886": "Payment", "Payment_887": "Payment", "Payment_888": "Payment", "Payment_889": "Payment", "Payment_890": "Payment", "Payment_891": "Payment", "Payment_892": "Payment", "Payment_893": "Payment", "Payment_894": "Payment", "Payment_895": "Payment", "Payment_896": "Payment", "Payment_897": "Payment", "Payment_898": "Payment", "Payment_899": "Payment", "Payment_900": "Payment", "Payment_901": "Payment", "Payment_902": "Payment", "Payment_903": "Payment", "Payment_904": "Payment", "Payment_905": "Payment", "Payment_906": "Payment", "Payment_907": "Payment", "Payment_908": "Payment", "Payment_909": "Payment", "Payment_910": "Payment", "Payment_911": "Payment", "Payment_912": "Payment", "Payment_913": "Payment", "Payment_914": "Payment", "Payment_915": "Payment", "Payment_916": "Payment", "Payment_917": "Payment", "Payment_918": "Payment", "Payment_919": "Payment", "Payment_920": "Payment", "Payment_921": "Payment", "Payment_922": "Payment", "Payment_923": "Payment", "Payment_924": "Payment", "Payment_925": "Payment", "Payment_926": "Payment", "Payment_927": "Payment", "Payment_928": "Payment", "Payment_929": "Payment", "Payment_930": "Payment", "Payment_931": "Payment", "Payment_932": "Payment", "Payment_933": "Payment", "Payment_934": "Payment", "Payment_935": "Payment", "Payment_936": "Payment", "Payment_937": "Payment", "Payment_938": "Payment", "Payment_939": "Payment", "Payment_940": "Payment", "Payment_941": "Payment", "Payment_942": "Payment", "Payment_943": "Payment", "Payment_944": "Payment", "Payment_945": "Payment", "Payment_946": "Payment", "Payment_947": "Payment", "Payment_948": "Payment", "Payment_949": "Payment", "Payment_950": "Payment", "Payment_951": "Payment", "Payment_952": "Payment", "Payment_953": "Payment", "Payment_954": "Payment", "Payment_955": "Payment", "Payment_956": "Payment", "Payment_957": "Payment", "Payment_958": "Payment", "Payment_959": "Payment", "Payment_960": "Payment", "Payment_961": "Payment", "Payment_962": "Payment", "Payment_963": "Payment", "Payment_964": "Payment", "Payment_965": "Payment", "Payment_966": "Payment", "Payment_967": "Payment", "Payment_968": "Payment", "Payment_969": "Payment", "Payment_970": "Payment", "Payment_971": "Payment", "Payment_972": "Payment", "Payment_973": "Payment", "Payment_974": "Payment", "Payment_975": "Payment", "Payment_976": "Payment", "Payment_977": "Payment", "Payment_978": "Payment", "Payment_979": "Payment", "Payment_980": "Payment", "Payment_981": "Payment", "Payment_982": "Payment", "Payment_983": "Payment", "Payment_984": "Payment", "Payment_985": "Payment", "Payment_986": "Payment", "Payment_987": "Payment", "Payment_988": "Payment", "Payment_989": "Payment", "Payment_990": "Payment", "Payment_991": "Payment", "Payment_992": "Payment", "Payment_993": "Payment", "Payment_994": "Payment", "Payment_995": "Payment", "Payment_996": "Payment", "Payment_997": "Payment", "Payment_998": "Payment", "Payment_999": "Payment", "Payment_1000": "Payment", "Payment_1001": "Payment", "Payment_1002": "Payment", "Payment_1003": "Payment", "Payment_1004": "Payment", "Payment_1005": "Payment", "Payment_1006": "Payment", "Payment_1007": "Payment", "Payment_1008": "Payment", "Payment_1009": "Payment", "Payment_1010": "Payment", "Payment_1011": "Payment", "Payment_1012": "Payment", "Payment_1013": "Payment", "Payment_1014": "Payment", "Payment_1015": "Payment"}
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:33:56.920716
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.9
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        Connected components:
+Payment
+False
+10
+73016048481465311
+
+Reassigned labels
+Map:
+{"Payment_7": "Payment", "Payment_9": "Payment", "Payment_1": "Payment", "Payment_6": "Payment", "Payment_3": "Payment", "Payment_5": "Payment", "Payment_8": "Payment", "Payment_0": "Payment", "Payment_2": "Payment", "Payment_4": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.06297798763052, "averageFitness": 0.9981354929761825, "percentage_of_fitting_traces": 99.06297798763052, "average_trace_fitness": 0.9981354929761825}
+precision
+0.8262220137886213
+simplicity
+0.6190476190476191
+generalization
+0.8627509347705742
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:34:15.879743
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 3
+Threshold for edges: 0.9
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        Connected components:
+Payment
+False
+10
+73016048481465311
+
+Reassigned labels
+Map:
+{"Payment_5": "Payment", "Payment_0": "Payment", "Payment_8": "Payment", "Payment_9": "Payment", "Payment_1": "Payment", "Payment_4": "Payment", "Payment_7": "Payment", "Payment_2": "Payment", "Payment_6": "Payment", "Payment_3": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.06297798763052, "averageFitness": 0.9981354929761825, "percentage_of_fitting_traces": 99.06297798763052, "average_trace_fitness": 0.9981354929761825}
+precision
+0.8262220137886213
+simplicity
+0.6190476190476191
+generalization
+0.8329759765663877
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:38:01.453538
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 4
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        Connected components:
+Payment
+True
+1
+1016
+
+Reassigned labels
+Map:
+{"Payment_0": "Payment", "Payment_1": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.4393828556228, "averageFitness": 0.9993118160103898, "percentage_of_fitting_traces": 99.4393828556228, "average_trace_fitness": 0.9993118160103898}
+precision
+0.510882538691342
+simplicity
+0.6202531645569621
+generalization
+0.9855643282466341
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:40:12.338791
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 4
+Threshold for edges: 0.5
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        Connected components:
+Payment
+False
+4
+78422264
+
+Reassigned labels
+Map:
+{"Payment_0": "Payment", "Payment_2": "Payment", "Payment_3": "Payment", "Payment_1": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.11085987896521, "averageFitness": 0.9986260880950091, "percentage_of_fitting_traces": 99.11085987896521, "average_trace_fitness": 0.9986260880950091}
+precision
+0.6959832838825085
+simplicity
+0.6111111111111112
+generalization
+0.9511555192155209
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 01:42:32.172885
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 4
+Threshold for edges: 0.75
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        Connected components:
+Payment
+False
+10
+73016048481465311
+
+Reassigned labels
+Map:
+{"Payment_8": "Payment", "Payment_6": "Payment", "Payment_5": "Payment", "Payment_1": "Payment", "Payment_2": "Payment", "Payment_9": "Payment", "Payment_3": "Payment", "Payment_0": "Payment", "Payment_7": "Payment", "Payment_4": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.06297798763052, "averageFitness": 0.9981354929761825, "percentage_of_fitting_traces": 99.06297798763052, "average_trace_fitness": 0.9981354929761825}
+precision
+0.8262220137886213
+simplicity
+0.6190476190476191
+generalization
+0.833726995902988
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:11:18.283467
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 4
+Threshold for edges: 0
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        Connected components:
+Payment
+True
+1
+1016
+
+Reassigned labels
+Map:
+{"Payment_0": "Payment", "Payment_1": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.4393828556228, "averageFitness": 0.9993118160103898, "percentage_of_fitting_traces": 99.4393828556228, "average_trace_fitness": 0.9993118160103898}
+precision
+0.510882538691342
+simplicity
+0.6202531645569621
+generalization
+0.9855643282466341
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:13:12.861428
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 4
+Threshold for edges: 0.5
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        Connected components:
+Payment
+False
+4
+78422264
+
+Reassigned labels
+Map:
+{"Payment_0": "Payment", "Payment_2": "Payment", "Payment_3": "Payment", "Payment_1": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.11085987896521, "averageFitness": 0.9986260880950091, "percentage_of_fitting_traces": 99.11085987896521, "average_trace_fitness": 0.9986260880950091}
+precision
+0.6959832838825085
+simplicity
+0.6111111111111112
+generalization
+0.9511555192155209
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417
+
+        
+        
+        
+----------------------------------------------------------------------------------------------
+Output from 2021-09-13 02:15:21.579133
+----------------------------------------------------------------------------------------------
+        
+        
+Parameters of this run:
+        
+Window size: 4
+Threshold for edges: 0.75
+Split candidates: Payment
+Max number of traces: 2000
+Method for distance calculation: DistanceVariant.EDIT_DISTANCE
+Method for finding clusters: ClusteringVariant.COMMUNITY_DETECTION
+Original log location: /home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz
+        
+        Connected components:
+Payment
+False
+10
+73016048481465311
+
+Reassigned labels
+Map:
+{"Payment_3": "Payment", "Payment_7": "Payment", "Payment_5": "Payment", "Payment_6": "Payment", "Payment_1": "Payment", "Payment_2": "Payment", "Payment_9": "Payment", "Payment_0": "Payment", "Payment_8": "Payment", "Payment_4": "Payment"}
+
+Performance split_log:
+alignment_fitness
+{"percFitTraces": 99.06297798763052, "averageFitness": 0.9981354929761825, "percentage_of_fitting_traces": 99.06297798763052, "average_trace_fitness": 0.9981354929761825}
+precision
+0.8262220137886213
+simplicity
+0.6190476190476191
+generalization
+0.8328635745344846
+
+Performance original_log:
+alignment_fitness
+{"percFitTraces": 100.0, "averageFitness": 1.0, "percentage_of_fitting_traces": 100.0, "average_trace_fitness": 1.0}
+precision
+0.6961584875883737
+simplicity
+0.6000000000000001
+generalization
+0.9539660554694417

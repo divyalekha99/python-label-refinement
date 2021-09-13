@@ -57,7 +57,7 @@ class LabelSplitter:
             self.get_distance = self.distance_calculator.get_edit_distance
         elif distance_variant is DistanceVariant.SET_DISTANCE:
             self.get_distance = self.distance_calculator.get_set_distance
-        elif distance_variant is DistanceVariant.SET_DISTANCE:
+        elif distance_variant is DistanceVariant.MULTISET_DISTANCE:
             self.get_distance = self.distance_calculator.get_multiset_distance
         else:
             print('Warning: Distance metric not found, fallback to default distance')
@@ -76,7 +76,7 @@ class LabelSplitter:
         event_graphs = self.get_event_graphs_from_event_log(log)
 
         self.calculate_edges(event_graphs)
-        # self.get_connected_components(event_graphs=event_graphs)
+        self.get_connected_components(event_graphs=event_graphs)
         self.get_communities_louvain(event_graphs=event_graphs)
         self.set_split_labels(event_graphs, log)
 
@@ -142,6 +142,7 @@ class LabelSplitter:
                 # edit_distance = self.get_edit_distance(self.hash_to_event[hash_a], self.hash_to_event[hash_b])
                 edit_distance = self.get_distance(self.hash_to_event[hash_a], self.hash_to_event[hash_b])
                 weight = 1 - edit_distance / self.window_size
+                # print(weight)
                 # self._write('weight')
                 # self._write(weight)
                 if weight > self.threshold:
@@ -157,7 +158,7 @@ class LabelSplitter:
     def get_communities_louvain(self, event_graphs) -> None:
         for (label, graph) in event_graphs.items():
             print(f'Getting communities for {label}')
-            partition = community_louvain.best_partition(graph, weight="weight")
+            partition = community_louvain.best_partition(graph, weight="weight", randomize=False)
             # self._write('Partition:')
             # self._write(partition)
 
@@ -197,9 +198,9 @@ class LabelSplitter:
         print('Finished setting labels')
 
     def get_connected_components(self, event_graphs) -> None:
-        self._write('get componets')
+        self._write('Connected components:')
         for (label, graph) in event_graphs.items():
-            if label != 'D':
+            if label != 'Payment':
                 continue
             self._write(label)
             self._write(str(nx.is_connected(graph)))
