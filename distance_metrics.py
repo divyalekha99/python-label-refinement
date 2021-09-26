@@ -23,8 +23,6 @@ class DistanceCalculator:
         # self._write(suffix_distance)
         return prefix_distance * 0.5 + suffix_distance * 0.5
 
-
-
     def get_set_distance(self, event_a, event_b) -> float:
         prefix_a = set(event_a['prefix'][(-1) * min(self.window_size, len(event_a['prefix'])):])
         prefix_b = set(event_b['prefix'][(-1) * min(self.window_size, len(event_b['prefix'])):])
@@ -45,6 +43,7 @@ class DistanceCalculator:
 
         return prefix_distance * 0.5 + suffix_distance * 0.5
 
+
 def _get_set_distance_for_strings(string_a: Set[str], string_b: Set[str]) -> int:
     distance = 0
     if len(string_a) > len(string_b):
@@ -60,18 +59,18 @@ def _get_set_distance_for_strings(string_a: Set[str], string_b: Set[str]) -> int
 
 
 def _get_multiset_distance_for_strings(string_a, string_b) -> int:
-        distance = 0
-        if len(string_a) > len(string_b):
-            long_sting = string_a
-            short_string = string_b
+    distance = 0
+    if len(string_a) > len(string_b):
+        long_sting = string_a
+        short_string = string_b
+    else:
+        long_sting = string_b
+        short_string = string_a
+
+    for label in long_sting:
+        if label not in short_string:
+            distance += 1
         else:
-            long_sting = string_b
-            short_string = string_a
+            short_string = short_string.replace(label, '', 1)
 
-        for label in long_sting:
-            if label not in short_string:
-                distance += 1
-            else:
-                short_string = short_string.replace(label, '', 1)
-
-        return distance
+    return distance

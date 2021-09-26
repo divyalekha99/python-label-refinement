@@ -22,6 +22,7 @@ class PerformanceEvaluator:
         self.fm = fm
         self.log = log
         self.outfile = outfile
+        self.precision = 0
 
     def _write(self, log_entry: string) -> None:
         self.outfile.write(f'{log_entry}\n')
@@ -47,6 +48,7 @@ class PerformanceEvaluator:
     def get_precision(self) -> float:
         precision = precision_evaluator.apply(self.log, self.net, self.im, self.fm,
                                               variant=precision_evaluator.Variants.ALIGN_ETCONFORMANCE)
+        self.precision = precision
         self._write('precision')
         self._write(json.dumps(precision))
         return precision
