@@ -4,7 +4,11 @@ import pm4py
 from pm4py.visualization.process_tree import visualizer as pt_visualizer
 from pm4py.objects.conversion.process_tree import converter
 
-from pipeline_runner import run_pipeline_single_layer_networkx
+from log_generator import LogGenerator
+from pipeline_runner_multi_layer_igraph import run_pipeline_multi_layer_igraph
+from pipeline_runner_single_layer_networkx import run_pipeline_single_layer_networkx
+from pm4py.algo.filtering.log.variants import variants_filter
+
 
 
 def import_csv(file_path):
@@ -15,10 +19,30 @@ def import_csv(file_path):
 
 
 def main() -> None:
-    run_pipeline_single_layer_networkx()
+    run_pipeline_multi_layer_igraph()
 
+    # bpmn_graph = pm4py.read_bpmn(f'/home/jonas/repositories/pm-label-splitting/bpmn_files/loop_example_th_0.bpmn')
+    # log_generator = LogGenerator()
+    # log = log_generator.get_log_from_bpmn(bpmn_graph)
+    #
+    # variants = variants_filter.get_variants(log)
+    # print(variants.keys())
+    #
+    # for variant in variants:
+    #     print(variant)
+    #     print(variants[variant])
+    #     print(len(variants[variant]))
+    #     filtered_log1 = variants_filter.apply(log, [variant])
+    #     for i in variant:
+    #         print(i)
+    #
+    #     for trace in filtered_log1:
+    #         for event in trace:
+    #             event['Teeeeeeeeeeessssssst'] = 'Foo'
+    # print('log')
+    # print(log)
 
-
+    # run_pipeline_single_layer_networkx()
 
 
 def export_bpmn_model(log):

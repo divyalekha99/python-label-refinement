@@ -61,7 +61,7 @@ class LabelSplitter:
             self.get_distance = self.distance_calculator.get_multiset_distance
         else:
             print('Warning: Distance metric not found, fallback to default distance')
-            self.get_distance = self.get_edit_distance
+            self.get_distance = self.distance_calculator.get_edit_distance
 
     def _write(self, log_entry: string) -> None:
         self.outfile.write(f'{log_entry}\n')
