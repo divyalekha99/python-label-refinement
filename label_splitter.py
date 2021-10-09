@@ -76,7 +76,7 @@ class LabelSplitter:
         event_graphs = self.get_event_graphs_from_event_log(log)
 
         self.calculate_edges(event_graphs)
-        self.get_connected_components(event_graphs=event_graphs)
+        # self.get_connected_components(event_graphs=event_graphs)
         self.get_communities_louvain(event_graphs=event_graphs)
         self.set_split_labels(event_graphs, log)
 

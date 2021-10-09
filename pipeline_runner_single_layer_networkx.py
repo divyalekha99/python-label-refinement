@@ -18,19 +18,30 @@ from log_generator import LogGenerator
 from performance_evaluator import PerformanceEvaluator
 from post_processor import PostProcessor
 
-evaluated_models = [('R_1',
+evaluated_models = [('mrt06-2056/R_1',
                           '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz'),
-                         ('AB_1',
+                         ('mrt06-2056/AB_1',
                           '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/AB_1_LogD_Sequence_mrt06-2056.xes.gz'),
-                         ('V_1',
+                         ('feb17-1147/V_1',
                           '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb17-1147/logs/V_1_LogD_Sequence_feb17-1147.xes.gz'),
-                         ('J_1',
+                         ('feb18-1515/J_1',
                           '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb18-1515/logs/J_1_LogD_Sequence_feb18-1515.xes.gz'),
-                         ('C_1',
-                          '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes')]
+                         ('mrt06-1652/C_1',
+                          '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes'),
+                    ('mrt09-1956/DQ_1', '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/DQ_1_LogD_Sequence_mrt09-1956.xes.gz'),
+                    ('mrt09-1956/AN_1', '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/AN_1_LogD_Sequence_mrt09-1956.xes.gz'),
+                    ('mrt09-1956/BM_1_L', '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/BM_1_LogD_Sequence_mrt09-1956.xes.gz'),
+                    ('mrt09-1956/BD_1_L', '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/BD_1_LogD_Sequence_mrt09-1956.xes.gz'),
+                    ('mrt04-1632/EJ_1', '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/EJ_1_LogD_Sequence_mrt04-1632.xes.gz'),
+                    ('mrt04-1632/AU_1', '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/AU_1_LogD_Sequence_mrt04-1632.xes.gz'),
+                    ('mrt04-1632/E_1', '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/E_1_LogD_Sequence_mrt04-1632.xes.gz'),
+                    ('mrt04-1632/BM_1_N_L', '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/BM_1_LogD_Sequence_mrt04-1632.xes.gz'),
+                    ('mrt04-1632/AU_1', '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/AU_1_LogD_Sequence_mrt04-1632.xes.gz')]
 
 def run_pipeline_single_layer_networkx(input_models=evaluated_models) -> None:
-    for (name, path) in input_models:
+    temp = [('mrt06-2056/AB_1',
+                          '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/AB_1_LogD_Sequence_mrt06-2056.xes.gz')]
+    for (name, path) in temp:
         apply_pipeline_single_layer_networkx_to_log_with_multiple_parameters(name, [], path, 20000)
 
     # apply_pipeline_to_bpmn('loop_example_th_0', threshold=0, window_size=3)
@@ -82,18 +93,17 @@ def apply_pipeline_single_layer_networkx_to_log_with_multiple_parameters(input_n
                                           xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: max_number_of_traces})
     write_data_from_original_log_with_imprecise_labels(input_name, original_log)
 
-    if len(input_name) < 5:
+    if not input_name.startswith('real_logs'):
         export_model_from_original_log_with_precise_labels(input_name, log_path)
     best_precision = 0
 
-    for window_size in [3]:
-        for distance in [DistanceVariant.EDIT_DISTANCE]:
-            for threshold in [0]:
+    for window_size in [4, 5]:
+        for distance in [DistanceVariant.SET_DISTANCE, DistanceVariant.MULTISET_DISTANCE]:
+            for threshold in [0, 0.5, 0.75]:
                 log = xes_importer.apply(
                     log_path,
                     parameters={
                         xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: max_number_of_traces})
-
                 best_precision = apply_pipeline_single_layer_networkx_to_log(input_name,
                                                                              log,
                                                                              labels_to_split,
@@ -104,6 +114,8 @@ def apply_pipeline_single_layer_networkx_to_log_with_multiple_parameters(input_n
                                                                              distance_variant=distance,
                                                                              original_log_path=log_path,
                                                                              best_precision=best_precision)
+    print('best_precision found:')
+    print(best_precision)
 
 
 def write_data_from_original_log_with_imprecise_labels(input_name, original_log):
@@ -136,10 +148,10 @@ def export_model_from_original_log_with_precise_labels(input_name, path):
     with open(f'./outputs/{input_name}.txt', 'a') as outfile:
         outfile.write('\n Data from log without imprecise labels\n')
 
-        pattern = input_name + r'.*.xes.gz'
-        log_path = re.sub(pattern, f'{input_name}_Log.xes.gz', path)
-        print('log_path')
-        print(log_path)
+        original_input_name = re.sub(r'.*/', '', input_name)
+
+        pattern = original_input_name + r'.*'
+        log_path = re.sub(pattern, f'{original_input_name}_Log.xes.gz', path)
 
         original_log = xes_importer.apply(log_path)
         original_net, initial_marking, final_marking = inductive_miner.apply(original_log)
@@ -206,7 +218,6 @@ Original log location: {original_log_path}
                    clustering_variant=clustering_variant,
                    original_log_path=original_log_path))
 
-        xes_exporter.apply(log, f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_used_log.xes')
         label_splitter = LabelSplitter(outfile,
                                        labels_to_split,
                                        threshold=threshold,
@@ -214,7 +225,6 @@ Original log location: {original_log_path}
                                        distance_variant=distance_variant,
                                        clustering_variant=clustering_variant)
         split_log = label_splitter.split_labels(log)
-        xes_exporter.apply(split_log, f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_split_log.xes')
 
         net, initial_marking, final_marking = inductive_miner.apply(split_log)
         tree = inductive_miner.apply_tree(split_log)
@@ -228,7 +238,10 @@ Original log location: {original_log_path}
         performance_evaluator.evaluate_performance()
 
         if performance_evaluator.precision > best_precision:
-            print(f'Higher Precision found: {performance_evaluator.precision}')
+            print(f'\nHigher Precision found: {performance_evaluator.precision}')
+            xes_exporter.apply(split_log,
+                               f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_split_log.xes')
+
             pnml_exporter.apply(final_net, initial_marking,
                                 f'/home/jonas/repositories/pm-label-splitting/outputs/{input_type}_petri_net.pnml',
                                 final_marking=final_marking)
@@ -239,10 +252,8 @@ Original log location: {original_log_path}
 
 def save_models_as_png(name, final_marking, initial_marking, net, tree):
     gviz = pt_visualizer.apply(tree)
-    # pt_visualizer.view(gviz)
     pt_visualizer.save(gviz,
                        f'/mnt/c/Users/Jonas/Desktop/pm-label-splitting/result_pngs/{name}_tree.png')
-    # export_bpmn_model(log)
     parameters = {pn_visualizer.Variants.WO_DECORATION.value.Parameters.FORMAT: "png"}
     gviz_petri_net = pn_visualizer.apply(net, initial_marking, final_marking, parameters=parameters)
     pn_visualizer.save(gviz_petri_net,

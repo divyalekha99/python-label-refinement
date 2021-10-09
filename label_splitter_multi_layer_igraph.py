@@ -27,6 +27,7 @@ class LabelSplitter:
         self._split_labels_to_original_labels = {}
         self.outfile = outfile
         self.label_and_id_to_event = {}
+        self.variants_to_count = {}
         self.distance_variant = distance_variant
         self.distance_calculator = DistanceCalculator(window_size)
         self.clustering_variant = clustering_variant
@@ -92,6 +93,8 @@ class LabelSplitter:
                 event['suffix'] = ''
                 event['label'] = label
                 event['variant'] = label + '_' + str(variant).replace(',', '') + f'_{occurrence_counters[label]}'
+
+                self.variants_to_count[event['variant']] = len(variants[variant])
                 processed_events.append(event)
 
                 # graph.add_node(event, prefix=prefix, suffix='')
@@ -113,7 +116,8 @@ class LabelSplitter:
                         occurrence_counters[label] += 1
                     event['variant'] = label + '_' + str(variant).replace(',', '') + f'_{occurrence_counters[label]}'
 
-        print('Finished calculating event_graphs')
+        # print('Finished calculating event_graphs')
+        # print(json.dumps(self.variants_to_count))
         return event_graphs
 
     def calculate_edges(self, event_graphs) -> None:
@@ -130,7 +134,9 @@ class LabelSplitter:
                 # edit_distance = self.get_edit_distance(self.hash_to_event[hash_a], self.hash_to_event[hash_b])
                 edit_distance = self.get_distance(self.label_and_id_to_event[label][vertex_a],
                                                   self.label_and_id_to_event[label][vertex_b])
-                weight = 1 - edit_distance / self.window_size
+                weight = (1 - edit_distance / self.window_size) * (
+                            self.variants_to_count[self.label_and_id_to_event[label][vertex_a]['variant']] *
+                            self.variants_to_count[self.label_and_id_to_event[label][vertex_b]['variant']])
                 # print(weight)
                 if weight > self.threshold:
                     # TODO Try adding multiple edges at once
@@ -150,45 +156,36 @@ class LabelSplitter:
             print(partition)
 
             for count, cluster in enumerate(partition):
-                print('community')
-                print(cluster)
-                print('count')
-                print(count)
                 self._split_labels_to_original_labels[f'{label}_{count}'] = label
                 for vertex in cluster:
-                    print(vertex)
                     self.label_and_id_to_event[label][vertex]['label'] = f'{label}_{count}'
                     self._variant_to_label[self.label_and_id_to_event[label][vertex]['variant']] = f'{label}_{count}'
 
-        # if partitions[partition[event]]:
-        #  partitions[partition[event]].append(event)
-        # else:
-        #  partitions[partition[event]] = [event]
-
-        # for key in partitions.keys():
-        #  self._write(partitions[key])
-        # self._write(len(partitions[key]))
         self._write('\nReassigned labels')
-        # self._write(graph.nodes)
-
-        # pos = nx.spring_layout(graph)
-        # color the nodes according to their partition
-        # cmap = cm.get_cmap('viridis', max(partition.values()) + 1)
-        # nx.draw_networkx_nodes(graph, pos, partition.keys(), node_size=40,
-        #                       cmap=cmap, node_color=list(partition.values()))
-        # nx.draw_networkx_edges(graph, pos, alpha=0.5)
-        # plt.savefig("temp.png")
-        # plt.show(block=True)
 
     print('Finished community detection')
-
 
     def set_split_labels(self, log):
         print('Before:')
         print(log)
-        for trace in log:
-            for event in trace:
-                if event['variant'] in self._variant_to_label:
-                    event['concept:name'] = self._variant_to_label[event['variant']]
+        # for trace in log:
+        #     for event in trace:
+        #         if event['variant'] in self._variant_to_label:
+        #             event['concept:name'] = self._variant_to_label[event['variant']]
+
+        variants = variants_filter.get_variants(log)
+        for variant in variants:
+            filtered_log = variants_filter.apply(log, [variant])
+            for trace in filtered_log:
+                occurrence_counters = {}
+                for event in trace:
+                    label = event['concept:name']
+                    if label not in occurrence_counters:
+                        occurrence_counters[label] = 0
+                    else:
+                        occurrence_counters[label] += 1
+                    event['variant'] = label + '_' + str(variant).replace(',', '') + f'_{occurrence_counters[label]}'
+                    if event['variant'] in self._variant_to_label:
+                        event['concept:name'] = self._variant_to_label[event['variant']]
         print('Finished setting labels')
         print(log)

@@ -19,6 +19,7 @@ def import_csv(file_path):
 
 
 def main() -> None:
+    # run_pipeline_single_layer_networkx()
     run_pipeline_multi_layer_igraph()
 
     # bpmn_graph = pm4py.read_bpmn(f'/home/jonas/repositories/pm-label-splitting/bpmn_files/loop_example_th_0.bpmn')
