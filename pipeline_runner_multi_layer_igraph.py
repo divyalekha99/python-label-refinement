@@ -29,9 +29,9 @@ evaluated_models = [('mrt06-2056/R_1',
                      '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/DQ_1_LogD_Sequence_mrt09-1956.xes.gz'),
                     ('mrt09-1956/AN_1',
                      '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/AN_1_LogD_Sequence_mrt09-1956.xes.gz'),
-                    ('mrt09-1956/BM_1_L',
+                    ('mrt09-1956/BM_1',
                      '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/BM_1_LogD_Sequence_mrt09-1956.xes.gz'),
-                    ('mrt09-1956/BD_1_L',
+                    ('mrt09-1956/BD_1',
                      '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/BD_1_LogD_Sequence_mrt09-1956.xes.gz'),
                     ('mrt04-1632/EJ_1',
                      '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/EJ_1_LogD_Sequence_mrt04-1632.xes.gz'),
@@ -39,7 +39,7 @@ evaluated_models = [('mrt06-2056/R_1',
                      '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/AU_1_LogD_Sequence_mrt04-1632.xes.gz'),
                     ('mrt04-1632/E_1',
                      '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/E_1_LogD_Sequence_mrt04-1632.xes.gz'),
-                    ('mrt04-1632/BM_1_N_L',
+                    ('mrt04-1632/BM_1',
                      '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/BM_1_LogD_Sequence_mrt04-1632.xes.gz')]
 
 
@@ -47,13 +47,27 @@ def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
     # road_traffic_fines_log = xes_importer.apply(
     #      '/home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz', parameters={
     #           xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: 2000000})
-    for (name, path) in [('mrt06-2056/AB_1',
-                     '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/AB_1_LogD_Sequence_mrt06-2056.xes.gz')]:
-        apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(name, [], path, 20000000)
+    # for (name, path) in [('mrt09-1956/BM_1_N_W',
+    #                       '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/BM_1_LogD_Sequence_mrt09-1956.xes.gz'),
+    #                      ('mrt09-1956/BD_1_N_W',
+    #                       '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/BD_1_LogD_Sequence_mrt09-1956.xes.gz'),
+    #                      ('mrt04-1632/EJ_1_N_W',
+    #                       '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/EJ_1_LogD_Sequence_mrt04-1632.xes.gz'),
+    #                      ('mrt04-1632/AU_1_N_W',
+    #                       '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/AU_1_LogD_Sequence_mrt04-1632.xes.gz'),
+    #                      ('mrt04-1632/E_1_N_W',
+    #                       '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/E_1_LogD_Sequence_mrt04-1632.xes.gz'),
+    #                      ('mrt04-1632/BM_1_N_W',
+    #                       '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/BM_1_LogD_Sequence_mrt04-1632.xes.gz')]:
+    #     apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(name, [], path, 20000000)
 
-    # for (name, path) in [('road_traffic_fines',
+    # for (name, path) in [('real_logs/road_traffic_fines',
     #                       '/home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process.xes.gz')]:
-    #     apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(name, ['Payment'], path, 2000000)
+    #     apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(name, ['Payment'], path, 20000000)
+
+    for (name, path) in [('real_logs/road_traffic_fines',
+                          '/home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process_shortened_labels.xes.gz')]:
+        apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(name, ['F'], path, 20000000)
 
 
 def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_name: str,
@@ -82,7 +96,8 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_name
     best_precision = 0
 
     for window_size in [2, 3, 4]:
-        for distance in [DistanceVariant.EDIT_DISTANCE, DistanceVariant.SET_DISTANCE]:
+        for distance in [DistanceVariant.EDIT_DISTANCE, DistanceVariant.SET_DISTANCE,
+                         DistanceVariant.MULTISET_DISTANCE]:
             for threshold in [0]:
                 log = xes_importer.apply(
                     log_path,

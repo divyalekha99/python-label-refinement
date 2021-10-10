@@ -70,12 +70,13 @@ class LabelSplitter:
             # print(variants[variant])
             # print(len(variants[variant]))
             # print(variants.keys())
-            filtered_log1 = variants_filter.apply(log, [variant])
+            filtered_log = variants_filter.apply(log, [variant])
 
             prefix = ''
             processed_events = []
             occurrence_counters = {}
-            for event in filtered_log1[0]:
+            for event in filtered_log[0]:
+                # print(event)
                 label = event['concept:name']
                 if label not in list(event_graphs.keys()) and label in self.labels_to_split:
                     event_graphs[label] = igraph.Graph()
@@ -106,18 +107,10 @@ class LabelSplitter:
                     self.label_and_id_to_event[label].append(event)
                     event_graphs[label].add_vertices(1)
 
-            for trace in filtered_log1:
-                occurrence_counters = {}
-                for event in trace:
-                    label = event['concept:name']
-                    if label not in occurrence_counters:
-                        occurrence_counters[label] = 0
-                    else:
-                        occurrence_counters[label] += 1
-                    event['variant'] = label + '_' + str(variant).replace(',', '') + f'_{occurrence_counters[label]}'
-
         # print('Finished calculating event_graphs')
         # print(json.dumps(self.variants_to_count))
+        # print(self.label_and_id_to_event['D'])
+        # print(self.label_and_id_to_event['D'][611])
         return event_graphs
 
     def calculate_edges(self, event_graphs) -> None:
@@ -130,13 +123,14 @@ class LabelSplitter:
 
             print('nodes length')
             print(range(len(graph.vs) - 1))
-            for (vertex_a, vertex_b) in combinations(range(len(graph.vs) - 1), 2):
+            for (vertex_a, vertex_b) in combinations(range(len(graph.vs)), 2):
                 # edit_distance = self.get_edit_distance(self.hash_to_event[hash_a], self.hash_to_event[hash_b])
                 edit_distance = self.get_distance(self.label_and_id_to_event[label][vertex_a],
                                                   self.label_and_id_to_event[label][vertex_b])
-                weight = (1 - edit_distance / self.window_size) * (
-                            self.variants_to_count[self.label_and_id_to_event[label][vertex_a]['variant']] *
-                            self.variants_to_count[self.label_and_id_to_event[label][vertex_b]['variant']])
+                # weight = (1 - edit_distance / self.window_size) * (
+                #             self.variants_to_count[self.label_and_id_to_event[label][vertex_a]['variant']] *
+                #             self.variants_to_count[self.label_and_id_to_event[label][vertex_b]['variant']])
+                weight = (1 - edit_distance / self.window_size)
                 # print(weight)
                 if weight > self.threshold:
                     # TODO Try adding multiple edges at once
@@ -162,12 +156,11 @@ class LabelSplitter:
                     self._variant_to_label[self.label_and_id_to_event[label][vertex]['variant']] = f'{label}_{count}'
 
         self._write('\nReassigned labels')
-
-    print('Finished community detection')
+        print('Finished community detection')
 
     def set_split_labels(self, log):
         print('Before:')
-        print(log)
+        # print(log)
         # for trace in log:
         #     for event in trace:
         #         if event['variant'] in self._variant_to_label:
@@ -187,5 +180,8 @@ class LabelSplitter:
                     event['variant'] = label + '_' + str(variant).replace(',', '') + f'_{occurrence_counters[label]}'
                     if event['variant'] in self._variant_to_label:
                         event['concept:name'] = self._variant_to_label[event['variant']]
+                    # else:
+                    #     event['concept:name'] = event['original_label']
+
         print('Finished setting labels')
-        print(log)
+        # print(log)

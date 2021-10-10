@@ -30,12 +30,12 @@ evaluated_models = [('mrt06-2056/R_1',
                           '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes'),
                     ('mrt09-1956/DQ_1', '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/DQ_1_LogD_Sequence_mrt09-1956.xes.gz'),
                     ('mrt09-1956/AN_1', '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/AN_1_LogD_Sequence_mrt09-1956.xes.gz'),
-                    ('mrt09-1956/BM_1_L', '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/BM_1_LogD_Sequence_mrt09-1956.xes.gz'),
-                    ('mrt09-1956/BD_1_L', '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/BD_1_LogD_Sequence_mrt09-1956.xes.gz'),
+                    ('mrt09-1956/BM_1', '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/BM_1_LogD_Sequence_mrt09-1956.xes.gz'),
+                    ('mrt09-1956/BD_1', '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/BD_1_LogD_Sequence_mrt09-1956.xes.gz'),
                     ('mrt04-1632/EJ_1', '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/EJ_1_LogD_Sequence_mrt04-1632.xes.gz'),
                     ('mrt04-1632/AU_1', '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/AU_1_LogD_Sequence_mrt04-1632.xes.gz'),
                     ('mrt04-1632/E_1', '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/E_1_LogD_Sequence_mrt04-1632.xes.gz'),
-                    ('mrt04-1632/BM_1_N_L', '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/BM_1_LogD_Sequence_mrt04-1632.xes.gz'),
+                    ('mrt04-1632/BM_1', '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/BM_1_LogD_Sequence_mrt04-1632.xes.gz'),
                     ('mrt04-1632/AU_1', '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/AU_1_LogD_Sequence_mrt04-1632.xes.gz')]
 
 def run_pipeline_single_layer_networkx(input_models=evaluated_models) -> None:
