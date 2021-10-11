@@ -19,7 +19,8 @@ class LabelSplitter:
                  threshold: float = 0.75,
                  prefix_weight: float = 0.5,
                  distance_variant: DistanceVariant = DistanceVariant.EDIT_DISTANCE,
-                 clustering_variant: ClusteringVariant = ClusteringVariant.COMMUNITY_DETECTION):
+                 clustering_variant: ClusteringVariant = ClusteringVariant.COMMUNITY_DETECTION,
+                 use_frequency=False):
         self.labels_to_split = labels_to_split
         self.window_size = window_size
         self.threshold = threshold
@@ -32,6 +33,7 @@ class LabelSplitter:
         self.distance_calculator = DistanceCalculator(window_size)
         self.clustering_variant = clustering_variant
         self._variant_to_label = {}
+        self.use_frequency = use_frequency
 
         if distance_variant is DistanceVariant.EDIT_DISTANCE:
             self.get_distance = self.distance_calculator.get_edit_distance
@@ -121,24 +123,21 @@ class LabelSplitter:
             weights = []
             # TODO Check performance of combinations
 
-            print('nodes length')
-            print(range(len(graph.vs) - 1))
             for (vertex_a, vertex_b) in combinations(range(len(graph.vs)), 2):
                 # edit_distance = self.get_edit_distance(self.hash_to_event[hash_a], self.hash_to_event[hash_b])
                 edit_distance = self.get_distance(self.label_and_id_to_event[label][vertex_a],
                                                   self.label_and_id_to_event[label][vertex_b])
-                # weight = (1 - edit_distance / self.window_size) * (
-                #             self.variants_to_count[self.label_and_id_to_event[label][vertex_a]['variant']] *
-                #             self.variants_to_count[self.label_and_id_to_event[label][vertex_b]['variant']])
-                weight = (1 - edit_distance / self.window_size)
+
+                if self.use_frequency:
+                    weight = (1 - edit_distance / self.window_size) * (
+                                self.variants_to_count[self.label_and_id_to_event[label][vertex_a]['variant']] *
+                                self.variants_to_count[self.label_and_id_to_event[label][vertex_b]['variant']])
+                else:
+                    weight = (1 - edit_distance / self.window_size)
                 # print(weight)
                 if weight > self.threshold:
-                    # TODO Try adding multiple edges at once
-                    # Try first fully connected graph, then edges?
                     edges.append((vertex_a, vertex_b))
                     weights.append(weight)
-                    # graph.add_edge(hash_a, hash_b, weight=weight)
-                    # self._write(edit_distance)
             graph.add_edges(edges)
             graph.es['weight'] = weights
         print('Finished calculating edges')
@@ -148,6 +147,8 @@ class LabelSplitter:
             print(f'Getting communities for {label}')
             partition = graph.community_multilevel(weights=graph.es['weight'], return_levels=False)
             print(partition)
+            self._write('Found communities: \n')
+            self._write(str(partition))
 
             for count, cluster in enumerate(partition):
                 self._split_labels_to_original_labels[f'{label}_{count}'] = label
@@ -159,13 +160,6 @@ class LabelSplitter:
         print('Finished community detection')
 
     def set_split_labels(self, log):
-        print('Before:')
-        # print(log)
-        # for trace in log:
-        #     for event in trace:
-        #         if event['variant'] in self._variant_to_label:
-        #             event['concept:name'] = self._variant_to_label[event['variant']]
-
         variants = variants_filter.get_variants(log)
         for variant in variants:
             filtered_log = variants_filter.apply(log, [variant])

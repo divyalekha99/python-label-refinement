@@ -17,7 +17,7 @@ def main(args) -> None:
         for event in trace:
             label = event['concept:name']
             if label not in label_mapping:
-                label_mapping[label] = string.ascii_uppercase[i]
+                label_mapping[label] = string.printable[i]
                 print(label)
                 i += 1
             event['original_label'] = label

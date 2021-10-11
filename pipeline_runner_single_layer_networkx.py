@@ -13,30 +13,13 @@ from pm4py.visualization.process_tree import visualizer as pt_visualizer
 
 from clustering_variant import ClusteringVariant
 from distance_metrics import DistanceVariant
+from file_writer_helper import run_start_string
 from label_splitter import LabelSplitter
 from log_generator import LogGenerator
 from performance_evaluator import PerformanceEvaluator
 from post_processor import PostProcessor
+from shared_constants import evaluated_models
 
-evaluated_models = [('mrt06-2056/R_1',
-                          '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/R_1_LogD_Sequence_mrt06-2056.xes.gz'),
-                         ('mrt06-2056/AB_1',
-                          '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/AB_1_LogD_Sequence_mrt06-2056.xes.gz'),
-                         ('feb17-1147/V_1',
-                          '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb17-1147/logs/V_1_LogD_Sequence_feb17-1147.xes.gz'),
-                         ('feb18-1515/J_1',
-                          '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb18-1515/logs/J_1_LogD_Sequence_feb18-1515.xes.gz'),
-                         ('mrt06-1652/C_1',
-                          '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-1652/logs/C_1_LogD_Sequence_mrt06-1652.xes'),
-                    ('mrt09-1956/DQ_1', '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/DQ_1_LogD_Sequence_mrt09-1956.xes.gz'),
-                    ('mrt09-1956/AN_1', '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/AN_1_LogD_Sequence_mrt09-1956.xes.gz'),
-                    ('mrt09-1956/BM_1', '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/BM_1_LogD_Sequence_mrt09-1956.xes.gz'),
-                    ('mrt09-1956/BD_1', '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt09-1956/logs/BD_1_LogD_Sequence_mrt09-1956.xes.gz'),
-                    ('mrt04-1632/EJ_1', '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/EJ_1_LogD_Sequence_mrt04-1632.xes.gz'),
-                    ('mrt04-1632/AU_1', '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/AU_1_LogD_Sequence_mrt04-1632.xes.gz'),
-                    ('mrt04-1632/E_1', '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/E_1_LogD_Sequence_mrt04-1632.xes.gz'),
-                    ('mrt04-1632/BM_1', '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/BM_1_LogD_Sequence_mrt04-1632.xes.gz'),
-                    ('mrt04-1632/AU_1', '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/mrt04-1632/logs/AU_1_LogD_Sequence_mrt04-1632.xes.gz')]
 
 def run_pipeline_single_layer_networkx(input_models=evaluated_models) -> None:
     temp = [('mrt06-2056/AB_1',
@@ -121,16 +104,7 @@ def apply_pipeline_single_layer_networkx_to_log_with_multiple_parameters(input_n
 def write_data_from_original_log_with_imprecise_labels(input_name, original_log):
     with open(f'./outputs/{input_name}.txt', 'a') as outfile:
         print(f'Starting pipeline for {input_name}')
-        outfile.write('''
-
-
-
-----------------------------------------------------------------------------------------------
-Output from {date}
-----------------------------------------------------------------------------------------------
-        
-        
-                '''.format(date=datetime.now()))
+        outfile.write(run_start_string())
         outfile.write('\nOriginal Data Performance:\n')
 
         original_net, initial_marking, final_marking = inductive_miner.apply(original_log)
@@ -166,12 +140,14 @@ def export_model_from_original_log_with_precise_labels(input_name, path):
 
 
 def get_imprecise_labels(log: EventLog) -> list[str]:
+    print('Getting imprecise labels')
     imprecise_labels = set()
     for trace in log:
         for event in trace:
             if event['OrgLabel'] != event['concept:name']:
                 imprecise_labels.add(event['concept:name'])
     # print(imprecise_labels)
+    print(list(imprecise_labels))
     return list(imprecise_labels)
 
 
