@@ -7,7 +7,8 @@ from post_processor import PostProcessor
 
 
 def apply_im_with_noise_and_export(input_name, suffix, original_log, outfile):
-    for noise_threshold in [0, 0.1, 0.2, 0.3]:
+    f1_scores = []
+    for noise_threshold in [0, 0.1, 0.2, 0.3, 0.4]:
         outfile.write(f'\nnoise_threshold: {noise_threshold}\n')
 
         original_net, initial_marking, final_marking = inductive_miner.apply(original_log,
@@ -19,6 +20,11 @@ def apply_im_with_noise_and_export(input_name, suffix, original_log, outfile):
                                                      outfile)
 
         performance_evaluator.evaluate_performance()
+
+        precision = performance_evaluator.precision
+        recall = performance_evaluator.fitness
+
+        f1_scores.append(2 * (precision * recall) / (precision + recall))
         # original_tree = inductive_miner.apply_tree(original_log,
         #                                            variant=inductive_miner.Variants.IMf,
         #                                            parameters={
@@ -31,6 +37,7 @@ def apply_im_with_noise_and_export(input_name, suffix, original_log, outfile):
         #                    initial_marking,
         #                    original_net,
         #                    original_tree)
+    return f1_scores
 
 
 def apply_im_without_noise_and_export(input_name, suffix, original_log, outfile):
@@ -54,11 +61,12 @@ def apply_im_without_noise_and_export(input_name, suffix, original_log, outfile)
     return performance_evaluator.precision
 
 
-def apply_im_with_noise_and_export_post_process(input_name, suffix, original_log, outfile, labels_to_original):
-    for noise_threshold in [0, 0.1, 0.2, 0.3]:
+def apply_im_with_noise_and_export_post_process(input_name, suffix, split_log, original_log, outfile, labels_to_original):
+    f1_scores = []
+    for noise_threshold in [0, 0.1, 0.2, 0.3, 0.4]:
         outfile.write(f'\nnoise_threshold: {noise_threshold}\n')
 
-        net, initial_marking, final_marking = inductive_miner.apply(original_log,
+        net, initial_marking, final_marking = inductive_miner.apply(split_log,
                                                                     variant=inductive_miner.Variants.IMf,
                                                                     parameters={
                                                                         inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: noise_threshold})
@@ -70,6 +78,14 @@ def apply_im_with_noise_and_export_post_process(input_name, suffix, original_log
                                                      outfile)
 
         performance_evaluator.evaluate_performance()
+
+        precision = performance_evaluator.precision
+        recall = performance_evaluator.fitness
+
+        print(recall)
+        print(precision)
+        print(2 * (precision * recall) / (precision + recall))
+        f1_scores.append(2 * (precision * recall) / (precision + recall))
         # tree = inductive_miner.apply_tree(original_log,
         #                                   variant=inductive_miner.Variants.IMf,
         #                                   parameters={
@@ -82,3 +98,4 @@ def apply_im_with_noise_and_export_post_process(input_name, suffix, original_log
         #                    initial_marking,
         #                    final_net,
         #                    tree)
+    return f1_scores

@@ -1,3 +1,4 @@
+import datetime
 from datetime import datetime
 
 
@@ -37,3 +38,13 @@ Use frequency: {use_frequency}
            clustering_variant=clustering_variant,
            original_log_path=original_log_path,
            use_frequency=use_frequency)
+
+
+def get_result_header(name):
+    return '''
+
+-------------------------------------------------------
+Results for {name} from {date}
+-------------------------------------------------------
+
+'''.format(date=datetime.now(), name=name)

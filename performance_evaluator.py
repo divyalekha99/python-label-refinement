@@ -23,6 +23,7 @@ class PerformanceEvaluator:
         self.log = log
         self.outfile = outfile
         self.precision = 0
+        self.fitness = 0
 
     def _write(self, log_entry: string) -> None:
         self.outfile.write(f'{log_entry}\n')
@@ -42,6 +43,7 @@ class PerformanceEvaluator:
                                                            variant=replay_fitness_evaluator.Variants.ALIGNMENT_BASED)
         self._write('alignment_fitness')
         self._write(json.dumps(alignment_fitness))
+        self.fitness = alignment_fitness['averageFitness']
 
         return alignment_fitness
 
