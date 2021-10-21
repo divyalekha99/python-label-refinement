@@ -1,75 +1,47 @@
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
-from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
 
+from file_writer_helper import run_start_string, write_exception
+from goldenstandardmodel import export_models_and_pngs
 from performance_evaluator import PerformanceEvaluator
-from pipeline_runner_single_layer_networkx import save_models_as_png
 from post_processor import PostProcessor
 
 
-def apply_im_with_noise_and_export(input_name, suffix, original_log, outfile):
-    f1_scores = []
-    for noise_threshold in [0, 0.1, 0.2, 0.3, 0.4]:
-        outfile.write(f'\nnoise_threshold: {noise_threshold}\n')
-
-        original_net, initial_marking, final_marking = inductive_miner.apply(original_log,
-                                                                             variant=inductive_miner.Variants.IMf,
-                                                                             parameters={
-                                                                                 inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: noise_threshold})
-
-        performance_evaluator = PerformanceEvaluator(original_net, initial_marking, final_marking, original_log,
-                                                     outfile)
-
-        performance_evaluator.evaluate_performance()
-
-        precision = performance_evaluator.precision
-        recall = performance_evaluator.fitness
-
-        f1_scores.append(2 * (precision * recall) / (precision + recall))
-        # original_tree = inductive_miner.apply_tree(original_log,
-        #                                            variant=inductive_miner.Variants.IMf,
-        #                                            parameters={
-        #                                                inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: noise_threshold})
-        # pnml_exporter.apply(original_net, initial_marking,
-        #                     f'/home/jonas/repositories/pm-label-splitting/outputs/{input_name}_{noise_threshold}_{suffix}.pnml',
-        #                     final_marking=final_marking)
-        # save_models_as_png(f'{input_name}_{noise_threshold}_{suffix}',
-        #                    final_marking,
-        #                    initial_marking,
-        #                    original_net,
-        #                    original_tree)
-    return f1_scores
-
-
-def apply_im_without_noise_and_export(input_name, suffix, original_log, outfile):
+def apply_im_without_noise_and_export(input_name, suffix, split_log, original_log, outfile, labels_to_original={}):
     outfile.write(f'\n IM without noise threshold:\n')
 
-    original_net, initial_marking, final_marking = inductive_miner.apply(original_log)
+    final_marking, initial_marking, final_net, precision = apply_im_without_noise(labels_to_original,
+                                                                                  split_log,
+                                                                                  original_log,
+                                                                                  outfile)
+    tree = inductive_miner.apply_tree(split_log)
 
-    performance_evaluator = PerformanceEvaluator(original_net, initial_marking, final_marking, original_log,
+    export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_name, suffix)
+    return precision
+
+
+def apply_im_without_noise(labels_to_original, split_log, original_log, outfile):
+    net, initial_marking, final_marking = inductive_miner.apply(split_log)
+    performance_evaluator = PerformanceEvaluator(net, initial_marking, final_marking, original_log,
                                                  outfile)
-
+    post_processor = PostProcessor(labels_to_original)
+    final_net = post_processor.post_process_petri_net(net)
     performance_evaluator.evaluate_performance()
-    original_tree = inductive_miner.apply_tree(original_log)
-    pnml_exporter.apply(original_net, initial_marking,
-                        f'/home/jonas/repositories/pm-label-splitting/outputs/{input_name}_no_noise_{suffix}.pnml',
-                        final_marking=final_marking)
-    save_models_as_png(f'{input_name}_no_noise_{suffix}',
-                       final_marking,
-                       initial_marking,
-                       original_net,
-                       original_tree)
-    return performance_evaluator.precision
+    return final_marking, initial_marking, final_net, performance_evaluator.precision
 
 
-def apply_im_with_noise_and_export_post_process(input_name, suffix, split_log, original_log, outfile, labels_to_original):
+def apply_im_with_noise_and_export(input_name, suffix, split_log, original_log, outfile, labels_to_original={}):
     f1_scores = []
     for noise_threshold in [0, 0.1, 0.2, 0.3, 0.4]:
         outfile.write(f'\nnoise_threshold: {noise_threshold}\n')
 
-        net, initial_marking, final_marking = inductive_miner.apply(split_log,
-                                                                    variant=inductive_miner.Variants.IMf,
-                                                                    parameters={
-                                                                        inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: noise_threshold})
+        try:
+            net, initial_marking, final_marking = inductive_miner.apply(split_log,
+                                                                        variant=inductive_miner.Variants.IMf,
+                                                                        parameters={
+                                                                            inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: noise_threshold})
+        except Exception as e:
+            write_exception(e, outfile)
+            continue
 
         post_processor = PostProcessor(labels_to_original)
         final_net = post_processor.post_process_petri_net(net)
@@ -79,23 +51,28 @@ def apply_im_with_noise_and_export_post_process(input_name, suffix, split_log, o
 
         performance_evaluator.evaluate_performance()
 
-        precision = performance_evaluator.precision
-        recall = performance_evaluator.fitness
+        f1_score = get_f1_score(performance_evaluator.precision, performance_evaluator.fitness)
+        f1_scores.append(f1_score)
+        tree = inductive_miner.apply_tree(original_log,
+                                          variant=inductive_miner.Variants.IMf,
+                                          parameters={
+                                              inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: noise_threshold})
+        export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_name, suffix)
+    return f1_scores
 
-        print(recall)
-        print(precision)
-        print(2 * (precision * recall) / (precision + recall))
-        f1_scores.append(2 * (precision * recall) / (precision + recall))
-        # tree = inductive_miner.apply_tree(original_log,
-        #                                   variant=inductive_miner.Variants.IMf,
-        #                                   parameters={
-        #                                       inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: noise_threshold})
-        # pnml_exporter.apply(final_net, initial_marking,
-        #                     f'/home/jonas/repositories/pm-label-splitting/outputs/{input_name}_{noise_threshold}_{suffix}.pnml',
-        #                     final_marking=final_marking)
-        # save_models_as_png(f'{input_name}_{noise_threshold}_{suffix}',
-        #                    final_marking,
-        #                    initial_marking,
-        #                    final_net,
-        #                    tree)
+
+def get_f1_score(precision, recall):
+    print(recall)
+    print(precision)
+    print(2 * (precision * recall) / (precision + recall))
+    return 2 * (precision * recall) / (precision + recall)
+
+
+def write_data_from_original_log_with_imprecise_labels(input_name, original_log, use_noise=True):
+    print(f'./outputs/{input_name}.txt')
+    with open(f'./outputs/{input_name}.txt', 'a') as outfile:
+        outfile.write('\nOriginal Data Performance:\n')
+        f1_scores = apply_im_with_noise_and_export(input_name, 'original_log_imprecise_labels', original_log, original_log,
+                                                   outfile) if use_noise else []
+        apply_im_without_noise_and_export(input_name, 'original_log_imprecise_labels', original_log, original_log, outfile)
     return f1_scores

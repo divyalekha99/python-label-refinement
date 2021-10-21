@@ -1,5 +1,4 @@
 import re
-from datetime import datetime
 from typing import List
 
 import pm4py
@@ -21,9 +20,15 @@ from post_processor import PostProcessor
 from shared_constants import evaluated_models
 
 
+# ('mrt07-0946/AG_1',
+#                           '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt07-0946/logs/AG_1_LogD_Sequence_mrt07-0946.xes.gz'),
+#             ('mrt07-0946/AB_1',
+#                           '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt07-0946/logs/AB_1_LogD_Sequence_mrt07-0946.xes.gz')
+
 def run_pipeline_single_layer_networkx(input_models=evaluated_models) -> None:
-    temp = [('mrt06-2056/AB_1',
-                          '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt06-2056/logs/AB_1_LogD_Sequence_mrt06-2056.xes.gz')]
+    temp = [('feb16-1625/H_1',
+             '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb16-1625/logs/H_1_LogD_Sequence_feb16-1625.xes.gz')
+            ]
     for (name, path) in temp:
         apply_pipeline_single_layer_networkx_to_log_with_multiple_parameters(name, [], path, 20000)
 
@@ -80,8 +85,9 @@ def apply_pipeline_single_layer_networkx_to_log_with_multiple_parameters(input_n
         export_model_from_original_log_with_precise_labels(input_name, log_path)
     best_precision = 0
 
-    for window_size in [4, 5]:
-        for distance in [DistanceVariant.SET_DISTANCE, DistanceVariant.MULTISET_DISTANCE]:
+    for window_size in [2, 3, 4]:
+        for distance in [DistanceVariant.EDIT_DISTANCE, DistanceVariant.SET_DISTANCE,
+                         DistanceVariant.MULTISET_DISTANCE]:
             for threshold in [0, 0.5, 0.75]:
                 log = xes_importer.apply(
                     log_path,
@@ -115,7 +121,8 @@ def write_data_from_original_log_with_imprecise_labels(input_name, original_log)
         pnml_exporter.apply(original_net, initial_marking,
                             f'/home/jonas/repositories/pm-label-splitting/outputs/{input_name}_not_split_petri_net.pnml',
                             final_marking=final_marking)
-        save_models_as_png(f'{input_name}_original_log_imprecise_labels', final_marking, initial_marking, original_net, original_tree)
+        save_models_as_png(f'{input_name}_original_log_imprecise_labels', final_marking, initial_marking, original_net,
+                           original_tree)
 
 
 def export_model_from_original_log_with_precise_labels(input_name, path):
@@ -136,7 +143,8 @@ def export_model_from_original_log_with_precise_labels(input_name, path):
         pnml_exporter.apply(original_net, initial_marking,
                             f'/home/jonas/repositories/pm-label-splitting/outputs/{input_name}_not_split_petri_net.pnml',
                             final_marking=final_marking)
-        save_models_as_png(f'{input_name}_original_log_precise_labels', final_marking, initial_marking, original_net, original_tree)
+        save_models_as_png(f'{input_name}_original_log_precise_labels', final_marking, initial_marking, original_net,
+                           original_tree)
 
 
 def get_imprecise_labels(log: EventLog) -> list[str]:

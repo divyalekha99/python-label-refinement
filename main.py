@@ -1,14 +1,9 @@
 import pandas as pd
 import pm4py
-
-from pm4py.visualization.process_tree import visualizer as pt_visualizer
 from pm4py.objects.conversion.process_tree import converter
+from pm4py.visualization.process_tree import visualizer as pt_visualizer
 
-from log_generator import LogGenerator
 from pipeline_runner_multi_layer_igraph import run_pipeline_multi_layer_igraph
-from pipeline_runner_single_layer_networkx import run_pipeline_single_layer_networkx
-from pm4py.algo.filtering.log.variants import variants_filter
-
 
 
 def import_csv(file_path):
