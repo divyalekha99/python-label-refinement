@@ -24,6 +24,9 @@ def export_models_and_pngs(final_marking, initial_marking, net, original_tree, i
 
 def rename_transitions_to_original_label(imprecise_labels, net, labels_to_split):
     for transition in net.transitions:
+        if transition.label is None:
+            continue
+
         if transition.label not in imprecise_labels:
             transition.label = labels_to_split[0]
 
@@ -64,7 +67,7 @@ class GoldenStandardModel:
             rename_transitions_to_original_label(imprecise_labels, net, self._labels_to_split)
 
             performance_evaluator = PerformanceEvaluator(net, initial_marking, final_marking, self._imprecise_log,
-                                                         outfile)
+                                                         outfile, skip_fitness=True)
             performance_evaluator.evaluate_performance()
 
             original_tree = inductive_miner.apply_tree(log)

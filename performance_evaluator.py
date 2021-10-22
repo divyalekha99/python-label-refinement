@@ -16,7 +16,7 @@ from pm4py.algo.evaluation.simplicity import algorithm as simplicity_evaluator
 
 
 class PerformanceEvaluator:
-    def __init__(self, net: PetriNet, im: Marking, fm: Marking, log: EventLog, outfile: TextIO):
+    def __init__(self, net: PetriNet, im: Marking, fm: Marking, log: EventLog, outfile: TextIO, skip_fitness=False):
         self.net = net
         self.im = im
         self.fm = fm
@@ -24,6 +24,7 @@ class PerformanceEvaluator:
         self.outfile = outfile
         self.precision = 0
         self.fitness = 0
+        self.skip_fitness = skip_fitness
 
     def _write(self, log_entry: string) -> None:
         self.outfile.write(f'{log_entry}\n')
@@ -39,6 +40,11 @@ class PerformanceEvaluator:
         # self._write(log)
         # token_fitness = replay_fitness_evaluator.apply(log, net, im, fm, variant=replay_fitness_evaluator.Variants.TOKEN_BASED)
         # self._write(token_fitness)
+        if self.skip_fitness:
+            self.fitness = 1
+            self._write('Fitness skipped, assumed to be 1 because of IM')
+            return 1
+
         alignment_fitness = replay_fitness_evaluator.apply(self.log, self.net, self.im, self.fm,
                                                            variant=replay_fitness_evaluator.Variants.ALIGNMENT_BASED)
         self._write('alignment_fitness')
@@ -48,8 +54,12 @@ class PerformanceEvaluator:
         return alignment_fitness
 
     def get_precision(self) -> float:
+        # Slower, but "more precise" version
+        # precision = precision_evaluator.apply(self.log, self.net, self.im, self.fm,
+        #                                       variant=precision_evaluator.Variants.ALIGN_ETCONFORMANCE)
+
         precision = precision_evaluator.apply(self.log, self.net, self.im, self.fm,
-                                              variant=precision_evaluator.Variants.ALIGN_ETCONFORMANCE)
+                                              variant=precision_evaluator.Variants.ETCONFORMANCE_TOKEN)
         self.precision = precision
         self._write('precision')
         self._write(json.dumps(precision))

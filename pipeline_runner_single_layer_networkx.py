@@ -213,7 +213,7 @@ Original log location: {original_log_path}
         net, initial_marking, final_marking = inductive_miner.apply(split_log)
         tree = inductive_miner.apply_tree(split_log)
 
-        post_processor = PostProcessor(label_splitter.get_split_labels_to_original_labels())
+        post_processor = PostProcessor(label_splitter.get_split_labels_to_original_labels(), {})
         final_net = post_processor.post_process_petri_net(net)
 
         outfile.write('\nPerformance split_log:\n')

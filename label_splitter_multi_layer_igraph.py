@@ -34,6 +34,7 @@ class LabelSplitter:
         self.clustering_variant = clustering_variant
         self._variant_to_label = {}
         self.use_frequency = use_frequency
+        self.short_label_to_original_label = {}
 
         if distance_variant is DistanceVariant.EDIT_DISTANCE:
             self.get_distance = self.distance_calculator.get_edit_distance
@@ -80,6 +81,10 @@ class LabelSplitter:
             for event in filtered_log[0]:
                 # print(event)
                 label = event['concept:name']
+                if 'original_label' in event.keys():
+                    # print(event['original_label'])
+                    self.short_label_to_original_label[label] = event['original_label']
+
                 if label not in list(event_graphs.keys()) and label in self.labels_to_split:
                     event_graphs[label] = igraph.Graph()
                     self.label_and_id_to_event[label] = []
@@ -130,8 +135,8 @@ class LabelSplitter:
 
                 if self.use_frequency:
                     weight = (1 - edit_distance / self.window_size) * (
-                                self.variants_to_count[self.label_and_id_to_event[label][vertex_a]['variant']] *
-                                self.variants_to_count[self.label_and_id_to_event[label][vertex_b]['variant']])
+                            self.variants_to_count[self.label_and_id_to_event[label][vertex_a]['variant']] *
+                            self.variants_to_count[self.label_and_id_to_event[label][vertex_b]['variant']])
                 else:
                     weight = (1 - edit_distance / self.window_size)
                 # print(weight)

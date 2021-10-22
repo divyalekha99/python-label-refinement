@@ -24,23 +24,25 @@ from shared_constants import evaluated_models
 
 
 def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
-    # apply_pipeline_to_folder([('real_logs/road_traffic_fines_N_W',
-    #                            '/home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process_shortened_labels.xes.gz')],
-    #                          'real_logs.txt',
-    #                          labels_to_split=['F'],
-    #                          use_frequency=False)
-    #
-    mrt07_0946_list = get_tuples_for_folder(
-        '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt07-0946/logs/',
-        'mrt07-0946')
-
-    apply_pipeline_to_folder(mrt07_0946_list[12:],
-                             'mrt07-0946',
+    apply_pipeline_to_folder([('real_logs/road_traffic_fines_N_W',
+                               '/home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process_shortened_labels.xes.gz')],
+                             'real_logs.txt',
                              PipelineVariant.VARIANTS,
-                             labels_to_split=[],
+                             labels_to_split=['F'],
                              use_frequency=False,
                              use_noise=False)
     #
+    # mrt07_0946_list = get_tuples_for_folder(
+    #     '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt07-0946/logs/',
+    #     'mrt07-0946')
+    #
+    # apply_pipeline_to_folder(mrt07_0946_list[15:],
+    #                          'mrt07-0946',
+    #                          PipelineVariant.VARIANTS,
+    #                          labels_to_split=[],
+    #                          use_frequency=False,
+    #                          use_noise=False)
+
     # mrt05_1442_list = get_tuples_for_folder('/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_adaptive_OD/mrt05-1442/logs/', 'mrt05-1442')
     #
     # apply_pipeline_to_folder(mrt05_1442_list,
@@ -65,7 +67,8 @@ def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
     #                          use_frequency=False)
 
 
-def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_to_split=[], use_frequency=False, use_noise=True):
+def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_to_split=[], use_frequency=False,
+                             use_noise=True):
     for (name, path) in input_list:
         best_precision, best_configs, xixi_precision, golden_standard_precision = apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(
             name,
@@ -79,7 +82,7 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
             summary_file_name = f'{folder_name}_{pipeline_variant}.txt'
             write_summary_file_with_parameters(best_configs, best_precision, name, summary_file_name)
             write_summary_file(best_precision, golden_standard_precision, name, summary_file_name,
-                                         xixi_precision)
+                               xixi_precision)
         except Exception as e:
             print('----------------Exception occurred------------------------')
             print(e)
@@ -132,9 +135,10 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_name
     x_noises = [0, 0.1, 0.2, 0.3, 0.4]
 
     for label in labels_to_split:
-        for window_size in [3]:
-            for distance in [DistanceVariant.MULTISET_DISTANCE]:
-                for threshold in [0]:
+        for window_size in [2, 3, 4]:
+            for distance in [DistanceVariant.EDIT_DISTANCE, DistanceVariant.SET_DISTANCE,
+                             DistanceVariant.MULTISET_DISTANCE]:
+                for threshold in [0, 0.25, 0.5]:
                     try:
                         log = xes_importer.apply(
                             log_path,
@@ -206,8 +210,10 @@ def export_model_from_original_log_with_precise_labels(input_name, path, use_noi
         log_path = re.sub(pattern, f'{original_input_name}_Log.xes.gz', path)
         original_log = xes_importer.apply(log_path)
         if use_noise:
-            apply_im_with_noise_and_export(input_name, 'original_log_precise_labels', original_log, original_log, outfile)
-        apply_im_without_noise_and_export(input_name, 'original_log_precise_labels', original_log, original_log, outfile)
+            apply_im_with_noise_and_export(input_name, 'original_log_precise_labels', original_log, original_log,
+                                           outfile)
+        apply_im_without_noise_and_export(input_name, 'original_log_precise_labels', original_log, original_log,
+                                          outfile)
 
 
 def apply_pipeline_multi_layer_igraph_to_log(input_name: str,
@@ -243,8 +249,10 @@ def apply_pipeline_multi_layer_igraph_to_log(input_name: str,
 
         labels_to_original = label_splitter.get_split_labels_to_original_labels()
 
-        final_marking, initial_marking, final_net, precision = apply_im_without_noise(labels_to_original, split_log, original_log,
-                                                                                      outfile)
+        final_marking, initial_marking, final_net, precision = apply_im_without_noise(labels_to_original, split_log,
+                                                                                      original_log,
+                                                                                      outfile,
+                                                                                      label_splitter.short_label_to_original_label)
 
         f1_scores_refined = []
         if precision > best_precision:
@@ -254,7 +262,8 @@ def apply_pipeline_multi_layer_igraph_to_log(input_name: str,
                 outfile.write('\nIM with noise threshold:\n')
                 f1_scores_refined = apply_im_with_noise_and_export(input_name, 'split_log', split_log, original_log,
                                                                    outfile,
-                                                                   label_splitter.get_split_labels_to_original_labels())
+                                                                   label_splitter.get_split_labels_to_original_labels(),
+                                                                   label_splitter.short_label_to_original_label)
 
             xes_exporter.apply(split_log,
                                f'/home/jonas/repositories/pm-label-splitting/outputs/{input_name}_split_log.xes')
