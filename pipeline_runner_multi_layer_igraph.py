@@ -24,13 +24,31 @@ from shared_constants import evaluated_models
 
 
 def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
-    apply_pipeline_to_folder([('real_logs/road_traffic_fines_N_W',
+    feb16_1625_list = get_tuples_for_folder('/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb16-1625/logs/', 'feb16-1625')
+
+    apply_pipeline_to_folder(feb16_1625_list,
+                             'feb16-1625.txt',
+                             PipelineVariant.VARIANTS,
+                             labels_to_split=[],
+                             use_frequency=True,
+                             use_noise=False)
+
+
+    apply_pipeline_to_folder([('real_logs/road_traffic_fines',
                                '/home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process_shortened_labels.xes.gz')],
                              'real_logs.txt',
                              PipelineVariant.VARIANTS,
                              labels_to_split=['F'],
-                             use_frequency=False,
+                             use_frequency=True,
                              use_noise=False)
+
+    # apply_pipeline_to_folder([('real_logs/BPI_Challenge_2017_N_W',
+    #                            '/home/jonas/repositories/pm-label-splitting/example_logs/BPI_Challenge_2017_shortened_labels.xes.gz')],
+    #                          'real_logs.txt',
+    #                          PipelineVariant.VARIANTS,
+    #                          labels_to_split=['e'],
+    #                          use_frequency=False,
+    #                          use_noise=False)
     #
     # mrt07_0946_list = get_tuples_for_folder(
     #     '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt07-0946/logs/',
@@ -47,25 +65,23 @@ def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
     #
     # apply_pipeline_to_folder(mrt05_1442_list,
     #                          'mrt05-1442.txt',
+    #                          PipelineVariant.VARIANTS,
     #                          labels_to_split=[],
-    #                          use_frequency=False)
+    #                          use_frequency=False,
+    #                          use_noise=False)
     #
+    #
+
+
     #
     # feb19_1230_list = get_tuples_for_folder('/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_IMD/feb19-1230/logs/', 'feb19-1230')
     #
     # apply_pipeline_to_folder(feb19_1230_list,
     #                          'feb19-1230.txt',
+    #                          PipelineVariant.VARIANTS,
     #                          labels_to_split=[],
-    #                          use_frequency=False)
-
-    #
-    # feb16_1625_list = get_tuples_for_folder('/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb16-1625/logs/', 'feb16-1625')
-    #
-    # apply_pipeline_to_folder(feb16_1625_list[10:],
-    #                          'feb16-1625.txt',
-    #                          labels_to_split=[],
-    #                          use_frequency=False)
-
+    #                          use_frequency=True,
+    #                          use_noise=False)
 
 def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_to_split=[], use_frequency=False,
                              use_noise=True):
@@ -79,7 +95,7 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
             use_frequency=use_frequency,
             use_noise=use_noise)
         try:
-            summary_file_name = f'{folder_name}_{pipeline_variant}.txt'
+            summary_file_name = f'{folder_name}_{pipeline_variant}.txt' if use_frequency else f'{folder_name}_{pipeline_variant}_N_W.txt'
             write_summary_file_with_parameters(best_configs, best_precision, name, summary_file_name)
             write_summary_file(best_precision, golden_standard_precision, name, summary_file_name,
                                xixi_precision)
@@ -100,7 +116,8 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_name
                                                                       use_frequency=False,
                                                                       use_noise=True):
     input_name = f'{input_name}_{pipeline_variant}' if use_frequency else f'{input_name}_{pipeline_variant}_N_W'
-    original_log = xes_importer.apply(log_path)
+    original_log = xes_importer.apply(log_path, parameters={
+                xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: max_number_of_traces})
 
     with open(f'./outputs/{input_name}.txt', 'a') as outfile:
         print(f'Starting pipeline for {input_name}')
@@ -138,7 +155,7 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_name
         for window_size in [2, 3, 4]:
             for distance in [DistanceVariant.EDIT_DISTANCE, DistanceVariant.SET_DISTANCE,
                              DistanceVariant.MULTISET_DISTANCE]:
-                for threshold in [0, 0.25, 0.5]:
+                for threshold in [0, 0.25, 0.5, 0.75]:
                     try:
                         log = xes_importer.apply(
                             log_path,

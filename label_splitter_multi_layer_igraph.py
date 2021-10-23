@@ -1,4 +1,5 @@
 import json
+import math
 import string
 from itertools import combinations
 from typing import TextIO
@@ -133,21 +134,34 @@ class LabelSplitter:
                 edit_distance = self.get_distance(self.label_and_id_to_event[label][vertex_a],
                                                   self.label_and_id_to_event[label][vertex_b])
 
+                normalized_distance = (1 - edit_distance / self.window_size)
                 if self.use_frequency:
-                    weight = (1 - edit_distance / self.window_size) * (
+                    weight = normalized_distance * (
                             self.variants_to_count[self.label_and_id_to_event[label][vertex_a]['variant']] *
                             self.variants_to_count[self.label_and_id_to_event[label][vertex_b]['variant']])
+                    # print(weight)
                 else:
-                    weight = (1 - edit_distance / self.window_size)
-                # print(weight)
-                if weight > self.threshold:
+                    weight = normalized_distance
+                if normalized_distance > self.threshold:
                     edges.append((vertex_a, vertex_b))
                     weights.append(weight)
+            if self.use_frequency:
+                for vertex_a in range(len(graph.vs)):
+                    # edit_distance = self.get_edit_distance(self.hash_to_event[hash_a], self.hash_to_event[hash_b])
+                    count = self.variants_to_count[self.label_and_id_to_event[label][vertex_a]['variant']]
+                    # print(weight)
+                    if count > 1:
+                        weight = math.comb(count, 2)
+                        # print('Self loop weight')
+                        # print(weight)
+                        edges.append((vertex_a, vertex_a))
+                        weights.append(weight)
             graph.add_edges(edges)
             graph.es['weight'] = weights
         print('Finished calculating edges')
 
     def get_communities_louvain(self, event_graphs) -> None:
+        print('Starting community detection')
         for (label, graph) in event_graphs.items():
             print(f'Getting communities for {label}')
             partition = graph.community_multilevel(weights=graph.es['weight'], return_levels=False)
