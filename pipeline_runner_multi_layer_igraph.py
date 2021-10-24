@@ -15,7 +15,8 @@ from distance_metrics import DistanceVariant
 from file_writer_helper import get_config_string, write_summary_file, \
     write_summary_file_with_parameters, run_start_string
 from goldenstandardmodel import GoldenStandardModel, export_models_and_pngs
-from label_splitter_multi_layer_igraph import LabelSplitter
+from label_splitter_event_based_igraph import LabelSplitter as LabelSplitterEventBased
+from label_splitter_multi_layer_igraph import LabelSplitter as LabelSplitterVariantBased
 from pipeline_helpers_shared import get_xixi_metrics, get_tuples_for_folder
 from pipeline_runner_single_layer_networkx import get_imprecise_labels
 from pipeline_variant import PipelineVariant, remove_pipeline_variant_from_string
@@ -24,23 +25,40 @@ from shared_constants import evaluated_models
 
 
 def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
-    feb16_1625_list = get_tuples_for_folder('/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb16-1625/logs/', 'feb16-1625')
-
-    apply_pipeline_to_folder(feb16_1625_list,
-                             'feb16-1625.txt',
+    apply_pipeline_to_folder([('real_logs/hospital_billing',
+                               '/home/jonas/repositories/pm-label-splitting/example_logs/Hospital_billing_event_log_shortened_labels.xes.gz')],
+                             'real_logs.txt',
                              PipelineVariant.VARIANTS,
+                             labels_to_split=['6'],
+                             use_frequency=True,
+                             use_noise=False)
+
+
+    # feb16_1625_list = get_tuples_for_folder(
+    #     '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb16-1625/logs/',
+    #     'feb16-1625')
+    #
+    # apply_pipeline_to_folder(feb16_1625_list[5:],
+    #                          'feb16-1625.txt',
+    #                          PipelineVariant.VARIANTS,
+    #                          labels_to_split=[],
+    #                          use_frequency=True,
+    #                          use_noise=False)
+
+    apply_pipeline_to_folder(feb16_1625_list[-2:],
+                             'feb16-1625.txt',
+                             PipelineVariant.EVENTS,
                              labels_to_split=[],
                              use_frequency=True,
                              use_noise=False)
 
-
-    apply_pipeline_to_folder([('real_logs/road_traffic_fines',
-                               '/home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process_shortened_labels.xes.gz')],
-                             'real_logs.txt',
-                             PipelineVariant.VARIANTS,
-                             labels_to_split=['F'],
-                             use_frequency=True,
-                             use_noise=False)
+    # apply_pipeline_to_folder([('real_logs/road_traffic_fines',
+    #                            '/home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process_shortened_labels.xes.gz')],
+    #                          'real_logs.txt',
+    #                          PipelineVariant.VARIANTS,
+    #                          labels_to_split=['F'],
+    #                          use_frequency=True,
+    #                          use_noise=False)
 
     # apply_pipeline_to_folder([('real_logs/BPI_Challenge_2017_N_W',
     #                            '/home/jonas/repositories/pm-label-splitting/example_logs/BPI_Challenge_2017_shortened_labels.xes.gz')],
@@ -72,7 +90,6 @@ def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
     #
     #
 
-
     #
     # feb19_1230_list = get_tuples_for_folder('/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_IMD/feb19-1230/logs/', 'feb19-1230')
     #
@@ -82,6 +99,7 @@ def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
     #                          labels_to_split=[],
     #                          use_frequency=True,
     #                          use_noise=False)
+
 
 def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_to_split=[], use_frequency=False,
                              use_noise=True):
@@ -117,7 +135,7 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_name
                                                                       use_noise=True):
     input_name = f'{input_name}_{pipeline_variant}' if use_frequency else f'{input_name}_{pipeline_variant}_N_W'
     original_log = xes_importer.apply(log_path, parameters={
-                xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: max_number_of_traces})
+        xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: max_number_of_traces})
 
     with open(f'./outputs/{input_name}.txt', 'a') as outfile:
         print(f'Starting pipeline for {input_name}')
@@ -252,13 +270,22 @@ def apply_pipeline_multi_layer_igraph_to_log(input_name: str,
         outfile.write(get_config_string(clustering_variant, distance_variant, labels_to_split, number_of_traces,
                                         original_log_path, threshold, window_size, use_frequency))
 
-        label_splitter = LabelSplitter(outfile,
-                                       labels_to_split,
-                                       threshold=threshold,
-                                       window_size=window_size,
-                                       distance_variant=distance_variant,
-                                       clustering_variant=clustering_variant,
-                                       use_frequency=use_frequency)
+        if pipeline_variant == PipelineVariant.VARIANTS:
+            label_splitter = LabelSplitterVariantBased(outfile,
+                                                       labels_to_split,
+                                                       threshold=threshold,
+                                                       window_size=window_size,
+                                                       distance_variant=distance_variant,
+                                                       clustering_variant=clustering_variant,
+                                                       use_frequency=use_frequency)
+        else:
+            label_splitter = LabelSplitterEventBased(outfile,
+                                                     labels_to_split,
+                                                     threshold=threshold,
+                                                     window_size=window_size,
+                                                     distance_variant=distance_variant,
+                                                     clustering_variant=clustering_variant)
+
         split_log = label_splitter.split_labels(log)
 
         outfile.write('\nPerformance split_log:\n')
@@ -266,7 +293,8 @@ def apply_pipeline_multi_layer_igraph_to_log(input_name: str,
 
         labels_to_original = label_splitter.get_split_labels_to_original_labels()
 
-        final_marking, initial_marking, final_net, precision = apply_im_without_noise(labels_to_original, split_log,
+        final_marking, initial_marking, final_net, precision = apply_im_without_noise(labels_to_original,
+                                                                                      split_log,
                                                                                       original_log,
                                                                                       outfile,
                                                                                       label_splitter.short_label_to_original_label)
