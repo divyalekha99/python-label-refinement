@@ -52,6 +52,9 @@ class GoldenStandardModel:
         self._input_identifier = original_input_name if original_input_name != '' \
             else get_input_identifier_from_variant_input_name(self._input_name)
         self._imprecise_log = xes_importer.apply(self._path)
+        self.net = None
+        self.im = None
+        self.fm = None
 
     def evaluate_golden_standard_model(self):
         with open(f'./outputs/{self._input_name}.txt', 'a') as outfile:
@@ -66,6 +69,9 @@ class GoldenStandardModel:
 
             rename_transitions_to_original_label(imprecise_labels, net, self._labels_to_split)
 
+            self.net = net
+            self.im = initial_marking
+            self.fm = final_marking
             performance_evaluator = PerformanceEvaluator(net, initial_marking, final_marking, self._imprecise_log,
                                                          outfile, skip_fitness=True)
             performance_evaluator.evaluate_performance()

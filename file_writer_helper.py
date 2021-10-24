@@ -52,10 +52,10 @@ Results for {name} from {date}
 
 def write_summary_file(best_precision, golden_standard_precision, name, summary_file_name, xixi_precision):
     with open(f'./outputs/best_results/{summary_file_name}', 'a') as outfile:
-        outfile.write(f'\n\nBest precision found for {name}:\n')
+        outfile.write(f'\n\nBest combined_score found for {name}:\n')
         outfile.write(f'{str(best_precision)}\n')
         if xixi_precision != 0:
-            outfile.write(f'Precision found by Xixi for {name}:\n')
+            outfile.write(f'Combined_score found by Xixi for {name}:\n')
             outfile.write(f'{str(xixi_precision)}\n')
         if golden_standard_precision != 0:
             outfile.write(f'Golden_standard_precision for {name}:\n')
@@ -75,5 +75,5 @@ def write_summary_file_with_parameters(best_configs, best_precision, name, summa
         outfile.write(f'\nBest found configs for {name}:')
         for config in best_configs:
             outfile.write(config)
-        outfile.write('Precision:\n')
+        outfile.write('Combined Score:\n')
         outfile.write(str(best_precision))

@@ -23,26 +23,35 @@ class ModelComparer:
         self.precision = precision
         self.fitness = 0
 
-    def get_enabled_transitions(self, pn, m, e):
+    def get_enabled_transitions(self, pn, m: Marking, e, visited_silent=[]):
         enabled = set()
         transition_to_marking = {}
 
         for t in pn.transitions:
             #
+            # print('transition')
             # print(t)
+            # print(t.label)
             # print(m)
             # print(e)
+            current_visited_silent = visited_silent.copy()
             if semantics.is_enabled(t, pn, m, e):
                 if t.label is None:
-                    # print('Silent transition')
+                    if t in current_visited_silent:
+                        # print('visited_silent contains t')
+                        # print(t)
+                        # print(visited_silent)
+                        continue
                     m_s = semantics.execute(t, pn, m, e)
+
+                    current_visited_silent.append(t)
                     # print('m_s')
                     # print(m_s)
                     if t in transition_to_marking.keys():
                         # print('################## Continued ##################')
                         continue
 
-                    enabled_s, transition_to_marking_s = self.get_enabled_transitions(pn, m_s, e)
+                    enabled_s, transition_to_marking_s = self.get_enabled_transitions(pn, m_s, e, current_visited_silent)
                     enabled |= enabled_s
                     transition_to_marking |= transition_to_marking_s
                 else:
@@ -70,6 +79,12 @@ class ModelComparer:
         return overlap
 
     def compare_models(self):
+        return 0, 0
+        # print('Entered')
+        self.outfile.write('\nComparison with golden standard model: \n')
+        if self.net_a is None:
+            return 0, 0
+
         precision = 0
         recall = 0
         log_size = 0
@@ -90,7 +105,16 @@ class ModelComparer:
             precision_s, recall_s = self.get_behavioral_metrics(trace, m_a, m_b)
             precision += precision_s * variant_count / len(trace)
             recall += recall_s * variant_count / len(trace)
-        return precision * 1 / log_size, recall * 1 / log_size
+
+        precision = precision * 1 / log_size
+        recall = recall * 1 / log_size
+
+        self.outfile.write('Compared precision: \n')
+        self.outfile.write(f'{precision}\n')
+        self.outfile.write('Compared recall: \n')
+        self.outfile.write(f'{recall}\n')
+
+        return precision, recall
 
     def get_behavioral_metrics(self, trace: list[Event], m_a, m_b):
         # print('trace')
@@ -104,38 +128,15 @@ class ModelComparer:
             return 0, 0
         e = trace[0]
 
-        # print('before')
         enabled_a, t_to_m_a = self.get_enabled_transitions(self.net_a, m_a, e)
-        # print('after')
         enabled_b, t_to_m_b = self.get_enabled_transitions(self.net_b, m_b, e)
         overlap = self.get_overlap(enabled_a, enabled_b)
-
-        # print('overlap test')
-        # print(overlap)
-        # print('enabled_b test')
-        # print(enabled_b)
-        # print('enabled_a test')
-        # print(enabled_a)
 
         precision += len(overlap) / len(enabled_b) if len(enabled_b) > 0 else 0
         recall += len(overlap) / len(enabled_a) if len(enabled_a) > 0 else 0
 
-        # print('Calculated precision')
-        # print(precision)
-
         valid_a = [t for t in enabled_a if t.label == e['concept:name']]
         valid_b = [t for t in enabled_b if t.label == e['concept:name']]
-
-        # for t in enabled_a:
-        #     print('##############################################')
-        #     print(t.label)
-        #     print(e['concept:name'])
-        #     print('##############################################')
-        #
-        # print('valid_a')
-        # print(valid_a)
-        # print('valid_b')
-        # print(valid_b)
 
         for t_a in valid_a:
             for t_b in valid_b:

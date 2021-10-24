@@ -18,7 +18,7 @@ def apply_im_without_noise_and_export(input_name, suffix, split_log, original_lo
     tree = inductive_miner.apply_tree(split_log)
 
     export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_name, suffix)
-    return precision
+    return precision, final_net, initial_marking, final_marking
 
 
 def apply_im_without_noise(labels_to_original, split_log, original_log, outfile, short_labels_to_original_labels={}):

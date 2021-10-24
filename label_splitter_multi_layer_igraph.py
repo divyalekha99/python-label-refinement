@@ -3,6 +3,7 @@ import math
 import string
 from itertools import combinations
 from typing import TextIO
+import leidenalg as la
 
 import igraph
 from pm4py.algo.filtering.log.variants import variants_filter
@@ -60,7 +61,7 @@ class LabelSplitter:
         event_graphs = self.get_event_graphs_from_event_log(log)
 
         self.calculate_edges(event_graphs)
-        self.get_communities_louvain(event_graphs=event_graphs)
+        self.get_communities_leiden(event_graphs=event_graphs)
         self.set_split_labels(log)
 
         return log
@@ -142,11 +143,11 @@ class LabelSplitter:
             graph.es['weight'] = weights
         print('Finished calculating edges')
 
-    def get_communities_louvain(self, event_graphs) -> None:
+    def get_communities_leiden(self, event_graphs) -> None:
         print('Starting community detection')
         for (label, graph) in event_graphs.items():
             print(f'Getting communities for {label}')
-            partition = graph.community_multilevel(weights=graph.es['weight'], return_levels=False)
+            partition = la.find_partition(graph, la.ModularityVertexPartition, weights=graph.es['weight'], seed=396482)
             print(partition)
             self._write('Found communities: \n')
             self._write(str(partition))

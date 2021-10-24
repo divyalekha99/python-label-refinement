@@ -9,6 +9,7 @@ from pm4py.objects.log.obj import EventLog
 
 from clustering_variant import ClusteringVariant
 from distance_metrics import DistanceVariant, DistanceCalculator
+import leidenalg as la
 
 
 class LabelSplitter:
@@ -115,7 +116,7 @@ class LabelSplitter:
         print('Starting community detection')
         for (label, graph) in event_graphs.items():
             print(f'Getting communities for {label}')
-            partition = graph.community_multilevel(weights=graph.es['weight'], return_levels=False)
+            partition = la.find_partition(graph, la.ModularityVertexPartition, weights=graph.es['weight'], seed=396482)
             print(partition)
             self._write('Found communities: \n')
             self._write(str(partition))

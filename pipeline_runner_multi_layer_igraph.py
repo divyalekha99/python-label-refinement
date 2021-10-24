@@ -3,6 +3,7 @@ from typing import List
 
 import pm4py
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
+from pm4py.objects.conversion.bpmn import converter as bpmn_converter
 from pm4py.objects.log.exporter.xes import exporter as xes_exporter
 from pm4py.objects.log.importer.xes import importer as xes_importer
 from pm4py.objects.log.obj import EventLog
@@ -19,14 +20,12 @@ from goldenstandardmodel import GoldenStandardModel, export_models_and_pngs
 from label_splitter_event_based_igraph import LabelSplitter as LabelSplitterEventBased
 from label_splitter_multi_layer_igraph import LabelSplitter as LabelSplitterVariantBased
 from log_generator import LogGenerator
+from model_comparer import ModelComparer
 from pipeline_helpers_shared import get_xixi_metrics, get_tuples_for_folder
 from pipeline_runner_single_layer_networkx import get_imprecise_labels
 from pipeline_variant import PipelineVariant, remove_pipeline_variant_from_string
 from plot_helpers import plot_noise_to_f1_score
 from shared_constants import evaluated_models
-from pm4py.algo.discovery.inductive import algorithm as inductive_miner
-from pm4py.objects.conversion.bpmn import converter as bpmn_converter
-from model_comparer import ModelComparer
 
 
 def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
@@ -37,32 +36,31 @@ def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
     #                          labels_to_split=['6'],
     #                          use_frequency=True,
     #                          use_noise=False)
-    bpmn_graph = pm4py.read_bpmn(f'/home/jonas/repositories/pm-label-splitting/bpmn_files/loop_example_th_0.bpmn')
-    log_generator = LogGenerator()
-    log = log_generator.get_log_from_bpmn(bpmn_graph)
-
-    net_a, im_a, fm_a = bpmn_converter.apply(bpmn_graph)
-
-    net_b, im_b, fm_b = inductive_miner.apply(log)
-
-    model_comparer = ModelComparer(net_a, im_a, fm_a, net_b, im_b, fm_b, log, '', 0)
-    precision, recall = model_comparer.compare_models()
-    print('final precision')
-    print(precision)
-    print('final recall')
-    print(recall)
-
-
-    # feb16_1625_list = get_tuples_for_folder(
-    #     '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb16-1625/logs/',
-    #     'feb16-1625')
+    # bpmn_graph = pm4py.read_bpmn(f'/home/jonas/repositories/pm-label-splitting/bpmn_files/loop_example_th_0.bpmn')
+    # log_generator = LogGenerator()
+    # log = log_generator.get_log_from_bpmn(bpmn_graph)
     #
-    # apply_pipeline_to_folder(feb16_1625_list,
-    #                          'feb16-1625.txt',
-    #                          PipelineVariant.VARIANTS,
-    #                          labels_to_split=[],
-    #                          use_frequency=True,
-    #                          use_noise=False)
+    # net_a, im_a, fm_a = bpmn_converter.apply(bpmn_graph)
+    #
+    # net_b, im_b, fm_b = inductive_miner.apply(log)
+    #
+    # model_comparer = ModelComparer(net_a, im_a, fm_a, net_b, im_b, fm_b, log, '', 0)
+    # precision, recall = model_comparer.compare_models()
+    # print('final precision')
+    # print(precision)
+    # print('final recall')
+    # print(recall)
+
+    feb16_1625_list = get_tuples_for_folder(
+        '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb16-1625/logs/',
+        'feb16-1625')
+
+    apply_pipeline_to_folder(feb16_1625_list,
+                             'feb16-1625.txt',
+                             PipelineVariant.VARIANTS,
+                             labels_to_split=[],
+                             use_frequency=True,
+                             use_noise=False)
 
     # apply_pipeline_to_folder(feb16_1625_list[-2:],
     #                          'feb16-1625.txt',
@@ -123,7 +121,7 @@ def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
 def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_to_split=[], use_frequency=False,
                              use_noise=True):
     for (name, path) in input_list:
-        best_precision, best_configs, xixi_precision, golden_standard_precision = apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(
+        best_combined_score, best_configs, xixi_precision, golden_standard_precision = apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(
             name,
             pipeline_variant,
             labels_to_split,
@@ -133,8 +131,8 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
             use_noise=use_noise)
         try:
             summary_file_name = f'{folder_name}_{pipeline_variant}.txt' if use_frequency else f'{folder_name}_{pipeline_variant}_N_W.txt'
-            write_summary_file_with_parameters(best_configs, best_precision, name, summary_file_name)
-            write_summary_file(best_precision, golden_standard_precision, name, summary_file_name,
+            write_summary_file_with_parameters(best_configs, best_combined_score, name, summary_file_name)
+            write_summary_file(best_combined_score, golden_standard_precision, name, summary_file_name,
                                xixi_precision)
         except Exception as e:
             print('----------------Exception occurred------------------------')
@@ -160,18 +158,26 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_name
         print(f'Starting pipeline for {input_name}')
         outfile.write(run_start_string())
 
-    xixi_precision = 0
+    xixi_combined_score = 0
     golden_standard_precision = 0
+
+    golden_net = None
+    golden_im = None
+    golden_fm = None
 
     if not labels_to_split:
         labels_to_split = get_imprecise_labels(original_log)
-        xixi_precision = get_xixi_metrics(input_name, log_path, labels_to_split)
-
         golden_standard_model = GoldenStandardModel(input_name, '', log_path, labels_to_split)
         golden_standard_precision = golden_standard_model.evaluate_golden_standard_model()
+        golden_net = golden_standard_model.net
+        golden_im = golden_standard_model.im
+        golden_fm = golden_standard_model.fm
         print('golden_standard_precision')
         print(golden_standard_precision)
 
+        xixi_combined_score = get_xixi_metrics(input_name, log_path, labels_to_split, golden_net, golden_im, golden_fm)
+        print('xixi_combined_score')
+        print(xixi_combined_score)
         export_model_from_original_log_with_precise_labels(input_name, log_path, use_noise)
 
     y_f1_scores_unrefined = write_data_from_original_log_with_imprecise_labels(input_name, original_log, use_noise)
@@ -183,7 +189,7 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_name
                 xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: max_number_of_traces})
         xes_exporter.apply(log, f'/home/jonas/repositories/pm-label-splitting/outputs/{input_name}_used_log.xes')
 
-    best_precision = 0
+    best_combined_score = 0
     best_configs = []
     y_f1_scores_refined = []
     x_noises = [0, 0.1, 0.2, 0.3, 0.4]
@@ -199,23 +205,26 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_name
                             parameters={
                                 xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: max_number_of_traces})
 
-                        precision, f1_scores_refined = apply_pipeline_multi_layer_igraph_to_log(input_name,
-                                                                                                pipeline_variant,
-                                                                                                log,
-                                                                                                [label],
-                                                                                                original_log=original_log,
-                                                                                                threshold=threshold,
-                                                                                                window_size=window_size,
-                                                                                                number_of_traces=max_number_of_traces,
-                                                                                                distance_variant=distance,
-                                                                                                original_log_path=log_path,
-                                                                                                best_precision=best_precision,
-                                                                                                use_frequency=use_frequency,
-                                                                                                use_noise=use_noise)
+                        combined_score, f1_scores_refined = apply_pipeline_multi_layer_igraph_to_log(input_name,
+                                                                                                     pipeline_variant,
+                                                                                                     log,
+                                                                                                     [label],
+                                                                                                     original_log=original_log,
+                                                                                                     threshold=threshold,
+                                                                                                     window_size=window_size,
+                                                                                                     number_of_traces=max_number_of_traces,
+                                                                                                     distance_variant=distance,
+                                                                                                     original_log_path=log_path,
+                                                                                                     best_combined_score=best_combined_score,
+                                                                                                     use_frequency=use_frequency,
+                                                                                                     use_noise=use_noise,
+                                                                                                     golden_net=golden_net,
+                                                                                                     golden_im=golden_im,
+                                                                                                     golden_fm=golden_fm)
                         if len(f1_scores_refined) > 0:
                             y_f1_scores_refined = f1_scores_refined
 
-                        if precision > best_precision:
+                        if combined_score > best_combined_score:
                             best_configs = [get_config_string(clustering_variant.ClusteringVariant.COMMUNITY_DETECTION,
                                                               distance,
                                                               labels_to_split,
@@ -224,8 +233,8 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_name
                                                               threshold,
                                                               window_size,
                                                               use_frequency=use_frequency)]
-                            best_precision = precision
-                        elif round(precision, 2) == round(best_precision, 2):
+                            best_combined_score = combined_score
+                        elif round(combined_score, 2) == round(best_combined_score, 2):
                             best_configs.append(
                                 get_config_string(clustering_variant.ClusteringVariant.COMMUNITY_DETECTION,
                                                   distance,
@@ -243,15 +252,15 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_name
                             outfile.write(f'{repr(e)}\n')
                         continue
 
-    print('best_precision of all iterations:')
-    print(best_precision)
+    print('best_combined_score of all iterations:')
+    print(best_combined_score)
 
     if len(y_f1_scores_refined) > 0:
         plot_noise_to_f1_score(x_noises, y_f1_scores_unrefined, y_f1_scores_refined, input_name)
     with open(f'./outputs/{input_name}.txt', 'a') as outfile:
         outfile.write('Best precision found:\n')
-        outfile.write(str(best_precision))
-    return best_precision, best_configs, xixi_precision, golden_standard_precision
+        outfile.write(str(best_combined_score))
+    return best_combined_score, best_configs, xixi_combined_score, golden_standard_precision
 
 
 def export_model_from_original_log_with_precise_labels(input_name, path, use_noise=True):
@@ -281,9 +290,12 @@ def apply_pipeline_multi_layer_igraph_to_log(input_name: str,
                                              distance_variant: DistanceVariant = DistanceVariant.EDIT_DISTANCE,
                                              clustering_variant: ClusteringVariant = ClusteringVariant.COMMUNITY_DETECTION,
                                              original_log_path: str = '',
-                                             best_precision: float = 0,
+                                             best_combined_score: float = 0,
                                              use_frequency=False,
-                                             use_noise=True
+                                             use_noise=True,
+                                             golden_net=None,
+                                             golden_im=None,
+                                             golden_fm=None
                                              ):
     with open(f'./outputs/{input_name}.txt', 'a') as outfile:
         outfile.write(get_config_string(clustering_variant, distance_variant, labels_to_split, number_of_traces,
@@ -319,7 +331,18 @@ def apply_pipeline_multi_layer_igraph_to_log(input_name: str,
                                                                                       label_splitter.short_label_to_original_label)
 
         f1_scores_refined = []
-        if precision > best_precision:
+        model_comparer = ModelComparer(golden_net, golden_im, golden_fm, final_net, initial_marking, final_marking,
+                                       original_log, outfile, 0)
+        s_precision, s_recall = model_comparer.compare_models()
+        print('s_precision')
+        print(s_precision)
+        print('s_recall')
+        print(s_recall)
+        print('Combined score')
+        c_score = precision + s_precision + s_recall
+        print(c_score)
+
+        if precision + s_precision + s_recall > best_combined_score:
             print(f'\nHigher Precision found: {precision}')
 
             if use_noise:
@@ -334,4 +357,4 @@ def apply_pipeline_multi_layer_igraph_to_log(input_name: str,
 
             tree = inductive_miner.apply_tree(split_log)
             export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_name, 'split_log')
-        return precision, f1_scores_refined
+        return precision + s_precision + s_recall, f1_scores_refined
