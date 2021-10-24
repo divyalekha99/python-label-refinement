@@ -55,11 +55,11 @@ class PerformanceEvaluator:
 
     def get_precision(self) -> float:
         # Slower, but "more precise" version
-        # precision = precision_evaluator.apply(self.log, self.net, self.im, self.fm,
-        #                                       variant=precision_evaluator.Variants.ALIGN_ETCONFORMANCE)
-
         precision = precision_evaluator.apply(self.log, self.net, self.im, self.fm,
-                                              variant=precision_evaluator.Variants.ETCONFORMANCE_TOKEN)
+                                              variant=precision_evaluator.Variants.ALIGN_ETCONFORMANCE)
+
+        # precision = precision_evaluator.apply(self.log, self.net, self.im, self.fm,
+        #                                       variant=precision_evaluator.Variants.ETCONFORMANCE_TOKEN)
         self.precision = precision
         self._write('precision')
         self._write(json.dumps(precision))

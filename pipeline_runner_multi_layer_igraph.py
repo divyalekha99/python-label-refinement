@@ -1,6 +1,7 @@
 import re
 from typing import List
 
+import pm4py
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 from pm4py.objects.log.exporter.xes import exporter as xes_exporter
 from pm4py.objects.log.importer.xes import importer as xes_importer
@@ -17,40 +18,58 @@ from file_writer_helper import get_config_string, write_summary_file, \
 from goldenstandardmodel import GoldenStandardModel, export_models_and_pngs
 from label_splitter_event_based_igraph import LabelSplitter as LabelSplitterEventBased
 from label_splitter_multi_layer_igraph import LabelSplitter as LabelSplitterVariantBased
+from log_generator import LogGenerator
 from pipeline_helpers_shared import get_xixi_metrics, get_tuples_for_folder
 from pipeline_runner_single_layer_networkx import get_imprecise_labels
 from pipeline_variant import PipelineVariant, remove_pipeline_variant_from_string
 from plot_helpers import plot_noise_to_f1_score
 from shared_constants import evaluated_models
+from pm4py.algo.discovery.inductive import algorithm as inductive_miner
+from pm4py.objects.conversion.bpmn import converter as bpmn_converter
+from model_comparer import ModelComparer
 
 
 def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
-    apply_pipeline_to_folder([('real_logs/hospital_billing',
-                               '/home/jonas/repositories/pm-label-splitting/example_logs/Hospital_billing_event_log_shortened_labels.xes.gz')],
-                             'real_logs.txt',
-                             PipelineVariant.VARIANTS,
-                             labels_to_split=['6'],
-                             use_frequency=True,
-                             use_noise=False)
+    # apply_pipeline_to_folder([('real_logs/hospital_billing',
+    #                            '/home/jonas/repositories/pm-label-splitting/example_logs/Hospital_billing_event_log_shortened_labels.xes.gz')],
+    #                          'real_logs.txt',
+    #                          PipelineVariant.VARIANTS,
+    #                          labels_to_split=['6'],
+    #                          use_frequency=True,
+    #                          use_noise=False)
+    bpmn_graph = pm4py.read_bpmn(f'/home/jonas/repositories/pm-label-splitting/bpmn_files/loop_example_th_0.bpmn')
+    log_generator = LogGenerator()
+    log = log_generator.get_log_from_bpmn(bpmn_graph)
+
+    net_a, im_a, fm_a = bpmn_converter.apply(bpmn_graph)
+
+    net_b, im_b, fm_b = inductive_miner.apply(log)
+
+    model_comparer = ModelComparer(net_a, im_a, fm_a, net_b, im_b, fm_b, log, '', 0)
+    precision, recall = model_comparer.compare_models()
+    print('final precision')
+    print(precision)
+    print('final recall')
+    print(recall)
 
 
     # feb16_1625_list = get_tuples_for_folder(
     #     '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb16-1625/logs/',
     #     'feb16-1625')
     #
-    # apply_pipeline_to_folder(feb16_1625_list[5:],
+    # apply_pipeline_to_folder(feb16_1625_list,
     #                          'feb16-1625.txt',
     #                          PipelineVariant.VARIANTS,
     #                          labels_to_split=[],
     #                          use_frequency=True,
     #                          use_noise=False)
 
-    apply_pipeline_to_folder(feb16_1625_list[-2:],
-                             'feb16-1625.txt',
-                             PipelineVariant.EVENTS,
-                             labels_to_split=[],
-                             use_frequency=True,
-                             use_noise=False)
+    # apply_pipeline_to_folder(feb16_1625_list[-2:],
+    #                          'feb16-1625.txt',
+    #                          PipelineVariant.EVENTS,
+    #                          labels_to_split=[],
+    #                          use_frequency=True,
+    #                          use_noise=False)
 
     # apply_pipeline_to_folder([('real_logs/road_traffic_fines',
     #                            '/home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process_shortened_labels.xes.gz')],
