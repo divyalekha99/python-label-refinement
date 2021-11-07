@@ -17,11 +17,6 @@ def get_xixi_metrics(input_name, log_path, labels_to_split, g_net, g_im, g_fm):
         log = xes_importer.apply(xixi_refined_log_path)
         labels_to_original = {}
 
-        for trace in log:
-            for event in trace:
-                print('concept:name')
-                print(event['concept:name'])
-
         for label in labels_to_split:
             labels_to_original[label] = label
 
@@ -29,9 +24,9 @@ def get_xixi_metrics(input_name, log_path, labels_to_split, g_net, g_im, g_fm):
         outfile.write('\n Xixi refined log results:\n')
         precision, final_net, initial_marking, final_marking = apply_im_without_noise_and_export(input_name, 'xixi', log, original_log, outfile, labels_to_original=labels_to_original)
 
-        model_comparer = ModelComparer(g_net, g_im, g_fm, final_net, initial_marking, final_marking, log, outfile, precision)
-        s_precision, s_recall = model_comparer.compare_models()
-    return precision + s_precision + s_recall
+        # model_comparer = ModelComparer(g_net, g_im, g_fm, final_net, initial_marking, final_marking, log, outfile, precision)
+        # s_precision, s_recall = model_comparer.compare_models()
+    return precision
 
 
 def get_tuples_for_folder(folder_path, prefix):

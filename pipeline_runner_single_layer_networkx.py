@@ -1,4 +1,5 @@
 import re
+from collections import namedtuple
 from typing import List
 
 import pm4py
@@ -147,7 +148,7 @@ def export_model_from_original_log_with_precise_labels(input_name, path):
                            original_tree)
 
 
-def get_imprecise_labels(log: EventLog) -> list[str]:
+def get_imprecise_labels(log: EventLog) -> list:
     print('Getting imprecise labels')
     imprecise_labels = set()
     for trace in log:
