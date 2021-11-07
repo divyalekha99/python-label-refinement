@@ -18,7 +18,8 @@ from file_writer_helper import get_config_string, write_summary_file, \
     write_summary_file_with_parameters, run_start_string
 from goldenstandardmodel import GoldenStandardModel, export_models_and_pngs
 from label_splitter_event_based_igraph import LabelSplitter as LabelSplitterEventBased
-from label_splitter_multi_layer_igraph import LabelSplitter as LabelSplitterVariantBased
+from label_splitter_variant_based_igraph import LabelSplitter as LabelSplitterVariantBased
+from label_splitter_variant_multiplex import LabelSplitter as LabelSplitterVariantMultiplex
 from log_generator import LogGenerator
 from model_comparer import ModelComparer
 from pipeline_helpers_shared import get_xixi_metrics, get_tuples_for_folder
@@ -57,7 +58,7 @@ def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
 
     apply_pipeline_to_folder(feb16_1625_list,
                              'feb16-1625.txt',
-                             PipelineVariant.VARIANTS,
+                             PipelineVariant.VARIANTS_MULTIPLEX,
                              labels_to_split=[],
                              use_frequency=True,
                              use_noise=False)
@@ -194,10 +195,11 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_name
     y_f1_scores_refined = []
     x_noises = [0, 0.1, 0.2, 0.3, 0.4]
 
+    return best_combined_score, best_configs, xixi_combined_score, golden_standard_precision
+
     for label in labels_to_split:
         for window_size in [2, 3, 4]:
-            for distance in [DistanceVariant.EDIT_DISTANCE, DistanceVariant.SET_DISTANCE,
-                             DistanceVariant.MULTISET_DISTANCE]:
+            for distance in [DistanceVariant.EDIT_DISTANCE]:
                 for threshold in [0, 0.25, 0.5, 0.75]:
                     try:
                         log = xes_importer.apply(
@@ -303,6 +305,14 @@ def apply_pipeline_multi_layer_igraph_to_log(input_name: str,
 
         if pipeline_variant == PipelineVariant.VARIANTS:
             label_splitter = LabelSplitterVariantBased(outfile,
+                                                       labels_to_split,
+                                                       threshold=threshold,
+                                                       window_size=window_size,
+                                                       distance_variant=distance_variant,
+                                                       clustering_variant=clustering_variant,
+                                                       use_frequency=use_frequency)
+        elif pipeline_variant == PipelineVariant.VARIANTS_MULTIPLEX:
+            label_splitter = LabelSplitterVariantMultiplex(outfile,
                                                        labels_to_split,
                                                        threshold=threshold,
                                                        window_size=window_size,

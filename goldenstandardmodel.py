@@ -51,6 +51,8 @@ class GoldenStandardModel:
         self._labels_to_split = labels_to_split
         self._input_identifier = original_input_name if original_input_name != '' \
             else get_input_identifier_from_variant_input_name(self._input_name)
+        print('self._input_identifier')
+        print(self._input_identifier)
         self._imprecise_log = xes_importer.apply(self._path)
         self.net = None
         self.im = None
@@ -59,7 +61,6 @@ class GoldenStandardModel:
     def evaluate_golden_standard_model(self):
         with open(f'./outputs/{self._input_name}.txt', 'a') as outfile:
             outfile.write('\n Performance of golden standard model:\n')
-
             log = get_log_from_input_identifier(self._input_identifier, path=self._path)
 
             imprecise_labels = attributes_filter.get_attribute_values(self._imprecise_log, 'concept:name')

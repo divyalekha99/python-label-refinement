@@ -8,8 +8,15 @@ class PostProcessor:
 
     def post_process_petri_net(self, net: PetriNet) -> PetriNet:
         for transition in net.transitions:
-            if transition.label in self._split_labels_to_original_labels.keys():
-                transition.label = self._split_labels_to_original_labels[transition.label]
+            print('transition.label')
+            print(transition.label)
+            if transition.label is not None and transition.label[0] in self._split_labels_to_original_labels.values():
+                print('Before')
+                print(transition.label)
+                transition.label = transition.label[0]
+                print('After')
+                print(transition.label)
+
         return net
 
     def rename_short_labels_to_original_labels(self, net):
