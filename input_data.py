@@ -19,6 +19,8 @@ class InputData:
     max_number_of_traces: int = 20000000
     input_name: str = ''
     xixi_precision: float = 0
+    xixi_clustering: Clustering = None
+    xixi_ari: float = 0
     ground_truth_model: GoldenStandardModel = None
     ground_truth_precision: float = 0
     ground_truth_clustering: Clustering = None

@@ -14,7 +14,7 @@ from input_preprocessor import InputPreprocessor
 from label_splitter_event_based_igraph import LabelSplitter as LabelSplitterEventBased
 from label_splitter_variant_based_igraph import LabelSplitter as LabelSplitterVariantBased
 from label_splitter_variant_multiplex import LabelSplitter as LabelSplitterVariantMultiplex
-from pipeline_helpers_shared import get_tuples_for_folder
+from pipeline_helpers_shared import get_tuples_for_folder, get_community_similarity
 from pipeline_variant import PipelineVariant
 from plot_helpers import plot_noise_to_f1_score
 from shared_constants import evaluated_models
@@ -47,7 +47,7 @@ def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
         '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb16-1625/logs/',
         'feb16-1625')
 
-    apply_pipeline_to_folder(feb16_1625_list[1:],
+    apply_pipeline_to_folder(feb16_1625_list[2:],
                              'feb16-1625.txt',
                              PipelineVariant.VARIANTS,
                              labels_to_split=[],
@@ -128,13 +128,13 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
         input_preprocessor = InputPreprocessor(input_data)
         input_preprocessor.preprocess_input()
 
-        best_combined_score, best_configs = apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(
+        best_score, best_precision, best_configs = apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(
             input_data)
         try:
             summary_file_name = f'{folder_name}_{pipeline_variant}.txt' if use_frequency else f'{folder_name}_{pipeline_variant}_N_W.txt'
-            write_summary_file_with_parameters(best_configs, best_combined_score, name, summary_file_name)
-            write_summary_file(best_combined_score, input_data.ground_truth_precision, name, summary_file_name,
-                               input_data.xixi_precision)
+            write_summary_file_with_parameters(best_configs, best_score, best_precision, name, summary_file_name)
+            write_summary_file(best_score, best_precision, input_data.ground_truth_precision, name, summary_file_name,
+                               input_data.xixi_precision, input_data.xixi_ari)
         except Exception as e:
             print('----------------Exception occurred------------------------')
             print(e)
@@ -158,6 +158,7 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_data
                            f'/home/jonas/repositories/pm-label-splitting/outputs/{input_data.input_name}_used_log.xes')
 
     best_precision = 0
+    best_score = 0
     best_configs = []
     y_f1_scores_refined = []
     x_noises = [0, 0.1, 0.2, 0.3, 0.4]
@@ -174,15 +175,16 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_data
                             parameters={
                                 xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: input_data.max_number_of_traces})
 
-                        combined_score, f1_scores_refined = apply_pipeline_multi_layer_igraph_to_log(input_data, log,
+                        found_score, precision, f1_scores_refined = apply_pipeline_multi_layer_igraph_to_log(input_data,
+                                                                                                            log,
                                                                                                      distance,
                                                                                                      window_size,
                                                                                                      threshold,
-                                                                                                     best_precision)
+                                                                                                     best_score)
                         if len(f1_scores_refined) > 0:
                             y_f1_scores_refined = f1_scores_refined
 
-                        if combined_score > best_precision:
+                        if found_score > best_score:
                             best_configs = [get_config_string(clustering_variant.ClusteringVariant.COMMUNITY_DETECTION,
                                                               distance,
                                                               input_data.labels_to_split,
@@ -191,8 +193,9 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_data
                                                               threshold,
                                                               window_size,
                                                               use_frequency=input_data.use_frequency)]
-                            best_precision = combined_score
-                        elif round(combined_score, 2) == round(best_precision, 2):
+                            best_score = found_score
+                            best_precision = precision
+                        elif round(found_score, 2) == round(best_score, 2):
                             best_configs.append(
                                 get_config_string(clustering_variant.ClusteringVariant.COMMUNITY_DETECTION,
                                                   distance,
@@ -210,6 +213,9 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_data
                             outfile.write(f'{repr(e)}\n')
                         continue
 
+    print('best_score of all iterations:')
+    print(best_score)
+
     print('best_precision of all iterations:')
     print(best_precision)
 
@@ -218,7 +224,7 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_data
     with open(f'./outputs/{input_data.input_name}.txt', 'a') as outfile:
         outfile.write('Best precision found:\n')
         outfile.write(str(best_precision))
-    return best_precision, best_configs
+    return best_score, best_precision, best_configs
 
 
 def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
@@ -226,7 +232,7 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
                                              distance_variant: DistanceVariant,
                                              window_size: int,
                                              threshold: float,
-                                             best_precision: float):
+                                             best_score: float):
     with open(f'./outputs/{input_data.input_name}.txt', 'a') as outfile:
         outfile.write(get_config_string(clustering_variant.ClusteringVariant.COMMUNITY_DETECTION, distance_variant,
                                         input_data.labels_to_split, input_data.max_number_of_traces,
@@ -273,9 +279,16 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
         # model_comparer = ModelComparer(golden_net, golden_im, golden_fm, final_net, initial_marking, final_marking,
         #                                original_log, outfile, 0)
         # s_precision, s_recall = model_comparer.compare_models()
+        ari_score = get_community_similarity(input_data.ground_truth_clustering, label_splitter.found_clustering)
+        outfile.write(f'\nAdjusted Rand Index:\n')
+        outfile.write(f'{ari_score}\n\n')
 
-        if precision > best_precision:
-            print(f'\nHigher Precision found: {precision}')
+        print(f'\nAdjusted Rand Index:\n')
+        print(f'{ari_score}')
+
+        if ari_score > best_score:
+            print(f'\nHigher Adjusted Rand Index found: {ari_score}')
+            print(f'\nPrecision of found clustering: {precision}')
 
             if input_data.use_noise:
                 outfile.write('\nIM with noise threshold:\n')
@@ -290,4 +303,4 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
 
             tree = inductive_miner.apply_tree(split_log)
             export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_data.input_name, 'split_log')
-        return precision, f1_scores_refined
+        return ari_score, precision, f1_scores_refined

@@ -6,6 +6,7 @@ from typing import TextIO
 import leidenalg as la
 
 import igraph
+from igraph import Clustering
 from pm4py.algo.filtering.log.variants import variants_filter
 from pm4py.objects.log.obj import EventLog
 
@@ -37,6 +38,7 @@ class LabelSplitter:
         self._variant_to_label = {}
         self.use_frequency = use_frequency
         self.short_label_to_original_label = {}
+        self.found_clustering = None
 
         if distance_variant is DistanceVariant.EDIT_DISTANCE:
             self.get_distance = self.distance_calculator.get_edit_distance
@@ -149,6 +151,7 @@ class LabelSplitter:
             print(f'Getting communities for {label}')
             partition = la.find_partition(graph, la.ModularityVertexPartition, weights=graph.es['weight'], seed=396482)
             print(partition)
+            self.found_clustering = partition
             self._write('Found communities: \n')
             self._write(str(partition))
 
