@@ -28,3 +28,4 @@ class InputData:
     labels_to_split: list[str] = field(default_factory=list)
     original_labels: list[str] = field(default_factory=list)
     original_log: EventLog = None
+    concurrent_labels: list[str] = field(default_factory=list)

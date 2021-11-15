@@ -54,7 +54,7 @@ def write_summary_file(best_score, best_precision, golden_standard_precision, na
     with open(f'./outputs/best_results/{summary_file_name}', 'a') as outfile:
         outfile.write(f'\n\nBest score found for {name}:\n')
         outfile.write(f'{str(best_score)}\n')
-        outfile.write(f'\nPrecision of best_score model found for {name}:\n')
+        outfile.write(f'Precision of best_score model found for {name}:\n')
         outfile.write(f'{str(best_precision)}\n')
         if xixi_precision != 0:
             outfile.write(f'Precision found by Xixi for {name}:\n')

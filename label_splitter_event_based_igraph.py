@@ -33,6 +33,7 @@ class LabelSplitter:
         self.distance_calculator = DistanceCalculator(window_size)
         self.clustering_variant = clustering_variant
         self.short_label_to_original_label = {}
+        self.found_clustering = None
 
         if distance_variant is DistanceVariant.EDIT_DISTANCE:
             self.get_distance = self.distance_calculator.get_edit_distance
@@ -118,6 +119,7 @@ class LabelSplitter:
             print(f'Getting communities for {label}')
             partition = la.find_partition(graph, la.ModularityVertexPartition, weights=graph.es['weight'], seed=396482)
             print(partition)
+            self.found_clustering = partition
             self._write('Found communities: \n')
             self._write(str(partition))
 

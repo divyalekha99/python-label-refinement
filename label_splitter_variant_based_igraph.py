@@ -23,7 +23,13 @@ class LabelSplitter:
                  prefix_weight: float = 0.5,
                  distance_variant: DistanceVariant = DistanceVariant.EDIT_DISTANCE,
                  clustering_variant: ClusteringVariant = ClusteringVariant.COMMUNITY_DETECTION,
-                 use_frequency=False):
+                 use_frequency=False,
+                 concurrent_labels=None):
+        if concurrent_labels is None:
+            concurrent_labels = []
+        print('concurrent_labels')
+        print(concurrent_labels)
+        self.concurrent_labels = concurrent_labels
         self.labels_to_split = labels_to_split
         self.window_size = window_size
         self.threshold = threshold
@@ -89,6 +95,8 @@ class LabelSplitter:
                     self.label_and_id_to_event[label] = []
 
                 for preceding_event in processed_events:
+                    if label in self.concurrent_labels:
+                        break
                     preceding_event['suffix'] = preceding_event['suffix'] + label
 
                 if label not in occurrence_counters:
@@ -102,7 +110,8 @@ class LabelSplitter:
                 event['variant'] = label + '_' + str(variant).replace(',', '') + f'_{occurrence_counters[label]}'
                 self.variants_to_count[event['variant']] = len(variants[variant])
                 processed_events.append(event)
-                prefix = prefix + label
+                if label not in self.concurrent_labels:
+                    prefix = prefix + label
             for event in processed_events:
                 label = event['concept:name']
                 if label in self.labels_to_split:

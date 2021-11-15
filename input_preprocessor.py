@@ -74,8 +74,8 @@ class InputPreprocessor:
             self.input_data.labels_to_split = labels_to_split
             self.input_data.original_labels = original_labels
             self.input_data.ground_truth_clustering = ground_truth_clustering
-            self.xixi_clustering = xixi_clustering
-            self.xixi_ari = xixi_ari
+            self.input_data.xixi_clustering = xixi_clustering
+            self.input_data.xixi_ari = xixi_ari
 
     def get_original_labels(self, labels_to_split: list[str]) -> list:
         print('Getting original labels')

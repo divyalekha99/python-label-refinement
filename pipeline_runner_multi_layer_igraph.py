@@ -14,7 +14,7 @@ from input_preprocessor import InputPreprocessor
 from label_splitter_event_based_igraph import LabelSplitter as LabelSplitterEventBased
 from label_splitter_variant_based_igraph import LabelSplitter as LabelSplitterVariantBased
 from label_splitter_variant_multiplex import LabelSplitter as LabelSplitterVariantMultiplex
-from pipeline_helpers_shared import get_tuples_for_folder, get_community_similarity
+from pipeline_helpers_shared import get_tuples_for_folder, get_community_similarity, get_concurrent_labels
 from pipeline_variant import PipelineVariant
 from plot_helpers import plot_noise_to_f1_score
 from shared_constants import evaluated_models
@@ -43,23 +43,17 @@ def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
     # print('final recall')
     # print(recall)
 
-    feb16_1625_list = get_tuples_for_folder(
-        '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb16-1625/logs/',
-        'feb16-1625')
-
-    apply_pipeline_to_folder(feb16_1625_list[2:],
-                             'feb16-1625.txt',
-                             PipelineVariant.VARIANTS,
-                             labels_to_split=[],
-                             use_frequency=True,
-                             use_noise=False)
-
-    # apply_pipeline_to_folder(feb16_1625_list[-2:],
+    # feb16_1625_list = get_tuples_for_folder(
+    #     '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb16-1625/logs/',
+    #     'feb16-1625')
+    #
+    # apply_pipeline_to_folder(feb16_1625_list[2:],
     #                          'feb16-1625.txt',
-    #                          PipelineVariant.EVENTS,
+    #                          PipelineVariant.VARIANTS,
     #                          labels_to_split=[],
     #                          use_frequency=True,
     #                          use_noise=False)
+
 
     # apply_pipeline_to_folder([('real_logs/road_traffic_fines',
     #                            '/home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process_shortened_labels.xes.gz')],
@@ -77,37 +71,37 @@ def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
     #                          use_frequency=False,
     #                          use_noise=False)
     #
-    # mrt07_0946_list = get_tuples_for_folder(
-    #     '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt07-0946/logs/',
-    #     'mrt07-0946')
-    #
-    # apply_pipeline_to_folder(mrt07_0946_list[15:],
-    #                          'mrt07-0946',
-    #                          PipelineVariant.VARIANTS,
-    #                          labels_to_split=[],
-    #                          use_frequency=False,
-    #                          use_noise=False)
+    mrt07_0946_list = get_tuples_for_folder(
+        '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt07-0946/logs/',
+        'mrt07-0946')
 
-    # mrt05_1442_list = get_tuples_for_folder('/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_adaptive_OD/mrt05-1442/logs/', 'mrt05-1442')
-    #
-    # apply_pipeline_to_folder(mrt05_1442_list,
-    #                          'mrt05-1442.txt',
-    #                          PipelineVariant.VARIANTS,
-    #                          labels_to_split=[],
-    #                          use_frequency=False,
-    #                          use_noise=False)
-    #
-    #
+    apply_pipeline_to_folder(mrt07_0946_list,
+                             'mrt07-0946',
+                             PipelineVariant.VARIANTS,
+                             labels_to_split=[],
+                             use_frequency=False,
+                             use_noise=False)
 
-    #
-    # feb19_1230_list = get_tuples_for_folder('/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_IMD/feb19-1230/logs/', 'feb19-1230')
-    #
-    # apply_pipeline_to_folder(feb19_1230_list,
-    #                          'feb19-1230.txt',
-    #                          PipelineVariant.VARIANTS,
-    #                          labels_to_split=[],
-    #                          use_frequency=True,
-    #                          use_noise=False)
+    mrt05_1442_list = get_tuples_for_folder('/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_adaptive_OD/mrt05-1442/logs/', 'mrt05-1442')
+
+    apply_pipeline_to_folder(mrt05_1442_list,
+                             'mrt05-1442.txt',
+                             PipelineVariant.VARIANTS,
+                             labels_to_split=[],
+                             use_frequency=False,
+                             use_noise=False)
+
+
+
+
+    feb19_1230_list = get_tuples_for_folder('/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_IMD/feb19-1230/logs/', 'feb19-1230')
+
+    apply_pipeline_to_folder(feb19_1230_list,
+                             'feb19-1230.txt',
+                             PipelineVariant.VARIANTS,
+                             labels_to_split=[],
+                             use_frequency=True,
+                             use_noise=False)
 
 
 def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_to_split=[], use_frequency=False,
@@ -127,6 +121,21 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
 
         input_preprocessor = InputPreprocessor(input_data)
         input_preprocessor.preprocess_input()
+
+
+        ############################################################
+        ############################################################
+        concurrent_labels = get_concurrent_labels(input_data, 0.85)
+        ############################################################
+        ############################################################
+
+        # concurrent_labels = []
+
+
+
+        input_data.concurrent_labels = concurrent_labels
+        print('concurrent_labels')
+        print(concurrent_labels)
 
         best_score, best_precision, best_configs = apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(
             input_data)
@@ -245,7 +254,8 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
                                                        window_size=window_size,
                                                        distance_variant=distance_variant,
                                                        clustering_variant=clustering_variant.ClusteringVariant.COMMUNITY_DETECTION,
-                                                       use_frequency=input_data.use_frequency)
+                                                       use_frequency=input_data.use_frequency,
+                                                       concurrent_labels=input_data.concurrent_labels)
         elif input_data.pipeline_variant == PipelineVariant.VARIANTS_MULTIPLEX:
             label_splitter = LabelSplitterVariantMultiplex(outfile,
                                                            input_data.labels_to_split,
