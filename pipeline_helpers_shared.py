@@ -3,6 +3,7 @@ import os
 import re
 
 from igraph import Clustering, compare_communities
+from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 from pm4py.algo.filtering.log.variants import variants_filter
 from pm4py.objects.log.importer.xes import importer as xes_importer
 from pm4py.objects.log.obj import EventLog
@@ -26,6 +27,7 @@ def get_xixi_metrics(input_name, log_path, labels_to_split, g_net, g_im, g_fm):
         #         print(event['concept:name'])
 
         clustering = get_clustering_from_xixi_log(log, labels_to_split, outfile)
+        clustering = filter_duplicate_xor(log, labels_to_split, clustering)
 
         labels_to_original = {}
 
@@ -57,7 +59,7 @@ def get_clustering_from_xixi_log(log: EventLog, labels_to_split: list[str], outf
             if label[0] in labels_to_split:
                 if label not in split_labels:
                     split_labels.append(label)
-                clustering.append(split_labels.index(label))
+                clustering.append(int(next(re.finditer(r'\d+$', label)).group(0)))
 
     print('Clustering(clustering)')
     print(Clustering(clustering))
@@ -126,3 +128,64 @@ def get_concurrent_labels(input_data: InputData, threshold: float = 0.85):
         outfile.write('\n Concurrent labels:\n')
         outfile.write(f'{str(concurrent_labels)}\n')
     return concurrent_labels
+
+
+def filter_duplicate_xor(event_log: EventLog, labels_to_split, clustering: Clustering):
+    print('Starting filtering duplicate Xor')
+    net, initial_marking, final_marking = inductive_miner.apply(event_log)
+
+    seen_transitions = []
+    updated_label_mapping = {}
+    must_update_log = False
+
+    for t_1 in net.transitions:
+        if t_1.label is not None and t_1.label[0] in labels_to_split and t_1.label not in seen_transitions:
+            pre_places_1 = set()
+            post_places_1 = set()
+            for arc in t_1.in_arcs:
+                pre_places_1.add(arc.source)
+            for arc in t_1.out_arcs:
+                post_places_1.add(arc.target)
+
+            seen_transitions.append(t_1.label)
+            updated_label_mapping[next(re.finditer(r'\d+$', t_1.label)).group(0)] = t_1.label
+
+            for t_2 in net.transitions:
+                if t_2.label is not None and t_2.label not in seen_transitions and t_2.label[0] in labels_to_split and t_2.label != t_1.label:
+                    pre_places_2 = set()
+                    post_places_2 = set()
+                    for arc in t_2.in_arcs:
+                        pre_places_2.add(arc.source)
+                    for arc in t_2.out_arcs:
+                        post_places_2.add(arc.target)
+
+                    if pre_places_1 == pre_places_2 and post_places_1 == post_places_2:
+                        print(f'Merging {t_2.label} and {t_1.label}')
+                        must_update_log = True
+                        seen_transitions.append(t_2.label)
+                        updated_label_mapping[next(re.finditer(r'\d+$', t_2.label)).group(0)] = t_1.label
+
+    print('Filtering Result:')
+    print(json.dumps(updated_label_mapping))
+    if must_update_log:
+        print('Starting Log update')
+        print('clustering')
+        print(clustering)
+        for trace in event_log:
+            for event in trace:
+                label = event['concept:name']
+                if label[0] in labels_to_split:
+                    event['concept:name'] = updated_label_mapping[next(re.finditer(r'\d+$', label)).group(0)]
+        new_clustering = []
+        print('clustering.membership')
+        print(clustering.membership)
+        for i in range(len(clustering.membership)):
+            m = clustering.membership[i]
+            new_m = next(re.finditer(r'\d+$', updated_label_mapping[f'{m}'])).group(0)
+            new_clustering.append(int(new_m))
+        clustering = Clustering(new_clustering)
+        print('New Clustering')
+        print(clustering)
+
+    print('Finished filtering duplicate xor')
+    return clustering

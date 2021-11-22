@@ -60,6 +60,10 @@ class InputPreprocessor:
             outfile.write('\n Ground truth clustering clustering:\n')
             outfile.write(f'{str(ground_truth_clustering)}\n')
 
+            print('xixi_clustering')
+            print(xixi_clustering)
+            print('ground_truth_clustering')
+            print(ground_truth_clustering)
             xixi_ari = get_community_similarity(ground_truth_clustering, xixi_clustering)
             outfile.write('\n Xixi Adjusted Rand Index:\n')
             outfile.write(f'{xixi_ari}\n')
@@ -112,6 +116,16 @@ class InputPreprocessor:
         print('Clustering(ground_truth_clustering)')
         print(Clustering(ground_truth_clustering))
         return Clustering(ground_truth_clustering)
+
+    def has_duplicate_xor(self):
+        for p in self.input_data.ground_truth_model.net.places:
+            seen_labels = []
+            for a in p.out_arcs:
+                t = a.target
+                if t.label != None and t.label in self.input_data.labels_to_split and t.label in seen_labels:
+                    return True
+                seen_labels.append(t.label)
+        return False
 
 
 def export_model_from_original_log_with_precise_labels(input_name, path, use_noise=True):

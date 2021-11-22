@@ -14,7 +14,8 @@ from input_preprocessor import InputPreprocessor
 from label_splitter_event_based_igraph import LabelSplitter as LabelSplitterEventBased
 from label_splitter_variant_based_igraph import LabelSplitter as LabelSplitterVariantBased
 from label_splitter_variant_multiplex import LabelSplitter as LabelSplitterVariantMultiplex
-from pipeline_helpers_shared import get_tuples_for_folder, get_community_similarity, get_concurrent_labels
+from pipeline_helpers_shared import get_tuples_for_folder, get_community_similarity, get_concurrent_labels, \
+    filter_duplicate_xor
 from pipeline_variant import PipelineVariant
 from plot_helpers import plot_noise_to_f1_score
 from shared_constants import evaluated_models
@@ -47,7 +48,7 @@ def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
     #     '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb16-1625/logs/',
     #     'feb16-1625')
     #
-    # apply_pipeline_to_folder(feb16_1625_list[2:],
+    # apply_pipeline_to_folder(feb16_1625_list[1:],
     #                          'feb16-1625.txt',
     #                          PipelineVariant.VARIANTS,
     #                          labels_to_split=[],
@@ -75,7 +76,7 @@ def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
         '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt07-0946/logs/',
         'mrt07-0946')
 
-    apply_pipeline_to_folder(mrt07_0946_list,
+    apply_pipeline_to_folder(mrt07_0946_list[0:],
                              'mrt07-0946',
                              PipelineVariant.VARIANTS,
                              labels_to_split=[],
@@ -121,6 +122,15 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
 
         input_preprocessor = InputPreprocessor(input_data)
         input_preprocessor.preprocess_input()
+        summary_file_name = f'{folder_name}_{pipeline_variant}.txt' if use_frequency else f'{folder_name}_{pipeline_variant}_N_W.txt'
+
+        if input_preprocessor.has_duplicate_xor():
+            print('############## Skipped ######################')
+            print('Duplicate XOR found, skipping this model')
+            with open(f'./outputs/best_results/{summary_file_name}', 'a') as outfile:
+                outfile.write(f'´\n----------------Skipped Model {input_data.input_name} because of duplicate label ------------------------\n')
+            continue
+
 
 
         ############################################################
@@ -140,7 +150,7 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
         best_score, best_precision, best_configs = apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(
             input_data)
         try:
-            summary_file_name = f'{folder_name}_{pipeline_variant}.txt' if use_frequency else f'{folder_name}_{pipeline_variant}_N_W.txt'
+
             write_summary_file_with_parameters(best_configs, best_score, best_precision, name, summary_file_name)
             write_summary_file(best_score, best_precision, input_data.ground_truth_precision, name, summary_file_name,
                                input_data.xixi_precision, input_data.xixi_ari)
@@ -273,6 +283,10 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
                                                      clustering_variant=clustering_variant.ClusteringVariant.COMMUNITY_DETECTION)
 
         split_log = label_splitter.split_labels(log)
+        print('before')
+        print(label_splitter.found_clustering)
+        split_log_clustering = filter_duplicate_xor(split_log, input_data.labels_to_split, label_splitter.found_clustering)
+        print('After')
 
         outfile.write('\nPerformance split_log:\n')
         outfile.write('\nIM without threshold:\n')
@@ -289,7 +303,7 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
         # model_comparer = ModelComparer(golden_net, golden_im, golden_fm, final_net, initial_marking, final_marking,
         #                                original_log, outfile, 0)
         # s_precision, s_recall = model_comparer.compare_models()
-        ari_score = get_community_similarity(input_data.ground_truth_clustering, label_splitter.found_clustering)
+        ari_score = get_community_similarity(input_data.ground_truth_clustering, split_log_clustering)
         outfile.write(f'\nAdjusted Rand Index:\n')
         outfile.write(f'{ari_score}\n\n')
 
