@@ -22,7 +22,8 @@ class LabelSplitter:
                  prefix_weight: float = 0.5,
                  distance_variant: DistanceVariant = DistanceVariant.EDIT_DISTANCE,
                  clustering_variant: ClusteringVariant = ClusteringVariant.COMMUNITY_DETECTION,
-                 use_frequency=False):
+                 use_frequency=False,
+                 use_combined_context=False):
         self.labels_to_split = labels_to_split
         self.window_size = window_size
         self.threshold = threshold
@@ -32,7 +33,7 @@ class LabelSplitter:
         self.label_and_id_to_event = {}
         self.variants_to_count = {}
         self.distance_variant = distance_variant
-        self.distance_calculator = DistanceCalculator(window_size)
+        self.distance_calculator = DistanceCalculator(window_size, use_combined_context)
         self.clustering_variant = clustering_variant
         self._variant_to_label = {}
         self.use_frequency = use_frequency

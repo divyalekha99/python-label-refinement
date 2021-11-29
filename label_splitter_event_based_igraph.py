@@ -20,7 +20,12 @@ class LabelSplitter:
                  threshold: float = 0.75,
                  prefix_weight: float = 0.5,
                  distance_variant: DistanceVariant = DistanceVariant.EDIT_DISTANCE,
-                 clustering_variant: ClusteringVariant = ClusteringVariant.COMMUNITY_DETECTION):
+                 clustering_variant: ClusteringVariant = ClusteringVariant.COMMUNITY_DETECTION,
+                 concurrent_labels=None,
+                 use_combined_context=False):
+        if concurrent_labels is None:
+            concurrent_labels = []
+        self.concurrent_labels = concurrent_labels
         self.labels_to_split = labels_to_split
         self.window_size = window_size
         self.threshold = threshold
@@ -30,7 +35,7 @@ class LabelSplitter:
         self.label_and_id_to_event = {}
         self.variants_to_count = {}
         self.distance_variant = distance_variant
-        self.distance_calculator = DistanceCalculator(window_size)
+        self.distance_calculator = DistanceCalculator(window_size, use_combined_context)
         self.clustering_variant = clustering_variant
         self.short_label_to_original_label = {}
         self.found_clustering = None
@@ -80,13 +85,16 @@ class LabelSplitter:
                     self.label_and_id_to_event[label] = []
 
                 for preceding_event in processed_events:
+                    if label in self.concurrent_labels:
+                        break
                     preceding_event['suffix'] = preceding_event['suffix'] + label
 
                 event['prefix'] = prefix
                 event['suffix'] = ''
                 event['label'] = label
                 processed_events.append(event)
-                prefix = prefix + label
+                if label not in self.concurrent_labels:
+                    prefix = prefix + label
 
             for event in processed_events:
                 label = event['concept:name']

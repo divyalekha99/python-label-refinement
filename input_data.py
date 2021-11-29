@@ -13,6 +13,7 @@ from pm4py.objects.log.importer.xes import importer as xes_importer
 class InputData:
     log_path: str = ''
     original_input_name: str = ''
+    folder_name: str = ''
     pipeline_variant: PipelineVariant = PipelineVariant.VARIANTS
     use_frequency: bool = True
     use_noise: bool = False
@@ -24,6 +25,7 @@ class InputData:
     ground_truth_model: GoldenStandardModel = None
     ground_truth_precision: float = 0
     ground_truth_clustering: Clustering = None
+    use_combined_context: bool = False
     y_f1_scores_unrefined: list[float] = field(default_factory=list)
     labels_to_split: list[str] = field(default_factory=list)
     original_labels: list[str] = field(default_factory=list)

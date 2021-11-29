@@ -15,9 +15,9 @@ def apply_im_without_noise_and_export(input_name, suffix, split_log, original_lo
                                                                                   original_log,
                                                                                   outfile,
                                                                                   short_labels_to_original_labels)
-    tree = inductive_miner.apply_tree(split_log)
+    # tree = inductive_miner.apply_tree(split_log)
 
-    export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_name, suffix)
+    # export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_name, suffix)
     return precision, final_net, initial_marking, final_marking
 
 
@@ -67,7 +67,7 @@ def apply_im_with_noise_and_export(input_name, suffix, split_log, original_log, 
                                           variant=inductive_miner.Variants.IMf,
                                           parameters={
                                               inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: noise_threshold})
-        export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_name, suffix)
+        # export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_name, suffix)
     return f1_scores
 
 
