@@ -3,11 +3,10 @@ import math
 import string
 from itertools import combinations
 from typing import TextIO
-import leidenalg as la
 
 import igraph
+import leidenalg as la
 from pm4py.algo.filtering.log.variants import variants_filter
-from pm4py.objects.log.obj import EventLog
 
 from clustering_variant import ClusteringVariant
 from distance_metrics import DistanceVariant, DistanceCalculator
@@ -16,12 +15,12 @@ from distance_metrics import DistanceVariant, DistanceCalculator
 class LabelSplitter:
     def __init__(self,
                  outfile: TextIO,
-                 labels_to_split: list[str],
+                 labels_to_split,
                  window_size: int = 3,
                  threshold: float = 0.75,
                  prefix_weight: float = 0.5,
-                 distance_variant: DistanceVariant = DistanceVariant.EDIT_DISTANCE,
-                 clustering_variant: ClusteringVariant = ClusteringVariant.COMMUNITY_DETECTION,
+                 distance_variant=DistanceVariant.EDIT_DISTANCE,
+                 clustering_variant=ClusteringVariant.COMMUNITY_DETECTION,
                  use_frequency=False,
                  use_combined_context=False):
         self.labels_to_split = labels_to_split
@@ -53,12 +52,12 @@ class LabelSplitter:
     def _write(self, log_entry: string) -> None:
         self.outfile.write(f'{log_entry}\n')
 
-    def get_split_labels_to_original_labels(self) -> dict[str, str]:
+    def get_split_labels_to_original_labels(self):
         self._write('Map:')
         self._write(json.dumps(self._split_labels_to_original_labels))
         return self._split_labels_to_original_labels
 
-    def split_labels(self, log: EventLog) -> EventLog:
+    def split_labels(self):
         print('Starting label splitting')
         layers = []
         event_graphs = self.get_event_graphs_from_event_log(log)
@@ -74,7 +73,7 @@ class LabelSplitter:
 
         return log
 
-    def get_event_graphs_from_event_log(self, log) -> dict[str, igraph.Graph]:
+    def get_event_graphs_from_event_log(self, log):
         print('Variants based approach')
         variants = variants_filter.get_variants(log)
         event_graphs = {}
@@ -136,7 +135,7 @@ class LabelSplitter:
 
             for (vertex_a, vertex_b) in combinations(range(len(graph.vs)), 2):
                 edit_distance = self.get_distance_by_index(index, self.label_and_id_to_event[label][vertex_a],
-                                                  self.label_and_id_to_event[label][vertex_b])
+                                                           self.label_and_id_to_event[label][vertex_b])
 
                 normalized_distance = (1 - edit_distance / self.window_size)
                 if self.use_frequency:
@@ -181,13 +180,13 @@ class LabelSplitter:
         self._write('\nReassigned labels')
         print('Finished community detection')
 
-
     def get_communities_leiden_multiplex(self, layers) -> None:
         print('Starting community detection')
         for (label, graph) in layers[0].items():
             print(f'Getting communities for {label}')
             graphs = [graph, layers[1][label], layers[2][label]]
-            membership, improvement = la.find_partition_multiplex(graphs, la.ModularityVertexPartition, weights=graph.es['weight'], seed=396482)
+            membership, improvement = la.find_partition_multiplex(graphs, la.ModularityVertexPartition,
+                                                                  weights=graph.es['weight'], seed=396482)
             print('membership')
             print(membership)
             print('improvement')

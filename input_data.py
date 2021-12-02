@@ -1,8 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List
 
-from igraph import Clustering
-from pm4py.objects.log.obj import EventLog
+from igraph import *
 
 from goldenstandardmodel import GoldenStandardModel
 from pipeline_variant import PipelineVariant
@@ -26,8 +25,8 @@ class InputData:
     ground_truth_precision: float = 0
     ground_truth_clustering: Clustering = None
     use_combined_context: bool = False
-    y_f1_scores_unrefined: list[float] = field(default_factory=list)
-    labels_to_split: list[str] = field(default_factory=list)
-    original_labels: list[str] = field(default_factory=list)
-    original_log: EventLog = None
-    concurrent_labels: list[str] = field(default_factory=list)
+    y_f1_scores_unrefined: object = field(default_factory=list)
+    labels_to_split: object = field(default_factory=list)
+    original_labels: object = field(default_factory=list)
+    original_log: object = None
+    concurrent_labels: object = field(default_factory=list)

@@ -6,7 +6,6 @@ from typing import TextIO
 import community as community_louvain
 import networkx as nx
 from networkx import Graph
-from pm4py.objects.log.obj import EventLog
 
 from clustering_variant import ClusteringVariant
 from distance_metrics import DistanceVariant, DistanceCalculator
@@ -30,12 +29,15 @@ class LabelSplitter:
 
     def __init__(self,
                  outfile: TextIO,
-                 labels_to_split: list[str],
+                 labels_to_split,
                  window_size: int = 3,
                  threshold: float = 0.75,
                  prefix_weight: float = 0.5,
-                 distance_variant: DistanceVariant = DistanceVariant.EDIT_DISTANCE,
-                 clustering_variant: ClusteringVariant = ClusteringVariant.COMMUNITY_DETECTION):
+                 clustering_variant=None,
+                 distance_variant=DistanceVariant.EDIT_DISTANCE,
+                 ):
+        if clustering_variant == None:
+            clustering_variant = ClusteringVariant.COMMUNITY_DETECTION
         self.labels_to_split = labels_to_split
         self.window_size = window_size
         self.threshold = threshold
@@ -60,12 +62,12 @@ class LabelSplitter:
     def _write(self, log_entry: string) -> None:
         self.outfile.write(f'{log_entry}\n')
 
-    def get_split_labels_to_original_labels(self) -> dict[str, str]:
+    def get_split_labels_to_original_labels(self):
         self._write('Map:')
         self._write(json.dumps(self._split_labels_to_original_labels))
         return self._split_labels_to_original_labels
 
-    def split_labels(self, log: EventLog) -> EventLog:
+    def split_labels(self, log):
         print('Starting label splitting')
         event_graphs = self.get_event_graphs_from_event_log(log)
 
@@ -75,7 +77,7 @@ class LabelSplitter:
         self.set_split_labels(event_graphs, log)
         return log
 
-    def get_event_graphs_from_event_log(self, log) -> dict[str, Graph]:
+    def get_event_graphs_from_event_log(self, log):
         event_graphs = {}
         for case_id, trace in enumerate(log):
             prefix = ''

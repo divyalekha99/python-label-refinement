@@ -5,14 +5,12 @@ from pathlib import Path
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 from pm4py.objects.log.exporter.xes import exporter as xes_exporter
 from pm4py.objects.log.importer.xes import importer as xes_importer
-from pm4py.objects.log.obj import EventLog
 
 import clustering_variant
 from apply_im import apply_im_with_noise_and_export, apply_im_without_noise
 from distance_metrics import DistanceVariant
 from file_writer_helper import get_config_string, write_summary_file, \
     write_summary_file_with_parameters, run_start_string
-from goldenstandardmodel import export_models_and_pngs
 from input_data import InputData
 from input_preprocessor import InputPreprocessor
 from label_splitter_event_based_igraph import LabelSplitter as LabelSplitterEventBased
@@ -25,7 +23,7 @@ from plot_helpers import plot_noise_to_f1_score
 from shared_constants import evaluated_models
 
 
-def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
+def run_pipeline_multi_layer_igraph(input_paths) -> None:
     # apply_pipeline_to_folder([('real_logs/hospital_billing',
     #                            '/home/jonas/repositories/pm-label-splitting/example_logs/Hospital_billing_event_log_shortened_labels.xes.gz')],
     #                          'real_logs.txt',
@@ -76,6 +74,17 @@ def run_pipeline_multi_layer_igraph(input_models=evaluated_models) -> None:
     #                          use_frequency=False,
     #                          use_noise=False)
     #
+
+    for path, prefix in input_paths:
+        input_list = get_tuples_for_folder(path, prefix)
+        print('path')
+        print(path)
+        print('prefix')
+        print(prefix)
+        print('input_list')
+        print(input_list)
+        apply_pipeline_to_folder(input_list, prefix, PipelineVariant.VARIANTS, labels_to_split=[], use_noise=False, use_frequency=False)
+
     mrt07_0946_list = get_tuples_for_folder(
         '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt07-0946/logs/',
         'mrt07-0946')
@@ -137,7 +146,8 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
         input_data.original_log = xes_importer.apply(input_data.log_path, parameters={
             xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: input_data.max_number_of_traces})
         input_data.input_name = f'{input_data.original_input_name}_{input_data.pipeline_variant}' if use_frequency else f'{input_data.original_input_name}_{input_data.pipeline_variant}_N_W'
-        input_data.use_combined_context = True
+
+        input_data.use_combined_context = False
 
         input_preprocessor = InputPreprocessor(input_data)
         input_preprocessor.preprocess_input()
@@ -203,11 +213,11 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_data
     x_noises = [0, 0.1, 0.2, 0.3, 0.4]
 
     for label in input_data.labels_to_split:
-        for window_size in [2, 3, 4]:
+        for window_size in [1, 2, 3, 4, 5]:
             for distance in [DistanceVariant.EDIT_DISTANCE,
                              DistanceVariant.SET_DISTANCE,
                              DistanceVariant.MULTISET_DISTANCE]:
-                for threshold in [0, 0.25, 0.5, 0.75]:
+                for threshold in [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]:
                     try:
                         log = copy.deepcopy(input_data.original_log)
 
@@ -264,7 +274,7 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_data
 
 
 def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
-                                             log: EventLog,
+                                             log,
                                              distance_variant: DistanceVariant,
                                              window_size: int,
                                              threshold: float,

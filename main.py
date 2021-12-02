@@ -1,3 +1,6 @@
+import os
+import sys
+
 import pandas as pd
 import pm4py
 from pm4py.objects.conversion.process_tree import converter
@@ -5,6 +8,7 @@ from pm4py.visualization.process_tree import visualizer as pt_visualizer
 
 from pipeline_runner_multi_layer_igraph import run_pipeline_multi_layer_igraph
 
+folder_index = int(sys.argv[1])
 
 def import_csv(file_path):
     event_log = pd.read_csv(file_path, sep=';')
@@ -15,7 +19,13 @@ def import_csv(file_path):
 
 def main() -> None:
     # run_pipeline_single_layer_networkx()
-    run_pipeline_multi_layer_igraph()
+    directory = "../data/imprInLoop_adaptive_OD"
+
+    input_paths = []
+    for folder_name in (os.listdir(directory)):
+        input_paths.append((os.path.join(directory, folder_name, 'logs/'), folder_name))
+
+    run_pipeline_multi_layer_igraph([input_paths[folder_index]])
 
     # bpmn_graph = pm4py.read_bpmn(f'/home/jonas/repositories/pm-label-splitting/bpmn_files/loop_example_th_0.bpmn')
     # log_generator = LogGenerator()

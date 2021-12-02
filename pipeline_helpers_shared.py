@@ -6,7 +6,6 @@ from igraph import Clustering, compare_communities
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 from pm4py.algo.filtering.log.variants import variants_filter
 from pm4py.objects.log.importer.xes import importer as xes_importer
-from pm4py.objects.log.obj import EventLog
 
 from apply_im import apply_im_without_noise_and_export
 from input_data import InputData
@@ -47,7 +46,7 @@ def get_xixi_metrics(input_name, log_path, labels_to_split, g_net, g_im, g_fm):
     return precision, clustering
 
 
-def get_clustering_from_xixi_log(log: EventLog, labels_to_split: list[str], outfile):
+def get_clustering_from_xixi_log(log, labels_to_split, outfile):
     variants = variants_filter.get_variants(log)
     clustering = []
     split_labels = []
@@ -130,7 +129,7 @@ def get_concurrent_labels(input_data: InputData, threshold: float = 0.85):
     return concurrent_labels
 
 
-def filter_duplicate_xor(event_log: EventLog, labels_to_split, clustering: Clustering):
+def filter_duplicate_xor(event_log, labels_to_split, clustering: Clustering):
     print('Starting filtering duplicate Xor')
     net, initial_marking, final_marking = inductive_miner.apply(event_log)
 

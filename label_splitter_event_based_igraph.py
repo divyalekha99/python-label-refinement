@@ -5,7 +5,6 @@ from typing import TextIO
 
 import igraph
 from pm4py.algo.filtering.log.variants import variants_filter
-from pm4py.objects.log.obj import EventLog
 
 from clustering_variant import ClusteringVariant
 from distance_metrics import DistanceVariant, DistanceCalculator
@@ -15,12 +14,12 @@ import leidenalg as la
 class LabelSplitter:
     def __init__(self,
                  outfile: TextIO,
-                 labels_to_split: list[str],
+                 labels_to_split,
                  window_size: int = 3,
                  threshold: float = 0.75,
                  prefix_weight: float = 0.5,
-                 distance_variant: DistanceVariant = DistanceVariant.EDIT_DISTANCE,
-                 clustering_variant: ClusteringVariant = ClusteringVariant.COMMUNITY_DETECTION,
+                 distance_variant = DistanceVariant.EDIT_DISTANCE,
+                 clustering_variant = ClusteringVariant.COMMUNITY_DETECTION,
                  concurrent_labels=None,
                  use_combined_context=False):
         if concurrent_labels is None:
@@ -53,12 +52,12 @@ class LabelSplitter:
     def _write(self, log_entry: string) -> None:
         self.outfile.write(f'{log_entry}\n')
 
-    def get_split_labels_to_original_labels(self) -> dict[str, str]:
+    def get_split_labels_to_original_labels(self):
         self._write('Map:')
         self._write(json.dumps(self._split_labels_to_original_labels))
         return self._split_labels_to_original_labels
 
-    def split_labels(self, log: EventLog) -> EventLog:
+    def split_labels(self, log):
         print('Starting label splitting')
         event_graphs = self.get_event_graphs_from_event_log(log)
 
@@ -67,7 +66,7 @@ class LabelSplitter:
 
         return log
 
-    def get_event_graphs_from_event_log(self, log) -> dict[str, igraph.Graph]:
+    def get_event_graphs_from_event_log(self, log):
         print('Event based approach')
         event_graphs = {}
         for case_id, trace in enumerate(log):

@@ -1,7 +1,6 @@
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 
 from file_writer_helper import write_exception
-from goldenstandardmodel import export_models_and_pngs
 from performance_evaluator import PerformanceEvaluator
 from post_processor import PostProcessor
 

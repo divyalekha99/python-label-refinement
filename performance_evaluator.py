@@ -5,18 +5,16 @@
 #
 import json
 import string
-from typing import Any, TextIO
+from typing import TextIO
 
-from pm4py.objects.log.obj import EventLog
-from pm4py.objects.petri_net.obj import PetriNet, Marking
-from pm4py.algo.evaluation.replay_fitness import algorithm as replay_fitness_evaluator
-from pm4py.algo.evaluation.precision import algorithm as precision_evaluator
-from pm4py.algo.evaluation.generalization import algorithm as generalization_evaluator
-from pm4py.algo.evaluation.simplicity import algorithm as simplicity_evaluator
+from pm4py.evaluation.replay_fitness import evaluator as replay_fitness_evaluator
+from pm4py.evaluation.precision import evaluator as precision_evaluator
+from pm4py.evaluation.generalization import evaluator as generalization_evaluator
+from pm4py.evaluation.simplicity import evaluator as simplicity_evaluator
 
 
 class PerformanceEvaluator:
-    def __init__(self, net: PetriNet, im: Marking, fm: Marking, log: EventLog, outfile: TextIO, skip_fitness=False):
+    def __init__(self, net, im, fm, log, outfile: TextIO, skip_fitness=False):
         self.net = net
         self.im = im
         self.fm = fm
@@ -35,7 +33,7 @@ class PerformanceEvaluator:
         self.get_simplicity()
         self.get_generalization()
 
-    def get_fitness(self) -> dict[str, Any]:
+    def get_fitness(self):
         # Models expected to have fitness 1 (Inductive miner)
         # self._write(log)
         # token_fitness = replay_fitness_evaluator.apply(log, net, im, fm, variant=replay_fitness_evaluator.Variants.TOKEN_BASED)

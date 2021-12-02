@@ -1,6 +1,6 @@
 import re
 
-from igraph import Clustering
+from igraph import *
 from pm4py.objects.log.importer.xes import importer as xes_importer
 
 from apply_im import write_data_from_original_log_with_imprecise_labels, apply_im_with_noise_and_export, \
@@ -81,7 +81,7 @@ class InputPreprocessor:
             # self.input_data.xixi_clustering = xixi_clustering
             # self.input_data.xixi_ari = xixi_ari
 
-    def get_original_labels(self, labels_to_split: list[str]) -> list:
+    def get_original_labels(self, labels_to_split):
         print('Getting original labels')
         original_labels = set()
         log = self.input_data.original_log
@@ -97,7 +97,7 @@ class InputPreprocessor:
         print(list(original_labels))
         return list(original_labels)
 
-    def get_ground_truth_clustering(self, original_labels: list[str], labels_to_split: list[str]):
+    def get_ground_truth_clustering(self, original_labels, labels_to_split):
         log = self.input_data.original_log
         ground_truth_clustering = []
         variants = variants_filter.get_variants(log)

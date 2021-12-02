@@ -1,25 +1,24 @@
 import re
-from typing import List
 
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 from pm4py.algo.filtering.log.attributes import attributes_filter
 from pm4py.objects.log.importer.xes import importer as xes_importer
-from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
+# from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
 
 from performance_evaluator import PerformanceEvaluator
-from pipeline_runner_single_layer_networkx import save_models_as_png
+# from pipeline_runner_single_layer_networkx import save_models_as_png
 from pipeline_variant import remove_pipeline_variant_from_string
 
 
-def export_models_and_pngs(final_marking, initial_marking, net, original_tree, input_name, suffix):
-    pnml_exporter.apply(net, initial_marking,
-                        f'/home/jonas/repositories/pm-label-splitting/outputs/{input_name}_{suffix}.pnml',
-                        final_marking=final_marking)
-    save_models_as_png(f'{input_name}_{suffix}',
-                       final_marking,
-                       initial_marking,
-                       net,
-                       original_tree)
+# def export_models_and_pngs(final_marking, initial_marking, net, original_tree, input_name, suffix):
+#     pnml_exporter.apply(net, initial_marking,
+#                         f'/home/jonas/repositories/pm-label-splitting/outputs/{input_name}_{suffix}.pnml',
+#                         final_marking=final_marking)
+#     save_models_as_png(f'{input_name}_{suffix}',
+#                        final_marking,
+#                        initial_marking,
+#                        net,
+#                        original_tree)
 
 
 def rename_transitions_to_original_label(imprecise_labels, net, labels_to_split):
@@ -45,7 +44,7 @@ def get_log_from_input_identifier(input_identifier, path):
 
 
 class GoldenStandardModel:
-    def __init__(self, input_name: str, original_input_name: str, path: str, labels_to_split: List[str]):
+    def __init__(self, input_name: str, original_input_name: str, path: str, labels_to_split):
         self._input_name = input_name
         self._path = path
         self._labels_to_split = labels_to_split
@@ -77,7 +76,7 @@ class GoldenStandardModel:
                                                          outfile, skip_fitness=True)
             performance_evaluator.evaluate_performance()
 
-            original_tree = inductive_miner.apply_tree(log)
-            export_models_and_pngs(final_marking, initial_marking, net, original_tree, self._input_name, 'no_noise_golden')
+            # original_tree = inductive_miner.apply_tree(log)
+            # export_models_and_pngs(final_marking, initial_marking, net, original_tree, self._input_name, 'no_noise_golden')
 
         return performance_evaluator.precision
