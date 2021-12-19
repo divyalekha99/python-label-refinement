@@ -26,8 +26,6 @@ class LabelSplitter:
                  use_combined_context=False):
         if concurrent_labels is None:
             concurrent_labels = []
-        print('concurrent_labels')
-        print(concurrent_labels)
         self.concurrent_labels = concurrent_labels
         self.labels_to_split = labels_to_split
         self.window_size = window_size
@@ -158,7 +156,6 @@ class LabelSplitter:
         for (label, graph) in event_graphs.items():
             print(f'Getting communities for {label}')
             partition = la.find_partition(graph, la.ModularityVertexPartition, weights=graph.es['weight'], seed=396482)
-            print(partition)
             self.found_clustering = partition
             self._write('Found communities: \n')
             self._write(str(partition))

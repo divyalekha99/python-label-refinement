@@ -1,18 +1,18 @@
-python3 main.py 0
-#python3 main.py 1 &
-#python3 main.py 2 &
-#python3 main.py 3 &
-#python3 main.py 4 &
-#python3 main.py 5 &
-#python3 main.py 6 &
-#python3 main.py 7 &
-#python3 main.py 8 &
-#python3 main.py 9 &
-#python3 main.py 10 &
-#python3 main.py 11 &
-#python3 main.py 12 &
-#python3 main.py 13 &
-#python3 main.py 14 &
-#python3 main.py 15 &
-#python3 main.py 16 &
-#python3 main.py 17 &
+python3 main.py 0 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 1 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 2 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 3 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 4 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 5 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 6 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 7 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 8 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 9 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 10 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 11 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 12 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 13 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 14 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 15 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 16 '../data/imprInLoop_adaptive_OD' &
+python3 main.py 17 '../data/imprInLoop_adaptive_OD' &

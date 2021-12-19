@@ -1,16 +1,16 @@
 import re
 
 from igraph import *
+from pm4py.algo.filtering.log.variants import variants_filter
 from pm4py.objects.log.importer.xes import importer as xes_importer
 
-from apply_im import write_data_from_original_log_with_imprecise_labels, apply_im_with_noise_and_export, \
+from apply_im import apply_im_with_noise_and_export, \
     apply_im_without_noise_and_export
 from goldenstandardmodel import GoldenStandardModel
 from input_data import InputData
 from pipeline_helpers_shared import get_xixi_metrics, get_community_similarity
 from pipeline_runner_single_layer_networkx import get_imprecise_labels
 from pipeline_variant import remove_pipeline_variant_from_string, PipelineVariant
-from pm4py.algo.filtering.log.variants import variants_filter
 
 
 class InputPreprocessor:
@@ -21,11 +21,11 @@ class InputPreprocessor:
         with open(f'./outputs/{self.input_data.input_name}.txt', 'a') as outfile:
             original_log = self.input_data.original_log
 
-            # xixi_precision = 0
+            xixi_precision = 0
             ground_truth_precision = 0
             labels_to_split = []
             ground_truth_model = None
-            # xixi_clustering = None
+            xixi_clustering = None
 
             if not self.input_data.labels_to_split:
                 labels_to_split = get_imprecise_labels(original_log)
@@ -38,20 +38,14 @@ class InputPreprocessor:
                 print('ground_truth_precision')
                 print(ground_truth_precision)
 
-                # xixi_precision, xixi_clustering = get_xixi_metrics(self.input_data.input_name, self.input_data.log_path, labels_to_split,
-                #                                   ground_net, ground_im,
-                #                                   ground_fm)
-                # print('xixi_precision')
-                # print(xixi_precision)
+                xixi_precision, xixi_clustering = get_xixi_metrics(labels_to_split, self.input_data)
 
                 # export_model_from_original_log_with_precise_labels(self.input_data.input_name, self.input_data.log_path,
                 #                                                    self.input_data.use_noise)
 
-            # print('getting f1_scores')
             # y_f1_scores_unrefined = write_data_from_original_log_with_imprecise_labels(self.input_data.input_name,
             #                                                                            original_log,
             #                                                                            self.input_data.use_noise)
-            print('After')
             original_labels = self.get_original_labels(labels_to_split)
             outfile.write('\n Original Labels:\n')
             outfile.write(f'{str(original_labels)}\n')
@@ -64,25 +58,25 @@ class InputPreprocessor:
             # print(xixi_clustering)
             print('ground_truth_clustering')
             print(ground_truth_clustering)
-            # xixi_ari = get_community_similarity(ground_truth_clustering, xixi_clustering)
-            # outfile.write('\n Xixi Adjusted Rand Index:\n')
-            # outfile.write(f'{xixi_ari}\n')
+            xixi_ari = 0 # get_community_similarity(ground_truth_clustering, xixi_clustering)
+            outfile.write('\n Xixi Adjusted Rand Index:\n')
+            outfile.write(f'{xixi_ari}\n')
 
             # print('\n Xixi Adjusted Rand Index:\n')
             # print(f'{xixi_ari}\n')
 
-            # self.input_data.xixi_precision = xixi_precision
+            self.input_data.original_labels = original_labels
+            self.input_data.xixi_precision = xixi_precision
             self.input_data.ground_truth_precision = ground_truth_precision
             # self.input_data.y_f1_scores_unrefined = y_f1_scores_unrefined
             self.input_data.ground_truth_model = ground_truth_model
             self.input_data.labels_to_split = labels_to_split
             self.input_data.original_labels = original_labels
             self.input_data.ground_truth_clustering = ground_truth_clustering
-            # self.input_data.xixi_clustering = xixi_clustering
-            # self.input_data.xixi_ari = xixi_ari
+            self.input_data.xixi_clustering = xixi_clustering
+            self.input_data.xixi_ari = xixi_ari
 
     def get_original_labels(self, labels_to_split):
-        print('Getting original labels')
         original_labels = set()
         log = self.input_data.original_log
 
@@ -93,8 +87,6 @@ class InputPreprocessor:
             for event in filtered_log[0]:
                 if event['concept:name'] in labels_to_split:
                     original_labels.add(event['OrgLabel'])
-        print('list(original_labels)')
-        print(list(original_labels))
         return list(original_labels)
 
     def get_ground_truth_clustering(self, original_labels, labels_to_split):
@@ -113,8 +105,6 @@ class InputPreprocessor:
                 for event in trace:
                     if event['concept:name'] in labels_to_split:
                         ground_truth_clustering.append(original_labels.index(event['OrgLabel']))
-        print('Clustering(ground_truth_clustering)')
-        print(Clustering(ground_truth_clustering))
         return Clustering(ground_truth_clustering)
 
     def has_duplicate_xor(self):

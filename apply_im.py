@@ -49,6 +49,7 @@ def apply_im_with_noise_and_export(input_name, suffix, split_log, original_log, 
                                                                         parameters={
                                                                             inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: noise_threshold})
         except Exception as e:
+            print('Exception occurred while applying IM with noise')
             write_exception(e, outfile)
             continue
 

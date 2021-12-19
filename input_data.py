@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List
+from typing import List, Iterable
 
 from igraph import *
 
@@ -13,6 +13,7 @@ class InputData:
     log_path: str = ''
     original_input_name: str = ''
     folder_name: str = ''
+    summary_file_name: str = ''
     pipeline_variant: PipelineVariant = PipelineVariant.VARIANTS
     use_frequency: bool = True
     use_noise: bool = False
@@ -26,7 +27,7 @@ class InputData:
     ground_truth_clustering: Clustering = None
     use_combined_context: bool = False
     y_f1_scores_unrefined: object = field(default_factory=list)
-    labels_to_split: object = field(default_factory=list)
-    original_labels: object = field(default_factory=list)
+    labels_to_split: Iterable[str] = field(default_factory=list)
+    original_labels: Iterable[str] = field(default_factory=list)
     original_log: object = None
-    concurrent_labels: object = field(default_factory=list)
+    concurrent_labels: Iterable[str] = field(default_factory=list)

@@ -2,8 +2,6 @@ import copy
 import csv
 from pathlib import Path
 
-from pm4py.algo.discovery.inductive import algorithm as inductive_miner
-from pm4py.objects.log.exporter.xes import exporter as xes_exporter
 from pm4py.objects.log.importer.xes import importer as xes_importer
 
 import clustering_variant
@@ -16,47 +14,12 @@ from input_preprocessor import InputPreprocessor
 from label_splitter_event_based_igraph import LabelSplitter as LabelSplitterEventBased
 from label_splitter_variant_based_igraph import LabelSplitter as LabelSplitterVariantBased
 from label_splitter_variant_multiplex import LabelSplitter as LabelSplitterVariantMultiplex
-from pipeline_helpers_shared import get_tuples_for_folder, get_community_similarity, get_concurrent_labels, \
-    filter_duplicate_xor
+from pipeline_helpers_shared import get_tuples_for_folder, get_community_similarity, filter_duplicate_xor
 from pipeline_variant import PipelineVariant
 from plot_helpers import plot_noise_to_f1_score
-from shared_constants import evaluated_models
 
 
 def run_pipeline_multi_layer_igraph(input_paths) -> None:
-    # apply_pipeline_to_folder([('real_logs/hospital_billing',
-    #                            '/home/jonas/repositories/pm-label-splitting/example_logs/Hospital_billing_event_log_shortened_labels.xes.gz')],
-    #                          'real_logs.txt',
-    #                          PipelineVariant.VARIANTS,
-    #                          labels_to_split=['6'],
-    #                          use_frequency=True,
-    #                          use_noise=False)
-    # bpmn_graph = pm4py.read_bpmn(f'/home/jonas/repositories/pm-label-splitting/bpmn_files/loop_example_th_0.bpmn')
-    # log_generator = LogGenerator()
-    # log = log_generator.get_log_from_bpmn(bpmn_graph)
-    #
-    # net_a, im_a, fm_a = bpmn_converter.apply(bpmn_graph)
-    #
-    # net_b, im_b, fm_b = inductive_miner.apply(log)
-    #
-    # model_comparer = ModelComparer(net_a, im_a, fm_a, net_b, im_b, fm_b, log, '', 0)
-    # precision, recall = model_comparer.compare_models()
-    # print('final precision')
-    # print(precision)
-    # print('final recall')
-    # print(recall)
-
-    # feb16_1625_list = get_tuples_for_folder(
-    #     '/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_OD/feb16-1625/logs/',
-    #     'feb16-1625')
-    #
-    # apply_pipeline_to_folder(feb16_1625_list[1:],
-    #                          'feb16-1625.txt',
-    #                          PipelineVariant.VARIANTS,
-    #                          labels_to_split=[],
-    #                          use_frequency=True,
-    #                          use_noise=False)
-
 
     # apply_pipeline_to_folder([('real_logs/road_traffic_fines',
     #                            '/home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process_shortened_labels.xes.gz')],
@@ -66,67 +29,38 @@ def run_pipeline_multi_layer_igraph(input_paths) -> None:
     #                          use_frequency=True,
     #                          use_noise=False)
 
-    # apply_pipeline_to_folder([('real_logs/BPI_Challenge_2017_N_W',
-    #                            '/home/jonas/repositories/pm-label-splitting/example_logs/BPI_Challenge_2017_shortened_labels.xes.gz')],
-    #                          'real_logs.txt',
+    for path, prefix in input_paths:
+        input_list = get_tuples_for_folder(path, prefix)
+        apply_pipeline_to_folder(input_list, prefix, PipelineVariant.VARIANTS, labels_to_split=[], use_noise=False,
+                                 use_frequency=False)
+
+    # mrt07_0946_list = get_tuples_for_folder(
+    #     '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt07-0946/logs/',
+    #     'mrt07-0946')
+    #
+    # apply_pipeline_to_folder(mrt07_0946_list[1:],
+    #                          'mrt07-0946',
     #                          PipelineVariant.VARIANTS,
-    #                          labels_to_split=['e'],
+    #                          labels_to_split=[],
     #                          use_frequency=False,
     #                          use_noise=False)
     #
-
-    for path, prefix in input_paths:
-        input_list = get_tuples_for_folder(path, prefix)
-        print('path')
-        print(path)
-        print('prefix')
-        print(prefix)
-        print('input_list')
-        print(input_list)
-        apply_pipeline_to_folder(input_list, prefix, PipelineVariant.VARIANTS, labels_to_split=[], use_noise=False, use_frequency=False)
-
-    mrt07_0946_list = get_tuples_for_folder(
-        '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt07-0946/logs/',
-        'mrt07-0946')
-
-    apply_pipeline_to_folder(mrt07_0946_list[1:],
-                             'mrt07-0946',
-                             PipelineVariant.VARIANTS,
-                             labels_to_split=[],
-                             use_frequency=False,
-                             use_noise=False)
-
-    mrt05_1442_list = get_tuples_for_folder('/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_adaptive_OD/mrt05-1442/logs/', 'mrt05-1442')
-
-    apply_pipeline_to_folder(mrt05_1442_list,
-                             'mrt05-1442.txt',
-                             PipelineVariant.VARIANTS,
-                             labels_to_split=[],
-                             use_frequency=False,
-                             use_noise=False)
-
-
-
-
-    feb19_1230_list = get_tuples_for_folder('/home/jonas/repositories/pm-label-splitting/example_logs/noImprInLoop_default_IMD/feb19-1230/logs/', 'feb19-1230')
-
-    apply_pipeline_to_folder(feb19_1230_list,
-                             'feb19-1230.txt',
-                             PipelineVariant.VARIANTS,
-                             labels_to_split=[],
-                             use_frequency=True,
-                             use_noise=False)
 
 
 def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_to_split=[], use_frequency=False,
                              use_noise=True):
     header = [
-        'Name', 'labels_to_split', 'use_combined_context', 'window_size', 'distance_metric', 'threshold',
-        'Precision Align', 'ARI'
-    ]
+        'Name', 'labels_to_split', 'original labels', 'Xixi number of Clusters found', 'Xixi Precision', 'Xixi ARI',
+        'use_combined_context', 'window_size', 'distance_metric', 'threshold', 'Number of Clusters found',
+        'Precision Align', 'ARI']
 
     # Path(f'./results/{folder_name}').mkdir(parents=True, exist_ok=True)
     Path(f'./outputs/{folder_name}').mkdir(parents=True, exist_ok=True)
+
+    csv_file_path = Path(f'./results/{folder_name}_{pipeline_variant}.csv')
+    if csv_file_path.is_file():
+        print('Warning: File already existis exiting')
+        return
 
     with open(f'./results/{folder_name}_{pipeline_variant}.csv', 'w') as f:
         writer = csv.writer(f)
@@ -139,7 +73,7 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
                                labels_to_split=labels_to_split,
                                use_frequency=use_frequency,
                                use_noise=use_noise,
-                               max_number_of_traces=20000000,
+                               max_number_of_traces=500,
                                folder_name=folder_name
                                )
 
@@ -152,16 +86,15 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
         input_preprocessor = InputPreprocessor(input_data)
         input_preprocessor.preprocess_input()
         summary_file_name = f'{folder_name}_{pipeline_variant}.txt' if use_frequency else f'{folder_name}_{pipeline_variant}_N_W.txt'
-
+        input_data.summary_file_name = summary_file_name
 
         if input_preprocessor.has_duplicate_xor():
             print('############## Skipped ######################')
             print('Duplicate XOR found, skipping this model')
             with open(f'./outputs/best_results/{summary_file_name}', 'a') as outfile:
-                outfile.write(f'´\n----------------Skipped Model {input_data.input_name} because of duplicate label ------------------------\n')
+                outfile.write(
+                    f'´\n----------------Skipped Model {input_data.input_name} because of duplicate label ------------------------\n')
             continue
-
-
 
         ############################################################
         ############################################################
@@ -170,8 +103,6 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
         ############################################################
 
         concurrent_labels = []
-
-
 
         input_data.concurrent_labels = concurrent_labels
         print('concurrent_labels')
@@ -185,10 +116,10 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
             write_summary_file(best_score, best_precision, input_data.ground_truth_precision, name, summary_file_name,
                                input_data.xixi_precision, input_data.xixi_ari)
         except Exception as e:
-            print('----------------Exception occurred------------------------')
-            print(e)
+            print('----------------Exception occurred while writing summary file ------------------------')
+            print(repr(e))
             with open(f'./outputs/best_results/{summary_file_name}', 'a') as outfile:
-                outfile.write(f'´\n----------------Exception occurred------------------------\n')
+                outfile.write(f'´\n----------------Exception occurred while writing summary file------------------------\n')
                 outfile.write(f'{repr(e)}\n')
             continue
 
@@ -198,14 +129,6 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_data
         print(f'Starting pipeline for {input_data.input_name}')
         outfile.write(run_start_string())
 
-    # if input_data.max_number_of_traces < 20000000:
-    #     log = xes_importer.apply(
-    #         input_data.log_path,
-    #         parameters={
-    #             xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: input_data.max_number_of_traces})
-    #     xes_exporter.apply(log,
-    #                        f'/home/jonas/repositories/pm-label-splitting/outputs/{input_data.input_name}_used_log.xes')
-
     best_precision = 0
     best_score = 0
     best_configs = []
@@ -213,51 +136,73 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_data
     x_noises = [0, 0.1, 0.2, 0.3, 0.4]
 
     for label in input_data.labels_to_split:
-        for window_size in [1, 2, 3, 4, 5]:
-            for distance in [DistanceVariant.EDIT_DISTANCE,
-                             DistanceVariant.SET_DISTANCE,
-                             DistanceVariant.MULTISET_DISTANCE]:
-                for threshold in [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]:
-                    try:
-                        log = copy.deepcopy(input_data.original_log)
+        for i in range(2):
+            if i == 1:
+                input_data.use_combined_context = True
+            else:
+                input_data.use_combined_context = False
+            for window_size in [1, 2, 3, 4, 5]:
+                for distance in [DistanceVariant.EDIT_DISTANCE,
+                                 DistanceVariant.SET_DISTANCE,
+                                 DistanceVariant.MULTISET_DISTANCE]:
+                    for threshold in [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]:
+                        try:
+                            log = copy.deepcopy(input_data.original_log)
 
-                        found_score, precision, f1_scores_refined = apply_pipeline_multi_layer_igraph_to_log(input_data,
-                                                                                                            log,
-                                                                                                     distance,
-                                                                                                     window_size,
-                                                                                                     threshold,
-                                                                                                     best_score)
-                        if len(f1_scores_refined) > 0:
-                            y_f1_scores_refined = f1_scores_refined
+                            found_score, precision, f1_scores_refined = apply_pipeline_multi_layer_igraph_to_log(
+                                input_data,
+                                log,
+                                distance,
+                                window_size,
+                                threshold,
+                                best_score)
+                            if len(f1_scores_refined) > 0:
+                                y_f1_scores_refined = f1_scores_refined
 
-                        if found_score > best_score:
-                            best_configs = [get_config_string(clustering_variant.ClusteringVariant.COMMUNITY_DETECTION,
-                                                              distance,
-                                                              input_data.labels_to_split,
-                                                              input_data.max_number_of_traces,
-                                                              input_data.log_path,
-                                                              threshold,
-                                                              window_size,
-                                                              use_frequency=input_data.use_frequency)]
-                            best_score = found_score
-                            best_precision = precision
-                        elif round(found_score, 2) == round(best_score, 2):
-                            best_configs.append(
-                                get_config_string(clustering_variant.ClusteringVariant.COMMUNITY_DETECTION,
-                                                  distance,
-                                                  input_data.labels_to_split,
-                                                  input_data.max_number_of_traces,
-                                                  input_data.log_path,
-                                                  threshold,
-                                                  window_size,
-                                                  use_frequency=input_data.use_frequency))
-                    except Exception as e:
-                        print('----------------Exception occurred------------------------')
-                        print(e)
-                        with open(f'./outputs/{input_data.input_name}.txt', 'a') as outfile:
-                            outfile.write(f'´\n----------------Exception occurred------------------------\n')
-                            outfile.write(f'{repr(e)}\n')
-                        continue
+                            if found_score > best_score:
+                                best_configs = [
+                                    get_config_string(clustering_variant.ClusteringVariant.COMMUNITY_DETECTION,
+                                                      distance,
+                                                      input_data.labels_to_split,
+                                                      input_data.max_number_of_traces,
+                                                      input_data.log_path,
+                                                      threshold,
+                                                      window_size,
+                                                      use_frequency=input_data.use_frequency)]
+                                best_score = found_score
+                                best_precision = precision
+                            elif round(found_score, 2) == round(best_score, 2):
+                                best_configs.append(
+                                    get_config_string(clustering_variant.ClusteringVariant.COMMUNITY_DETECTION,
+                                                      distance,
+                                                      input_data.labels_to_split,
+                                                      input_data.max_number_of_traces,
+                                                      input_data.log_path,
+                                                      threshold,
+                                                      window_size,
+                                                      use_frequency=input_data.use_frequency))
+                        except Exception as e:
+                            print('----------------Exception occurred while running pipeline ------------------------')
+                            print(repr(e))
+                            with open(f'./outputs/best_results/{input_data.summary_file_name}', 'a') as outfile:
+                                outfile.write(
+                                    f'´\n----------------Exception occurred while running pipeline------------------------\n')
+                                outfile.write(f'{repr(e)}\n')
+                                outfile.write('Error parameters:')
+                                outfile.write(f'{input_data.input_name}')
+                                outfile.write(f'{window_size}\n')
+                                outfile.write(f'{threshold}\n')
+                                outfile.write(f'{distance}\n')
+                                outfile.write(f'{input_data.use_combined_context}\n')
+
+                            with open(f'./outputs/{input_data.input_name}.txt', 'a') as outfile:
+                                outfile.write(f'´\n----------------Exception occurred------------------------\n')
+                                outfile.write(f'{repr(e)}\n')
+                                outfile.write(f'{window_size}\n')
+                                outfile.write(f'{threshold}\n')
+                                outfile.write(f'{distance}\n')
+                                outfile.write(f'{input_data.use_combined_context}\n')
+                            continue
 
     print('best_score of all iterations:')
     print(best_score)
@@ -313,10 +258,8 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
                                                      use_combined_context=input_data.use_combined_context)
 
         split_log = label_splitter.split_labels(log)
-        print('before')
-        print(label_splitter.found_clustering)
-        split_log_clustering = filter_duplicate_xor(split_log, input_data.labels_to_split, label_splitter.found_clustering)
-        print('After')
+        split_log_clustering = filter_duplicate_xor(split_log, input_data.labels_to_split,
+                                                    label_splitter.found_clustering)
 
         outfile.write('\nPerformance split_log:\n')
         outfile.write('\nIM without threshold:\n')
@@ -330,9 +273,6 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
                                                                                       label_splitter.short_label_to_original_label)
 
         f1_scores_refined = []
-        # model_comparer = ModelComparer(golden_net, golden_im, golden_fm, final_net, initial_marking, final_marking,
-        #                                original_log, outfile, 0)
-        # s_precision, s_recall = model_comparer.compare_models()
         ari_score = get_community_similarity(input_data.ground_truth_clustering, split_log_clustering)
         outfile.write(f'\nAdjusted Rand Index:\n')
         outfile.write(f'{ari_score}\n\n')
@@ -340,14 +280,13 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
         print(f'\nAdjusted Rand Index:\n')
         print(f'{ari_score}')
 
-        #
-        #      'Name', 'labels_to_split', 'use_combined_context', 'window_size', 'distance_metric', 'threshold',
-        #       'Precision Align', 'ARI'
-
         with open(f'./results/{input_data.folder_name}_{input_data.pipeline_variant}.csv', 'a') as f:
             writer = csv.writer(f)
-            row = [input_data.original_input_name, ' '.join(input_data.labels_to_split), input_data.use_combined_context, window_size, distance_variant, threshold,
-                   precision, ari_score]
+            row = [input_data.original_input_name, ' '.join(input_data.labels_to_split),
+                   ', '.join(input_data.original_labels), len(input_data.xixi_clustering),
+                   input_data.xixi_precision, input_data.xixi_ari,
+                   input_data.use_combined_context, window_size, distance_variant, threshold,
+                   len(label_splitter.found_clustering), precision, ari_score]
             writer.writerow(row)
 
         if ari_score > best_score:
