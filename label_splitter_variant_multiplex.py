@@ -10,6 +10,7 @@ from pm4py.algo.filtering.log.variants import variants_filter
 
 from clustering_variant import ClusteringVariant
 from distance_metrics import DistanceVariant, DistanceCalculator
+from label_splitter_variant_based_igraph import ncr
 
 
 class LabelSplitter:
@@ -154,7 +155,7 @@ class LabelSplitter:
                         ########################################################################
                         # TODO: Check if times 2 or not!!!!!!!
                         ########################################################################
-                        weight = math.comb(count, 2) * 2
+                        weight = ncr(count, 2) * 2
                         edges.append((vertex_a, vertex_a))
                         weights.append(weight)
             graph.add_edges(edges)

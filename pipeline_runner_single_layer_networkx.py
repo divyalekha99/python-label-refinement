@@ -15,9 +15,9 @@ from post_processor import PostProcessor
 from shared_constants import evaluated_models
 
 
-# from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
-# from pm4py.visualization.petri_net import visualizer as pn_visualizer
-# from pm4py.visualization.process_tree import visualizer as pt_visualizer
+from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
+from pm4py.visualization.petri_net import visualizer as pn_visualizer
+from pm4py.visualization.process_tree import visualizer as pt_visualizer
 
 
 # ('mrt07-0946/AG_1',
@@ -233,11 +233,11 @@ def apply_pipeline_to_bpmn(input_type: str, threshold: float = 0.5,
 #             return performance_evaluator.precision
 #         return best_precision
 
-# def save_models_as_png(name, final_marking, initial_marking, net, tree):
-#     gviz = pt_visualizer.apply(tree)
-#     pt_visualizer.save(gviz,
-#                        f'/mnt/c/Users/Jonas/Desktop/pm-label-splitting/result_pngs/{name}_tree.png')
-#     parameters = {pn_visualizer.Variants.WO_DECORATION.value.Parameters.FORMAT: "png"}
-#     gviz_petri_net = pn_visualizer.apply(net, initial_marking, final_marking, parameters=parameters)
-#     pn_visualizer.save(gviz_petri_net,
-#                        f'/mnt/c/Users/Jonas/Desktop/pm-label-splitting/result_pngs/{name}_net.png')
+def save_models_as_png(name, final_marking, initial_marking, net, tree):
+    gviz = pt_visualizer.apply(tree)
+    pt_visualizer.save(gviz,
+                       f'/mnt/c/Users/Jonas/Desktop/pm-label-splitting/result_pngs/{name}_tree.png')
+    parameters = {pn_visualizer.Variants.WO_DECORATION.value.Parameters.FORMAT: "png"}
+    gviz_petri_net = pn_visualizer.apply(net, initial_marking, final_marking, parameters=parameters)
+    pn_visualizer.save(gviz_petri_net,
+                       f'/mnt/c/Users/Jonas/Desktop/pm-label-splitting/result_pngs/{name}_net.png')

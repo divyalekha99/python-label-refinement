@@ -9,7 +9,7 @@ def apply_im_without_noise_and_export(input_name, suffix, split_log, original_lo
                                       short_labels_to_original_labels={}):
     outfile.write(f'\n IM without noise threshold:\n')
 
-    final_marking, initial_marking, final_net, precision = apply_im_without_noise(labels_to_original,
+    final_marking, initial_marking, final_net, precision, simplicity, generalization = apply_im_without_noise(labels_to_original,
                                                                                   split_log,
                                                                                   original_log,
                                                                                   outfile,
@@ -34,7 +34,7 @@ def apply_im_without_noise(labels_to_original, split_log, original_log, outfile,
     performance_evaluator.evaluate_performance()
 
     final_net = post_processor.rename_short_labels_to_original_labels(final_net)
-    return final_marking, initial_marking, final_net, performance_evaluator.precision
+    return final_marking, initial_marking, final_net, performance_evaluator.precision, performance_evaluator.simplicity, performance_evaluator.generalization
 
 
 def apply_im_with_noise_and_export(input_name, suffix, split_log, original_log, outfile, labels_to_original={},

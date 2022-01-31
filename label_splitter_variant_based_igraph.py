@@ -10,6 +10,8 @@ from pm4py.algo.filtering.log.variants import variants_filter
 
 from clustering_variant import ClusteringVariant
 from distance_metrics import DistanceVariant, DistanceCalculator
+import operator as op
+from functools import reduce
 
 
 class LabelSplitter:
@@ -144,7 +146,7 @@ class LabelSplitter:
                         ########################################################################
                         # TODO: Check if times 2 or not!!!!!!!
                         ########################################################################
-                        weight = math.comb(count, 2) * 2
+                        weight = ncr(count, 2) * 2
                         edges.append((vertex_a, vertex_a))
                         weights.append(weight)
             graph.add_edges(edges)
@@ -185,3 +187,9 @@ class LabelSplitter:
                     if event['variant'] in self._variant_to_label:
                         event['concept:name'] = self._variant_to_label[event['variant']]
         print('Finished setting labels')
+
+def ncr(n, r):
+    r = min(r, n-r)
+    numer = reduce(op.mul, range(n, n-r, -1), 1)
+    denom = reduce(op.mul, range(1, r+1), 1)
+    return numer // denom  # or / in Python 2

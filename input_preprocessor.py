@@ -22,10 +22,13 @@ class InputPreprocessor:
             original_log = self.input_data.original_log
 
             xixi_precision = 0
+            xixi_ari = 0
             ground_truth_precision = 0
-            labels_to_split = []
+            labels_to_split = self.input_data.labels_to_split
             ground_truth_model = None
             xixi_clustering = None
+            original_labels = None
+            ground_truth_clustering = None
 
             if not self.input_data.labels_to_split:
                 labels_to_split = get_imprecise_labels(original_log)
@@ -43,24 +46,24 @@ class InputPreprocessor:
                 # export_model_from_original_log_with_precise_labels(self.input_data.input_name, self.input_data.log_path,
                 #                                                    self.input_data.use_noise)
 
-            # y_f1_scores_unrefined = write_data_from_original_log_with_imprecise_labels(self.input_data.input_name,
-            #                                                                            original_log,
-            #                                                                            self.input_data.use_noise)
-            original_labels = self.get_original_labels(labels_to_split)
-            outfile.write('\n Original Labels:\n')
-            outfile.write(f'{str(original_labels)}\n')
+                # y_f1_scores_unrefined = write_data_from_original_log_with_imprecise_labels(self.input_data.input_name,
+                #                                                                            original_log,
+                #                                                                            self.input_data.use_noise)
+                original_labels = self.get_original_labels(labels_to_split)
+                outfile.write('\n Original Labels:\n')
+                outfile.write(f'{str(original_labels)}\n')
 
-            ground_truth_clustering = self.get_ground_truth_clustering(original_labels, labels_to_split)
-            outfile.write('\n Ground truth clustering clustering:\n')
-            outfile.write(f'{str(ground_truth_clustering)}\n')
+                ground_truth_clustering = self.get_ground_truth_clustering(original_labels, labels_to_split)
+                outfile.write('\n Ground truth clustering clustering:\n')
+                outfile.write(f'{str(ground_truth_clustering)}\n')
 
-            # print('xixi_clustering')
-            # print(xixi_clustering)
-            print('ground_truth_clustering')
-            print(ground_truth_clustering)
-            xixi_ari = 0 # get_community_similarity(ground_truth_clustering, xixi_clustering)
-            outfile.write('\n Xixi Adjusted Rand Index:\n')
-            outfile.write(f'{xixi_ari}\n')
+                # print('xixi_clustering')
+                # print(xixi_clustering)
+                print('ground_truth_clustering')
+                print(ground_truth_clustering)
+                xixi_ari = 0 # get_community_similarity(ground_truth_clustering, xixi_clustering)
+                outfile.write('\n Xixi Adjusted Rand Index:\n')
+                outfile.write(f'{xixi_ari}\n')
 
             # print('\n Xixi Adjusted Rand Index:\n')
             # print(f'{xixi_ari}\n')
@@ -108,6 +111,8 @@ class InputPreprocessor:
         return Clustering(ground_truth_clustering)
 
     def has_duplicate_xor(self):
+        if not self.input_data.ground_truth_model:
+            return False
         for p in self.input_data.ground_truth_model.net.places:
             seen_labels = []
             for a in p.out_arcs:

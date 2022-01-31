@@ -30,4 +30,7 @@ class InputData:
     labels_to_split: Iterable[str] = field(default_factory=list)
     original_labels: Iterable[str] = field(default_factory=list)
     original_log: object = None
+    original_log_precision: float = 0
+    original_log_simplicity: float = 0
+    original_log_generalization: float = 0
     concurrent_labels: Iterable[str] = field(default_factory=list)

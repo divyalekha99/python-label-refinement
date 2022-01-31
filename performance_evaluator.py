@@ -22,6 +22,8 @@ class PerformanceEvaluator:
         self.outfile = outfile
         self.precision = 0
         self.fitness = 0
+        self.generalization = 0
+        self.simplicity = 0
         self.skip_fitness = skip_fitness
 
     def _write(self, log_entry: string) -> None:
@@ -67,10 +69,12 @@ class PerformanceEvaluator:
         generalization = generalization_evaluator.apply(self.log, self.net, self.im, self.fm)
         self._write('generalization')
         self._write(json.dumps(generalization))
+        self.generalization = generalization
         return generalization
 
     def get_simplicity(self):
         simplicity = simplicity_evaluator.apply(self.net)
+        self.simplicity = simplicity
         self._write('simplicity')
         self._write(json.dumps(simplicity))
         return simplicity

@@ -1,5 +1,6 @@
 import copy
 import csv
+import os
 from pathlib import Path
 
 from pm4py.objects.log.importer.xes import importer as xes_importer
@@ -9,6 +10,7 @@ from apply_im import apply_im_with_noise_and_export, apply_im_without_noise
 from distance_metrics import DistanceVariant
 from file_writer_helper import get_config_string, write_summary_file, \
     write_summary_file_with_parameters, run_start_string
+from goldenstandardmodel import export_models_and_pngs
 from input_data import InputData
 from input_preprocessor import InputPreprocessor
 from label_splitter_event_based_igraph import LabelSplitter as LabelSplitterEventBased
@@ -17,22 +19,48 @@ from label_splitter_variant_multiplex import LabelSplitter as LabelSplitterVaria
 from pipeline_helpers_shared import get_tuples_for_folder, get_community_similarity, filter_duplicate_xor
 from pipeline_variant import PipelineVariant
 from plot_helpers import plot_noise_to_f1_score
+from pm4py.objects.log.exporter.xes import exporter as xes_exporter
+from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 
 
 def run_pipeline_multi_layer_igraph(input_paths) -> None:
 
-    # apply_pipeline_to_folder([('real_logs/road_traffic_fines',
-    #                            '/home/jonas/repositories/pm-label-splitting/example_logs/Road_Traffic_Fine_Management_Process_shortened_labels.xes.gz')],
-    #                          'real_logs.txt',
+    if not os.path.exists('./outputs/best_results'):
+        os.makedirs('./outputs/best_results')
+
+    apply_pipeline_to_folder([('real_logs/road_traffic_fines',
+                               './real_logs/Road_Traffic_Fine_Management_Process_shortened_labels.xes.gz')],
+                             'real_logs.txt',
+                             PipelineVariant.VARIANTS,
+                             labels_to_split=['F'],
+                             use_frequency=True,
+                             use_noise=False)
+
+    return
+
+    # apply_pipeline_to_folder([('real_logs/loop_start_end_same',
+    #                            '/home/jonas/repositories/pm-label-splitting/example_logs/loop_start_end_same_log.xes')],
+    #                          'real_logs',
     #                          PipelineVariant.VARIANTS,
-    #                          labels_to_split=['F'],
+    #                          labels_to_split=['B'],
     #                          use_frequency=True,
     #                          use_noise=False)
+
+    # apply_pipeline_to_folder([('real_logs/no_loop',
+    #                            '/home/jonas/repositories/pm-label-splitting/example_logs/no_loop.xes')],
+    #                          'real_logs',
+    #                          PipelineVariant.VARIANTS,
+    #                          labels_to_split=['B'],
+    #                          use_frequency=True,
+    #                          use_noise=False)
+
+
+
 
     for path, prefix in input_paths:
         input_list = get_tuples_for_folder(path, prefix)
         apply_pipeline_to_folder(input_list, prefix, PipelineVariant.VARIANTS, labels_to_split=[], use_noise=False,
-                                 use_frequency=False)
+                                 use_frequency=True)
 
     # mrt07_0946_list = get_tuples_for_folder(
     #     '/home/jonas/repositories/pm-label-splitting/example_logs/imprInLoop_adaptive_OD/mrt07-0946/logs/',
@@ -50,15 +78,16 @@ def run_pipeline_multi_layer_igraph(input_paths) -> None:
 def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_to_split=[], use_frequency=False,
                              use_noise=True):
     header = [
-        'Name', 'labels_to_split', 'original labels', 'Xixi number of Clusters found', 'Xixi Precision', 'Xixi ARI',
-        'use_combined_context', 'window_size', 'distance_metric', 'threshold', 'Number of Clusters found',
-        'Precision Align', 'ARI']
+        'Name', 'max_number_of_traces', 'labels_to_split', 'original labels', 'original_precision', 'original_simplicity', 'original_generalization', 'Xixi number of Clusters found', 'Xixi Precision', 'Xixi ARI',
+        'use_combined_context', 'use_frequency', 'window_size', 'distance_metric', 'threshold', 'Number of Clusters found',
+        'Precision Align', 'ARI', 'Simplicity', 'Generalization']
 
     # Path(f'./results/{folder_name}').mkdir(parents=True, exist_ok=True)
     Path(f'./outputs/{folder_name}').mkdir(parents=True, exist_ok=True)
 
     csv_file_path = Path(f'./results/{folder_name}_{pipeline_variant}.csv')
     if csv_file_path.is_file():
+        print(csv_file_path)
         print('Warning: File already existis exiting')
         return
 
@@ -66,6 +95,7 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
         writer = csv.writer(f)
         writer.writerow(header)
 
+    print("Starting pipeline")
     for (name, path) in input_list:
         input_data = InputData(original_input_name=name,
                                log_path=path,
@@ -74,18 +104,17 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
                                use_frequency=use_frequency,
                                use_noise=use_noise,
                                max_number_of_traces=500,
-                               folder_name=folder_name
-                               )
+                               folder_name=folder_name)
 
         input_data.original_log = xes_importer.apply(input_data.log_path, parameters={
             xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: input_data.max_number_of_traces})
-        input_data.input_name = f'{input_data.original_input_name}_{input_data.pipeline_variant}' if use_frequency else f'{input_data.original_input_name}_{input_data.pipeline_variant}_N_W'
+        input_data.input_name = f'{input_data.original_input_name}_{input_data.pipeline_variant}' if use_frequency else f'{input_data.original_input_name}_{input_data.pipeline_variant}'
 
         input_data.use_combined_context = False
 
         input_preprocessor = InputPreprocessor(input_data)
         input_preprocessor.preprocess_input()
-        summary_file_name = f'{folder_name}_{pipeline_variant}.txt' if use_frequency else f'{folder_name}_{pipeline_variant}_N_W.txt'
+        summary_file_name = f'{folder_name}_{pipeline_variant}.txt' if use_frequency else f'{folder_name}_{pipeline_variant}.txt'
         input_data.summary_file_name = summary_file_name
 
         if input_preprocessor.has_duplicate_xor():
@@ -138,9 +167,9 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_data
     for label in input_data.labels_to_split:
         for i in range(2):
             if i == 1:
-                input_data.use_combined_context = True
+                input_data.use_frequency = True
             else:
-                input_data.use_combined_context = False
+                input_data.use_frequency = False
             for window_size in [1, 2, 3, 4, 5]:
                 for distance in [DistanceVariant.EDIT_DISTANCE,
                                  DistanceVariant.SET_DISTANCE,
@@ -266,14 +295,29 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
 
         labels_to_original = label_splitter.get_split_labels_to_original_labels()
 
-        final_marking, initial_marking, final_net, precision = apply_im_without_noise(labels_to_original,
+        if input_data.original_log_precision == 0:
+            final_marking, initial_marking, final_net, original_precision, original_simplicity, original_generalization = apply_im_without_noise(labels_to_original,
+                                                                                      input_data.original_log,
+                                                                                      input_data.original_log,
+                                                                                      outfile,
+                                                                                      label_splitter.short_label_to_original_label)
+            input_data.original_log_precision = original_precision
+            input_data.original_log_simplicity = original_simplicity
+            input_data.original_log_generalization = original_generalization
+
+
+        final_marking, initial_marking, final_net, precision, simplicity, generalization = apply_im_without_noise(labels_to_original,
                                                                                       split_log,
                                                                                       input_data.original_log,
                                                                                       outfile,
                                                                                       label_splitter.short_label_to_original_label)
 
         f1_scores_refined = []
-        ari_score = get_community_similarity(input_data.ground_truth_clustering, split_log_clustering)
+        ari_score = 0
+        if input_data.ground_truth_clustering:
+            ari_score = get_community_similarity(input_data.ground_truth_clustering, split_log_clustering)
+        else:
+            ari_score = precision
         outfile.write(f'\nAdjusted Rand Index:\n')
         outfile.write(f'{ari_score}\n\n')
 
@@ -282,11 +326,23 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
 
         with open(f'./results/{input_data.folder_name}_{input_data.pipeline_variant}.csv', 'a') as f:
             writer = csv.writer(f)
-            row = [input_data.original_input_name, ' '.join(input_data.labels_to_split),
-                   ', '.join(input_data.original_labels), len(input_data.xixi_clustering),
-                   input_data.xixi_precision, input_data.xixi_ari,
-                   input_data.use_combined_context, window_size, distance_variant, threshold,
-                   len(label_splitter.found_clustering), precision, ari_score]
+            if input_data.ground_truth_clustering:
+                row = [input_data.original_input_name, input_data.max_number_of_traces,
+                       ' '.join(input_data.labels_to_split),
+                       ', '.join(input_data.original_labels), input_data.original_log_precision,
+                       input_data.original_log_simplicity, input_data.original_log_generalization,
+                       len(input_data.xixi_clustering),
+                       input_data.xixi_precision, input_data.xixi_ari,
+                       input_data.use_combined_context, input_data.use_frequency, window_size, distance_variant, threshold,
+                       len(label_splitter.found_clustering), precision, ari_score, simplicity, generalization]
+            else:
+                row = [input_data.original_input_name, input_data.max_number_of_traces,
+                       ' '.join(input_data.labels_to_split),
+                       '[]', input_data.original_log_precision,
+                       input_data.original_log_simplicity, input_data.original_log_generalization,
+                       0, 0, 0,
+                       input_data.use_combined_context, input_data.use_frequency, window_size, distance_variant, threshold,
+                       len(label_splitter.found_clustering), precision, ari_score, simplicity, generalization]
             writer.writerow(row)
 
         if ari_score > best_score:
@@ -301,9 +357,9 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
                                                                    label_splitter.get_split_labels_to_original_labels(),
                                                                    label_splitter.short_label_to_original_label)
 
-            # xes_exporter.apply(split_log,
-            #                    f'/home/jonas/repositories/pm-label-splitting/outputs/{input_data.input_name}_split_log.xes')
-            #
-            # tree = inductive_miner.apply_tree(split_log)
-            # export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_data.input_name, 'split_log')
+            xes_exporter.apply(split_log,
+                            f'./outputs/{input_data.input_name}_split_log.xes')
+
+            tree = inductive_miner.apply_tree(split_log)
+            export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_data.input_name, 'split_log')
         return ari_score, precision, f1_scores_refined
