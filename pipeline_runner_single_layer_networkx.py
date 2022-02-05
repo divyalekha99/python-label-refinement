@@ -9,7 +9,7 @@ from clustering_variant import ClusteringVariant
 from distance_metrics import DistanceVariant
 from file_writer_helper import run_start_string
 from label_splitter import LabelSplitter
-from log_generator import LogGenerator
+# from log_generator import LogGenerator
 from performance_evaluator import PerformanceEvaluator
 from post_processor import PostProcessor
 from shared_constants import evaluated_models
@@ -159,11 +159,11 @@ def get_imprecise_labels(log):
     return list(imprecise_labels)
 
 
-def apply_pipeline_to_bpmn(input_type: str, threshold: float = 0.5,
-                           window_size: int = 3):
-    bpmn_graph = pm4py.read_bpmn(f'/home/jonas/repositories/pm-label-splitting/bpmn_files/{input_type}.bpmn')
-    log_generator = LogGenerator()
-    log = log_generator.get_log_from_bpmn(bpmn_graph)
+# def apply_pipeline_to_bpmn(input_type: str, threshold: float = 0.5,
+#                            window_size: int = 3):
+#     bpmn_graph = pm4py.read_bpmn(f'/home/jonas/repositories/pm-label-splitting/bpmn_files/{input_type}.bpmn')
+#     log_generator = LogGenerator()
+#     log = log_generator.get_log_from_bpmn(bpmn_graph)
 
     # apply_pipeline_single_layer_networkx_to_log(f'{input_type}', log, ['D'], log, threshold=threshold,
     #                                             window_size=window_size)
@@ -236,8 +236,8 @@ def apply_pipeline_to_bpmn(input_type: str, threshold: float = 0.5,
 def save_models_as_png(name, final_marking, initial_marking, net, tree):
     gviz = pt_visualizer.apply(tree)
     pt_visualizer.save(gviz,
-                       f'/mnt/c/Users/Jonas/Desktop/pm-label-splitting/result_pngs/{name}_tree.png')
+                       f'{name}_tree.png')
     parameters = {pn_visualizer.Variants.WO_DECORATION.value.Parameters.FORMAT: "png"}
     gviz_petri_net = pn_visualizer.apply(net, initial_marking, final_marking, parameters=parameters)
     pn_visualizer.save(gviz_petri_net,
-                       f'/mnt/c/Users/Jonas/Desktop/pm-label-splitting/result_pngs/{name}_net.png')
+                       f'{name}_net.png')

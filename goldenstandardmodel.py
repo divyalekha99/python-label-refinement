@@ -4,6 +4,7 @@ from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 from pm4py.algo.filtering.log.attributes import attributes_filter
 from pm4py.objects.log.importer.xes import importer as xes_importer
 from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
+from pm4py.objects.process_tree.exporter import exporter as ptml_exporter
 
 from performance_evaluator import PerformanceEvaluator
 from pipeline_runner_single_layer_networkx import save_models_as_png
@@ -12,13 +13,14 @@ from pipeline_variant import remove_pipeline_variant_from_string
 
 def export_models_and_pngs(final_marking, initial_marking, net, original_tree, input_name, suffix):
     pnml_exporter.apply(net, initial_marking,
-                        f'/home/jonas/repositories/pm-label-splitting/outputs/{input_name}_{suffix}.pnml',
-                        final_marking=final_marking)
-    save_models_as_png(f'{input_name}_{suffix}',
+                        f'./outputs/{suffix}.pnml', final_marking=final_marking)
+    ptml_exporter.apply(original_tree, f'./outputs/{suffix}.ptml')
+    save_models_as_png(f'./outputs/{suffix}',
                        final_marking,
                        initial_marking,
                        net,
                        original_tree)
+    return
 
 
 def rename_transitions_to_original_label(imprecise_labels, net, labels_to_split):

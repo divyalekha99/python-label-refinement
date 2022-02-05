@@ -23,6 +23,15 @@ from pm4py.objects.log.exporter.xes import exporter as xes_exporter
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 
 
+from pm4py.evaluation.replay_fitness import evaluator as replay_fitness_evaluator
+from pm4py.evaluation.precision import evaluator as precision_evaluator
+from pm4py.evaluation.generalization import evaluator as generalization_evaluator
+from pm4py.evaluation.simplicity import evaluator as simplicity_evaluator
+
+
+from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
+
+
 def run_pipeline_multi_layer_igraph(input_paths) -> None:
 
     if not os.path.exists('./outputs/best_results'):
@@ -35,7 +44,6 @@ def run_pipeline_multi_layer_igraph(input_paths) -> None:
                              labels_to_split=['F'],
                              use_frequency=True,
                              use_noise=False)
-
     return
 
     # apply_pipeline_to_folder([('real_logs/loop_start_end_same',
@@ -55,11 +63,9 @@ def run_pipeline_multi_layer_igraph(input_paths) -> None:
     #                          use_noise=False)
 
 
-
-
     for path, prefix in input_paths:
         input_list = get_tuples_for_folder(path, prefix)
-        apply_pipeline_to_folder(input_list, prefix, PipelineVariant.VARIANTS, labels_to_split=[], use_noise=False,
+        apply_pipeline_to_folder(input_list, prefix, PipelineVariant.EVENTS, labels_to_split=[], use_noise=False,
                                  use_frequency=True)
 
     # mrt07_0946_list = get_tuples_for_folder(
@@ -75,7 +81,7 @@ def run_pipeline_multi_layer_igraph(input_paths) -> None:
     #
 
 
-def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_to_split=[], use_frequency=False,
+def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_to_split=[], use_frequency=True,
                              use_noise=True):
     header = [
         'Name', 'max_number_of_traces', 'labels_to_split', 'original labels', 'original_precision', 'original_simplicity', 'original_generalization', 'Xixi number of Clusters found', 'Xixi Precision', 'Xixi ARI',
@@ -84,6 +90,29 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
 
     # Path(f'./results/{folder_name}').mkdir(parents=True, exist_ok=True)
     Path(f'./outputs/{folder_name}').mkdir(parents=True, exist_ok=True)
+    # for (name, path) in input_list:
+    #     log = xes_importer.apply(path, parameters={
+    #         xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: 5000000})
+    #     net, initial_marking, final_marking = inductive_miner.apply(log,
+    #                                                                 variant=inductive_miner.Variants.IMf,
+    #                                                                 parameters={inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: 0.1})
+    #     # alignment_fitness = replay_fitness_evaluator.apply(log, net, initial_marking, final_marking,
+    #     #                                                    variant=replay_fitness_evaluator.Variants.ALIGNMENT_BASED)
+    #     # print('alignment_fitness')
+    #     # print(alignment_fitness)
+    #
+    #     precision = precision_evaluator.apply(log, net, initial_marking, final_marking,
+    #                                           variant=precision_evaluator.Variants.ALIGN_ETCONFORMANCE)
+    #     print('precision')
+    #     print(precision)
+    #     simplicity = simplicity_evaluator.apply(net)
+    #     print('simplicity')
+    #     print(simplicity)
+    #     pnml_exporter.apply(net,
+    #                         initial_marking,
+    #                         f'/mnt/c/Users/Jonas/OneDrive/RWTH/BA thesis/results_real_log/road_traffic_original_real_labels.pnml',
+    #                         final_marking=final_marking)
+    # return
 
     csv_file_path = Path(f'./results/{folder_name}_{pipeline_variant}.csv')
     if csv_file_path.is_file():
@@ -95,8 +124,15 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
         writer = csv.writer(f)
         writer.writerow(header)
 
+    parsed_logs = {'mrt08-2107': {'G_1', 'P_1', 'AB_1', 'O_1', 'AA_1', 'M_1', 'H_1', 'AE_1', 'W_1', 'U_1', 'F_1', 'I_1', 'Y_1', 'N_1', 'V_1', 'X_1', 'Z_1', 'AC_1'}, 'mrt06-2142': {'A_1', 'L_1', 'T_1', 'C_1', 'AD_1', 'AQ_1', 'AB_1', 'AA_1', 'AF_1', 'J_1', 'B_1', 'AL_1', 'AI_1', 'AM_1', 'V_1'}, 'mrt08-0846': {'A_1', 'E_1', 'AD_1', 'AP_1', 'D_1', 'R_1', 'AF_1', 'B_1', 'AG_1', 'AK_1', 'C_1', 'AJ_1', 'I_1', 'V_1', 'W_1', 'AH_1', 'T_1', 'AB_1', 'O_1', 'AA_1', 'AE_1', 'AL_1', 'AI_1', 'K_1'}, 'mrt09-1233': {'E_1', 'R_1', 'D_1', 'AF_1', 'B_1', 'CG_1', 'BC_1', 'Q_1', 'AG_1', 'AJ_1', 'BQ_1', 'BW_1', 'BX_1', 'BE_1', 'W_1', 'AH_1', 'AM_1', 'Y_1', 'CE_1', 'BI_1', 'CK_1', 'AN_1', 'AB_1', 'M_1', 'BL_1', 'BJ_1', 'BY_1', 'CD_1', 'K_1'}, 'mrt03-1655': {'ED_1', 'DE_1', 'CL_1', 'BK_1', 'BC_1', 'EW_1', 'DT_1', 'CJ_1', 'BH_1', 'FW_1', 'DN_1', 'GN_1', 'BQ_1', 'CF_1', 'GC_1', 'EF_1', 'CO_1', 'CS_1', 'FY_1', 'BX_1', 'BE_1', 'EM_1', 'AM_1', 'FM_1', 'GA_1', 'N_1', 'DU_1', 'AN_1', 'FH_1', 'CP_1', 'AO_1', 'EY_1', 'AE_1', 'BP_1'}, 'mrt07-1207': {'AD_1', 'AP_1', 'R_1', 'S_1', 'AJ_1', 'AS_1', 'H_1', 'U_1', 'AH_1', 'AR_1', 'AB_1', 'O_1', 'AA_1', 'M_1', 'J_1', 'AL_1', 'K_1', 'X_1', 'AC_1'}, 'mrt03-2247': {'AK_1', 'AP_1', 'AQ_1', 'BX_1', 'BB_1', 'CN_1', 'AG_1'}, 'mrt08-2232': {'V_1', 'G_1', 'C_1', 'AJ_1', 'P_1', 'O_1', 'AT_1', 'R_1', 'M_1', 'H_1', 'U_1', 'F_1', 'AR_1', 'K_1'}, 'mrt06-1652': {'E_1', 'D_1', 'CG_1', 'DB_1', 'CI_1', 'AW_1', 'BF_1', 'C_1', 'DH_1', 'DN_1', 'BQ_1', 'DA_1', 'CT_1', 'BW_1', 'CO_1', 'CC_1', 'BX_1', 'W_1', 'Y_1', 'CE_1', 'CK_1', 'AV_1', 'Z_1', 'DD_1', 'BL_1', 'CD_1', 'BD_1', 'X_1'}, 'mrt04-1713': {'A_1', 'AD_1', 'AU_1', 'AP_1', 'Q_1', 'AK_1', 'I_1', 'V_1', 'AQ_1', 'W_1', 'U_1', 'AH_1', 'Y_1', 'N_1', 'AN_1', 'G_1', 'T_1', 'AB_1', 'O_1', 'M_1', 'AL_1', 'AI_1', 'AO_1', 'K_1', 'X_1'}, 'mrt08-1202': {'A_1', 'V_1', 'C_1', 'P_1', 'AB_1', 'O_1', 'AA_1', 'B_1', 'W_1', 'U_1', 'F_1', 'S_1', 'Y_1', 'N_1', 'AE_1'}, 'mrt04-1632': {'A_1', 'CB_1', 'AP_1', 'BR_1', 'DK_1', 'BM_1', 'BS_1', 'BF_1', 'CR_1', 'CU_1', 'I_1', 'DV_1', 'ER_1', 'DA_1', 'BW_1', 'BV_1', 'CC_1', 'CS_1', 'EI_1', 'H_1', 'BE_1', 'W_1', 'AM_1', 'BU_1', 'CV_1', 'CE_1', 'BI_1', 'L_1', 'AV_1', 'EG_1', 'G_1', 'AZ_1', 'AB_1', 'DX_1', 'CX_1', 'AI_1', 'DW_1', 'AO_1', 'BJ_1', 'CD_1', 'X_1', 'AC_1'}, 'feb18-1515': {'E_1', 'T_1', 'J_1', 'F_1', 'N_1'}, 'mrt06-1911': {'E_1', 'P_1', 'AF_1', 'F_1', 'AG_1', 'Q_1', 'AK_1', 'I_1', 'H_1', 'U_1', 'Y_1', 'L_1', 'G_1', 'T_1', 'O_1', 'M_1', 'AL_1', 'AE_1', 'X_1', 'AC_1'}, 'mrt09-1041': {'BF_1', 'C_1', 'E_1', 'AK_1', 'AP_1', 'AT_1', 'AF_1', 'B_1', 'AX_1', 'BE_1', 'W_1', 'AM_1', 'Q_1', 'AE_1', 'X_1'}, 'mrt09-1441': {'DF_1', 'CM_1', 'BR_1', 'S_1', 'BS_1', 'BF_1', 'C_1', 'AK_1', 'BZ_1', 'DH_1', 'CF_1', 'DQ_1', 'BX_1', 'CV_1', 'AR_1', 'CY_1', 'G_1', 'T_1', 'O_1', 'BJ_1', 'CH_1'}, 'mrt09-2247': {'E_1', 'P_1', 'CB_1', 'DE_1', 'BK_1', 'F_1', 'CG_1', 'AW_1', 'EL_1', 'AJ_1', 'DN_1', 'DQ_1', 'DL_1', 'DR_1', 'AR_1', 'DC_1', 'M_1', 'EX_1', 'DD_1', 'DM_1', 'CH_1', 'K_1'}, 'feb17-1236': {'R_1', 'U_1'}, 'mrt04-1607': {'A_1', 'L_1', 'R_1'}, 'feb17-1101': {'K_1'}, 'mrt07-0946': {'A_1', 'E_1', 'P_1', 'AB_1', 'AD_1', 'D_1', 'AA_1', 'J_1', 'AF_1', 'W_1', 'U_1', 'Y_1', 'AG_1', 'V_1', 'X_1'}, 'mrt09-1956': {'AP_1', 'CQ_1', 'DP_1', 'S_1', 'EC_1', 'BA_1', 'CU_1', 'CT_1', 'DL_1', 'CC_1', 'W_1', 'U_1', 'CV_1', 'DU_1', 'AN_1', 'CX_1', 'AO_1', 'BD_1', 'BP_1'}, 'feb17-0936': {'E_1'}, 'mrt07-1957': {'AJ_1', 'AB_1', 'J_1', 'B_1', 'AM_1'}, 'mrt08-1656': {'T_1', 'AB_1', 'D_1', 'AA_1', 'R_1', 'AF_1', 'AL_1', 'U_1', 'F_1', 'X_1'}, 'mrt09-0930': {'BH_1', 'AB_1', 'AU_1', 'AP_1', 'AA_1', 'AQ_1', 'J_1', 'H_1', 'BL_1', 'AI_1', 'U_1', 'S_1', 'BJ_1', 'AR_1'}, 'feb29-1654': {'H_1'}, 'feb17-1147': {'S_1', 'V_1', 'R_1'}, 'feb27-1517': {'B_1', 'C_1'}, 'feb16-1625': {'P_1', 'O_1', 'D_1', 'J_1', 'H_1'}, 'mrt06-2056': {'C_1', 'R_1', 'B_1', 'AL_1', 'AM_1', 'Y_1', 'AS_1', 'AG_1', 'X_1'}, 'feb18-1645': {'W_1'}, 'mrt04-0910': {'E_1', 'I_1', 'Z_1'}, 'feb29-1548': {'K_1', 'R_1'}}
+
     print("Starting pipeline")
     for (name, path) in input_list:
+        split_name = name.split('/')
+        if split_name[0] not in parsed_logs.keys() or split_name[1] not in parsed_logs[split_name[0]]:
+            print(f'skipped {name}')
+            continue
+
         input_data = InputData(original_input_name=name,
                                log_path=path,
                                pipeline_variant=pipeline_variant,
@@ -165,7 +201,7 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_data
     x_noises = [0, 0.1, 0.2, 0.3, 0.4]
 
     for label in input_data.labels_to_split:
-        for i in range(2):
+        for i in range(1):
             if i == 1:
                 input_data.use_frequency = True
             else:
@@ -356,10 +392,11 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
                                                                    outfile,
                                                                    label_splitter.get_split_labels_to_original_labels(),
                                                                    label_splitter.short_label_to_original_label)
+            outfile_name = f'{input_data.input_name}_{threshold}_{distance_variant}_{window_size}'
 
             xes_exporter.apply(split_log,
-                            f'./outputs/{input_data.input_name}_split_log.xes')
+                            f'./outputs/{outfile_name}_split_log.xes')
 
             tree = inductive_miner.apply_tree(split_log)
-            export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_data.input_name, 'split_log')
+            export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_data.input_name, f'{input_data.input_name}_{threshold}_{distance_variant}_{window_size}_split_log')
         return ari_score, precision, f1_scores_refined
