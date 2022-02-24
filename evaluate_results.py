@@ -34,14 +34,14 @@ def main():
     listdir(variant_approach_results_path_no_impr_loop)
 
     xixi_cc_results_path_no_impr_loop = Path(
-        r'C:\Users\Jonas\Desktop\real_logs\xixi\xixi_no_impr_in_loop\exp_xixi_cc_200')
+        r'C:\Users\Jonas\Desktop\real_logs\xixi\xixi_no_impr_in_loop\exp_xixi_cc_300')
     xixi_cd_results_path_no_impr_loop = Path(
-        r'C:\Users\Jonas\Desktop\real_logs\xixi\xixi_no_impr_in_loop\exp_xixi_cd_200')
+        r'C:\Users\Jonas\Desktop\real_logs\xixi\xixi_no_impr_in_loop\exp_xixi_cd_300')
 
     xixi_cc_results_path_impr_loop = Path(
-        r'C:\Users\Jonas\Desktop\real_logs\xixi\xixi_impr_in_loop\exp_xixi_cc_200')
+        r'C:\Users\Jonas\Desktop\real_logs\xixi\xixi_impr_in_loop\exp_xixi_cc_300')
     xixi_cd_results_path_impr_loop = Path(
-        r'C:\Users\Jonas\Desktop\real_logs\xixi\xixi_impr_in_loop\exp_xixi_cd_200')
+        r'C:\Users\Jonas\Desktop\real_logs\xixi\xixi_impr_in_loop\exp_xixi_cd_300')
 
     file_paths_variant_approach_no_impr_loop = [join(variant_approach_results_path_no_impr_loop, f) for f in
                                                 listdir(variant_approach_results_path_no_impr_loop) if
@@ -91,6 +91,26 @@ def main():
         file_paths_variant_approach = file_paths_variant_approach_no_impr_loop
         file_paths_event_approach = file_paths_event_approach_no_impr_loop
 
+    dfs_xixi_cd = []
+    for path in file_paths_xixi_cd:
+        dfs_xixi_cd.append(pd.read_csv(path))
+    df_xixi_cd = pd.DataFrame(np.concatenate([df_temp.values for df_temp in dfs_xixi_cd]),
+                              columns=dfs_xixi_cd[0].columns)
+
+    df_xixi_cd['Name'] = df_xixi_cd['Folder'] + '/' + df_xixi_cd['Log']
+    xixi_cd_names = set(list(df_xixi_cd['Name']))
+    print(len(xixi_cd_names))
+
+    dfs = []
+    for path in file_paths_variant_approach:
+        if 'png' in path:
+            continue
+        temp = pd.read_csv(path)
+        dfs.append(temp)
+
+    df = pd.DataFrame(np.concatenate([df_temp.values for df_temp in dfs]), columns=dfs[0].columns)
+    variant_based_names = set(list(df['Name']))
+
     def get_results(df):
         return df['ARI'].mean(), df['Precision Align'].mean(), df.groupby(['Name'])['Precision Align'].max().mean(), \
                df.groupby(['Name'])['ARI'].max().mean(), df['Xixi Precision'].mean(), df.groupby(['Name'])[
@@ -124,8 +144,17 @@ def main():
         models_event_based.setdefault(split_name[0], set()).add(split_name[1])
     print(models_event_based)
 
+    print('Before')
+    print(len(set(df_events['Name'])))
+
+    df_events = df_events.loc[df_events['Name'].isin(xixi_cd_names)]
+    df_events = df_events.loc[df_events['Name'].isin(variant_based_names)]
+    print('len(set(df_events[Name]))')
+    print(len(set(df_events['Name'])))
+
+
     # df_events = df_events.loc[df_events['use_frequency'] == True]
-    df_events = df_events.loc[df_events['window_size'] > 2]
+    # df_events = df_events.loc[df_events['window_size'] > 2]
     # df_events = df_events.loc[df_events['distance_metric'] == 'DistanceVariant.MULTISET_DISTANCE']
     # df_events = df_events.loc[df_events['threshold'] > 0.8]
     # df_events = df_events.loc[df_events['threshold'] < 0.8]
@@ -177,13 +206,18 @@ def main():
     # df = df.loc[df['distance_metric'] == 'DistanceVariant.MULTISET_DISTANCE']
     # df = df.loc[df['threshold'] < 0.8]
     # df = df.loc[df['threshold'] < 0.8]
-    df = df.loc[df['Name'].isin(logs_event_based)]
+    print('Before')
+    print(len(set(df['Name'])))
+    df = df.loc[df['Name'].isin(xixi_cd_names)]
     # df_t = df.loc[]
-    with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
-        print('##################################################')
-        print(df.groupby(['Name'])['Precision Align'].max())
-        print('++++++++++++++++++++++++++++++++++++++++++++++++++++++')
-        print(df.groupby(['Name'])['original_precision'].max())
+    print('after')
+    print(len(set(df['Name'])))
+
+    # with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
+    #     print('##################################################')
+    #     print(df.groupby(['Name'])['Precision Align'].max())
+    #     print('++++++++++++++++++++++++++++++++++++++++++++++++++++++')
+    #     print(df.groupby(['Name'])['original_precision'].max())
     # .apply(lambda g: g < 0))
 
 
@@ -208,240 +242,270 @@ def main():
 
 
     # %%
+    
 
     plt.figure()
-    bp = df_events.boxplot(by=['threshold'], column=['ARI'], grid=False)
+    fig, ax = plt.subplots()
+    bp1 = ax.boxplot(df_events[df_events['threshold'] == 0]['Precision Align'], positions=[1], patch_artist=True)
+    bp2 = ax.boxplot(df_events[df_events['threshold'] == 0.1]['Precision Align'], positions=[2], patch_artist=True)
+    bp3 = ax.boxplot(df_events[df_events['threshold'] == 0.2]['Precision Align'], positions=[3], patch_artist=True)
+    bp4 = ax.boxplot(df_events[df_events['threshold'] == 0.3]['Precision Align'], positions=[4], patch_artist=True)
+    bp5 = ax.boxplot(df_events[df_events['threshold'] == 0.4]['Precision Align'], positions=[5], patch_artist=True)
+    bp6 = ax.boxplot(df_events[df_events['threshold'] == 0.5]['Precision Align'], positions=[6], patch_artist=True)
+    bp7 = ax.boxplot(df_events[df_events['threshold'] == 0.6]['Precision Align'], positions=[7], patch_artist=True)
+    bp8 = ax.boxplot(df_events[df_events['threshold'] == 0.7]['Precision Align'], positions=[8], patch_artist=True)
+    bp9 = ax.boxplot(df_events[df_events['threshold'] == 0.8]['Precision Align'], positions=[9], patch_artist=True)
+    bp10 = ax.boxplot(df_events[df_events['threshold'] == 0.9]['Precision Align'], positions=[10], patch_artist=True)
+    bp11 = ax.boxplot(df_events[df_events['threshold'] == 1]['Precision Align'], positions=[11], patch_artist=True)
+    bp12 = ax.boxplot(df_xixi_cd['Unrefined Log Precision'], positions=[12], patch_artist=True, boxprops=dict(facecolor="C2"))
+
+    ax.legend([bp12["boxes"][0]],
+              ['Unrefined event log'],
+              loc='upper center', bbox_to_anchor=(0.5, 1.13),
+              ncol=1, fancybox=True
+              )
+
+    plt.xlabel('Threshold')
+    plt.ylabel('Precision')
+    plt.xticks(list(range(1, 13)), [i / 10 for i in range(11)] + [''])
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_event_precision.png')
+    plt.show()
+
+
+
+    plt.figure()
+    fig, ax = plt.subplots()
+    bp1 = ax.boxplot(df_events[df_events['threshold'] == 0]['ARI'], positions=[1], patch_artist=True)
+    bp2 = ax.boxplot(df_events[df_events['threshold'] == 0.1]['ARI'], positions=[2], patch_artist=True)
+    bp3 = ax.boxplot(df_events[df_events['threshold'] == 0.2]['ARI'], positions=[3], patch_artist=True)
+    bp4 = ax.boxplot(df_events[df_events['threshold'] == 0.3]['ARI'], positions=[4], patch_artist=True)
+    bp5 = ax.boxplot(df_events[df_events['threshold'] == 0.4]['ARI'], positions=[5], patch_artist=True)
+    bp6 = ax.boxplot(df_events[df_events['threshold'] == 0.5]['ARI'], positions=[6], patch_artist=True)
+    bp7 = ax.boxplot(df_events[df_events['threshold'] == 0.6]['ARI'], positions=[7], patch_artist=True)
+    bp8 = ax.boxplot(df_events[df_events['threshold'] == 0.7]['ARI'], positions=[8], patch_artist=True)
+    bp9 = ax.boxplot(df_events[df_events['threshold'] == 0.8]['ARI'], positions=[9], patch_artist=True)
+    bp10 = ax.boxplot(df_events[df_events['threshold'] == 0.9]['ARI'], positions=[10], patch_artist=True)
+    bp11 = ax.boxplot(df_events[df_events['threshold'] == 1]['ARI'], positions=[11], patch_artist=True)
+
     plt.xlabel('Threshold')
     plt.ylabel('ARI')
-    plt.title('Threshold parameter event-based approach')
+    plt.xticks(list(range(1, 12)), [i / 10 for i in range(11)])
     plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_event_ari.png')
     plt.show()
 
     plt.figure()
-    bp = df_events.boxplot(by=['window_size'], column=['ARI'], grid=False)
-    plt.xlabel('Context size')
-    plt.ylabel('ARI')
-    plt.title('Context size parameter event-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_event_ari.png')
-    plt.show()
+    fig, ax = plt.subplots()
+    bp1 = ax.boxplot(df[df['threshold'] == 0]['Precision Align'], positions=[1], patch_artist=True)
+    bp2 = ax.boxplot(df[df['threshold'] == 0.1]['Precision Align'], positions=[2], patch_artist=True)
+    bp3 = ax.boxplot(df[df['threshold'] == 0.2]['Precision Align'], positions=[3], patch_artist=True)
+    bp4 = ax.boxplot(df[df['threshold'] == 0.3]['Precision Align'], positions=[4], patch_artist=True)
+    bp5 = ax.boxplot(df[df['threshold'] == 0.4]['Precision Align'], positions=[5], patch_artist=True)
+    bp6 = ax.boxplot(df[df['threshold'] == 0.5]['Precision Align'], positions=[6], patch_artist=True)
+    bp7 = ax.boxplot(df[df['threshold'] == 0.6]['Precision Align'], positions=[7], patch_artist=True)
+    bp8 = ax.boxplot(df[df['threshold'] == 0.7]['Precision Align'], positions=[8], patch_artist=True)
+    bp9 = ax.boxplot(df[df['threshold'] == 0.8]['Precision Align'], positions=[9], patch_artist=True)
+    bp10 = ax.boxplot(df[df['threshold'] == 0.9]['Precision Align'], positions=[10], patch_artist=True)
+    bp11 = ax.boxplot(df[df['threshold'] == 1]['Precision Align'], positions=[11], patch_artist=True)
+    bp12 = ax.boxplot(df_xixi_cd['Unrefined Log Precision'], positions=[12], patch_artist=True, boxprops=dict(facecolor="C2"))
 
-    plt.figure()
-    bp = df_events.boxplot(by=['distance_metric'], column=['ARI'], grid=False)
-    plt.xlabel('Distance metric')
-    plt.ylabel('ARI')
-    plt.title('Distance metric parameter event-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_event_ari.png')
-    plt.show()
-
-    plt.figure()
-    bp = df_events.boxplot(by=['threshold'], column=['Precision Align'], grid=False)
+    ax.legend([bp12["boxes"][0]],
+              ['Unrefined event log'],
+              loc='upper center', bbox_to_anchor=(0.5, 1.13),
+              ncol=1, fancybox=True
+              )
     plt.xlabel('Threshold')
     plt.ylabel('Precision')
-    plt.title('Threshold parameter event-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_event_precision.png')
-    plt.show()
-
-    plt.figure()
-    bp = df_events.boxplot(by=['window_size'], column=['Precision Align'], grid=False)
-    plt.xlabel('Context size')
-    plt.ylabel('Precision')
-    plt.title('Context size parameter event-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_event_precision.png')
-    plt.show()
-
-    plt.figure()
-    bp = df_events.boxplot(by=['distance_metric'], column=['Precision Align'], grid=False)
-    plt.xlabel('Distance metric')
-    plt.ylabel('ARI')
-    plt.title('Distance metric parameter event-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_event_precision.png')
-    plt.show()
-
-
-    plt.figure()
-    bp = df.boxplot(by=['threshold'], column=['ARI'], grid=False)
-    plt.xlabel('Threshold')
-    plt.ylabel('ARI')
-    plt.title('Threshold parameter variants-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_variants_ari.png')
-    plt.show()
-
-    plt.figure()
-    bp = df.boxplot(by=['window_size'], column=['ARI'], grid=False)
-    plt.xlabel('Context size')
-    plt.ylabel('ARI')
-    plt.title('Context size parameter variants-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_variants_ari.png')
-    plt.show()
-
-    plt.figure()
-    bp = df.boxplot(by=['distance_metric'], column=['ARI'], grid=False)
-    plt.xlabel('Distance metric')
-    plt.ylabel('ARI')
-    plt.title('Distance metric parameter variants-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_variants_ari.png')
-    plt.show()
-
-    plt.figure()
-    bp = df.boxplot(by=['threshold'], column=['Precision Align'], grid=False)
-    plt.xlabel('Threshold')
-    plt.ylabel('Precision')
-    plt.title('Threshold parameter variants-based approach')
+    plt.xticks(list(range(1, 13)), [i / 10 for i in range(11)] + [''])
     plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_variants_precision.png')
     plt.show()
 
     plt.figure()
-    bp = df.boxplot(by=['window_size'], column=['Precision Align'], grid=False)
+    fig, ax = plt.subplots()
+    bp1 = ax.boxplot(df[df['threshold'] == 0]['ARI'], positions=[1], patch_artist=True)
+    bp2 = ax.boxplot(df[df['threshold'] == 0.1]['ARI'], positions=[2], patch_artist=True)
+    bp3 = ax.boxplot(df[df['threshold'] == 0.2]['ARI'], positions=[3], patch_artist=True)
+    bp4 = ax.boxplot(df[df['threshold'] == 0.3]['ARI'], positions=[4], patch_artist=True)
+    bp5 = ax.boxplot(df[df['threshold'] == 0.4]['ARI'], positions=[5], patch_artist=True)
+    bp6 = ax.boxplot(df[df['threshold'] == 0.5]['ARI'], positions=[6], patch_artist=True)
+    bp7 = ax.boxplot(df[df['threshold'] == 0.6]['ARI'], positions=[7], patch_artist=True)
+    bp8 = ax.boxplot(df[df['threshold'] == 0.7]['ARI'], positions=[8], patch_artist=True)
+    bp9 = ax.boxplot(df[df['threshold'] == 0.8]['ARI'], positions=[9], patch_artist=True)
+    bp10 = ax.boxplot(df[df['threshold'] == 0.9]['ARI'], positions=[10], patch_artist=True)
+    bp11 = ax.boxplot(df[df['threshold'] == 1]['ARI'], positions=[11], patch_artist=True)
+
+
+    plt.xlabel('Threshold')
+    plt.ylabel('ARI')
+    plt.xticks(list(range(1, 12)), [i / 10 for i in range(11)])
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_variants_ari.png')
+    plt.show()
+    
+    
+    plt.figure()
+    fig, ax = plt.subplots()
+    bp1 = ax.boxplot(df_events[df_events['window_size'] == 1]['Precision Align'], positions=[1], patch_artist=True)
+    bp2 = ax.boxplot(df_events[df_events['window_size'] == 2]['Precision Align'], positions=[2], patch_artist=True)
+    bp3 = ax.boxplot(df_events[df_events['window_size'] == 3]['Precision Align'], positions=[3], patch_artist=True)
+    bp4 = ax.boxplot(df_events[df_events['window_size'] == 4]['Precision Align'], positions=[4], patch_artist=True)
+    bp5 = ax.boxplot(df_events[df_events['window_size'] == 5]['Precision Align'], positions=[5], patch_artist=True)
+    bp6 = ax.boxplot(df_xixi_cd['Unrefined Log Precision'], positions=[6], patch_artist=True, boxprops=dict(facecolor="C2"))
+
+    ax.legend([bp6["boxes"][0]],
+              ['Unrefined event log'],
+              loc='upper center', bbox_to_anchor=(0.5, 1.13),
+              ncol=1, fancybox=True
+              )
+
     plt.xlabel('Context size')
     plt.ylabel('Precision')
-    plt.title('Context size parameter variants-based approach')
+    plt.xticks(list(range(1, 7)), [i for i in range(1, 6)] + [''])
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_event_precision.png')
+    plt.show()
+
+    plt.figure()
+    fig, ax = plt.subplots()
+    bp1 = ax.boxplot(df_events[df_events['window_size'] == 1]['ARI'], positions=[1], patch_artist=True)
+    bp2 = ax.boxplot(df_events[df_events['window_size'] == 2]['ARI'], positions=[2], patch_artist=True)
+    bp3 = ax.boxplot(df_events[df_events['window_size'] == 3]['ARI'], positions=[3], patch_artist=True)
+    bp4 = ax.boxplot(df_events[df_events['window_size'] == 4]['ARI'], positions=[4], patch_artist=True)
+    bp5 = ax.boxplot(df_events[df_events['window_size'] == 5]['ARI'], positions=[5], patch_artist=True)
+
+    plt.xlabel('Context size')
+    plt.ylabel('ARI')
+    # plt.xticks(list(range(1, 12)), [i / 10 for i in range(11)])
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_event_ari.png')
+    plt.show()
+
+    plt.figure()
+    fig, ax = plt.subplots()
+    bp1 = ax.boxplot(df[df['window_size'] == 1]['Precision Align'], positions=[1], patch_artist=True)
+    bp2 = ax.boxplot(df[df['window_size'] == 2]['Precision Align'], positions=[2], patch_artist=True)
+    bp3 = ax.boxplot(df[df['window_size'] == 3]['Precision Align'], positions=[3], patch_artist=True)
+    bp4 = ax.boxplot(df[df['window_size'] == 4]['Precision Align'], positions=[4], patch_artist=True)
+    bp5 = ax.boxplot(df[df['window_size'] == 5]['Precision Align'], positions=[5], patch_artist=True)
+    bp6 = ax.boxplot(df_xixi_cd['Unrefined Log Precision'], positions=[6], patch_artist=True, boxprops=dict(facecolor="C2"))
+
+    ax.legend([bp6["boxes"][0]],
+              ['Unrefined event log'],
+              loc='upper center', bbox_to_anchor=(0.5, 1.13),
+              ncol=1, fancybox=True
+              )
+
+    plt.xlabel('Context size')
+    plt.ylabel('Precision')
+    plt.xticks(list(range(1, 7)), [i for i in range(1, 6)] + [''])
     plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_variants_precision.png')
     plt.show()
 
     plt.figure()
-    bp = df.boxplot(by=['distance_metric'], column=['Precision Align'], grid=False)
-    plt.xlabel('Distance metric')
+    fig, ax = plt.subplots()
+    bp1 = ax.boxplot(df[df['window_size'] == 1]['ARI'], positions=[1], patch_artist=True)
+    bp2 = ax.boxplot(df[df['window_size'] == 2]['ARI'], positions=[2], patch_artist=True)
+    bp3 = ax.boxplot(df[df['window_size'] == 3]['ARI'], positions=[3], patch_artist=True)
+    bp4 = ax.boxplot(df[df['window_size'] == 4]['ARI'], positions=[4], patch_artist=True)
+    bp5 = ax.boxplot(df[df['window_size'] == 5]['ARI'], positions=[5], patch_artist=True)
+
+    plt.xlabel('Context size')
+    plt.ylabel('ARI')
+    # plt.xticks(list(range(1, 12)), [i / 10 for i in range(11)])
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_variants_ari.png')
+    plt.show()
+    
+    
+    plt.figure()
+    fig, ax = plt.subplots()
+    bp1 = ax.boxplot(df_events[df_events['distance_metric'] == 'DistanceVariant.EDIT_DISTANCE']['Precision Align'], positions=[1], patch_artist=True)
+    bp2 = ax.boxplot(df_events[df_events['distance_metric'] == 'DistanceVariant.SET_DISTANCE']['Precision Align'], positions=[2], patch_artist=True)
+    bp3 = ax.boxplot(df_events[df_events['distance_metric'] == 'DistanceVariant.MULTISET_DISTANCE']['Precision Align'], positions=[3], patch_artist=True)
+    bp4 = ax.boxplot(df_xixi_cd['Unrefined Log Precision'], positions=[4], patch_artist=True, boxprops=dict(facecolor="C2"))
+
+    ax.legend([bp4["boxes"][0]],
+              ['Unrefined event log'],
+              loc='upper center', bbox_to_anchor=(0.5, 1.13),
+              ncol=1, fancybox=True
+              )
+
+    plt.xlabel('Distance Metric')
     plt.ylabel('Precision')
-    plt.title('Distance metric parameter variants-based approach')
+    plt.xticks(list(range(1, 5)), ['Edit Distance', 'Set Distance', 'Multi-set Distance', ''])
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_event_precision.png')
+    plt.show()
+
+    plt.figure()
+    fig, ax = plt.subplots()
+    bp1 = ax.boxplot(df_events[df_events['distance_metric'] == 'DistanceVariant.EDIT_DISTANCE']['ARI'], positions=[1], patch_artist=True)
+    bp2 = ax.boxplot(df_events[df_events['distance_metric'] == 'DistanceVariant.SET_DISTANCE']['ARI'], positions=[2], patch_artist=True)
+    bp3 = ax.boxplot(df_events[df_events['distance_metric'] == 'DistanceVariant.MULTISET_DISTANCE']['ARI'], positions=[3], patch_artist=True)
+
+    plt.xlabel('Distance Metric')
+    plt.ylabel('ARI')
+    plt.xticks(list(range(1, 4)), ['Edit Distance', 'Set Distance', 'Multi-set Distance'])
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_event_ari.png')
+    plt.show()
+
+    plt.figure()
+    fig, ax = plt.subplots()
+    bp1 = ax.boxplot(df[df['distance_metric'] == 'DistanceVariant.EDIT_DISTANCE']['Precision Align'], positions=[1], patch_artist=True)
+    bp2 = ax.boxplot(df[df['distance_metric'] == 'DistanceVariant.SET_DISTANCE']['Precision Align'], positions=[2], patch_artist=True)
+    bp3 = ax.boxplot(df[df['distance_metric'] == 'DistanceVariant.MULTISET_DISTANCE']['Precision Align'], positions=[3], patch_artist=True)
+    bp4 = ax.boxplot(df_xixi_cd['Unrefined Log Precision'], positions=[4], patch_artist=True, boxprops=dict(facecolor="C2"))
+
+    ax.legend([bp4["boxes"][0]],
+              ['Unrefined event log'],
+              loc='upper center', bbox_to_anchor=(0.5, 1.13),
+              ncol=1, fancybox=True
+              )
+
+    plt.xlabel('Distance Metric')
+    plt.ylabel('Precision')
+    plt.xticks(list(range(1, 5)), ['Edit Distance', 'Set Distance', 'Multi-set Distance', ''])
     plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_variants_precision.png')
     plt.show()
 
-
     plt.figure()
-    bp = df.boxplot(by=['use_frequency'], column=['ARI'], grid=False)
-    plt.xlabel('Use frequency for weight calculation')
+    fig, ax = plt.subplots()
+    bp1 = ax.boxplot(df[df['distance_metric'] == 'DistanceVariant.EDIT_DISTANCE']['ARI'], positions=[1], patch_artist=True)
+    bp2 = ax.boxplot(df[df['distance_metric'] == 'DistanceVariant.SET_DISTANCE']['ARI'], positions=[2], patch_artist=True)
+    bp3 = ax.boxplot(df[df['distance_metric'] == 'DistanceVariant.MULTISET_DISTANCE']['ARI'], positions=[3], patch_artist=True)
+
+    plt.xlabel('Distance Metric')
     plt.ylabel('ARI')
-    plt.title('Frequency information usage variants-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\frequency_variants_ari.png')
-    plt.show()
-
-    plt.figure()
-    bp = df.boxplot(by=['use_frequency'], column=['Precision Align'], grid=False)
-    plt.xlabel('Use frequency for weight calculation')
-    plt.ylabel('Precision')
-    plt.title('Frequency information usage variants-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\frequency_variants_precision.png')
+    plt.xticks(list(range(1, 4)), ['Edit Distance', 'Set Distance', 'Multi-set Distance'])
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_variants_ari.png')
     plt.show()
 
 
-
-  # %%
-
-    plt.figure()
-    bp = df_events.groupby(['Name']).boxplot(by=['threshold'], column=['ARI'], grid=False)
-    plt.xlabel('Threshold')
-    plt.ylabel('ARI')
-    plt.title('Threshold parameter event-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_event_ari.png')
-    plt.show()
 
     # %%
-
     plt.figure()
-    bp = df_events.boxplot(by=['window_size'], column=['ARI'], grid=False)
-    plt.xlabel('Context size')
-    plt.ylabel('ARI')
-    plt.title('Context size parameter event-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_event_ari.png')
-    plt.show()
+    fig, ax = plt.subplots()
+    bp1 = ax.boxplot(df[df['use_frequency'] == True]['Precision Align'], positions=[1], patch_artist=True)
+    bp2 = ax.boxplot(df[df['use_frequency'] == False]['Precision Align'], positions=[2], patch_artist=True)
+    bp3 = ax.boxplot(df_xixi_cd['Unrefined Log Precision'], positions=[3], patch_artist=True, boxprops=dict(facecolor="C2"))
 
-    plt.figure()
-    bp = df_events.boxplot(by=['distance_metric'], column=['ARI'], grid=False)
-    plt.xlabel('Distance metric')
-    plt.ylabel('ARI')
-    plt.title('Distance metric parameter event-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_event_ari.png')
-    plt.show()
+    ax.legend([bp3["boxes"][0]],
+              ['Unrefined event log'],
+              loc='upper center', bbox_to_anchor=(0.5, 1.13),
+              ncol=1, fancybox=True
+              )
 
-    plt.figure()
-    bp = df_events.boxplot(by=['threshold'], column=['Precision Align'], grid=False)
-    plt.xlabel('Threshold')
+    plt.xlabel('Use Frequency')
     plt.ylabel('Precision')
-    plt.title('Threshold parameter event-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_event_precision.png')
+    plt.xticks(list(range(1, 4)), ['Yes', 'No', ''])
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\frequency_variants_precision.png')
     plt.show()
 
     plt.figure()
-    bp = df_events.boxplot(by=['window_size'], column=['Precision Align'], grid=False)
-    plt.xlabel('Context size')
-    plt.ylabel('Precision')
-    plt.title('Context size parameter event-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_event_precision.png')
-    plt.show()
+    fig, ax = plt.subplots()
+    bp1 = ax.boxplot(df[df['use_frequency'] == True]['ARI'], positions=[1], patch_artist=True)
+    bp2 = ax.boxplot(df[df['use_frequency'] == False]['ARI'], positions=[2], patch_artist=True)
 
-    plt.figure()
-    bp = df_events.boxplot(by=['distance_metric'], column=['Precision Align'], grid=False)
-    plt.xlabel('Distance metric')
+    plt.xlabel('Use Frequency')
     plt.ylabel('ARI')
-    plt.title('Distance metric parameter event-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_event_precision.png')
-    plt.show()
-
-
-    plt.figure()
-    bp = df.boxplot(by=['threshold'], column=['ARI'], grid=False)
-    plt.xlabel('Threshold')
-    plt.ylabel('ARI')
-    plt.title('Threshold parameter variants-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_variants_ari.png')
-    plt.show()
-
-    plt.figure()
-    bp = df.boxplot(by=['window_size'], column=['ARI'], grid=False)
-    plt.xlabel('Context size')
-    plt.ylabel('ARI')
-    plt.title('Context size parameter variants-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_variants_ari.png')
-    plt.show()
-
-    plt.figure()
-    bp = df.boxplot(by=['distance_metric'], column=['ARI'], grid=False)
-    plt.xlabel('Distance metric')
-    plt.ylabel('ARI')
-    plt.title('Distance metric parameter variants-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_variants_ari.png')
-    plt.show()
-
-    plt.figure()
-    bp = df.boxplot(by=['threshold'], column=['Precision Align'], grid=False)
-    plt.xlabel('Threshold')
-    plt.ylabel('Precision')
-    plt.title('Threshold parameter variants-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_variants_precision.png')
-    plt.show()
-
-    plt.figure()
-    bp = df.boxplot(by=['window_size'], column=['Precision Align'], grid=False)
-    plt.xlabel('Context size')
-    plt.ylabel('Precision')
-    plt.title('Context size parameter variants-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_variants_precision.png')
-    plt.show()
-
-    plt.figure()
-    bp = df.boxplot(by=['distance_metric'], column=['Precision Align'], grid=False)
-    plt.xlabel('Distance metric')
-    plt.ylabel('Precision')
-    plt.title('Distance metric parameter variants-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_variants_precision.png')
-    plt.show()
-
-
-    plt.figure()
-    bp = df.boxplot(by=['use_frequency'], column=['ARI'], grid=False)
-    plt.xlabel('Use frequency for weight calculation')
-    plt.ylabel('ARI')
-    plt.title('Frequency information usage variants-based approach')
+    plt.xticks(list(range(1, 3)), ['Yes', 'No'])
     plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\frequency_variants_ari.png')
     plt.show()
 
-    plt.figure()
-    bp = df.boxplot(by=['use_frequency'], column=['Precision Align'], grid=False)
-    plt.xlabel('Use frequency for weight calculation')
-    plt.ylabel('Precision')
-    plt.title('Frequency information usage variants-based approach')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\frequency_variants_precision.png')
-    plt.show()
 
     # %%
 
@@ -468,11 +532,18 @@ def main():
     df_xixi_cc['Name'] = df_xixi_cc['Folder'] + '/' + df_xixi_cc['Log']
     xixi_names = set(list(df_xixi_cc['Name']))
 
-    df_xixi_cc = df_xixi_cc.loc[df_xixi_cc['Name'].isin(logs_event_based)]
+    print('Before')
+    print(len(xixi_names))
 
-    with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
-        print('++++++++++++++++++++++++++++++++++++++++++++++++++++++')
-        print(df_xixi_cc.groupby(['Name'])['Precise Log Precision '].max())
+    df_xixi_cc = df_xixi_cc.loc[df_xixi_cc['Name'].isin(xixi_cd_names)]
+    df_xixi_cc = df_xixi_cc.loc[df_xixi_cc['Name'].isin(variant_based_names)]
+
+    print('After')
+    print(len(set(df_xixi_cc['Name'])))
+
+    # with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
+    #     print('++++++++++++++++++++++++++++++++++++++++++++++++++++++')
+    #     print(df_xixi_cc.groupby(['Name'])['Precise Log Precision '].max())
 
     c = 0
     for name in xixi_names:
@@ -537,8 +608,13 @@ def main():
                               columns=dfs_xixi_cd[0].columns)
 
     df_xixi_cd['Name'] = df_xixi_cd['Folder'] + '/' + df_xixi_cd['Log']
+    xixi_cd_names = set(list(df_xixi_cd['Name']))
 
-    df_xixi_cd = df_xixi_cd.loc[df_xixi_cd['Name'].isin(logs_event_based)]
+    print('Before')
+    print(len(xixi_cd_names))
+    df_xixi_cd = df_xixi_cd.loc[df_xixi_cd['Name'].isin(variant_based_names)]
+    print('After')
+    print(len(set(df_xixi_cd['Name'])))
 
     # df_xixi_cd = df_xixi_cd.loc[df_xixi_cd['Unfolding Threshold'] > 0.5]
 
@@ -566,10 +642,13 @@ def main():
               loc='upper center', bbox_to_anchor=(0.5, 1.16),
               ncol=2, fancybox=True
               )
+    plt.xticks(list(range(1, 5)), ['Variants-\nbased', 'Event-\nbased', 'Mapping \nwith CC', 'Mapping \nwith CD'])
+    plt.subplots_adjust(bottom=0.15)
     plt.xlabel('Algorithm')
     plt.ylabel('ARI')
     plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\average_ari.png')
     plt.show()
+
 
     plt.figure()
     fig, ax = plt.subplots()
@@ -587,10 +666,16 @@ def main():
               loc='upper center', bbox_to_anchor=(0.5, 1.16),
               ncol=3, fancybox=True
               )
+    plt.xticks(list(range(1, 7)), ['Variants-\nbased', 'Event-\nbased', 'Mapping \nwith CC',
+                                   'Mapping \nwith CD', 'Ground truth\n event log', 'Unrefined\n event log'])
+    plt.subplots_adjust(bottom=0.15)
+
     plt.xlabel('Algorithm')
     plt.ylabel('Precision')
     plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\average_precision.png')
     plt.show()
+
+
 
     plt.figure()
     fig, ax = plt.subplots()
@@ -608,6 +693,9 @@ def main():
               loc='upper center', bbox_to_anchor=(0.5, 1.16),
               ncol=3, fancybox=True
               )
+    plt.xticks(list(range(1, 7)), ['Variants-\nbased', 'Event-\nbased', 'Mapping \nwith CC',
+                                   'Mapping \nwith CD', 'Ground truth\n event log', 'Unrefined\n event log'])
+    plt.subplots_adjust(bottom=0.15)
     plt.xlabel('Algorithm')
     plt.ylabel('Max Precision')
     plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\max_precision.png')
@@ -627,6 +715,9 @@ def main():
               loc='upper center', bbox_to_anchor=(0.5, 1.16),
               ncol=2, fancybox=True
               )
+
+    plt.xticks(list(range(1, 5)), ['Variants-\nbased', 'Event-\nbased', 'Mapping \nwith CC', 'Mapping \nwith CD'])
+    plt.subplots_adjust(bottom=0.15)
     plt.xlabel('Algorithm')
     plt.ylabel('Max ARI')
     plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\max_ari.png')
@@ -653,6 +744,9 @@ def main():
               loc='upper center', bbox_to_anchor=(0.5, 1.16),
               ncol=3, fancybox=True
               )
+    plt.xticks(list(range(1, 7)), ['Variants-\nbased', 'Event-\nbased', 'Mapping \nwith CC',
+                                   'Mapping \nwith CD', 'Ground truth\n event log', 'Unrefined\n event log'])
+    plt.subplots_adjust(bottom=0.15)
     plt.xlabel('Algorithm')
     plt.ylabel('Simplicity')
     plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\average_simplicity.png')
@@ -675,6 +769,9 @@ def main():
               loc='upper center', bbox_to_anchor=(0.5, 1.16),
               ncol=3, fancybox=True
               )
+    plt.xticks(list(range(1, 7)), ['Variants-\nbased', 'Event-\nbased', 'Mapping \nwith CC',
+                                   'Mapping \nwith CD', 'Ground truth\n event log', 'Unrefined\n event log'])
+    plt.subplots_adjust(bottom=0.15)
     plt.xlabel('Algorithm')
     plt.ylabel('Max Simplicity')
     plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\max_simplicity.png')
@@ -710,6 +807,238 @@ def main():
 
     plt.figure()
     bp = df_xixi_cd.boxplot(by='Variant Threshold', column=['Refined Log ARI'], grid=False)
+    plt.show()
+
+    # %%
+
+    # TODO: ####################################### Old #######################################
+    plt.figure()
+    bp = df_events.boxplot(by=['threshold'], column=['ARI'], grid=False)
+    plt.xlabel('Threshold')
+    plt.ylabel('ARI')
+    plt.title('Threshold parameter event-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_event_ari.png')
+    plt.show()
+
+    plt.figure()
+    bp = df_events.boxplot(by=['window_size'], column=['ARI'], grid=False)
+    plt.xlabel('Context size')
+    plt.ylabel('ARI')
+    plt.title('Context size parameter event-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_event_ari.png')
+    plt.show()
+
+    plt.figure()
+    bp = df_events.boxplot(by=['distance_metric'], column=['ARI'], grid=False)
+    plt.xlabel('Distance metric')
+    plt.ylabel('ARI')
+    plt.title('Distance metric parameter event-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_event_ari.png')
+    plt.show()
+
+    plt.figure()
+    bp = df_events.boxplot(by=['threshold'], column=['Precision Align'], grid=False)
+    plt.xlabel('Threshold')
+    plt.ylabel('Precision')
+    plt.title('Threshold parameter event-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_event_precision.png')
+    plt.show()
+
+    plt.figure()
+    bp = df_events.boxplot(by=['window_size'], column=['Precision Align'], grid=False)
+    plt.xlabel('Context size')
+    plt.ylabel('Precision')
+    plt.title('Context size parameter event-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_event_precision.png')
+    plt.show()
+
+    plt.figure()
+    bp = df_events.boxplot(by=['distance_metric'], column=['Precision Align'], grid=False)
+    plt.xlabel('Distance metric')
+    plt.ylabel('ARI')
+    plt.title('Distance metric parameter event-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_event_precision.png')
+    plt.show()
+
+    plt.figure()
+    bp = df.boxplot(by=['threshold'], column=['ARI'], grid=False)
+    plt.xlabel('Threshold')
+    plt.ylabel('ARI')
+    plt.title('Threshold parameter variants-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_variants_ari.png')
+    plt.show()
+
+    plt.figure()
+    bp = df.boxplot(by=['window_size'], column=['ARI'], grid=False)
+    plt.xlabel('Context size')
+    plt.ylabel('ARI')
+    plt.title('Context size parameter variants-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_variants_ari.png')
+    plt.show()
+
+    plt.figure()
+    bp = df.boxplot(by=['distance_metric'], column=['ARI'], grid=False)
+    plt.xlabel('Distance metric')
+    plt.ylabel('ARI')
+    plt.title('Distance metric parameter variants-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_variants_ari.png')
+    plt.show()
+
+    plt.figure()
+    bp = df.boxplot(by=['threshold'], column=['Precision Align'], grid=False)
+    plt.xlabel('Threshold')
+    plt.ylabel('Precision')
+    plt.title('Threshold parameter variants-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_variants_precision.png')
+    plt.show()
+
+    plt.figure()
+    bp = df.boxplot(by=['window_size'], column=['Precision Align'], grid=False)
+    plt.xlabel('Context size')
+    plt.ylabel('Precision')
+    plt.title('Context size parameter variants-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_variants_precision.png')
+    plt.show()
+
+    plt.figure()
+    bp = df.boxplot(by=['distance_metric'], column=['Precision Align'], grid=False)
+    plt.xlabel('Distance metric')
+    plt.ylabel('Precision')
+    plt.title('Distance metric parameter variants-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_variants_precision.png')
+    plt.show()
+
+    # %%
+    plt.figure()
+    bp = df.boxplot(by=['use_frequency'], column=['ARI'], grid=False)
+    plt.xlabel('Use frequency for weight calculation')
+    plt.ylabel('ARI')
+    plt.title('Frequency information usage variants-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\frequency_variants_ari.png')
+    plt.show()
+
+    plt.figure()
+    bp = df.boxplot(by=['use_frequency'], column=['Precision Align'], grid=False)
+    plt.xlabel('Use frequency for weight calculation')
+    plt.ylabel('Precision')
+    plt.title('Frequency information usage variants-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\frequency_variants_precision.png')
+    plt.show()
+
+    # %%
+
+    plt.figure()
+    bp = df_events.groupby(['Name']).boxplot(by=['threshold'], column=['ARI'], grid=False)
+    plt.xlabel('Threshold')
+    plt.ylabel('ARI')
+    plt.title('Threshold parameter event-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_event_ari.png')
+    plt.show()
+
+    # %%
+
+    plt.figure()
+    bp = df_events.boxplot(by=['window_size'], column=['ARI'], grid=False)
+    plt.xlabel('Context size')
+    plt.ylabel('ARI')
+    plt.title('Context size parameter event-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_event_ari.png')
+    plt.show()
+
+    plt.figure()
+    bp = df_events.boxplot(by=['distance_metric'], column=['ARI'], grid=False)
+    plt.xlabel('Distance metric')
+    plt.ylabel('ARI')
+    plt.title('Distance metric parameter event-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_event_ari.png')
+    plt.show()
+
+    plt.figure()
+    bp = df_events.boxplot(by=['threshold'], column=['Precision Align'], grid=False)
+    plt.xlabel('Threshold')
+    plt.ylabel('Precision')
+    plt.title('Threshold parameter event-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_event_precision.png')
+    plt.show()
+
+    plt.figure()
+    bp = df_events.boxplot(by=['window_size'], column=['Precision Align'], grid=False)
+    plt.xlabel('Context size')
+    plt.ylabel('Precision')
+    plt.title('Context size parameter event-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_event_precision.png')
+    plt.show()
+
+    plt.figure()
+    bp = df_events.boxplot(by=['distance_metric'], column=['Precision Align'], grid=False)
+    plt.xlabel('Distance metric')
+    plt.ylabel('ARI')
+    plt.title('Distance metric parameter event-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_event_precision.png')
+    plt.show()
+
+    plt.figure()
+    bp = df.boxplot(by=['threshold'], column=['ARI'], grid=False)
+    plt.xlabel('Threshold')
+    plt.ylabel('ARI')
+    plt.title('Threshold parameter variants-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_variants_ari.png')
+    plt.show()
+
+    plt.figure()
+    bp = df.boxplot(by=['window_size'], column=['ARI'], grid=False)
+    plt.xlabel('Context size')
+    plt.ylabel('ARI')
+    plt.title('Context size parameter variants-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_variants_ari.png')
+    plt.show()
+
+    plt.figure()
+    bp = df.boxplot(by=['distance_metric'], column=['ARI'], grid=False)
+    plt.xlabel('Distance metric')
+    plt.ylabel('ARI')
+    plt.title('Distance metric parameter variants-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_variants_ari.png')
+    plt.show()
+
+    plt.figure()
+    bp = df.boxplot(by=['threshold'], column=['Precision Align'], grid=False)
+    plt.xlabel('Threshold')
+    plt.ylabel('Precision')
+    plt.title('Threshold parameter variants-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\threshold_variants_precision.png')
+    plt.show()
+
+    plt.figure()
+    bp = df.boxplot(by=['window_size'], column=['Precision Align'], grid=False)
+    plt.xlabel('Context size')
+    plt.ylabel('Precision')
+    plt.title('Context size parameter variants-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\context_size_variants_precision.png')
+    plt.show()
+
+    plt.figure()
+    bp = df.boxplot(by=['distance_metric'], column=['Precision Align'], grid=False)
+    plt.xlabel('Distance metric')
+    plt.ylabel('Precision')
+    plt.title('Distance metric parameter variants-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\distance_metric_variants_precision.png')
+    plt.show()
+
+    plt.figure()
+    bp = df.boxplot(by=['use_frequency'], column=['ARI'], grid=False)
+    plt.xlabel('Use frequency for weight calculation')
+    plt.ylabel('ARI')
+    plt.title('Frequency information usage variants-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\frequency_variants_ari.png')
+    plt.show()
+
+    plt.figure()
+    bp = df.boxplot(by=['use_frequency'], column=['Precision Align'], grid=False)
+    plt.xlabel('Use frequency for weight calculation')
+    plt.ylabel('Precision')
+    plt.title('Frequency information usage variants-based approach')
+    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\frequency_variants_precision.png')
     plt.show()
 
 

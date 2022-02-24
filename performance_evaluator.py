@@ -7,10 +7,10 @@ import json
 import string
 from typing import TextIO
 
-from pm4py.evaluation.replay_fitness import evaluator as replay_fitness_evaluator
-from pm4py.evaluation.precision import evaluator as precision_evaluator
-from pm4py.evaluation.generalization import evaluator as generalization_evaluator
-from pm4py.evaluation.simplicity import evaluator as simplicity_evaluator
+from pm4py.algo.evaluation.replay_fitness import evaluator as replay_fitness_evaluator
+from pm4py.algo.evaluation.precision import evaluator as precision_evaluator
+from pm4py.algo.evaluation.generalization import evaluator as generalization_evaluator
+from pm4py.algo.evaluation.simplicity import evaluator as simplicity_evaluator
 
 
 class PerformanceEvaluator:
@@ -40,10 +40,10 @@ class PerformanceEvaluator:
         # self._write(log)
         # token_fitness = replay_fitness_evaluator.apply(log, net, im, fm, variant=replay_fitness_evaluator.Variants.TOKEN_BASED)
         # self._write(token_fitness)
-        if self.skip_fitness:
-            self.fitness = 1
-            self._write('Fitness skipped, assumed to be 1 because of IM')
-            return 1
+        # if self.skip_fitness:
+        #     self.fitness = 1
+        #     self._write('Fitness skipped, assumed to be 1 because of IM')
+        #     return 1
 
         alignment_fitness = replay_fitness_evaluator.apply(self.log, self.net, self.im, self.fm,
                                                            variant=replay_fitness_evaluator.Variants.ALIGNMENT_BASED)

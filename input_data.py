@@ -33,4 +33,5 @@ class InputData:
     original_log_precision: float = 0
     original_log_simplicity: float = 0
     original_log_generalization: float = 0
+    original_log_fitness: float = 0
     concurrent_labels: Iterable[str] = field(default_factory=list)

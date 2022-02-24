@@ -84,9 +84,10 @@ def run_pipeline_multi_layer_igraph(input_paths) -> None:
 def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_to_split=[], use_frequency=True,
                              use_noise=True):
     header = [
-        'Name', 'max_number_of_traces', 'labels_to_split', 'original labels', 'original_precision', 'original_simplicity', 'original_generalization', 'Xixi number of Clusters found', 'Xixi Precision', 'Xixi ARI',
+        'Name', 'max_number_of_traces', 'labels_to_split', 'original labels', 'original_precision', 'original_simplicity',
+        'original_generalization', 'original_fitness' ,'Xixi number of Clusters found', 'Xixi Precision', 'Xixi ARI',
         'use_combined_context', 'use_frequency', 'window_size', 'distance_metric', 'threshold', 'Number of Clusters found',
-        'Precision Align', 'ARI', 'Simplicity', 'Generalization']
+        'Precision Align', 'ARI', 'Simplicity', 'Generalization', 'Fitness']
 
     # Path(f'./results/{folder_name}').mkdir(parents=True, exist_ok=True)
     Path(f'./outputs/{folder_name}').mkdir(parents=True, exist_ok=True)
@@ -114,13 +115,13 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
     #                         final_marking=final_marking)
     # return
 
-    csv_file_path = Path(f'./results/{folder_name}_{pipeline_variant}.csv')
+    csv_file_path = Path(f'./results/{folder_name}_{pipeline_variant}_NOISE_05_NEW.csv')
     if csv_file_path.is_file():
         print(csv_file_path)
         print('Warning: File already existis exiting')
         return
 
-    with open(f'./results/{folder_name}_{pipeline_variant}.csv', 'w') as f:
+    with open(f'./results/{folder_name}_{pipeline_variant}_NOISE_05_NEW.csv', 'w') as f:
         writer = csv.writer(f)
         writer.writerow(header)
 
@@ -129,9 +130,9 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
     print("Starting pipeline")
     for (name, path) in input_list:
         split_name = name.split('/')
-        if split_name[0] not in parsed_logs.keys() or split_name[1] not in parsed_logs[split_name[0]]:
-            print(f'skipped {name}')
-            continue
+        # if split_name[0] not in parsed_logs.keys() or split_name[1] not in parsed_logs[split_name[0]]:
+        #     print(f'skipped {name}')
+        #     continue
 
         input_data = InputData(original_input_name=name,
                                log_path=path,
@@ -139,7 +140,7 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
                                labels_to_split=labels_to_split,
                                use_frequency=use_frequency,
                                use_noise=use_noise,
-                               max_number_of_traces=500,
+                               max_number_of_traces=500000,
                                folder_name=folder_name)
 
         input_data.original_log = xes_importer.apply(input_data.log_path, parameters={
@@ -205,7 +206,7 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_data
             if i == 1:
                 input_data.use_frequency = True
             else:
-                input_data.use_frequency = False
+                input_data.use_frequency = True
             for window_size in [1, 2, 3, 4, 5]:
                 for distance in [DistanceVariant.EDIT_DISTANCE,
                                  DistanceVariant.SET_DISTANCE,
@@ -332,7 +333,8 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
         labels_to_original = label_splitter.get_split_labels_to_original_labels()
 
         if input_data.original_log_precision == 0:
-            final_marking, initial_marking, final_net, original_precision, original_simplicity, original_generalization = apply_im_without_noise(labels_to_original,
+            print('Starting to get original performance')
+            final_marking, initial_marking, final_net, original_precision, original_simplicity, original_generalization, original_fitness = apply_im_without_noise(labels_to_original,
                                                                                       input_data.original_log,
                                                                                       input_data.original_log,
                                                                                       outfile,
@@ -340,9 +342,10 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
             input_data.original_log_precision = original_precision
             input_data.original_log_simplicity = original_simplicity
             input_data.original_log_generalization = original_generalization
+            input_data.original_log_fitness = original_fitness
+            print('finished original log calculation')
 
-
-        final_marking, initial_marking, final_net, precision, simplicity, generalization = apply_im_without_noise(labels_to_original,
+        final_marking, initial_marking, final_net, precision, simplicity, generalization, fitness = apply_im_without_noise(labels_to_original,
                                                                                       split_log,
                                                                                       input_data.original_log,
                                                                                       outfile,
@@ -360,25 +363,28 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
         print(f'\nAdjusted Rand Index:\n')
         print(f'{ari_score}')
 
-        with open(f'./results/{input_data.folder_name}_{input_data.pipeline_variant}.csv', 'a') as f:
+        with open(f'./results/{input_data.folder_name}_{input_data.pipeline_variant}_NOISE_05_NEW.csv', 'a') as f:
             writer = csv.writer(f)
             if input_data.ground_truth_clustering:
                 row = [input_data.original_input_name, input_data.max_number_of_traces,
                        ' '.join(input_data.labels_to_split),
                        ', '.join(input_data.original_labels), input_data.original_log_precision,
                        input_data.original_log_simplicity, input_data.original_log_generalization,
+                       input_data.original_log_fitness,
                        len(input_data.xixi_clustering),
                        input_data.xixi_precision, input_data.xixi_ari,
                        input_data.use_combined_context, input_data.use_frequency, window_size, distance_variant, threshold,
-                       len(label_splitter.found_clustering), precision, ari_score, simplicity, generalization]
+                       len(label_splitter.found_clustering), precision, ari_score, simplicity, generalization, fitness]
             else:
                 row = [input_data.original_input_name, input_data.max_number_of_traces,
                        ' '.join(input_data.labels_to_split),
                        '[]', input_data.original_log_precision,
                        input_data.original_log_simplicity, input_data.original_log_generalization,
+                       input_data.original_log_fitness,
                        0, 0, 0,
                        input_data.use_combined_context, input_data.use_frequency, window_size, distance_variant, threshold,
-                       len(label_splitter.found_clustering), precision, ari_score, simplicity, generalization]
+                       len(label_splitter.found_clustering), precision, ari_score, simplicity, generalization,
+                       fitness]
             writer.writerow(row)
 
         if ari_score > best_score:
