@@ -29,7 +29,7 @@ from pm4py.evaluation.generalization import evaluator as generalization_evaluato
 from pm4py.evaluation.simplicity import evaluator as simplicity_evaluator
 
 
-from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
+# from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
 
 
 def run_pipeline_multi_layer_igraph(input_paths) -> None:
@@ -37,14 +37,14 @@ def run_pipeline_multi_layer_igraph(input_paths) -> None:
     if not os.path.exists('./outputs/best_results'):
         os.makedirs('./outputs/best_results')
 
-    apply_pipeline_to_folder([('real_logs/road_traffic_fines',
-                               './real_logs/Road_Traffic_Fine_Management_Process_shortened_labels.xes.gz')],
-                             'real_logs.txt',
-                             PipelineVariant.VARIANTS,
-                             labels_to_split=['F'],
-                             use_frequency=True,
-                             use_noise=False)
-    return
+    # apply_pipeline_to_folder([('real_logs/road_traffic_fines',
+    #                            './real_logs/Road_Traffic_Fine_Management_Process_shortened_labels.xes.gz')],
+    #                          'real_logs.txt',
+    #                          PipelineVariant.VARIANTS,
+    #                          labels_to_split=['F'],
+    #                          use_frequency=True,
+    #                          use_noise=False)
+    # return
 
     # apply_pipeline_to_folder([('real_logs/loop_start_end_same',
     #                            '/home/jonas/repositories/pm-label-splitting/example_logs/loop_start_end_same_log.xes')],
@@ -64,7 +64,7 @@ def run_pipeline_multi_layer_igraph(input_paths) -> None:
 
 
     for path, prefix in input_paths:
-        input_list = get_tuples_for_folder(path, prefix)
+        input_list = get_tuples_for_folder(path, prefix)[::-1]
         apply_pipeline_to_folder(input_list, prefix, PipelineVariant.EVENTS, labels_to_split=[], use_noise=False,
                                  use_frequency=True)
 
@@ -115,24 +115,26 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
     #                         final_marking=final_marking)
     # return
 
-    csv_file_path = Path(f'./results/{folder_name}_{pipeline_variant}_NOISE_05_NEW.csv')
+    csv_file_path = Path(f'./results/{folder_name}_{pipeline_variant}_NEW.csv')
     if csv_file_path.is_file():
         print(csv_file_path)
         print('Warning: File already existis exiting')
         return
 
-    with open(f'./results/{folder_name}_{pipeline_variant}_NOISE_05_NEW.csv', 'w') as f:
+    with open(f'./results/{folder_name}_{pipeline_variant}_NEW.csv', 'w') as f:
         writer = csv.writer(f)
         writer.writerow(header)
 
-    parsed_logs = {'mrt08-2107': {'G_1', 'P_1', 'AB_1', 'O_1', 'AA_1', 'M_1', 'H_1', 'AE_1', 'W_1', 'U_1', 'F_1', 'I_1', 'Y_1', 'N_1', 'V_1', 'X_1', 'Z_1', 'AC_1'}, 'mrt06-2142': {'A_1', 'L_1', 'T_1', 'C_1', 'AD_1', 'AQ_1', 'AB_1', 'AA_1', 'AF_1', 'J_1', 'B_1', 'AL_1', 'AI_1', 'AM_1', 'V_1'}, 'mrt08-0846': {'A_1', 'E_1', 'AD_1', 'AP_1', 'D_1', 'R_1', 'AF_1', 'B_1', 'AG_1', 'AK_1', 'C_1', 'AJ_1', 'I_1', 'V_1', 'W_1', 'AH_1', 'T_1', 'AB_1', 'O_1', 'AA_1', 'AE_1', 'AL_1', 'AI_1', 'K_1'}, 'mrt09-1233': {'E_1', 'R_1', 'D_1', 'AF_1', 'B_1', 'CG_1', 'BC_1', 'Q_1', 'AG_1', 'AJ_1', 'BQ_1', 'BW_1', 'BX_1', 'BE_1', 'W_1', 'AH_1', 'AM_1', 'Y_1', 'CE_1', 'BI_1', 'CK_1', 'AN_1', 'AB_1', 'M_1', 'BL_1', 'BJ_1', 'BY_1', 'CD_1', 'K_1'}, 'mrt03-1655': {'ED_1', 'DE_1', 'CL_1', 'BK_1', 'BC_1', 'EW_1', 'DT_1', 'CJ_1', 'BH_1', 'FW_1', 'DN_1', 'GN_1', 'BQ_1', 'CF_1', 'GC_1', 'EF_1', 'CO_1', 'CS_1', 'FY_1', 'BX_1', 'BE_1', 'EM_1', 'AM_1', 'FM_1', 'GA_1', 'N_1', 'DU_1', 'AN_1', 'FH_1', 'CP_1', 'AO_1', 'EY_1', 'AE_1', 'BP_1'}, 'mrt07-1207': {'AD_1', 'AP_1', 'R_1', 'S_1', 'AJ_1', 'AS_1', 'H_1', 'U_1', 'AH_1', 'AR_1', 'AB_1', 'O_1', 'AA_1', 'M_1', 'J_1', 'AL_1', 'K_1', 'X_1', 'AC_1'}, 'mrt03-2247': {'AK_1', 'AP_1', 'AQ_1', 'BX_1', 'BB_1', 'CN_1', 'AG_1'}, 'mrt08-2232': {'V_1', 'G_1', 'C_1', 'AJ_1', 'P_1', 'O_1', 'AT_1', 'R_1', 'M_1', 'H_1', 'U_1', 'F_1', 'AR_1', 'K_1'}, 'mrt06-1652': {'E_1', 'D_1', 'CG_1', 'DB_1', 'CI_1', 'AW_1', 'BF_1', 'C_1', 'DH_1', 'DN_1', 'BQ_1', 'DA_1', 'CT_1', 'BW_1', 'CO_1', 'CC_1', 'BX_1', 'W_1', 'Y_1', 'CE_1', 'CK_1', 'AV_1', 'Z_1', 'DD_1', 'BL_1', 'CD_1', 'BD_1', 'X_1'}, 'mrt04-1713': {'A_1', 'AD_1', 'AU_1', 'AP_1', 'Q_1', 'AK_1', 'I_1', 'V_1', 'AQ_1', 'W_1', 'U_1', 'AH_1', 'Y_1', 'N_1', 'AN_1', 'G_1', 'T_1', 'AB_1', 'O_1', 'M_1', 'AL_1', 'AI_1', 'AO_1', 'K_1', 'X_1'}, 'mrt08-1202': {'A_1', 'V_1', 'C_1', 'P_1', 'AB_1', 'O_1', 'AA_1', 'B_1', 'W_1', 'U_1', 'F_1', 'S_1', 'Y_1', 'N_1', 'AE_1'}, 'mrt04-1632': {'A_1', 'CB_1', 'AP_1', 'BR_1', 'DK_1', 'BM_1', 'BS_1', 'BF_1', 'CR_1', 'CU_1', 'I_1', 'DV_1', 'ER_1', 'DA_1', 'BW_1', 'BV_1', 'CC_1', 'CS_1', 'EI_1', 'H_1', 'BE_1', 'W_1', 'AM_1', 'BU_1', 'CV_1', 'CE_1', 'BI_1', 'L_1', 'AV_1', 'EG_1', 'G_1', 'AZ_1', 'AB_1', 'DX_1', 'CX_1', 'AI_1', 'DW_1', 'AO_1', 'BJ_1', 'CD_1', 'X_1', 'AC_1'}, 'feb18-1515': {'E_1', 'T_1', 'J_1', 'F_1', 'N_1'}, 'mrt06-1911': {'E_1', 'P_1', 'AF_1', 'F_1', 'AG_1', 'Q_1', 'AK_1', 'I_1', 'H_1', 'U_1', 'Y_1', 'L_1', 'G_1', 'T_1', 'O_1', 'M_1', 'AL_1', 'AE_1', 'X_1', 'AC_1'}, 'mrt09-1041': {'BF_1', 'C_1', 'E_1', 'AK_1', 'AP_1', 'AT_1', 'AF_1', 'B_1', 'AX_1', 'BE_1', 'W_1', 'AM_1', 'Q_1', 'AE_1', 'X_1'}, 'mrt09-1441': {'DF_1', 'CM_1', 'BR_1', 'S_1', 'BS_1', 'BF_1', 'C_1', 'AK_1', 'BZ_1', 'DH_1', 'CF_1', 'DQ_1', 'BX_1', 'CV_1', 'AR_1', 'CY_1', 'G_1', 'T_1', 'O_1', 'BJ_1', 'CH_1'}, 'mrt09-2247': {'E_1', 'P_1', 'CB_1', 'DE_1', 'BK_1', 'F_1', 'CG_1', 'AW_1', 'EL_1', 'AJ_1', 'DN_1', 'DQ_1', 'DL_1', 'DR_1', 'AR_1', 'DC_1', 'M_1', 'EX_1', 'DD_1', 'DM_1', 'CH_1', 'K_1'}, 'feb17-1236': {'R_1', 'U_1'}, 'mrt04-1607': {'A_1', 'L_1', 'R_1'}, 'feb17-1101': {'K_1'}, 'mrt07-0946': {'A_1', 'E_1', 'P_1', 'AB_1', 'AD_1', 'D_1', 'AA_1', 'J_1', 'AF_1', 'W_1', 'U_1', 'Y_1', 'AG_1', 'V_1', 'X_1'}, 'mrt09-1956': {'AP_1', 'CQ_1', 'DP_1', 'S_1', 'EC_1', 'BA_1', 'CU_1', 'CT_1', 'DL_1', 'CC_1', 'W_1', 'U_1', 'CV_1', 'DU_1', 'AN_1', 'CX_1', 'AO_1', 'BD_1', 'BP_1'}, 'feb17-0936': {'E_1'}, 'mrt07-1957': {'AJ_1', 'AB_1', 'J_1', 'B_1', 'AM_1'}, 'mrt08-1656': {'T_1', 'AB_1', 'D_1', 'AA_1', 'R_1', 'AF_1', 'AL_1', 'U_1', 'F_1', 'X_1'}, 'mrt09-0930': {'BH_1', 'AB_1', 'AU_1', 'AP_1', 'AA_1', 'AQ_1', 'J_1', 'H_1', 'BL_1', 'AI_1', 'U_1', 'S_1', 'BJ_1', 'AR_1'}, 'feb29-1654': {'H_1'}, 'feb17-1147': {'S_1', 'V_1', 'R_1'}, 'feb27-1517': {'B_1', 'C_1'}, 'feb16-1625': {'P_1', 'O_1', 'D_1', 'J_1', 'H_1'}, 'mrt06-2056': {'C_1', 'R_1', 'B_1', 'AL_1', 'AM_1', 'Y_1', 'AS_1', 'AG_1', 'X_1'}, 'feb18-1645': {'W_1'}, 'mrt04-0910': {'E_1', 'I_1', 'Z_1'}, 'feb29-1548': {'K_1', 'R_1'}}
+    # parsed_logs = {'mrt08-2107': {'G_1', 'P_1', 'AB_1', 'O_1', 'AA_1', 'M_1', 'H_1', 'AE_1', 'W_1', 'U_1', 'F_1', 'I_1', 'Y_1', 'N_1', 'V_1', 'X_1', 'Z_1', 'AC_1'}, 'mrt06-2142': {'A_1', 'L_1', 'T_1', 'C_1', 'AD_1', 'AQ_1', 'AB_1', 'AA_1', 'AF_1', 'J_1', 'B_1', 'AL_1', 'AI_1', 'AM_1', 'V_1'}, 'mrt08-0846': {'A_1', 'E_1', 'AD_1', 'AP_1', 'D_1', 'R_1', 'AF_1', 'B_1', 'AG_1', 'AK_1', 'C_1', 'AJ_1', 'I_1', 'V_1', 'W_1', 'AH_1', 'T_1', 'AB_1', 'O_1', 'AA_1', 'AE_1', 'AL_1', 'AI_1', 'K_1'}, 'mrt09-1233': {'E_1', 'R_1', 'D_1', 'AF_1', 'B_1', 'CG_1', 'BC_1', 'Q_1', 'AG_1', 'AJ_1', 'BQ_1', 'BW_1', 'BX_1', 'BE_1', 'W_1', 'AH_1', 'AM_1', 'Y_1', 'CE_1', 'BI_1', 'CK_1', 'AN_1', 'AB_1', 'M_1', 'BL_1', 'BJ_1', 'BY_1', 'CD_1', 'K_1'}, 'mrt03-1655': {'ED_1', 'DE_1', 'CL_1', 'BK_1', 'BC_1', 'EW_1', 'DT_1', 'CJ_1', 'BH_1', 'FW_1', 'DN_1', 'GN_1', 'BQ_1', 'CF_1', 'GC_1', 'EF_1', 'CO_1', 'CS_1', 'FY_1', 'BX_1', 'BE_1', 'EM_1', 'AM_1', 'FM_1', 'GA_1', 'N_1', 'DU_1', 'AN_1', 'FH_1', 'CP_1', 'AO_1', 'EY_1', 'AE_1', 'BP_1'}, 'mrt07-1207': {'AD_1', 'AP_1', 'R_1', 'S_1', 'AJ_1', 'AS_1', 'H_1', 'U_1', 'AH_1', 'AR_1', 'AB_1', 'O_1', 'AA_1', 'M_1', 'J_1', 'AL_1', 'K_1', 'X_1', 'AC_1'}, 'mrt03-2247': {'AK_1', 'AP_1', 'AQ_1', 'BX_1', 'BB_1', 'CN_1', 'AG_1'}, 'mrt08-2232': {'V_1', 'G_1', 'C_1', 'AJ_1', 'P_1', 'O_1', 'AT_1', 'R_1', 'M_1', 'H_1', 'U_1', 'F_1', 'AR_1', 'K_1'}, 'mrt06-1652': {'E_1', 'D_1', 'CG_1', 'DB_1', 'CI_1', 'AW_1', 'BF_1', 'C_1', 'DH_1', 'DN_1', 'BQ_1', 'DA_1', 'CT_1', 'BW_1', 'CO_1', 'CC_1', 'BX_1', 'W_1', 'Y_1', 'CE_1', 'CK_1', 'AV_1', 'Z_1', 'DD_1', 'BL_1', 'CD_1', 'BD_1', 'X_1'}, 'mrt04-1713': {'A_1', 'AD_1', 'AU_1', 'AP_1', 'Q_1', 'AK_1', 'I_1', 'V_1', 'AQ_1', 'W_1', 'U_1', 'AH_1', 'Y_1', 'N_1', 'AN_1', 'G_1', 'T_1', 'AB_1', 'O_1', 'M_1', 'AL_1', 'AI_1', 'AO_1', 'K_1', 'X_1'}, 'mrt08-1202': {'A_1', 'V_1', 'C_1', 'P_1', 'AB_1', 'O_1', 'AA_1', 'B_1', 'W_1', 'U_1', 'F_1', 'S_1', 'Y_1', 'N_1', 'AE_1'}, 'mrt04-1632': {'A_1', 'CB_1', 'AP_1', 'BR_1', 'DK_1', 'BM_1', 'BS_1', 'BF_1', 'CR_1', 'CU_1', 'I_1', 'DV_1', 'ER_1', 'DA_1', 'BW_1', 'BV_1', 'CC_1', 'CS_1', 'EI_1', 'H_1', 'BE_1', 'W_1', 'AM_1', 'BU_1', 'CV_1', 'CE_1', 'BI_1', 'L_1', 'AV_1', 'EG_1', 'G_1', 'AZ_1', 'AB_1', 'DX_1', 'CX_1', 'AI_1', 'DW_1', 'AO_1', 'BJ_1', 'CD_1', 'X_1', 'AC_1'}, 'feb18-1515': {'E_1', 'T_1', 'J_1', 'F_1', 'N_1'}, 'mrt06-1911': {'E_1', 'P_1', 'AF_1', 'F_1', 'AG_1', 'Q_1', 'AK_1', 'I_1', 'H_1', 'U_1', 'Y_1', 'L_1', 'G_1', 'T_1', 'O_1', 'M_1', 'AL_1', 'AE_1', 'X_1', 'AC_1'}, 'mrt09-1041': {'BF_1', 'C_1', 'E_1', 'AK_1', 'AP_1', 'AT_1', 'AF_1', 'B_1', 'AX_1', 'BE_1', 'W_1', 'AM_1', 'Q_1', 'AE_1', 'X_1'}, 'mrt09-1441': {'DF_1', 'CM_1', 'BR_1', 'S_1', 'BS_1', 'BF_1', 'C_1', 'AK_1', 'BZ_1', 'DH_1', 'CF_1', 'DQ_1', 'BX_1', 'CV_1', 'AR_1', 'CY_1', 'G_1', 'T_1', 'O_1', 'BJ_1', 'CH_1'}, 'mrt09-2247': {'E_1', 'P_1', 'CB_1', 'DE_1', 'BK_1', 'F_1', 'CG_1', 'AW_1', 'EL_1', 'AJ_1', 'DN_1', 'DQ_1', 'DL_1', 'DR_1', 'AR_1', 'DC_1', 'M_1', 'EX_1', 'DD_1', 'DM_1', 'CH_1', 'K_1'}, 'feb17-1236': {'R_1', 'U_1'}, 'mrt04-1607': {'A_1', 'L_1', 'R_1'}, 'feb17-1101': {'K_1'}, 'mrt07-0946': {'A_1', 'E_1', 'P_1', 'AB_1', 'AD_1', 'D_1', 'AA_1', 'J_1', 'AF_1', 'W_1', 'U_1', 'Y_1', 'AG_1', 'V_1', 'X_1'}, 'mrt09-1956': {'AP_1', 'CQ_1', 'DP_1', 'S_1', 'EC_1', 'BA_1', 'CU_1', 'CT_1', 'DL_1', 'CC_1', 'W_1', 'U_1', 'CV_1', 'DU_1', 'AN_1', 'CX_1', 'AO_1', 'BD_1', 'BP_1'}, 'feb17-0936': {'E_1'}, 'mrt07-1957': {'AJ_1', 'AB_1', 'J_1', 'B_1', 'AM_1'}, 'mrt08-1656': {'T_1', 'AB_1', 'D_1', 'AA_1', 'R_1', 'AF_1', 'AL_1', 'U_1', 'F_1', 'X_1'}, 'mrt09-0930': {'BH_1', 'AB_1', 'AU_1', 'AP_1', 'AA_1', 'AQ_1', 'J_1', 'H_1', 'BL_1', 'AI_1', 'U_1', 'S_1', 'BJ_1', 'AR_1'}, 'feb29-1654': {'H_1'}, 'feb17-1147': {'S_1', 'V_1', 'R_1'}, 'feb27-1517': {'B_1', 'C_1'}, 'feb16-1625': {'P_1', 'O_1', 'D_1', 'J_1', 'H_1'}, 'mrt06-2056': {'C_1', 'R_1', 'B_1', 'AL_1', 'AM_1', 'Y_1', 'AS_1', 'AG_1', 'X_1'}, 'feb18-1645': {'W_1'}, 'mrt04-0910': {'E_1', 'I_1', 'Z_1'}, 'feb29-1548': {'K_1', 'R_1'}}
+    parsed_xixi_logs = {'mrt08-1202': {'S_1', 'O_1', 'N_1', 'I_1', 'B_1', 'P_1', 'W_1', 'Q_1', 'AH_1', 'Z_1', 'F_1', 'C_1', 'Y_1', 'AA_1', 'E_1', 'U_1', 'AG_1', 'AD_1', 'J_1', 'AE_1', 'A_1', 'AB_1', 'V_1'}, 'mrt09-1441': {'S_1', 'CV_1', 'O_1', 'BS_1', 'T_1', 'CH_1', 'AR_1', 'C_1', 'CM_1', 'CY_1', 'BJ_1', 'BX_1', 'BF_1', 'DH_1', 'CF_1', 'BR_1', 'BZ_1', 'G_1', 'DF_1', 'AK_1', 'DQ_1'}, 'mrt08-0846': {'O_1', 'AJ_1', 'I_1', 'R_1', 'B_1', 'D_1', 'W_1', 'AH_1', 'T_1', 'AP_1', 'AF_1', 'C_1', 'AL_1', 'AA_1', 'E_1', 'AG_1', 'AD_1', 'K_1', 'AE_1', 'A_1', 'AI_1', 'AK_1', 'AB_1', 'V_1'}, 'mrt09-1233': {'BB_1', 'AJ_1', 'R_1', 'CL_1', 'B_1', 'D_1', 'BI_1', 'W_1', 'CK_1', 'BK_1', 'BC_1', 'Q_1', 'CD_1', 'T_1', 'CJ_1', 'AH_1', 'BW_1', 'AR_1', 'AF_1', 'C_1', 'CE_1', 'Y_1', 'BY_1', 'AL_1', 'BE_1', 'BL_1', 'AA_1', 'E_1', 'BJ_1', 'BX_1', 'AG_1', 'CF_1', 'J_1', 'K_1', 'AQ_1', 'AM_1', 'L_1', 'AO_1', 'AI_1', 'BQ_1', 'AB_1', 'AN_1', 'CG_1', 'M_1'}, 'mrt06-1911': {'O_1', 'I_1', 'P_1', 'AC_1', 'Q_1', 'T_1', 'H_1', 'AF_1', 'F_1', 'Y_1', 'AL_1', 'E_1', 'U_1', 'AG_1', 'X_1', 'L_1', 'G_1', 'AE_1', 'AK_1', 'M_1'}, 'feb17-1147': {'S_1', 'R_1', 'V_1'}, 'mrt06-2142': {'AQ_1', 'AM_1', 'L_1', 'AA_1', 'A_1', 'T_1', 'J_1', 'B_1', 'Z_1', 'AF_1', 'AI_1', 'V_1', 'AB_1', 'C_1', 'AG_1', 'AD_1', 'Y_1', 'AL_1'}, 'mrt03-1655': {'N_1', 'DZ_1', 'R_1', 'CL_1', 'EM_1', 'EW_1', 'DT_1', 'W_1', 'BC_1', 'GC_1', 'CP_1', 'CJ_1', 'BT_1', 'DN_1', 'FY_1', 'FL_1', 'BE_1', 'GN_1', 'ED_1', 'GA_1', 'BX_1', 'BP_1', 'FM_1', 'J_1', 'EQ_1', 'AM_1', 'L_1', 'AE_1', 'DE_1', 'EX_1', 'DU_1', 'BQ_1', 'GL_1'}, 'mrt09-2247': {'AJ_1', 'DM_1', 'DR_1', 'DD_1', 'P_1', 'DL_1', 'BK_1', 'DN_1', 'CH_1', 'AR_1', 'F_1', 'AW_1', 'DC_1', 'E_1', 'K_1', 'DE_1', 'CB_1', 'EX_1', 'DQ_1', 'EL_1', 'CG_1', 'M_1'}, 'feb27-1517': {'K_1', 'L_1', 'G_1', 'I_1', 'A_1', 'B_1', 'P_1', 'D_1', 'F_1', 'C_1'}, 'mrt04-1632': {'CV_1', 'N_1', 'BV_1', 'I_1', 'CX_1', 'CC_1', 'CR_1', 'AC_1', 'BI_1', 'W_1', 'DA_1', 'EI_1', 'BS_1', 'BU_1', 'CD_1', 'H_1', 'AP_1', 'BW_1', 'DY_1', 'F_1', 'CE_1', 'BA_1', 'BE_1', 'DV_1', 'DX_1', 'AV_1', 'CU_1', 'E_1', 'BJ_1', 'BX_1', 'BF_1', 'CS_1', 'BM_1', 'BR_1', 'X_1', 'AM_1', 'L_1', 'EG_1', 'G_1', 'A_1', 'CB_1', 'AZ_1', 'CI_1', 'AO_1', 'AI_1', 'AB_1', 'ER_1', 'DK_1', 'DW_1', 'BH_1'}, 'mrt09-1041': {'AT_1', 'BE_1', 'X_1', 'AM_1', 'AE_1', 'Q_1', 'B_1', 'E_1', 'AP_1', 'AF_1', 'AX_1', 'AK_1', 'BF_1', 'C_1', 'W_1'}, 'mrt09-1956': {'CV_1', 'S_1', 'CX_1', 'CC_1', 'W_1', 'DL_1', 'CQ_1', 'AP_1', 'EC_1', 'BA_1', 'CT_1', 'CU_1', 'U_1', 'BP_1', 'AO_1', 'DU_1', 'BD_1', 'DP_1', 'AN_1'}, 'mrt07-1207': {'S_1', 'O_1', 'AJ_1', 'R_1', 'AC_1', 'AS_1', 'W_1', 'Q_1', 'AH_1', 'H_1', 'AP_1', 'AR_1', 'AL_1', 'AA_1', 'U_1', 'AD_1', 'J_1', 'K_1', 'X_1', 'AB_1', 'M_1'}, 'mrt03-2247': {'AQ_1', 'O_1', 'BB_1', 'CY_1', 'AP_1', 'CI_1', 'BX_1', 'AK_1', 'CN_1', 'AN_1', 'BY_1'}, 'feb16-1625': {'I_1', 'P_1', 'J_1'}, 'feb29-1614': {'G_1', 'I_1', 'H_1', 'C_1', 'J_1'}, 'feb29-1548': {'K_1', 'R_1'}, 'mrt09-0930': {'AU_1', 'AQ_1', 'S_1', 'BL_1', 'AA_1', 'H_1', 'BJ_1', 'U_1', 'AP_1', 'AR_1', 'AI_1', 'AB_1', 'BH_1', 'J_1'}, 'feb18-1645': {'W_1', 'X_1', 'V_1'}, 'mrt08-2107': {'O_1', 'X_1', 'N_1', 'AA_1', 'AE_1', 'I_1', 'G_1', 'H_1', 'U_1', 'Z_1', 'P_1', 'AB_1', 'AC_1', 'F_1', 'V_1', 'W_1', 'Y_1', 'M_1'}, 'mrt08-2232': {'K_1', 'AT_1', 'O_1', 'AJ_1', 'G_1', 'R_1', 'H_1', 'AR_1', 'U_1', 'P_1', 'V_1', 'F_1', 'C_1', 'M_1'}, 'feb18-1515': {'N_1', 'R_1', 'T_1', 'E_1', 'P_1', 'F_1', 'J_1'}, 'mrt06-1652': {'DB_1', 'CC_1', 'DD_1', 'D_1', 'CO_1', 'W_1', 'DA_1', 'CK_1', 'CD_1', 'DN_1', 'BW_1', 'Z_1', 'C_1', 'CE_1', 'CT_1', 'Y_1', 'AW_1', 'BL_1', 'E_1', 'BX_1', 'BF_1', 'DH_1', 'X_1', 'CI_1', 'BQ_1', 'BD_1', 'AV_1', 'CG_1'}, 'mrt07-0946': {'I_1', 'P_1', 'D_1', 'W_1', 'T_1', 'H_1', 'AF_1', 'F_1', 'Y_1', 'AA_1', 'E_1', 'U_1', 'AG_1', 'AD_1', 'J_1', 'X_1', 'L_1', 'G_1', 'A_1', 'V_1', 'AB_1'}, 'mrt06-2056': {'AM_1', 'X_1', 'R_1', 'C_1', 'B_1', 'AS_1', 'AG_1', 'Y_1', 'AL_1'}, 'mrt08-1656': {'X_1', 'AA_1', 'G_1', 'T_1', 'R_1', 'U_1', 'AF_1', 'AK_1', 'D_1', 'AB_1', 'F_1', 'C_1', 'Y_1', 'AL_1'}, 'mrt04-1713': {'O_1', 'N_1', 'I_1', 'W_1', 'Q_1', 'AH_1', 'T_1', 'AP_1', 'Y_1', 'AL_1', 'AU_1', 'U_1', 'AD_1', 'K_1', 'AQ_1', 'X_1', 'G_1', 'A_1', 'AO_1', 'AI_1', 'AK_1', 'V_1', 'AB_1', 'AN_1', 'M_1'}, 'feb17-1236': {'U_1', 'R_1'}, 'mrt07-1957': {'AM_1', 'N_1', 'AJ_1', 'A_1', 'B_1', 'AB_1', 'AG_1', 'Y_1', 'J_1'}, 'feb29-1439': {'G_1', 'I_1', 'Q_1', 'R_1', 'T_1', 'B_1', 'P_1', 'F_1', 'C_1'}, 'feb29-1334': {'Q_1', 'S_1', 'T_1', 'R_1'}, 'mrt04-1607': {'A_1', 'L_1'}, 'feb17-1101': {'K_1'}, 'feb17-0936': {'E_1', 'H_1'}, 'mrt04-0910': {'E_1', 'Z_1'}}
+    parsed_variant_logs = {'mrt08-1202': {'S_1', 'AA_1', 'A_1', 'AB_1', 'W_1'}, 'mrt09-1441': {'S_1', 'CV_1', 'O_1', 'BS_1', 'T_1', 'CH_1', 'AR_1', 'C_1', 'CM_1', 'CY_1', 'BJ_1', 'BX_1', 'BF_1', 'DH_1', 'CF_1', 'BR_1', 'BZ_1', 'G_1', 'DF_1', 'AK_1', 'DQ_1'}, 'mrt08-0846': {'AE_1', 'AH_1', 'AF_1', 'AI_1', 'V_1', 'AB_1', 'AD_1'}, 'feb17-1147': {'S_1', 'R_1', 'V_1'}, 'mrt06-2142': {'AQ_1', 'AM_1', 'L_1', 'AA_1', 'J_1', 'B_1', 'AF_1', 'AI_1', 'AB_1', 'C_1', 'AL_1'}, 'mrt09-2247': {'AJ_1', 'DM_1', 'DR_1', 'DD_1', 'P_1', 'DL_1', 'BK_1', 'DN_1', 'CH_1', 'AR_1', 'F_1', 'AW_1', 'DC_1', 'E_1', 'K_1', 'DE_1', 'CB_1', 'EX_1', 'DQ_1', 'EL_1', 'CG_1', 'M_1'}, 'mrt04-1632': {'CV_1', 'BV_1', 'I_1', 'CX_1', 'CC_1', 'AC_1', 'BI_1', 'W_1', 'DA_1', 'EI_1', 'BS_1', 'BU_1', 'CD_1', 'H_1', 'AP_1', 'BW_1', 'CE_1', 'BE_1', 'AV_1', 'CU_1', 'BJ_1', 'BF_1', 'CS_1', 'BM_1', 'BR_1', 'X_1', 'AM_1', 'L_1', 'EG_1', 'G_1', 'A_1', 'CB_1', 'AZ_1', 'AO_1', 'AI_1', 'AB_1', 'ER_1', 'DK_1', 'DW_1', 'DX_1'}, 'mrt09-1233': {'CK_1', 'BL_1', 'BW_1', 'BJ_1', 'BX_1', 'AB_1', 'CG_1', 'M_1'}, 'mrt09-1041': {'AT_1', 'X_1', 'Q_1', 'B_1', 'E_1', 'AP_1', 'AF_1', 'AX_1', 'W_1'}, 'mrt03-1655': {'FH_1', 'CS_1', 'CO_1'}, 'mrt09-1956': {'CV_1', 'S_1', 'CX_1', 'CC_1', 'W_1', 'DL_1', 'CQ_1', 'AP_1', 'EC_1', 'BA_1', 'CT_1', 'CU_1', 'U_1', 'BP_1', 'AO_1', 'DU_1', 'BD_1', 'DP_1', 'AN_1'}, 'feb16-1625': {'O_1', 'H_1', 'P_1', 'D_1', 'J_1'}, 'feb29-1548': {'K_1', 'R_1'}, 'mrt09-0930': {'AU_1', 'AQ_1', 'S_1', 'BL_1', 'AA_1', 'H_1', 'BJ_1', 'U_1', 'AP_1', 'AR_1', 'AI_1', 'AB_1', 'BH_1', 'J_1'}, 'mrt08-2107': {'O_1', 'X_1', 'N_1', 'AA_1', 'AE_1', 'I_1', 'G_1', 'H_1', 'U_1', 'Z_1', 'P_1', 'AB_1', 'AC_1', 'F_1', 'V_1', 'W_1', 'Y_1', 'M_1'}, 'mrt06-1652': {'DB_1', 'CC_1', 'DD_1', 'D_1', 'CO_1', 'W_1', 'DA_1', 'CK_1', 'CD_1', 'DN_1', 'BW_1', 'Z_1', 'C_1', 'CE_1', 'CT_1', 'Y_1', 'AW_1', 'BL_1', 'E_1', 'BX_1', 'BF_1', 'DH_1', 'X_1', 'CI_1', 'BQ_1', 'BD_1', 'AV_1', 'CG_1'}, 'mrt08-2232': {'AT_1', 'O_1', 'G_1', 'R_1', 'H_1', 'AR_1', 'U_1', 'P_1', 'V_1', 'F_1', 'C_1', 'M_1'}, 'mrt06-2056': {'AM_1', 'X_1', 'R_1', 'C_1', 'B_1', 'AS_1', 'AG_1', 'Y_1', 'AL_1'}, 'mrt08-1656': {'F_1', 'U_1', 'AL_1'}, 'mrt06-1911': {'O_1', 'L_1', 'Q_1', 'I_1', 'H_1', 'U_1', 'AF_1', 'P_1', 'AC_1', 'F_1', 'AG_1', 'Y_1', 'M_1', 'AL_1'}, 'mrt04-1713': {'O_1', 'N_1', 'I_1', 'W_1', 'Q_1', 'AH_1', 'T_1', 'AP_1', 'Y_1', 'AL_1', 'AU_1', 'U_1', 'AD_1', 'K_1', 'AQ_1', 'X_1', 'G_1', 'A_1', 'AO_1', 'AI_1', 'AK_1', 'V_1', 'AB_1', 'AN_1', 'M_1'}, 'mrt07-0946': {'AA_1', 'A_1', 'E_1', 'U_1', 'AF_1', 'W_1'}, 'feb17-1236': {'U_1', 'R_1'}, 'feb27-1517': {'C_1', 'B_1'}, 'mrt07-1957': {'AJ_1', 'AM_1', 'AB_1', 'B_1'}, 'mrt07-1207': {'K_1', 'S_1', 'X_1', 'AH_1', 'AP_1', 'AR_1', 'U_1', 'AC_1', 'AS_1', 'J_1'}, 'feb18-1515': {'N_1', 'T_1', 'E_1', 'F_1', 'J_1'}, 'mrt04-1607': {'A_1', 'R_1', 'L_1'}, 'mrt04-0910': {'E_1', 'I_1', 'Z_1'}, 'feb29-1654': {'H_1'}, 'feb18-1645': {'W_1'}, 'feb17-1101': {'K_1'}, 'feb17-0936': {'E_1'}, 'mrt03-2247': {'AQ_1'}}
 
     print("Starting pipeline")
     for (name, path) in input_list:
         split_name = name.split('/')
-        # if split_name[0] not in parsed_logs.keys() or split_name[1] not in parsed_logs[split_name[0]]:
-        #     print(f'skipped {name}')
-        #     continue
+        if (split_name[0] in parsed_variant_logs and split_name[1] in parsed_variant_logs[split_name[0]]) or (split_name[0] not in parsed_xixi_logs.keys() or split_name[1] not in parsed_xixi_logs[split_name[0]]):
+            print(f'skipped {name}')
+            continue
 
         input_data = InputData(original_input_name=name,
                                log_path=path,
@@ -140,7 +142,7 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
                                labels_to_split=labels_to_split,
                                use_frequency=use_frequency,
                                use_noise=use_noise,
-                               max_number_of_traces=500000,
+                               max_number_of_traces=500,
                                folder_name=folder_name)
 
         input_data.original_log = xes_importer.apply(input_data.log_path, parameters={
@@ -177,7 +179,6 @@ def apply_pipeline_to_folder(input_list, folder_name, pipeline_variant, labels_t
         best_score, best_precision, best_configs = apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(
             input_data)
         try:
-
             write_summary_file_with_parameters(best_configs, best_score, best_precision, name, summary_file_name)
             write_summary_file(best_score, best_precision, input_data.ground_truth_precision, name, summary_file_name,
                                input_data.xixi_precision, input_data.xixi_ari)
@@ -204,8 +205,8 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_data
     for label in input_data.labels_to_split:
         for i in range(1):
             if i == 1:
-                input_data.use_frequency = True
-            else:
+                input_data.use_frequency = False
+            elif i == 0:
                 input_data.use_frequency = True
             for window_size in [1, 2, 3, 4, 5]:
                 for distance in [DistanceVariant.EDIT_DISTANCE,
@@ -363,7 +364,7 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
         print(f'\nAdjusted Rand Index:\n')
         print(f'{ari_score}')
 
-        with open(f'./results/{input_data.folder_name}_{input_data.pipeline_variant}_NOISE_05_NEW.csv', 'a') as f:
+        with open(f'./results/{input_data.folder_name}_{input_data.pipeline_variant}_NEW.csv', 'a') as f:
             writer = csv.writer(f)
             if input_data.ground_truth_clustering:
                 row = [input_data.original_input_name, input_data.max_number_of_traces,

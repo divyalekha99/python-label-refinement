@@ -9,7 +9,7 @@ def apply_im_without_noise_and_export(input_name, suffix, split_log, original_lo
                                       short_labels_to_original_labels={}):
     outfile.write(f'\n IM without noise threshold:\n')
 
-    final_marking, initial_marking, final_net, precision, simplicity, generalization = apply_im_without_noise(labels_to_original,
+    final_marking, initial_marking, final_net, precision, simplicity, generalization, _ = apply_im_without_noise(labels_to_original,
                                                                                   split_log,
                                                                                   original_log,
                                                                                   outfile,
@@ -21,12 +21,12 @@ def apply_im_without_noise_and_export(input_name, suffix, split_log, original_lo
 
 
 def apply_im_without_noise(labels_to_original, split_log, original_log, outfile, short_labels_to_original_labels={}):
-    net, initial_marking, final_marking = inductive_miner.apply(split_log,
-                                                                variant=inductive_miner.Variants.IMf,
-                                                                parameters={inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: 0.5})
+    # net, initial_marking, final_marking = inductive_miner.apply(split_log,
+    #                                                            variant=inductive_miner.Variants.IMf,
+    #                                                            parameters={inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: 0.25})
 
     print('Applied IM with noise')
-    # net, initial_marking, final_marking = inductive_miner.apply(split_log)
+    net, initial_marking, final_marking = inductive_miner.apply(split_log)
     post_processor = PostProcessor(labels_to_original, short_labels_to_original_labels)
     final_net = post_processor.post_process_petri_net(net)
 

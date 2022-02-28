@@ -19,6 +19,9 @@ def main():
     import matplotlib.pyplot as plt
     from scipy.stats import ks_2samp
 
+    road_traffic_fines = Path(
+        r'C:\Users\Jonas\Desktop\real_logs\road_traffic_results\results')
+
     variant_approach_results_path_no_impr_loop = Path(
         r'C:\Users\Jonas\Desktop\real_logs\event_based_approach_new\noImprInLoop\results')
 
@@ -42,6 +45,10 @@ def main():
         r'C:\Users\Jonas\Desktop\real_logs\xixi\xixi_impr_in_loop\exp_xixi_cc_300')
     xixi_cd_results_path_impr_loop = Path(
         r'C:\Users\Jonas\Desktop\real_logs\xixi\xixi_impr_in_loop\exp_xixi_cd_300')
+
+    file_paths_road_traffic_fines = [join(road_traffic_fines, f) for f in
+                                                listdir(road_traffic_fines) if
+                                                isfile(join(road_traffic_fines, f))]
 
     file_paths_variant_approach_no_impr_loop = [join(variant_approach_results_path_no_impr_loop, f) for f in
                                                 listdir(variant_approach_results_path_no_impr_loop) if
@@ -120,6 +127,46 @@ def main():
         return df['Refined Log ARI'].mean(), df['Refined Log Precision'].mean(), df.groupby(['Name'])[
             'Refined Log Precision'].max().mean(), df.groupby(['Name'])['Refined Log ARI'].max().mean()
 
+
+    # %%
+
+    dfs_road_traffic = []
+    for path in file_paths_road_traffic_fines:
+        if 'png' in path:
+            continue
+        temp = pd.read_csv(path)
+        temp['refined_f1_score'] = 2 * (temp['Precision Align'] * temp['Fitness']) / (temp['Precision Align'] + temp['Fitness'])
+        temp['unrefined_f1_score'] = 2 * (temp['original_precision'] * temp['original_fitness']) / (temp['original_precision'] + temp['original_fitness'])
+
+        print('path')
+        print(path)
+        print('Road Traffic Fine Event Log')
+        print('Precision')
+        print(temp['Precision Align'].mean())
+        print(temp['Precision Align'].max())
+        print('Original Precision')
+        print(temp['original_precision'].mean())
+        print('Fitness')
+        print(temp['Fitness'].mean())
+        print(temp['Fitness'].max())
+        print('Original Fitness')
+        print(temp['original_fitness'].mean())
+
+        print('F1-score')
+        print(temp['refined_f1_score'].mean())
+        print(temp['refined_f1_score'].max())
+        print('unrefined_f1_score')
+        print(temp['unrefined_f1_score'].mean())
+
+        dfs_road_traffic.append(temp)
+
+    df_road_traffic = pd.DataFrame(np.concatenate([df_temp.values for df_temp in dfs_road_traffic]),
+                             columns=dfs_road_traffic[0].columns)
+
+
+
+
+
     # %%
 
     dfs_events = []
@@ -127,10 +174,6 @@ def main():
         if 'png' in path:
             continue
         temp = pd.read_csv(path)
-        # for i in range(166, len(temp), 330):
-        #     end = min(len(temp), i + 165)
-        #     temp.loc[i:end, 'use_frequency'] = True
-
         dfs_events.append(temp)
 
     df_events = pd.DataFrame(np.concatenate([df_temp.values for df_temp in dfs_events]),
@@ -532,19 +575,6 @@ def main():
     df_xixi_cc['Name'] = df_xixi_cc['Folder'] + '/' + df_xixi_cc['Log']
     xixi_names = set(list(df_xixi_cc['Name']))
 
-    print('Before')
-    print(len(xixi_names))
-
-    df_xixi_cc = df_xixi_cc.loc[df_xixi_cc['Name'].isin(xixi_cd_names)]
-    df_xixi_cc = df_xixi_cc.loc[df_xixi_cc['Name'].isin(variant_based_names)]
-
-    print('After')
-    print(len(set(df_xixi_cc['Name'])))
-
-    # with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
-    #     print('++++++++++++++++++++++++++++++++++++++++++++++++++++++')
-    #     print(df_xixi_cc.groupby(['Name'])['Precise Log Precision '].max())
-
     c = 0
     for name in xixi_names:
         if name in logs:
@@ -563,6 +593,21 @@ def main():
     print(len(xixi_names))
     print('Models')
     print(models)
+
+    print('Before')
+    print(len(xixi_names))
+
+    df_xixi_cc = df_xixi_cc.loc[df_xixi_cc['Name'].isin(xixi_cd_names)]
+    df_xixi_cc = df_xixi_cc.loc[df_xixi_cc['Name'].isin(variant_based_names)]
+
+    print('After')
+    print(len(set(df_xixi_cc['Name'])))
+
+    # with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
+    #     print('++++++++++++++++++++++++++++++++++++++++++++++++++++++')
+    #     print(df_xixi_cc.groupby(['Name'])['Precise Log Precision '].max())
+
+
 
     print('Base Data:')
     print(df_xixi_cc['Original Model Precision'].mean())
@@ -609,6 +654,25 @@ def main():
 
     df_xixi_cd['Name'] = df_xixi_cd['Folder'] + '/' + df_xixi_cd['Log']
     xixi_cd_names = set(list(df_xixi_cd['Name']))
+
+    c = 0
+    for name in xixi_cd_names:
+        if name in logs:
+            c += 1
+    print("Total logs")
+    print(c)
+
+    models = {}
+    # print(logs)
+
+    for name in xixi_cd_names:
+        split_name = name.split('/')
+        models.setdefault(split_name[0], set()).add(split_name[1])
+
+    print('len(xixi_cd_names)')
+    print(len(xixi_cd_names))
+    print('Models')
+    print(models)
 
     print('Before')
     print(len(xixi_cd_names))
