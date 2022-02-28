@@ -12,21 +12,6 @@ from distance_metrics import DistanceVariant, DistanceCalculator
 
 
 class LabelSplitter:
-    # (Second functionality: Label split log)
-    # Input: Event log
-    # Output: Event log with split labels
-    # Optional Parameters: list_of_labels, Similarity threshold, window / horizon size, suffix / prefix weight
-    # Option to generate both split logs (my approach + other approach)
-    # Window size
-    # calculate edit distance between all events
-    # Iterate over each event with window / horizon size
-    # Use editdistance library (should be efficient implementation)
-    # -> Save in data structure
-    # Generate a graph with the events connected that pass a certain threshold
-    # Or generate a graph that contains the distance
-    # Use community detection or other heuristic to find labels that should be split
-    # Generate new event log with split events
-
     def __init__(self,
                  outfile: TextIO,
                  labels_to_split,
@@ -72,7 +57,6 @@ class LabelSplitter:
         event_graphs = self.get_event_graphs_from_event_log(log)
 
         self.calculate_edges(event_graphs)
-        # self.get_connected_components(event_graphs=event_graphs)
         self.get_communities_louvain(event_graphs=event_graphs)
         self.set_split_labels(event_graphs, log)
         return log
@@ -140,7 +124,6 @@ class LabelSplitter:
 
     def set_split_labels(self, event_graphs, log):
         for label in self.labels_to_split:
-            # temp = list(filter(lambda event: event['label'] == f'{label}_0', event_graphs[label].nodes))
             for hash_value in event_graphs[label].nodes:
                 # TODO Is this really necessary or would it suffice to manipulate the hash map?
                 event = self.hash_to_event[hash_value]

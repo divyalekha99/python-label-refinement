@@ -143,9 +143,6 @@ class LabelSplitter:
                 for vertex_a in range(len(graph.vs)):
                     count = self.variants_to_count[self.label_and_id_to_event[label][vertex_a]['variant']]
                     if count > 1:
-                        ########################################################################
-                        # TODO: Check if times 2 or not!!!!!!!
-                        ########################################################################
                         weight = ncr(count, 2) * 2
                         edges.append((vertex_a, vertex_a))
                         weights.append(weight)

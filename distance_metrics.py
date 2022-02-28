@@ -20,11 +20,9 @@ class DistanceCalculator:
             prefix_distance = editdistance.eval(
                 event_a['prefix'][(-1) * min(self.window_size, len(event_a['prefix'])):],
                 event_b['prefix'][(-1) * min(self.window_size, len(event_b['prefix'])):])
-            # self._write(prefix_distance)
             suffix_distance = editdistance.eval(event_a['suffix'][:min(self.window_size, len(event_a['suffix'])) - 1],
                                                 event_b['suffix'][:min(self.window_size, len(event_b['suffix'])) - 1])
             return prefix_distance * 0.5 + suffix_distance * 0.5
-        # self._write(suffix_distance)
         else:
             return editdistance.eval(
                 event_a['prefix'][(-1) * min(self.window_size, len(event_a['prefix'])):] + event_a['suffix'][

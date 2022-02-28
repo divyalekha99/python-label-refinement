@@ -166,3 +166,15 @@ def filter_duplicate_xor(event_log, labels_to_split, clustering: Clustering):
         clustering = Clustering(new_clustering)
 
     return clustering
+
+
+def get_imprecise_labels(log):
+    print('Getting imprecise labels')
+    imprecise_labels = set()
+    for trace in log:
+        for event in trace:
+            if event['OrgLabel'] != event['concept:name']:
+                imprecise_labels.add(event['concept:name'])
+    # print(imprecise_labels)
+    print(list(imprecise_labels))
+    return list(imprecise_labels)

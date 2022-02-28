@@ -3,8 +3,8 @@ import re
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 from pm4py.algo.filtering.log.attributes import attributes_filter
 from pm4py.objects.log.importer.xes import importer as xes_importer
-# from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
-# from pm4py.objects.process_tree.exporter import exporter as ptml_exporter
+from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
+from pm4py.objects.process_tree.exporter import exporter as ptml_exporter
 
 from performance_evaluator import PerformanceEvaluator
 from pipeline_runner_single_layer_networkx import save_models_as_png
@@ -12,14 +12,9 @@ from pipeline_variant import remove_pipeline_variant_from_string
 
 
 def export_models_and_pngs(final_marking, initial_marking, net, original_tree, input_name, suffix):
-    # pnml_exporter.apply(net, initial_marking,
-    #                     f'./outputs/{suffix}.pnml', final_marking=final_marking)
-    # ptml_exporter.apply(original_tree, f'./outputs/{suffix}.ptml')
-    # save_models_as_png(f'./outputs/{suffix}',
-    #                    final_marking,
-    #                    initial_marking,
-    #                    net,
-    #                    original_tree)
+    pnml_exporter.apply(net, initial_marking,
+                        f'./outputs/{suffix}.pnml', final_marking=final_marking)
+    ptml_exporter.apply(original_tree, f'./outputs/{suffix}.ptml')
     return
 
 
@@ -78,7 +73,7 @@ class GoldenStandardModel:
                                                          outfile, skip_fitness=True)
             performance_evaluator.evaluate_performance()
 
-            # original_tree = inductive_miner.apply_tree(log)
-            # export_models_and_pngs(final_marking, initial_marking, net, original_tree, self._input_name, 'no_noise_golden')
+            original_tree = inductive_miner.apply_tree(log)
+            export_models_and_pngs(final_marking, initial_marking, net, original_tree, self._input_name, 'no_noise_golden')
 
         return performance_evaluator.precision

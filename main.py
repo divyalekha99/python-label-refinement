@@ -4,10 +4,8 @@ import pandas as pd
 import pm4py
 from pm4py.objects.conversion.process_tree import converter
 from pm4py.visualization.process_tree import visualizer as pt_visualizer
-from pm4py.objects.log.exporter.xes import exporter as xes_exporter
 
-# from log_generator import LogGenerator
-from pipeline_runner_multi_layer_igraph import run_pipeline_multi_layer_igraph
+from pipeline_runner_igraph import run_pipeline_multi_layer_igraph
 
 folder_index = int(sys.argv[1])
 directory = sys.argv[2]
@@ -21,24 +19,12 @@ def import_csv(file_path):
 
 
 def main() -> None:
-    # run_pipeline_single_layer_networkx()
-    # directory = "../data/imprInLoop_adaptive_OD"
-
     input_paths = []
     for folder_name in (os.listdir(directory)):
         input_paths.append((os.path.join(directory, folder_name, 'logs/'), folder_name))
 
     run_pipeline_multi_layer_igraph([input_paths[folder_index]])
-
-    # run_pipeline_multi_layer_igraph([])
     return
-
-    # bpmn_graph = pm4py.read_bpmn(f'/home/jonas/repositories/pm-label-splitting/bpmn_files/loop_start_end_same.bpmn')
-    # log_generator = LogGenerator()
-    # log = log_generator.get_log_from_bpmn(bpmn_graph)
-    # xes_exporter.apply(log,
-    #                     f'/home/jonas/repositories/pm-label-splitting/example_logs/loop_start_end_same_log.xes')
-
 
 def export_bpmn_model(log):
     tree = pm4py.discover_process_tree_inductive(log)

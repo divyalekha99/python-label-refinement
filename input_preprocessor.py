@@ -8,8 +8,7 @@ from apply_im import apply_im_with_noise_and_export, \
     apply_im_without_noise_and_export
 from goldenstandardmodel import GoldenStandardModel
 from input_data import InputData
-from pipeline_helpers_shared import get_xixi_metrics, get_community_similarity
-from pipeline_runner_single_layer_networkx import get_imprecise_labels
+from pipeline_helpers_shared import get_xixi_metrics, get_community_similarity, get_imprecise_labels
 from pipeline_variant import remove_pipeline_variant_from_string, PipelineVariant
 
 
@@ -43,12 +42,6 @@ class InputPreprocessor:
 
                 xixi_precision, xixi_clustering = get_xixi_metrics(labels_to_split, self.input_data)
 
-                # export_model_from_original_log_with_precise_labels(self.input_data.input_name, self.input_data.log_path,
-                #                                                    self.input_data.use_noise)
-
-                # y_f1_scores_unrefined = write_data_from_original_log_with_imprecise_labels(self.input_data.input_name,
-                #                                                                            original_log,
-                #                                                                            self.input_data.use_noise)
                 original_labels = self.get_original_labels(labels_to_split)
                 outfile.write('\n Original Labels:\n')
                 outfile.write(f'{str(original_labels)}\n')
@@ -57,21 +50,16 @@ class InputPreprocessor:
                 outfile.write('\n Ground truth clustering clustering:\n')
                 outfile.write(f'{str(ground_truth_clustering)}\n')
 
-                # print('xixi_clustering')
-                # print(xixi_clustering)
                 print('ground_truth_clustering')
                 print(ground_truth_clustering)
                 xixi_ari = 0 # get_community_similarity(ground_truth_clustering, xixi_clustering)
                 outfile.write('\n Xixi Adjusted Rand Index:\n')
                 outfile.write(f'{xixi_ari}\n')
 
-            # print('\n Xixi Adjusted Rand Index:\n')
-            # print(f'{xixi_ari}\n')
 
             self.input_data.original_labels = original_labels
             self.input_data.xixi_precision = xixi_precision
             self.input_data.ground_truth_precision = ground_truth_precision
-            # self.input_data.y_f1_scores_unrefined = y_f1_scores_unrefined
             self.input_data.ground_truth_model = ground_truth_model
             self.input_data.labels_to_split = labels_to_split
             self.input_data.original_labels = original_labels

@@ -58,7 +58,7 @@ class LabelSplitter:
         self._write(json.dumps(self._split_labels_to_original_labels))
         return self._split_labels_to_original_labels
 
-    def split_labels(self):
+    def split_labels(self, log):
         print('Starting label splitting')
         layers = []
         event_graphs = self.get_event_graphs_from_event_log(log)
@@ -68,7 +68,6 @@ class LabelSplitter:
 
         for index, layer in enumerate(layers):
             self.calculate_edges(layer, index)
-        # self.get_communities_leiden(event_graphs=event_graphs)
         self.get_communities_leiden_multiplex(layers=layers)
         self.set_split_labels(log)
 
