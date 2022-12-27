@@ -15,6 +15,11 @@ def export_models_and_pngs(final_marking, initial_marking, net, original_tree, i
     pnml_exporter.apply(net, initial_marking,
                         f'./outputs/{suffix}.pnml', final_marking=final_marking)
     ptml_exporter.apply(original_tree, f'./outputs/{suffix}.ptml')
+    save_models_as_png(f'./outputs/{suffix}',
+                       final_marking,
+                       initial_marking,
+                       net,
+                       original_tree)
     return
 
 
@@ -73,7 +78,7 @@ class GoldenStandardModel:
                                                          outfile, skip_fitness=True)
             performance_evaluator.evaluate_performance()
 
-            original_tree = inductive_miner.apply_tree(log)
-            export_models_and_pngs(final_marking, initial_marking, net, original_tree, self._input_name, 'no_noise_golden')
+            # original_tree = inductive_miner.apply_tree(log)
+            # export_models_and_pngs(final_marking, initial_marking, net, original_tree, self._input_name, 'no_noise_golden')
 
         return performance_evaluator.precision

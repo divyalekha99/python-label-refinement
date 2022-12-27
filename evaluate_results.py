@@ -148,6 +148,7 @@ def main():
             'Refined Log Precision'].max().mean(), df.groupby(['Name'])['Refined Log ARI'].max().mean()
 
 
+
     # %%
 
     dfs_road_traffic = []
@@ -218,6 +219,9 @@ def main():
     print(len(set(df_events['Name'])))
 
     df_events = df_events.groupby(['Name']).filter(lambda x: len(x) == 165)
+    # TODO: Uncomment!
+    # mask = df_events['window_size'].isin([1,3,5]) & df_events['threshold'].isin([0, 0.25, 0.5, 0.75, 1])
+    # df_events = df_events[mask]
     df_events.to_csv(r'C:\Users\Jonas\Desktop\real_logs\event_based_approach_events_new\results_combined.csv', index=False)
     #print(g)
     # print(len(g))
@@ -278,11 +282,15 @@ def main():
     #print(models)
 
     df = df.groupby(['Name']).filter(lambda x: len(x) == 330)
-    #df = df.loc[df['use_frequency'] == True]
+    df = df.loc[df['use_frequency'] == True]
     # df = df.loc[df['window_size'] == 4]
     # df = df.loc[df['distance_metric'] == 'DistanceVariant.MULTISET_DISTANCE']
     # df = df.loc[df['threshold'] < 0.8]
     # df = df.loc[df['threshold'] < 0.8]
+    # TODO: Uncomment
+    # mask = df['window_size'].isin([1, 3, 5]) & df['threshold'].isin([0, 0.25, 0.5, 0.75, 1]) & (df['use_frequency'] == True)
+    # df = df[mask]
+
     print('Before')
     print(len(set(df['Name'])))
     df = df.loc[df['Name'].isin(xixi_cd_names)]
@@ -325,16 +333,6 @@ def main():
     print(df['original_precision'].mean())
     print(df.groupby(['Name'])['original_precision'].max().mean())
 
-
-    # %%
-    import matplotlib
-    matplotlib.rcParams['mathtext.fontset'] = 'stix'
-    matplotlib.rcParams['font.family'] = 'STIXGeneral'
-    matplotlib.rcParams['font.size'] = 12
-    matplotlib.rcParams['axes.labelsize'] = 12
-    matplotlib.rcParams['legend.fontsize'] = 11
-    matplotlib.pyplot.title(r'ABC123 vs $\mathrm{ABC123}^{123}$')
-
     # plt.rcParams.update({
     #     'font.size': 11,  # Set font size to 11pt
     #     'axes.labelsize': 11,  # -> axis labels
@@ -346,6 +344,21 @@ def main():
     #         # ... more packages if needed
     #     )
     # })
+
+
+    # %%
+    import matplotlib
+    matplotlib.rcParams['mathtext.fontset'] = 'stix'
+    matplotlib.rcParams['font.family'] = 'STIXGeneral'
+    matplotlib.rcParams['font.size'] = 12
+    matplotlib.rcParams['axes.labelsize'] = 12
+    matplotlib.rcParams['legend.fontsize'] = 11
+    matplotlib.pyplot.title(r'ABC123 vs $\mathrm{ABC123}^{123}$')
+
+
+
+    # %%
+
 
     plt.figure()
     fig, ax = plt.subplots()
@@ -663,6 +676,9 @@ def main():
     print(len(set(df_xixi_cc['Name'])))
 
     df_xixi_cc = df_xixi_cc.groupby(['Name']).filter(lambda x: len(x) == 121)
+    # mask = df_xixi_cc['Variant Threshold'].isin([0, 0.25, 0.5, 0.75, 1]) & df_xixi_cc['Unfolding Threshold'].isin([0, 0.25, 0.5, 0.75, 1])
+    # df_xixi_cc = df_xixi_cc[mask]
+
     df_xixi_cc.to_csv(r'C:\Users\Jonas\Desktop\real_logs\xixi\results_combined_cc.csv', index=False)
     # print(g)
     # print(len(g))
@@ -730,6 +746,9 @@ def main():
     print(len(set(df_xixi_cd['Name'])))
 
     df_xixi_cd = df_xixi_cd.groupby(['Name']).filter(lambda x: len(x) == 121)
+    # TODO: Uncomment
+    # mask = df_xixi_cd['Variant Threshold'].isin([0, 0.25, 0.5, 0.75, 1]) & df_xixi_cd['Unfolding Threshold'].isin([0, 0.25, 0.5, 0.75, 1])
+    # df_xixi_cd = df_xixi_cd[mask]
     df_xixi_cd.to_csv(r'C:\Users\Jonas\Desktop\real_logs\xixi\results_combined_cd.csv', index=False)
     # print(g)
     # print(len(g))
@@ -754,15 +773,13 @@ def main():
     fig, ax = plt.subplots()
     bp1 = ax.boxplot(df['ARI'], positions=[1], patch_artist=True, boxprops=dict(facecolor="C0"))
     bp2 = ax.boxplot(df_events['ARI'], positions=[2], patch_artist=True, boxprops=dict(facecolor="C2"))
-    bp3 = ax.boxplot(df_xixi_cc['Refined Log ARI'], positions=[3], patch_artist=True, boxprops=dict(facecolor="C4"))
-    bp4 = ax.boxplot(df_xixi_cd['Refined Log ARI'], positions=[4], patch_artist=True, boxprops=dict(facecolor="C6"))
-    ax.legend([bp1["boxes"][0], bp2["boxes"][0], bp3["boxes"][0],
-               bp4["boxes"][0]],
-              ['Variants-based', 'Event-based', 'Mapping with CC', 'Mapping with CD'],
+    bp3 = ax.boxplot(df_xixi_cd['Refined Log ARI'], positions=[3], patch_artist=True, boxprops=dict(facecolor="C6"))
+    ax.legend([bp1["boxes"][0], bp2["boxes"][0], bp3["boxes"][0]],
+              ['Variant Compression', 'No Variant Compression', 'Mapping with CD'],
               loc='upper center', bbox_to_anchor=(0.5, 1.16),
               ncol=2, fancybox=True
               )
-    plt.xticks(list(range(1, 5)), ['Variants-\nbased', 'Event-\nbased', 'Mapping \nwith CC', 'Mapping \nwith CD'])
+    plt.xticks(list(range(1, 4)), ['Variant \nCompression', 'No Variant \nCompression', 'Mapping \nwith CD'])
     plt.subplots_adjust(bottom=0.15)
     plt.xlabel('Algorithm')
     plt.ylabel('ARI')
@@ -774,20 +791,19 @@ def main():
     fig, ax = plt.subplots()
     bp1 = ax.boxplot(df['Precision Align'], positions=[1], patch_artist=True, boxprops=dict(facecolor="C0"))
     bp2 = ax.boxplot(df_events['Precision Align'], positions=[2], patch_artist=True, boxprops=dict(facecolor="C2"))
-    bp3 = ax.boxplot(df_xixi_cc['Refined Log Precision'], positions=[3], patch_artist=True, boxprops=dict(facecolor="C4"))
-    bp4 = ax.boxplot(df_xixi_cd['Refined Log Precision'], positions=[4], patch_artist=True, boxprops=dict(facecolor="C6"))
-    bp5 = ax.boxplot(df_xixi_cd['Precise Log Precision '], positions=[5], patch_artist=True, boxprops=dict(facecolor="C7"))
-    bp6 = ax.boxplot(df_xixi_cd['Unrefined Log Precision'], positions=[6], patch_artist=True, boxprops=dict(facecolor="C8"))
+    bp4 = ax.boxplot(df_xixi_cd['Refined Log Precision'], positions=[3], patch_artist=True, boxprops=dict(facecolor="C6"))
+    bp5 = ax.boxplot(df_xixi_cd['Precise Log Precision '], positions=[4], patch_artist=True, boxprops=dict(facecolor="C7"))
+    bp6 = ax.boxplot(df_xixi_cd['Unrefined Log Precision'], positions=[5], patch_artist=True, boxprops=dict(facecolor="C8"))
 
-    ax.legend([bp1["boxes"][0], bp2["boxes"][0], bp3["boxes"][0],
+    ax.legend([bp1["boxes"][0], bp2["boxes"][0],
                bp4["boxes"][0], bp5["boxes"][0], bp6["boxes"][0]],
-              ['Variants-based', 'Event-based', 'Mapping with CC',
-               'Mapping with CD', 'Ground truth log', 'Unrefined log'],
+              ['Variant Compression', 'No Variant Compression',
+               'Mapping with CD', 'Ground Truth Log', 'Unrefined Log'],
               loc='upper center', bbox_to_anchor=(0.5, 1.16),
               ncol=3, fancybox=True
               )
-    plt.xticks(list(range(1, 7)), ['Variants-\nbased', 'Event-\nbased', 'Mapping \nwith CC',
-                                   'Mapping \nwith CD', 'Ground truth\n event log', 'Unrefined\n event log'])
+    plt.xticks(list(range(1, 6)), ['Variant \nCompression', 'No Variant \nCompression',
+                                   'Mapping \nwith CD', 'Ground Truth\n Event Log', 'Unrefined\n Event Log'])
     plt.subplots_adjust(bottom=0.15)
 
     plt.xlabel('Algorithm')
@@ -796,25 +812,23 @@ def main():
     plt.show()
 
 
-
     plt.figure()
     fig, ax = plt.subplots()
     bp1 = ax.boxplot(df.groupby(['Name'])['Precision Align'].max(), positions=[1], patch_artist=True, boxprops=dict(facecolor="C0"))
     bp2 = ax.boxplot(df_events.groupby(['Name'])['Precision Align'].max(), positions=[2], patch_artist=True, boxprops=dict(facecolor="C2"))
-    bp3 = ax.boxplot(df_xixi_cc.groupby(['Name'])['Refined Log Precision'].max(), positions=[3], patch_artist=True, boxprops=dict(facecolor="C4"))
-    bp4 = ax.boxplot(df_xixi_cd.groupby(['Name'])['Refined Log Precision'].max(), positions=[4], patch_artist=True, boxprops=dict(facecolor="C6"))
-    bp5 = ax.boxplot(df_xixi_cd.groupby(['Name'])['Precise Log Precision '].max(), positions=[5], patch_artist=True, boxprops=dict(facecolor="C7"))
-    bp6 = ax.boxplot(df_xixi_cd.groupby(['Name'])['Unrefined Log Precision'].max(), positions=[6], patch_artist=True, boxprops=dict(facecolor="C8"))
+    bp4 = ax.boxplot(df_xixi_cd.groupby(['Name'])['Refined Log Precision'].max(), positions=[3], patch_artist=True, boxprops=dict(facecolor="C6"))
+    bp5 = ax.boxplot(df_xixi_cd.groupby(['Name'])['Precise Log Precision '].max(), positions=[4], patch_artist=True, boxprops=dict(facecolor="C7"))
+    bp6 = ax.boxplot(df_xixi_cd.groupby(['Name'])['Unrefined Log Precision'].max(), positions=[5], patch_artist=True, boxprops=dict(facecolor="C8"))
 
-    ax.legend([bp1["boxes"][0], bp2["boxes"][0], bp3["boxes"][0],
+    ax.legend([bp1["boxes"][0], bp2["boxes"][0],
                bp4["boxes"][0], bp5["boxes"][0], bp6["boxes"][0]],
-              ['Variants-based', 'Event-based', 'Mapping with CC',
-               'Mapping with CD', 'Ground truth log', 'Unrefined log'],
+              ['Variant Compression', 'No Variant Compression',
+               'Mapping with CD', 'Ground Truth Log', 'Unrefined Log'],
               loc='upper center', bbox_to_anchor=(0.5, 1.16),
               ncol=3, fancybox=True
               )
-    plt.xticks(list(range(1, 7)), ['Variants-\nbased', 'Event-\nbased', 'Mapping \nwith CC',
-                                   'Mapping \nwith CD', 'Ground truth\n event log', 'Unrefined\n event log'])
+    plt.xticks(list(range(1, 6)), ['Variant \nCompression', 'No Variant \nCompression',
+                                   'Mapping \nwith CD', 'Ground Truth\n Event Log', 'Unrefined\n Event Log'])
     plt.subplots_adjust(bottom=0.15)
     plt.xlabel('Algorithm')
     plt.ylabel('Max Precision')
@@ -822,80 +836,81 @@ def main():
     plt.show()
 
 
+
     plt.figure()
     # bp = df.boxplot(column=['ARI'], grid=False)
     fig, ax = plt.subplots()
     bp1 = ax.boxplot(df.groupby(['Name'])['ARI'].max(), positions=[1], patch_artist=True, boxprops=dict(facecolor="C0"))
     bp2 = ax.boxplot(df_events.groupby(['Name'])['ARI'].max(), positions=[2], patch_artist=True, boxprops=dict(facecolor="C2"))
-    bp3 = ax.boxplot(df_xixi_cc.groupby(['Name'])['Refined Log ARI'].max(), positions=[3], patch_artist=True, boxprops=dict(facecolor="C4"))
-    bp4 = ax.boxplot(df_xixi_cd.groupby(['Name'])['Refined Log ARI'].max(), positions=[4], patch_artist=True, boxprops=dict(facecolor="C6"))
-    ax.legend([bp1["boxes"][0], bp2["boxes"][0], bp3["boxes"][0],
-               bp4["boxes"][0]],
-              ['Variants-based', 'Event-based', 'Mapping with CC', 'Mapping with CD'],
+    bp4 = ax.boxplot(df_xixi_cd.groupby(['Name'])['Refined Log ARI'].max(), positions=[3], patch_artist=True, boxprops=dict(facecolor="C6"))
+    ax.legend([bp1["boxes"][0], bp2["boxes"][0], bp4["boxes"][0]],
+              ['Variant Compression', 'No Variant Compression', 'Mapping with CD'],
               loc='upper center', bbox_to_anchor=(0.5, 1.16),
               ncol=2, fancybox=True
               )
 
-    plt.xticks(list(range(1, 5)), ['Variants-\nbased', 'Event-\nbased', 'Mapping \nwith CC', 'Mapping \nwith CD'])
+    plt.xticks(list(range(1, 4)), ['Variant \nCompression', 'No Variant \nCompression', 'Mapping \nwith CD'])
     plt.subplots_adjust(bottom=0.15)
     plt.xlabel('Algorithm')
     plt.ylabel('Max ARI')
     plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\max_ari.png', dpi=300)
     plt.show()
 
-
-    plt.figure()
-    fig, ax = plt.subplots()
-    bp1 = ax.boxplot(df['Simplicity'], positions=[1], patch_artist=True, boxprops=dict(facecolor="C0"))
-    bp2 = ax.boxplot(df_events['Simplicity'], positions=[2], patch_artist=True, boxprops=dict(facecolor="C2"))
-    bp3 = ax.boxplot(df_xixi_cc['Refined Log Simplicity'], positions=[3], patch_artist=True,
-                     boxprops=dict(facecolor="C4"))
-    bp4 = ax.boxplot(df_xixi_cd['Refined Log Simplicity'], positions=[4], patch_artist=True,
-                     boxprops=dict(facecolor="C6"))
-    bp5 = ax.boxplot(df_xixi_cd['Precise Log Simplicity'], positions=[5], patch_artist=True,
-                     boxprops=dict(facecolor="C7"))
-    bp6 = ax.boxplot(df_xixi_cd['Unrefined Log Simplicity'], positions=[6], patch_artist=True,
-                     boxprops=dict(facecolor="C8"))
-
-    ax.legend([bp1["boxes"][0], bp2["boxes"][0], bp3["boxes"][0],
-               bp4["boxes"][0], bp5["boxes"][0], bp6["boxes"][0]],
-              ['Variants-based', 'Event-based', 'Mapping with CC',
-               'Mapping with CD', 'Ground truth log', 'Unrefined log'],
-              loc='upper center', bbox_to_anchor=(0.5, 1.16),
-              ncol=3, fancybox=True
-              )
-    plt.xticks(list(range(1, 7)), ['Variants-\nbased', 'Event-\nbased', 'Mapping \nwith CC',
-                                   'Mapping \nwith CD', 'Ground truth\n event log', 'Unrefined\n event log'])
-    plt.subplots_adjust(bottom=0.15)
-    plt.xlabel('Algorithm')
-    plt.ylabel('Simplicity')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\average_simplicity.png', dpi=300)
-    plt.show()
+    # %%
 
 
-    plt.figure()
-    fig, ax = plt.subplots()
-    bp1 = ax.boxplot(df.groupby(['Name'])['Simplicity'].max(), positions=[1], patch_artist=True, boxprops=dict(facecolor="C0"))
-    bp2 = ax.boxplot(df_events.groupby(['Name'])['Simplicity'].max(), positions=[2], patch_artist=True, boxprops=dict(facecolor="C2"))
-    bp3 = ax.boxplot(df_xixi_cc.groupby(['Name'])['Refined Log Simplicity'].max(), positions=[3], patch_artist=True, boxprops=dict(facecolor="C4"))
-    bp4 = ax.boxplot(df_xixi_cd.groupby(['Name'])['Refined Log Simplicity'].max(), positions=[4], patch_artist=True, boxprops=dict(facecolor="C6"))
-    bp5 = ax.boxplot(df_xixi_cd.groupby(['Name'])['Precise Log Simplicity'].max(), positions=[5], patch_artist=True, boxprops=dict(facecolor="C7"))
-    bp6 = ax.boxplot(df_xixi_cd.groupby(['Name'])['Unrefined Log Simplicity'].max(), positions=[6], patch_artist=True, boxprops=dict(facecolor="C8"))
-
-    ax.legend([bp1["boxes"][0], bp2["boxes"][0], bp3["boxes"][0],
-               bp4["boxes"][0], bp5["boxes"][0], bp6["boxes"][0]],
-              ['Variants-based', 'Event-based', 'Mapping with CC',
-               'Mapping with CD', 'Ground truth log', 'Unrefined log'],
-              loc='upper center', bbox_to_anchor=(0.5, 1.16),
-              ncol=3, fancybox=True
-              )
-    plt.xticks(list(range(1, 7)), ['Variants-\nbased', 'Event-\nbased', 'Mapping \nwith CC',
-                                   'Mapping \nwith CD', 'Ground truth\n event log', 'Unrefined\n event log'])
-    plt.subplots_adjust(bottom=0.15)
-    plt.xlabel('Algorithm')
-    plt.ylabel('Max Simplicity')
-    plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\max_simplicity.png', dpi=300)
-    plt.show()
+    # plt.figure()
+    # fig, ax = plt.subplots()
+    # bp1 = ax.boxplot(df['Simplicity'], positions=[1], patch_artist=True, boxprops=dict(facecolor="C0"))
+    # bp2 = ax.boxplot(df_events['Simplicity'], positions=[2], patch_artist=True, boxprops=dict(facecolor="C2"))
+    # bp3 = ax.boxplot(df_xixi_cc['Refined Log Simplicity'], positions=[3], patch_artist=True,
+    #                  boxprops=dict(facecolor="C4"))
+    # bp4 = ax.boxplot(df_xixi_cd['Refined Log Simplicity'], positions=[4], patch_artist=True,
+    #                  boxprops=dict(facecolor="C6"))
+    # bp5 = ax.boxplot(df_xixi_cd['Precise Log Simplicity'], positions=[5], patch_artist=True,
+    #                  boxprops=dict(facecolor="C7"))
+    # bp6 = ax.boxplot(df_xixi_cd['Unrefined Log Simplicity'], positions=[6], patch_artist=True,
+    #                  boxprops=dict(facecolor="C8"))
+    #
+    # ax.legend([bp1["boxes"][0], bp2["boxes"][0], bp3["boxes"][0],
+    #            bp4["boxes"][0], bp5["boxes"][0], bp6["boxes"][0]],
+    #           ['Variants-based', 'Event-based', 'Mapping with CC',
+    #            'Mapping with CD', 'Ground truth log', 'Unrefined log'],
+    #           loc='upper center', bbox_to_anchor=(0.5, 1.16),
+    #           ncol=3, fancybox=True
+    #           )
+    # plt.xticks(list(range(1, 7)), ['Variants-\nbased', 'Event-\nbased', 'Mapping \nwith CC',
+    #                                'Mapping \nwith CD', 'Ground truth\n event log', 'Unrefined\n event log'])
+    # plt.subplots_adjust(bottom=0.15)
+    # plt.xlabel('Algorithm')
+    # plt.ylabel('Simplicity')
+    # plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\average_simplicity.png', dpi=300)
+    # plt.show()
+    #
+    #
+    # plt.figure()
+    # fig, ax = plt.subplots()
+    # bp1 = ax.boxplot(df.groupby(['Name'])['Simplicity'].max(), positions=[1], patch_artist=True, boxprops=dict(facecolor="C0"))
+    # bp2 = ax.boxplot(df_events.groupby(['Name'])['Simplicity'].max(), positions=[2], patch_artist=True, boxprops=dict(facecolor="C2"))
+    # bp3 = ax.boxplot(df_xixi_cc.groupby(['Name'])['Refined Log Simplicity'].max(), positions=[3], patch_artist=True, boxprops=dict(facecolor="C4"))
+    # bp4 = ax.boxplot(df_xixi_cd.groupby(['Name'])['Refined Log Simplicity'].max(), positions=[4], patch_artist=True, boxprops=dict(facecolor="C6"))
+    # bp5 = ax.boxplot(df_xixi_cd.groupby(['Name'])['Precise Log Simplicity'].max(), positions=[5], patch_artist=True, boxprops=dict(facecolor="C7"))
+    # bp6 = ax.boxplot(df_xixi_cd.groupby(['Name'])['Unrefined Log Simplicity'].max(), positions=[6], patch_artist=True, boxprops=dict(facecolor="C8"))
+    #
+    # ax.legend([bp1["boxes"][0], bp2["boxes"][0], bp3["boxes"][0],
+    #            bp4["boxes"][0], bp5["boxes"][0], bp6["boxes"][0]],
+    #           ['Variants-based', 'Event-based', 'Mapping with CC',
+    #            'Mapping with CD', 'Ground truth log', 'Unrefined log'],
+    #           loc='upper center', bbox_to_anchor=(0.5, 1.16),
+    #           ncol=3, fancybox=True
+    #           )
+    # plt.xticks(list(range(1, 7)), ['Variants-\nbased', 'Event-\nbased', 'Mapping \nwith CC',
+    #                                'Mapping \nwith CD', 'Ground truth\n event log', 'Unrefined\n event log'])
+    # plt.subplots_adjust(bottom=0.15)
+    # plt.xlabel('Algorithm')
+    # plt.ylabel('Max Simplicity')
+    # plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\max_simplicity.png', dpi=300)
+    # plt.show()
 
     # %%
     print('len(df[ARI])')

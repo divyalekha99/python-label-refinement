@@ -1,3 +1,4 @@
+import copy
 import json
 import math
 import string
@@ -25,7 +26,9 @@ class LabelSplitter:
                  clustering_variant=ClusteringVariant.COMMUNITY_DETECTION,
                  use_frequency=False,
                  concurrent_labels=None,
-                 use_combined_context=False):
+                 use_combined_context=False,
+                 event_graphs=None, short_label_to_original_label=None, label_and_id_to_event=None, variants_to_count=None
+                 ):
         if concurrent_labels is None:
             concurrent_labels = []
         self.concurrent_labels = concurrent_labels
@@ -35,15 +38,16 @@ class LabelSplitter:
         self.prefix_weight = prefix_weight
         self._split_labels_to_original_labels = {}
         self.outfile = outfile
-        self.label_and_id_to_event = {}
-        self.variants_to_count = {}
+        self.label_and_id_to_event = label_and_id_to_event
+        self.variants_to_count = variants_to_count
         self.distance_variant = distance_variant
         self.distance_calculator = DistanceCalculator(window_size, use_combined_context)
         self.clustering_variant = clustering_variant
         self._variant_to_label = {}
         self.use_frequency = use_frequency
-        self.short_label_to_original_label = {}
+        self.short_label_to_original_label = short_label_to_original_label
         self.found_clustering = None
+        self.event_graphs = event_graphs
 
         if distance_variant is DistanceVariant.EDIT_DISTANCE:
             self.get_distance = self.distance_calculator.get_edit_distance
@@ -65,7 +69,7 @@ class LabelSplitter:
 
     def split_labels(self, log):
         print('Starting label splitting')
-        event_graphs = self.get_event_graphs_from_event_log(log)
+        event_graphs = copy.deepcopy(self.event_graphs)
 
         self.calculate_edges(event_graphs)
         self.get_communities_leiden(event_graphs=event_graphs)
@@ -73,79 +77,45 @@ class LabelSplitter:
 
         return log
 
-    def get_event_graphs_from_event_log(self, log):
-        print('Variants based approach')
-        variants = variants_filter.get_variants(log)
-        event_graphs = {}
-
-        for variant in variants:
-            filtered_log = variants_filter.apply(log, [variant])
-
-            prefix = ''
-            processed_events = []
-            occurrence_counters = {}
-            for event in filtered_log[0]:
-                label = event['concept:name']
-                if 'original_label' in event.keys():
-                    self.short_label_to_original_label[label] = event['original_label']
-
-                if label not in list(event_graphs.keys()) and label in self.labels_to_split:
-                    event_graphs[label] = igraph.Graph()
-                    self.label_and_id_to_event[label] = []
-
-                for preceding_event in processed_events:
-                    if label in self.concurrent_labels:
-                        break
-                    preceding_event['suffix'] = preceding_event['suffix'] + label
-
-                if label not in occurrence_counters:
-                    occurrence_counters[label] = 0
-                else:
-                    occurrence_counters[label] += 1
-
-                event['prefix'] = prefix
-                event['suffix'] = ''
-                event['label'] = label
-                event['variant'] = label + '_' + str(variant).replace(',', '') + f'_{occurrence_counters[label]}'
-                self.variants_to_count[event['variant']] = len(variants[variant])
-                processed_events.append(event)
-                if label not in self.concurrent_labels:
-                    prefix = prefix + label
-            for event in processed_events:
-                label = event['concept:name']
-                if label in self.labels_to_split:
-                    self.label_and_id_to_event[label].append(event)
-                    event_graphs[label].add_vertices(1)
-
-        return event_graphs
-
     def calculate_edges(self, event_graphs) -> None:
         for (label, graph) in event_graphs.items():
             print(f'Calculating edges for {label}')
-            edges = []
-            weights = []
+            edges = [-1] * ncr(len(graph.vs), 2)
+            weights = [-1] * ncr(len(graph.vs), 2)
 
-            for (vertex_a, vertex_b) in combinations(range(len(graph.vs)), 2):
-                edit_distance = self.get_distance(self.label_and_id_to_event[label][vertex_a],
+            for index, (vertex_a, vertex_b) in enumerate(combinations(range(len(graph.vs)), 2)):
+                distance = self.get_distance(self.label_and_id_to_event[label][vertex_a],
                                                   self.label_and_id_to_event[label][vertex_b])
 
-                normalized_distance = (1 - edit_distance / self.window_size)
+                normalized_distance = (1 - distance / self.window_size)
                 if self.use_frequency:
                     weight = normalized_distance * (
                             self.variants_to_count[self.label_and_id_to_event[label][vertex_a]['variant']] *
                             self.variants_to_count[self.label_and_id_to_event[label][vertex_b]['variant']])
                 else:
                     weight = normalized_distance
-                if normalized_distance > self.threshold:
-                    edges.append((vertex_a, vertex_b))
-                    weights.append(weight)
+                if normalized_distance >= self.threshold:
+                    edges[index] = (vertex_a, vertex_b)
+                    weights[index] = weight
+            edges = [e for e in edges if e != -1]
+            weights = [w for w in weights if w != -1]
+
+
             if self.use_frequency:
-                for vertex_a in range(len(graph.vs)):
+                self_edges = [-1] * len(graph.vs)
+                self_weights = [-1] * len(graph.vs)
+
+                for index, vertex_a in enumerate(range(len(graph.vs))):
                     count = self.variants_to_count[self.label_and_id_to_event[label][vertex_a]['variant']]
                     if count > 1:
                         weight = ncr(count, 2) * 2
-                        edges.append((vertex_a, vertex_a))
-                        weights.append(weight)
+                        self_edges[index] = (vertex_a, vertex_a)
+                        self_weights[index] = weight
+                self_edges = [e for e in self_edges if e != -1]
+                self_weights = [w for w in self_weights if w != -1]
+                edges += self_edges
+                weights += self_weights
+
             graph.add_edges(edges)
             graph.es['weight'] = weights
         print('Finished calculating edges')
@@ -169,21 +139,81 @@ class LabelSplitter:
         print('Finished community detection')
 
     def set_split_labels(self, log):
-        variants = variants_filter.get_variants(log)
-        for variant in variants:
-            filtered_log = variants_filter.apply(log, [variant])
-            for trace in filtered_log:
-                occurrence_counters = {}
-                for event in trace:
-                    label = event['concept:name']
-                    if label not in occurrence_counters:
-                        occurrence_counters[label] = 0
-                    else:
-                        occurrence_counters[label] += 1
-                    event['variant'] = label + '_' + str(variant).replace(',', '') + f'_{occurrence_counters[label]}'
-                    if event['variant'] in self._variant_to_label:
-                        event['concept:name'] = self._variant_to_label[event['variant']]
+        for trace in log:
+            occurrence_counters = {}
+            for event in trace:
+                label = event['concept:name']
+                if label not in occurrence_counters:
+                    occurrence_counters[label] = 0
+                else:
+                    occurrence_counters[label] += 1
+                event['variant'] = label + '_' + event['variant_raw'] + f'_{occurrence_counters[label]}'
+                if event['variant'] in self._variant_to_label:
+                    event['concept:name'] = self._variant_to_label[event['variant']]
         print('Finished setting labels')
+
+
+def get_event_graphs_from_event_log(log, labels_to_split):
+    print('Variants based approach')
+    variants = variants_filter.get_variants(log)
+    event_graphs = {}
+    short_label_to_original_label = {}
+    label_and_id_to_event = {}
+    variants_to_count = {}
+    variant_to_sample_case = {}
+
+    for case in log:
+        variant = ''
+        for e in case:
+            variant = f"{variant},{e['concept:name']}"
+        if variant not in variant_to_sample_case:
+            variant_to_sample_case[variant[1:]] = case
+        for e in case:
+            e['variant_raw'] = variant.replace(',', '')
+
+    for variant in variants:
+        # print('Before')
+        # filtered_log = variants_filter.apply(log, [variant])
+        # print('After')
+
+        prefix = ''
+        processed_events = []
+        occurrence_counters = {}
+        for event in variant_to_sample_case[str(variant)]:
+            label = event['concept:name']
+            if 'original_label' in event.keys():
+                short_label_to_original_label[label] = event['original_label']
+
+            if label not in list(event_graphs.keys()) and label in labels_to_split:
+                event_graphs[label] = igraph.Graph()
+                label_and_id_to_event[label] = []
+
+            for preceding_event in processed_events:
+                # if label in self.concurrent_labels:
+                #     break
+                preceding_event['suffix'] = preceding_event['suffix'] + label
+
+            if label not in occurrence_counters:
+                occurrence_counters[label] = 0
+            else:
+                occurrence_counters[label] += 1
+
+            event['prefix'] = prefix
+            event['suffix'] = ''
+            event['label'] = label
+            event['variant'] = label + '_' + event['variant_raw'] + f'_{occurrence_counters[label]}'
+            variants_to_count[event['variant']] = len(variants[variant])
+            processed_events.append(event)
+            # if label not in self.concurrent_labels:
+            prefix = prefix + label
+        for event in processed_events:
+            label = event['concept:name']
+            if label in labels_to_split:
+                label_and_id_to_event[label].append(event)
+                event_graphs[label].add_vertices(1)
+
+    return event_graphs, short_label_to_original_label, label_and_id_to_event, variants_to_count
+
 
 def ncr(n, r):
     r = min(r, n-r)
