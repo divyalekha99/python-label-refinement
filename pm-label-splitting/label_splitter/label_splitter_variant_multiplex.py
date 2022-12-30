@@ -1,5 +1,4 @@
 import json
-import math
 import string
 from itertools import combinations
 from typing import TextIO
@@ -8,20 +7,26 @@ import igraph
 import leidenalg as la
 from pm4py.algo.filtering.log.variants import variants_filter
 
-from clustering_variant import ClusteringVariant
-from distance_metrics import DistanceVariant, DistanceCalculator
-from label_splitter_variant_based_igraph import ncr
+from pipeline.clustering_method import ClusteringMethod
+from distance_metrics import Distance, DistanceCalculator
+from label_splitter_variant_based import ncr
 
 
 class LabelSplitter:
+    """
+    EXPERIMENTAL:
+    Applies the label splitting algorithm, with the variant compression and a multiplex graph, using multiple attributes.
+    Generates the event graph, applies the clustering method and applies the label splitting to the event log
+    """
+
     def __init__(self,
                  outfile: TextIO,
                  labels_to_split,
                  window_size: int = 3,
                  threshold: float = 0.75,
                  prefix_weight: float = 0.5,
-                 distance_variant=DistanceVariant.EDIT_DISTANCE,
-                 clustering_variant=ClusteringVariant.COMMUNITY_DETECTION,
+                 distance_variant=Distance.EDIT_DISTANCE,
+                 clustering_variant=ClusteringMethod.COMMUNITY_DETECTION,
                  use_frequency=False,
                  use_combined_context=False):
         self.labels_to_split = labels_to_split
@@ -40,11 +45,11 @@ class LabelSplitter:
         self.short_label_to_original_label = {}
         self.found_clustering = None
 
-        if distance_variant is DistanceVariant.EDIT_DISTANCE:
+        if distance_variant is Distance.EDIT_DISTANCE:
             self.get_distance = self.distance_calculator.get_edit_distance
-        elif distance_variant is DistanceVariant.SET_DISTANCE:
+        elif distance_variant is Distance.SET_DISTANCE:
             self.get_distance = self.distance_calculator.get_set_distance
-        elif distance_variant is DistanceVariant.MULTISET_DISTANCE:
+        elif distance_variant is Distance.MULTISET_DISTANCE:
             self.get_distance = self.distance_calculator.get_multiset_distance
         else:
             print('Warning: Distance metric not found, fallback to default distance')

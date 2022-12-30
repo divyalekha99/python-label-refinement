@@ -11,7 +11,7 @@ from pm4py.objects.log.exporter.xes import exporter as xes_exporter
 def main(args) -> None:
     print(args)
     # log_path = args[1]
-    log_path = r'./real_logs/BPI Challenge 2017_3_cases_per_variant.xes.gz'
+    log_path = r'../real_logs/BPI Challenge 2017_3_cases_per_variant.xes.gz'
     log = xes_importer.apply(log_path)
     label_mapping = {}
     i = 0
@@ -47,7 +47,7 @@ def main(args) -> None:
     match = re.match(pattern, log_path)
 
     # new_log_path = re.sub(match.group(1), f'{match.group(1)}_shortened_labels', log_path)
-    new_log_path = './real_logs/bpi_challenge_2017_3_cases_per_variant_shortened_labels.xes.gz'
+    new_log_path = '../real_logs/bpi_challenge_2017_3_cases_per_variant_shortened_labels.xes.gz'
     print(log)
     print(new_log_path)
     print(json.dumps(label_mapping))
@@ -57,7 +57,7 @@ def main(args) -> None:
 def rename_from_short_to_original(args) -> None:
     print(args)
     # log_path = args[1]
-    log_path = './outputs/real_logs/caise_23_EVENTS_0_DistanceVariant.EDIT_DISTANCE_1_split_log.xes'
+    log_path = '../outputs/real_logs/caise_23_EVENTS_0_DistanceVariant.EDIT_DISTANCE_1_split_log.xes'
     log = xes_importer.apply(log_path)
     label_mapping = {}
     i = 0
@@ -77,7 +77,7 @@ def rename_from_short_to_original(args) -> None:
     match = re.match(pattern, log_path)
 
     # new_log_path = re.sub(match.group(1), f'{match.group(1)}_shortened_labels', log_path)
-    new_log_path = './real_logs/log_running_example_caise23_refined.xes'
+    new_log_path = '../real_logs/log_running_example_caise23_refined.xes'
     print(log)
     print(new_log_path)
     print(json.dumps(label_mapping))

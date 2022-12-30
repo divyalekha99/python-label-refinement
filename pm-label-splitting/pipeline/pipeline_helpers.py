@@ -1,4 +1,3 @@
-import json
 import os
 import re
 
@@ -6,9 +5,13 @@ from igraph import Clustering, compare_communities
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 from pm4py.algo.filtering.log.variants import variants_filter
 from pm4py.objects.log.importer.xes import importer as xes_importer
+from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
+from pm4py.objects.process_tree.exporter import exporter as ptml_exporter
+from pm4py.visualization.petri_net import visualizer as pn_visualizer
+from pm4py.visualization.process_tree import visualizer as pt_visualizer
 
-from apply_im import apply_im_without_noise_and_export
-from input_data import InputData
+from evaluation.apply_im import apply_im_without_noise_and_export
+from utils.input_data import InputData
 from pipeline_variant import PipelineVariant
 
 
@@ -175,6 +178,26 @@ def get_imprecise_labels(log):
         for event in trace:
             if event['OrgLabel'] != event['concept:name']:
                 imprecise_labels.add(event['concept:name'])
-    # print(imprecise_labels)
-    print(list(imprecise_labels))
     return list(imprecise_labels)
+
+
+def save_models_as_png(name, final_marking, initial_marking, net, tree):
+    gviz = pt_visualizer.apply(tree)
+    pt_visualizer.save(gviz,
+                      f'{name}_tree.png')
+    parameters = {pn_visualizer.Variants.WO_DECORATION.value.Parameters.FORMAT: "png"}
+    gviz_petri_net = pn_visualizer.apply(net, initial_marking, final_marking, parameters=parameters)
+    pn_visualizer.save(gviz_petri_net,
+                      f'{name}_net.png')
+    return
+
+
+def export_models_and_pngs(final_marking, initial_marking, net, original_tree, input_name, suffix):
+    pnml_exporter.apply(net, initial_marking,
+                        f'./outputs/{suffix}.pnml', final_marking=final_marking)
+    ptml_exporter.apply(original_tree, f'./outputs/{suffix}.ptml')
+    save_models_as_png(f'./outputs/{suffix}',
+                       final_marking,
+                       initial_marking,
+                       net,
+                       original_tree)

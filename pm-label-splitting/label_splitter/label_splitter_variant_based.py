@@ -1,33 +1,36 @@
 import copy
 import json
-import math
-import string
-from itertools import combinations
-from typing import TextIO
-
-import igraph
-import leidenalg as la
-from pm4py.algo.filtering.log.variants import variants_filter
-
-from clustering_variant import ClusteringVariant
-from distance_metrics import DistanceVariant, DistanceCalculator
 import operator as op
+import string
 from functools import reduce
+from itertools import combinations
+from typing import TextIO, List
+
+import leidenalg as la
+
+from distance_metrics import Distance, DistanceCalculator
+from label_splitter.event_graphs_variant_based import EventGraphsVariantBased
+from pipeline.clustering_method import ClusteringMethod
 
 
 class LabelSplitter:
+    """
+    Applies the label splitting algorithm, with the variant compression.
+    Generates the event graph, applies the clustering method and applies the label splitting to the event log
+    """
+
     def __init__(self,
                  outfile: TextIO,
                  labels_to_split,
                  window_size: int = 3,
                  threshold: float = 0.75,
                  prefix_weight: float = 0.5,
-                 distance_variant=DistanceVariant.EDIT_DISTANCE,
-                 clustering_variant=ClusteringVariant.COMMUNITY_DETECTION,
-                 use_frequency=False,
-                 concurrent_labels=None,
-                 use_combined_context=False,
-                 event_graphs=None, short_label_to_original_label=None, label_and_id_to_event=None, variants_to_count=None
+                 distance_variant=Distance.EDIT_DISTANCE,
+                 clustering_variant=ClusteringMethod.COMMUNITY_DETECTION,
+                 use_frequency: bool = False,
+                 concurrent_labels: List[str] = None,
+                 use_combined_context: bool = False,
+                 event_graphs_variant_based: EventGraphsVariantBased = None
                  ):
         if concurrent_labels is None:
             concurrent_labels = []
@@ -38,22 +41,22 @@ class LabelSplitter:
         self.prefix_weight = prefix_weight
         self._split_labels_to_original_labels = {}
         self.outfile = outfile
-        self.label_and_id_to_event = label_and_id_to_event
-        self.variants_to_count = variants_to_count
+        self.label_and_id_to_event = event_graphs_variant_based.label_and_id_to_event
+        self.variants_to_count = event_graphs_variant_based.variants_to_count
         self.distance_variant = distance_variant
         self.distance_calculator = DistanceCalculator(window_size, use_combined_context)
         self.clustering_variant = clustering_variant
         self._variant_to_label = {}
         self.use_frequency = use_frequency
-        self.short_label_to_original_label = short_label_to_original_label
+        self.short_label_to_original_label = event_graphs_variant_based.short_label_to_original_label
         self.found_clustering = None
-        self.event_graphs = event_graphs
+        self.event_graphs = event_graphs_variant_based.event_graphs
 
-        if distance_variant is DistanceVariant.EDIT_DISTANCE:
+        if distance_variant is Distance.EDIT_DISTANCE:
             self.get_distance = self.distance_calculator.get_edit_distance
-        elif distance_variant is DistanceVariant.SET_DISTANCE:
+        elif distance_variant is Distance.SET_DISTANCE:
             self.get_distance = self.distance_calculator.get_set_distance
-        elif distance_variant is DistanceVariant.MULTISET_DISTANCE:
+        elif distance_variant is Distance.MULTISET_DISTANCE:
             self.get_distance = self.distance_calculator.get_multiset_distance
         else:
             print('Warning: Distance metric not found, fallback to default distance')
@@ -85,7 +88,7 @@ class LabelSplitter:
 
             for index, (vertex_a, vertex_b) in enumerate(combinations(range(len(graph.vs)), 2)):
                 distance = self.get_distance(self.label_and_id_to_event[label][vertex_a],
-                                                  self.label_and_id_to_event[label][vertex_b])
+                                             self.label_and_id_to_event[label][vertex_b])
 
                 normalized_distance = (1 - distance / self.window_size)
                 if self.use_frequency:
@@ -99,7 +102,6 @@ class LabelSplitter:
                     weights[index] = weight
             edges = [e for e in edges if e != -1]
             weights = [w for w in weights if w != -1]
-
 
             if self.use_frequency:
                 self_edges = [-1] * len(graph.vs)
@@ -153,70 +155,8 @@ class LabelSplitter:
         print('Finished setting labels')
 
 
-def get_event_graphs_from_event_log(log, labels_to_split):
-    print('Variants based approach')
-    variants = variants_filter.get_variants(log)
-    event_graphs = {}
-    short_label_to_original_label = {}
-    label_and_id_to_event = {}
-    variants_to_count = {}
-    variant_to_sample_case = {}
-
-    for case in log:
-        variant = ''
-        for e in case:
-            variant = f"{variant},{e['concept:name']}"
-        if variant not in variant_to_sample_case:
-            variant_to_sample_case[variant[1:]] = case
-        for e in case:
-            e['variant_raw'] = variant.replace(',', '')
-
-    for variant in variants:
-        # print('Before')
-        # filtered_log = variants_filter.apply(log, [variant])
-        # print('After')
-
-        prefix = ''
-        processed_events = []
-        occurrence_counters = {}
-        for event in variant_to_sample_case[str(variant)]:
-            label = event['concept:name']
-            if 'original_label' in event.keys():
-                short_label_to_original_label[label] = event['original_label']
-
-            if label not in list(event_graphs.keys()) and label in labels_to_split:
-                event_graphs[label] = igraph.Graph()
-                label_and_id_to_event[label] = []
-
-            for preceding_event in processed_events:
-                # if label in self.concurrent_labels:
-                #     break
-                preceding_event['suffix'] = preceding_event['suffix'] + label
-
-            if label not in occurrence_counters:
-                occurrence_counters[label] = 0
-            else:
-                occurrence_counters[label] += 1
-
-            event['prefix'] = prefix
-            event['suffix'] = ''
-            event['label'] = label
-            event['variant'] = label + '_' + event['variant_raw'] + f'_{occurrence_counters[label]}'
-            variants_to_count[event['variant']] = len(variants[variant])
-            processed_events.append(event)
-            # if label not in self.concurrent_labels:
-            prefix = prefix + label
-        for event in processed_events:
-            label = event['concept:name']
-            if label in labels_to_split:
-                label_and_id_to_event[label].append(event)
-                event_graphs[label].add_vertices(1)
-
-    return event_graphs, short_label_to_original_label, label_and_id_to_event, variants_to_count
-
-
 def ncr(n, r):
-    r = min(r, n-r)
-    numer = reduce(op.mul, range(n, n-r, -1), 1)
-    denom = reduce(op.mul, range(1, r+1), 1)
-    return numer // denom  # or / in Python 2
+    r = min(r, n - r)
+    numer = reduce(op.mul, range(n, n - r, -1), 1)
+    denom = reduce(op.mul, range(1, r + 1), 1)
+    return numer // denom

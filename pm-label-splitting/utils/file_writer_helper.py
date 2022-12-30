@@ -1,5 +1,47 @@
+import csv
 import datetime
+import os
 from datetime import datetime
+from pathlib import Path
+
+from pipeline.pipeline_variant import PipelineVariant
+
+
+def write_summary_file_with_parameters(best_configs, best_score, best_precision, name, summary_file_name):
+    with open(f'./outputs/best_results/With_Parameters_{summary_file_name}', 'a') as outfile:
+        outfile.write(get_result_header(name))
+        outfile.write(f'\nBest found configs for {name}:')
+        for config in best_configs:
+            outfile.write(config)
+        outfile.write('Score:\n')
+        outfile.write(str(best_score))
+        outfile.write('\nPrecision of best_score model :\n')
+        outfile.write(str(best_precision))
+
+
+def setup_result_folder(folder_name: str, pipeline_variant: PipelineVariant):
+    if not os.path.exists('../../outputs/best_results'):
+        os.makedirs('../../outputs/best_results')
+
+    header = [
+        'Name', 'max_number_of_traces', 'labels_to_split', 'original labels', 'original_precision',
+        'original_simplicity',
+        'original_generalization', 'original_fitness', 'Xixi number of Clusters found', 'Xixi Precision', 'Xixi ARI',
+        'use_combined_context', 'use_frequency', 'window_size', 'distance_metric', 'threshold',
+        'Number of Clusters found',
+        'Precision Align', 'ARI', 'Simplicity', 'Generalization', 'Fitness', 'Runtime']
+
+    Path(f'./outputs/{folder_name}').mkdir(parents=True, exist_ok=True)
+
+    csv_file_path = Path(f'./results/{folder_name}_{pipeline_variant}_NEW.csv')
+    if csv_file_path.is_file():
+        print(csv_file_path)
+        print('Warning: File already existis exiting')
+        return
+
+    with open(f'./results/{folder_name}_{pipeline_variant}_NEW.csv', 'w') as f:
+        writer = csv.writer(f)
+        writer.writerow(header)
 
 
 def run_start_string():
@@ -71,15 +113,3 @@ def write_exception(e, outfile):
     print(e)
     outfile.write(f'´\n----------------Exception occurred------------------------\n')
     outfile.write(f'{repr(e)}\n')
-
-
-def write_summary_file_with_parameters(best_configs, best_score, best_precision, name, summary_file_name):
-    with open(f'./outputs/best_results/With_Parameters_{summary_file_name}', 'a') as outfile:
-        outfile.write(get_result_header(name))
-        outfile.write(f'\nBest found configs for {name}:')
-        for config in best_configs:
-            outfile.write(config)
-        outfile.write('Score:\n')
-        outfile.write(str(best_score))
-        outfile.write('\nPrecision of best_score model :\n')
-        outfile.write(str(best_precision))

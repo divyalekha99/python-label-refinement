@@ -1,15 +1,17 @@
 from dataclasses import dataclass, field
-from typing import List, Iterable
+from typing import Iterable
 
 from igraph import *
 
-from goldenstandardmodel import GoldenStandardModel
-from pipeline_variant import PipelineVariant
-from pm4py.objects.log.importer.xes import importer as xes_importer
+from evaluation.golden_standard_model import GoldenStandardModel
+from pipeline.pipeline_variant import PipelineVariant
 
 
 @dataclass
 class InputData:
+    """
+    Class that holds the data related to one input, i.e., run configurations, golden standard, original and Xixi data
+    """
     log_path: str = ''
     original_input_name: str = ''
     folder_name: str = ''

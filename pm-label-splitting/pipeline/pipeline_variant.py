@@ -2,7 +2,7 @@ import re
 from enum import Enum
 
 
-def remove_pipeline_variant_from_string(input_string: str):
+def remove_pipeline_variant_from_string(input_string: str) -> str:
     pattern = rf'\_({PipelineVariant.VARIANTS_MULTIPLEX}|{PipelineVariant.EVENTS_MULTIPLEX}|{PipelineVariant.EVENTS}|{PipelineVariant.VARIANTS})(_N_W)?'
     processed_input = re.sub(pattern, '', input_string)
     return processed_input

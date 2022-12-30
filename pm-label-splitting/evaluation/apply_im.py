@@ -1,35 +1,40 @@
+from typing import TextIO, Dict, List
+
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
+from pm4py.objects.log.obj import EventLog
 
-from file_writer_helper import write_exception
 from performance_evaluator import PerformanceEvaluator
-from post_processor import PostProcessor
+from pipeline.pipeline_helpers import export_models_and_pngs
+from pipeline.post_processor import PostProcessor
+from utils.file_writer_helper import write_exception
 
 
-def apply_im_without_noise_and_export(input_name, suffix, split_log, original_log, outfile, labels_to_original={},
-                                      short_labels_to_original_labels={}):
+def apply_im_without_noise_and_export(input_name: str, suffix: str, split_log: EventLog, original_log: EventLog,
+                                      outfile: TextIO, labels_to_original: Dict[str, str],
+                                      short_labels_to_original_labels: Dict[str, str]):
+    """
+    Applies the Inductive Miner without noise threshold and exports the result.
+    """
     outfile.write(f'\n IM without noise threshold:\n')
 
-    final_marking, initial_marking, final_net, precision, simplicity, generalization, _ = apply_im_without_noise(labels_to_original,
-                                                                                  split_log,
-                                                                                  original_log,
-                                                                                  outfile,
-                                                                                  short_labels_to_original_labels)
-    # tree = inductive_miner.apply_tree(split_log)
+    final_marking, initial_marking, final_net, precision, simplicity, generalization, _ = apply_im_without_noise_and_evaluate(
+        labels_to_original,
+        split_log,
+        original_log,
+        outfile,
+        short_labels_to_original_labels)
+    tree = inductive_miner.apply_tree(split_log)
 
-    # export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_name, suffix)
+    export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_name, suffix)
     return precision, final_net, initial_marking, final_marking
 
 
-def apply_im_without_noise(labels_to_original, split_log, original_log, outfile, short_labels_to_original_labels={}):
-    print('len(split_log)')
-    print(len(split_log))
-    print(split_log[0])
-    net, initial_marking, final_marking = inductive_miner.apply(split_log,
-                                                               variant=inductive_miner.Variants.IMf,
-                                                               parameters={inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: 0.1})
-
-    print('Applied IM with noise')
-    # net, initial_marking, final_marking = inductive_miner.apply(split_log)
+def apply_im_without_noise_and_evaluate(labels_to_original: Dict[str, str], split_log: EventLog, original_log: EventLog,
+                                        outfile: TextIO, short_labels_to_original_labels: Dict[str, str]):
+    """
+    Applies the Inductive Miner without noise threshold and evaluates the result.
+    """
+    net, initial_marking, final_marking = inductive_miner.apply(split_log)
     post_processor = PostProcessor(labels_to_original, short_labels_to_original_labels)
     final_net = post_processor.post_process_petri_net(net)
 
@@ -42,12 +47,17 @@ def apply_im_without_noise(labels_to_original, split_log, original_log, outfile,
     performance_evaluator.evaluate_performance()
 
     final_net = post_processor.rename_short_labels_to_original_labels(final_net)
-    return final_marking, initial_marking, final_net, performance_evaluator.precision,\
+    return final_marking, initial_marking, final_net, performance_evaluator.precision, \
            performance_evaluator.simplicity, performance_evaluator.generalization, performance_evaluator.fitness
 
 
-def apply_im_with_noise_and_export(input_name, suffix, split_log, original_log, outfile, labels_to_original={},
-                                   short_labels_to_original_labels={}):
+def apply_im_with_noise_and_export(input_name: str, suffix: str, split_log: EventLog, original_log: EventLog,
+                                   outfile: TextIO, labels_to_original: Dict[str, str],
+                                   short_labels_to_original_labels: Dict[str, str]):
+    """
+    Applies the Inductive miner with multiple noise thresholds to the input.
+    The mined models are evaluated and results and models exported.
+    """
     f1_scores = []
     for noise_threshold in [0, 0.1, 0.2, 0.3, 0.4]:
         outfile.write(f'\nnoise_threshold: {noise_threshold}\n')
@@ -76,18 +86,16 @@ def apply_im_with_noise_and_export(input_name, suffix, split_log, original_log, 
                                           variant=inductive_miner.Variants.IMf,
                                           parameters={
                                               inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: noise_threshold})
-        # export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_name, suffix)
+        export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_name, suffix)
     return f1_scores
 
 
-def get_f1_score(precision, recall):
-    print(recall)
-    print(precision)
-    print(2 * (precision * recall) / (precision + recall))
+def get_f1_score(precision: float, recall: float) -> float:
     return 2 * (precision * recall) / (precision + recall)
 
 
-def write_data_from_original_log_with_imprecise_labels(input_name, original_log, use_noise=True):
+def write_data_from_original_log_with_imprecise_labels(input_name: str, original_log: EventLog,
+                                                       use_noise: bool = True) -> List[float]:
     print(f'./outputs/{input_name}.txt')
     with open(f'./outputs/{input_name}.txt', 'a') as outfile:
         outfile.write('\nOriginal Data Performance:\n')
