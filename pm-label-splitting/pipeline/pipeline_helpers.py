@@ -1,43 +1,12 @@
-import json
 import os
 import re
 
 from igraph import Clustering, compare_communities
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 from pm4py.algo.filtering.log.variants import variants_filter
-from pm4py.objects.log.importer.xes import importer as xes_importer
 
-from apply_im import apply_im_without_noise_and_export
-from input_data import InputData
-from pipeline_variant import PipelineVariant
-
-
-def get_xixi_metrics(labels_to_split, input_data: InputData):
-    with open(f'./outputs/{input_data.input_name}.txt', 'a') as outfile:
-        original_log = xes_importer.apply(input_data.log_path)
-        xixi_refined_log_path = input_data.log_path.replace('LogD', 'LogR', 1)
-        if not os.path.isfile(xixi_refined_log_path):
-            xixi_refined_log_path = xixi_refined_log_path.replace('LogR', 'LogR_IM', 1)
-
-        log = xes_importer.apply(xixi_refined_log_path)
-
-        clustering = get_clustering_from_xixi_log(log, labels_to_split, outfile, input_data)
-        clustering = filter_duplicate_xor(log, labels_to_split, clustering)
-
-        labels_to_original = {}
-
-        for label in labels_to_split:
-            labels_to_original[label] = label
-
-        outfile.write('\n Xixi refined log results:\n')
-        precision, final_net, initial_marking, final_marking = apply_im_without_noise_and_export(input_data.input_name, 'xixi',
-                                                                                                 log, original_log,
-                                                                                                 outfile,
-                                                                                                 labels_to_original=labels_to_original)
-
-        outfile.write('\n Xixi clustering:\n')
-        outfile.write(f'{str(clustering)}\n')
-    return precision, clustering
+from utils.input_data import InputData
+from pipeline.pipeline_variant import PipelineVariant
 
 
 def get_clustering_from_xixi_log(log, labels_to_split, outfile, input_data: InputData):
@@ -175,6 +144,5 @@ def get_imprecise_labels(log):
         for event in trace:
             if event['OrgLabel'] != event['concept:name']:
                 imprecise_labels.add(event['concept:name'])
-    # print(imprecise_labels)
-    print(list(imprecise_labels))
     return list(imprecise_labels)
+

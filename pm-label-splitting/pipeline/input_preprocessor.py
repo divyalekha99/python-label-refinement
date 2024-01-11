@@ -4,19 +4,19 @@ from igraph import *
 from pm4py.algo.filtering.log.variants import variants_filter
 from pm4py.objects.log.importer.xes import importer as xes_importer
 
-from apply_im import apply_im_with_noise_and_export, \
-    apply_im_without_noise_and_export
-from goldenstandardmodel import GoldenStandardModel
-from input_data import InputData
-from pipeline_helpers_shared import get_xixi_metrics, get_community_similarity, get_imprecise_labels
-from pipeline_variant import remove_pipeline_variant_from_string, PipelineVariant
+from evaluation.apply_im import apply_im_with_noise_and_export, \
+    apply_im_without_noise_and_export, get_xixi_metrics
+from evaluation.golden_standard_model import GoldenStandardModel
+from utils.input_data import InputData
+from pipeline.pipeline_helpers import get_imprecise_labels, get_community_similarity
+from pipeline.pipeline_variant import remove_pipeline_variant_from_string, PipelineVariant
 
 
 class InputPreprocessor:
     def __init__(self, input_data: InputData):
         self.input_data: InputData = input_data
 
-    def preprocess_input(self):
+    def preprocess_input(self) -> None:
         with open(f'./outputs/{self.input_data.input_name}.txt', 'a') as outfile:
             original_log = self.input_data.original_log
 
@@ -34,13 +34,11 @@ class InputPreprocessor:
                 ground_truth_model = GoldenStandardModel(self.input_data.input_name, '', self.input_data.log_path,
                                                          labels_to_split)
                 ground_truth_precision = ground_truth_model.evaluate_golden_standard_model()
-                ground_net = ground_truth_model.net
-                ground_im = ground_truth_model.im
-                ground_fm = ground_truth_model.fm
-                print('ground_truth_precision')
-                print(ground_truth_precision)
 
                 xixi_precision, xixi_clustering = get_xixi_metrics(labels_to_split, self.input_data)
+
+                export_model_from_original_log_with_precise_labels(self.input_data.input_name, self.input_data.log_path,
+                                                                   self.input_data.use_noise)
 
                 original_labels = self.get_original_labels(labels_to_split)
                 outfile.write('\n Original Labels:\n')
@@ -50,9 +48,7 @@ class InputPreprocessor:
                 outfile.write('\n Ground truth clustering clustering:\n')
                 outfile.write(f'{str(ground_truth_clustering)}\n')
 
-                print('ground_truth_clustering')
-                print(ground_truth_clustering)
-                xixi_ari = 0 # get_community_similarity(ground_truth_clustering, xixi_clustering)
+                xixi_ari = get_community_similarity(ground_truth_clustering, xixi_clustering)
                 outfile.write('\n Xixi Adjusted Rand Index:\n')
                 outfile.write(f'{xixi_ari}\n')
 
@@ -122,6 +118,6 @@ def export_model_from_original_log_with_precise_labels(input_name, path, use_noi
         original_log = xes_importer.apply(log_path)
         if use_noise:
             apply_im_with_noise_and_export(input_name, 'original_log_precise_labels', original_log, original_log,
-                                           outfile)
+                                           outfile, labels_to_original={})
         apply_im_without_noise_and_export(input_name, 'original_log_precise_labels', original_log, original_log,
-                                          outfile)
+                                          outfile, labels_to_original={})

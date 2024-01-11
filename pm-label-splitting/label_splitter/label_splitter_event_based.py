@@ -1,29 +1,28 @@
 import json
-import math
 import string
 from itertools import combinations
 from typing import TextIO
 
 import igraph
-import leidenalg as la
-from pm4py.algo.filtering.log.variants import variants_filter
 
-from clustering_variant import ClusteringVariant
-from distance_metrics import DistanceVariant, DistanceCalculator
-import operator as op
-from functools import reduce
+from pipeline.clustering_method import ClusteringMethod
+from label_splitter.distance_metrics import Distance, DistanceCalculator
+import leidenalg as la
 
 
 class LabelSplitter:
+    """
+    Applies the label splitting algorithm, without the variant compression.
+    Generates the event graph, applies the clustering method and applies the label splitting to the event log
+    """
     def __init__(self,
                  outfile: TextIO,
                  labels_to_split,
                  window_size: int = 3,
                  threshold: float = 0.75,
                  prefix_weight: float = 0.5,
-                 distance_variant=DistanceVariant.EDIT_DISTANCE,
-                 clustering_variant=ClusteringVariant.COMMUNITY_DETECTION,
-                 use_frequency=False,
+                 distance_variant = Distance.EDIT_DISTANCE,
+                 clustering_variant = ClusteringMethod.COMMUNITY_DETECTION,
                  concurrent_labels=None,
                  use_combined_context=False):
         if concurrent_labels is None:
@@ -40,16 +39,14 @@ class LabelSplitter:
         self.distance_variant = distance_variant
         self.distance_calculator = DistanceCalculator(window_size, use_combined_context)
         self.clustering_variant = clustering_variant
-        self._variant_to_label = {}
-        self.use_frequency = use_frequency
         self.short_label_to_original_label = {}
         self.found_clustering = None
 
-        if distance_variant is DistanceVariant.EDIT_DISTANCE:
+        if distance_variant is Distance.EDIT_DISTANCE:
             self.get_distance = self.distance_calculator.get_edit_distance
-        elif distance_variant is DistanceVariant.SET_DISTANCE:
+        elif distance_variant is Distance.SET_DISTANCE:
             self.get_distance = self.distance_calculator.get_set_distance
-        elif distance_variant is DistanceVariant.MULTISET_DISTANCE:
+        elif distance_variant is Distance.MULTISET_DISTANCE:
             self.get_distance = self.distance_calculator.get_multiset_distance
         else:
             print('Warning: Distance metric not found, fallback to default distance')
@@ -68,27 +65,23 @@ class LabelSplitter:
         event_graphs = self.get_event_graphs_from_event_log(log)
 
         self.calculate_edges(event_graphs)
-        self.get_communities_leiden(event_graphs=event_graphs)
-        self.set_split_labels(log)
+        self.get_communities_louvain(event_graphs=event_graphs, log=log)
 
         return log
 
     def get_event_graphs_from_event_log(self, log):
-        print('Variants based approach')
-        variants = variants_filter.get_variants(log)
+        print('Event based approach')
         event_graphs = {}
-
-        for variant in variants:
-            filtered_log = variants_filter.apply(log, [variant])
-
+        for case_id, trace in enumerate(log):
             prefix = ''
             processed_events = []
-            occurrence_counters = {}
-            for event in filtered_log[0]:
+            for position, event in enumerate(trace):
                 label = event['concept:name']
                 if 'original_label' in event.keys():
                     self.short_label_to_original_label[label] = event['original_label']
 
+                event['case_id'] = case_id
+                event['position'] = position
                 if label not in list(event_graphs.keys()) and label in self.labels_to_split:
                     event_graphs[label] = igraph.Graph()
                     self.label_and_id_to_event[label] = []
@@ -98,25 +91,19 @@ class LabelSplitter:
                         break
                     preceding_event['suffix'] = preceding_event['suffix'] + label
 
-                if label not in occurrence_counters:
-                    occurrence_counters[label] = 0
-                else:
-                    occurrence_counters[label] += 1
-
                 event['prefix'] = prefix
                 event['suffix'] = ''
                 event['label'] = label
-                event['variant'] = label + '_' + str(variant).replace(',', '') + f'_{occurrence_counters[label]}'
-                self.variants_to_count[event['variant']] = len(variants[variant])
                 processed_events.append(event)
                 if label not in self.concurrent_labels:
                     prefix = prefix + label
+
             for event in processed_events:
                 label = event['concept:name']
                 if label in self.labels_to_split:
                     self.label_and_id_to_event[label].append(event)
                     event_graphs[label].add_vertices(1)
-
+        print('Finished calculating event_graphs')
         return event_graphs
 
     def calculate_edges(self, event_graphs) -> None:
@@ -128,33 +115,20 @@ class LabelSplitter:
             for (vertex_a, vertex_b) in combinations(range(len(graph.vs)), 2):
                 edit_distance = self.get_distance(self.label_and_id_to_event[label][vertex_a],
                                                   self.label_and_id_to_event[label][vertex_b])
-
-                normalized_distance = (1 - edit_distance / self.window_size)
-                if self.use_frequency:
-                    weight = normalized_distance * (
-                            self.variants_to_count[self.label_and_id_to_event[label][vertex_a]['variant']] *
-                            self.variants_to_count[self.label_and_id_to_event[label][vertex_b]['variant']])
-                else:
-                    weight = normalized_distance
-                if normalized_distance > self.threshold:
+                weight = (1 - edit_distance / self.window_size)
+                if weight > self.threshold:
                     edges.append((vertex_a, vertex_b))
                     weights.append(weight)
-            if self.use_frequency:
-                for vertex_a in range(len(graph.vs)):
-                    count = self.variants_to_count[self.label_and_id_to_event[label][vertex_a]['variant']]
-                    if count > 1:
-                        weight = ncr(count, 2) * 2
-                        edges.append((vertex_a, vertex_a))
-                        weights.append(weight)
             graph.add_edges(edges)
             graph.es['weight'] = weights
         print('Finished calculating edges')
 
-    def get_communities_leiden(self, event_graphs) -> None:
+    def get_communities_louvain(self, event_graphs, log) -> None:
         print('Starting community detection')
         for (label, graph) in event_graphs.items():
             print(f'Getting communities for {label}')
             partition = la.find_partition(graph, la.ModularityVertexPartition, weights=graph.es['weight'], seed=396482)
+            print(partition)
             self.found_clustering = partition
             self._write('Found communities: \n')
             self._write(str(partition))
@@ -162,31 +136,8 @@ class LabelSplitter:
             for count, cluster in enumerate(partition):
                 self._split_labels_to_original_labels[f'{label}_{count}'] = label
                 for vertex in cluster:
-                    self.label_and_id_to_event[label][vertex]['label'] = f'{label}_{count}'
-                    self._variant_to_label[self.label_and_id_to_event[label][vertex]['variant']] = f'{label}_{count}'
-
+                    event = self.label_and_id_to_event[label][vertex]
+                    log[event['case_id']][event['position']]['concept:name'] = f'{label}_{count}'
         self._write('\nReassigned labels')
-        print('Finished community detection')
-
-    def set_split_labels(self, log):
-        variants = variants_filter.get_variants(log)
-        for variant in variants:
-            filtered_log = variants_filter.apply(log, [variant])
-            for trace in filtered_log:
-                occurrence_counters = {}
-                for event in trace:
-                    label = event['concept:name']
-                    if label not in occurrence_counters:
-                        occurrence_counters[label] = 0
-                    else:
-                        occurrence_counters[label] += 1
-                    event['variant'] = label + '_' + str(variant).replace(',', '') + f'_{occurrence_counters[label]}'
-                    if event['variant'] in self._variant_to_label:
-                        event['concept:name'] = self._variant_to_label[event['variant']]
         print('Finished setting labels')
-
-def ncr(n, r):
-    r = min(r, n-r)
-    numer = reduce(op.mul, range(n, n-r, -1), 1)
-    denom = reduce(op.mul, range(1, r+1), 1)
-    return numer // denom  # or / in Python 2
+        print('Finished community detection')
