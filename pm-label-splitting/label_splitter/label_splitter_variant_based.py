@@ -8,7 +8,7 @@ from typing import TextIO, List
 
 import leidenalg as la
 
-from distance_metrics import Distance, DistanceCalculator
+from label_splitter.distance_metrics import Distance, DistanceCalculator
 from label_splitter.event_graphs_variant_based import EventGraphsVariantBased
 from pipeline.clustering_method import ClusteringMethod
 

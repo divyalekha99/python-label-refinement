@@ -26,7 +26,6 @@ class PerformanceEvaluator:
         self.generalization = 0
         self.simplicity = 0
         self.skip_fitness = skip_fitness
-
     def _write(self, log_entry: string) -> None:
         self.outfile.write(f'{log_entry}\n')
 

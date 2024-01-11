@@ -5,11 +5,11 @@ from pm4py.algo.filtering.log.variants import variants_filter
 from pm4py.objects.log.importer.xes import importer as xes_importer
 
 from evaluation.apply_im import apply_im_with_noise_and_export, \
-    apply_im_without_noise_and_export
+    apply_im_without_noise_and_export, get_xixi_metrics
 from evaluation.golden_standard_model import GoldenStandardModel
 from utils.input_data import InputData
-from pipeline_helpers import get_xixi_metrics, get_imprecise_labels, get_community_similarity
-from pipeline_variant import remove_pipeline_variant_from_string, PipelineVariant
+from pipeline.pipeline_helpers import get_imprecise_labels, get_community_similarity
+from pipeline.pipeline_variant import remove_pipeline_variant_from_string, PipelineVariant
 
 
 class InputPreprocessor:
@@ -118,6 +118,6 @@ def export_model_from_original_log_with_precise_labels(input_name, path, use_noi
         original_log = xes_importer.apply(log_path)
         if use_noise:
             apply_im_with_noise_and_export(input_name, 'original_log_precise_labels', original_log, original_log,
-                                           outfile)
+                                           outfile, labels_to_original={})
         apply_im_without_noise_and_export(input_name, 'original_log_precise_labels', original_log, original_log,
-                                          outfile)
+                                          outfile, labels_to_original={})

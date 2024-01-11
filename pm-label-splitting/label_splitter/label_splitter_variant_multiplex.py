@@ -8,8 +8,8 @@ import leidenalg as la
 from pm4py.algo.filtering.log.variants import variants_filter
 
 from pipeline.clustering_method import ClusteringMethod
-from distance_metrics import Distance, DistanceCalculator
-from label_splitter_variant_based import ncr
+from label_splitter.distance_metrics import Distance, DistanceCalculator
+from label_splitter.label_splitter_variant_based import ncr
 
 
 class LabelSplitter:

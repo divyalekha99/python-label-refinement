@@ -4,6 +4,11 @@ import os
 from datetime import datetime
 from pathlib import Path
 
+from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
+from pm4py.objects.process_tree.exporter import exporter as ptml_exporter
+from pm4py.visualization.petri_net import visualizer as pn_visualizer
+from pm4py.visualization.process_tree import visualizer as pt_visualizer
+
 from pipeline.pipeline_variant import PipelineVariant
 
 
@@ -113,3 +118,25 @@ def write_exception(e, outfile):
     print(e)
     outfile.write(f'´\n----------------Exception occurred------------------------\n')
     outfile.write(f'{repr(e)}\n')
+
+
+def export_models_and_pngs(final_marking, initial_marking, net, original_tree, input_name, suffix):
+    pnml_exporter.apply(net, initial_marking,
+                        f'./outputs/{suffix}.pnml', final_marking=final_marking)
+    ptml_exporter.apply(original_tree, f'./outputs/{suffix}.ptml')
+    save_models_as_png(f'./outputs/{suffix}',
+                       final_marking,
+                       initial_marking,
+                       net,
+                       original_tree)
+
+
+def save_models_as_png(name, final_marking, initial_marking, net, tree):
+    gviz = pt_visualizer.apply(tree)
+    pt_visualizer.save(gviz,
+                      f'{name}_tree.png')
+    parameters = {pn_visualizer.Variants.WO_DECORATION.value.Parameters.FORMAT: "png"}
+    gviz_petri_net = pn_visualizer.apply(net, initial_marking, final_marking, parameters=parameters)
+    pn_visualizer.save(gviz_petri_net,
+                      f'{name}_net.png')
+    return

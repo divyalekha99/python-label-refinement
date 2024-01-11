@@ -1,6 +1,5 @@
 import copy
 import csv
-import os
 import time
 from typing import List, Tuple
 
@@ -9,19 +8,19 @@ from pm4py.objects.log.exporter.xes import exporter as xes_exporter
 from pm4py.objects.log.importer.xes import importer as xes_importer
 from pm4py.objects.log.obj import EventLog
 
-import clustering_method
+import pipeline.clustering_method
 from evaluation.apply_im import apply_im_without_noise_and_evaluate
-from input_preprocessor import InputPreprocessor
+from pipeline import clustering_method
+from pipeline.input_preprocessor import InputPreprocessor
 from label_splitter.distance_metrics import Distance
 from label_splitter.event_graphs_variant_based import get_event_graphs_from_event_log, EventGraphsVariantBased
 from label_splitter.label_splitter_event_based import LabelSplitter as LabelSplitterEventBased
 from label_splitter.label_splitter_variant_based import LabelSplitter as LabelSplitterVariantBased
 from label_splitter.label_splitter_variant_multiplex import LabelSplitter as LabelSplitterVariantMultiplex
-from pipeline.pipeline_helpers import export_models_and_pngs
-from pipeline_helpers import get_tuples_for_folder, get_community_similarity, filter_duplicate_xor
-from pipeline_variant import PipelineVariant
+from pipeline.pipeline_helpers import get_tuples_for_folder, get_community_similarity, filter_duplicate_xor
+from pipeline.pipeline_variant import PipelineVariant
 from utils.file_writer_helper import get_config_string, write_summary_file, \
-    write_summary_file_with_parameters, run_start_string, setup_result_folder
+    write_summary_file_with_parameters, run_start_string, setup_result_folder, export_models_and_pngs
 from utils.input_data import InputData
 
 

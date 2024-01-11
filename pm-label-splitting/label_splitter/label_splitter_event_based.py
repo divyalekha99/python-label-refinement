@@ -6,7 +6,7 @@ from typing import TextIO
 import igraph
 
 from pipeline.clustering_method import ClusteringMethod
-from distance_metrics import Distance, DistanceCalculator
+from label_splitter.distance_metrics import Distance, DistanceCalculator
 import leidenalg as la
 
 

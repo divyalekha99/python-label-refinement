@@ -4,43 +4,9 @@ import re
 from igraph import Clustering, compare_communities
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 from pm4py.algo.filtering.log.variants import variants_filter
-from pm4py.objects.log.importer.xes import importer as xes_importer
-from pm4py.objects.petri_net.exporter import exporter as pnml_exporter
-from pm4py.objects.process_tree.exporter import exporter as ptml_exporter
-from pm4py.visualization.petri_net import visualizer as pn_visualizer
-from pm4py.visualization.process_tree import visualizer as pt_visualizer
 
-from evaluation.apply_im import apply_im_without_noise_and_export
 from utils.input_data import InputData
-from pipeline_variant import PipelineVariant
-
-
-def get_xixi_metrics(labels_to_split, input_data: InputData):
-    with open(f'./outputs/{input_data.input_name}.txt', 'a') as outfile:
-        original_log = xes_importer.apply(input_data.log_path)
-        xixi_refined_log_path = input_data.log_path.replace('LogD', 'LogR', 1)
-        if not os.path.isfile(xixi_refined_log_path):
-            xixi_refined_log_path = xixi_refined_log_path.replace('LogR', 'LogR_IM', 1)
-
-        log = xes_importer.apply(xixi_refined_log_path)
-
-        clustering = get_clustering_from_xixi_log(log, labels_to_split, outfile, input_data)
-        clustering = filter_duplicate_xor(log, labels_to_split, clustering)
-
-        labels_to_original = {}
-
-        for label in labels_to_split:
-            labels_to_original[label] = label
-
-        outfile.write('\n Xixi refined log results:\n')
-        precision, final_net, initial_marking, final_marking = apply_im_without_noise_and_export(input_data.input_name, 'xixi',
-                                                                                                 log, original_log,
-                                                                                                 outfile,
-                                                                                                 labels_to_original=labels_to_original)
-
-        outfile.write('\n Xixi clustering:\n')
-        outfile.write(f'{str(clustering)}\n')
-    return precision, clustering
+from pipeline.pipeline_variant import PipelineVariant
 
 
 def get_clustering_from_xixi_log(log, labels_to_split, outfile, input_data: InputData):
@@ -180,24 +146,3 @@ def get_imprecise_labels(log):
                 imprecise_labels.add(event['concept:name'])
     return list(imprecise_labels)
 
-
-def save_models_as_png(name, final_marking, initial_marking, net, tree):
-    gviz = pt_visualizer.apply(tree)
-    pt_visualizer.save(gviz,
-                      f'{name}_tree.png')
-    parameters = {pn_visualizer.Variants.WO_DECORATION.value.Parameters.FORMAT: "png"}
-    gviz_petri_net = pn_visualizer.apply(net, initial_marking, final_marking, parameters=parameters)
-    pn_visualizer.save(gviz_petri_net,
-                      f'{name}_net.png')
-    return
-
-
-def export_models_and_pngs(final_marking, initial_marking, net, original_tree, input_name, suffix):
-    pnml_exporter.apply(net, initial_marking,
-                        f'./outputs/{suffix}.pnml', final_marking=final_marking)
-    ptml_exporter.apply(original_tree, f'./outputs/{suffix}.ptml')
-    save_models_as_png(f'./outputs/{suffix}',
-                       final_marking,
-                       initial_marking,
-                       net,
-                       original_tree)

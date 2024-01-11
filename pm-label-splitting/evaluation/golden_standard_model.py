@@ -4,8 +4,8 @@ from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 from pm4py.algo.filtering.log.attributes import attributes_filter
 from pm4py.objects.log.importer.xes import importer as xes_importer
 
-from performance_evaluator import PerformanceEvaluator
-from pipeline.pipeline_helpers import export_models_and_pngs
+from evaluation.performance_evaluator import PerformanceEvaluator
+from utils.file_writer_helper import export_models_and_pngs
 from pipeline.pipeline_variant import remove_pipeline_variant_from_string
 
 

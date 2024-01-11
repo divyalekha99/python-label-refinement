@@ -1,17 +1,21 @@
+import os
 from typing import TextIO, Dict, List
 
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 from pm4py.objects.log.obj import EventLog
 
-from performance_evaluator import PerformanceEvaluator
-from pipeline.pipeline_helpers import export_models_and_pngs
+from evaluation.performance_evaluator import PerformanceEvaluator
+from pipeline.pipeline_helpers import get_clustering_from_xixi_log, filter_duplicate_xor
 from pipeline.post_processor import PostProcessor
-from utils.file_writer_helper import write_exception
+from utils.file_writer_helper import write_exception, export_models_and_pngs
+from pm4py.objects.log.importer.xes import importer as xes_importer
+
+from utils.input_data import InputData
 
 
 def apply_im_without_noise_and_export(input_name: str, suffix: str, split_log: EventLog, original_log: EventLog,
                                       outfile: TextIO, labels_to_original: Dict[str, str],
-                                      short_labels_to_original_labels: Dict[str, str]):
+                                      short_labels_to_original_labels: Dict[str, str] = None):
     """
     Applies the Inductive Miner without noise threshold and exports the result.
     """
@@ -30,7 +34,7 @@ def apply_im_without_noise_and_export(input_name: str, suffix: str, split_log: E
 
 
 def apply_im_without_noise_and_evaluate(labels_to_original: Dict[str, str], split_log: EventLog, original_log: EventLog,
-                                        outfile: TextIO, short_labels_to_original_labels: Dict[str, str]):
+                                        outfile: TextIO, short_labels_to_original_labels: Dict[str, str] = None):
     """
     Applies the Inductive Miner without noise threshold and evaluates the result.
     """
@@ -53,7 +57,7 @@ def apply_im_without_noise_and_evaluate(labels_to_original: Dict[str, str], spli
 
 def apply_im_with_noise_and_export(input_name: str, suffix: str, split_log: EventLog, original_log: EventLog,
                                    outfile: TextIO, labels_to_original: Dict[str, str],
-                                   short_labels_to_original_labels: Dict[str, str]):
+                                   short_labels_to_original_labels: Dict[str, str] = None):
     """
     Applies the Inductive miner with multiple noise thresholds to the input.
     The mined models are evaluated and results and models exported.
@@ -105,3 +109,32 @@ def write_data_from_original_log_with_imprecise_labels(input_name: str, original
         apply_im_without_noise_and_export(input_name, 'original_log_imprecise_labels', original_log, original_log,
                                           outfile)
     return f1_scores
+
+
+def get_xixi_metrics(labels_to_split, input_data: InputData):
+    with open(f'./outputs/{input_data.input_name}.txt', 'a') as outfile:
+        original_log = xes_importer.apply(input_data.log_path)
+        xixi_refined_log_path = input_data.log_path.replace('LogD', 'LogR', 1)
+        if not os.path.isfile(xixi_refined_log_path):
+            xixi_refined_log_path = xixi_refined_log_path.replace('LogR', 'LogR_IM', 1)
+
+        log = xes_importer.apply(xixi_refined_log_path)
+
+        clustering = get_clustering_from_xixi_log(log, labels_to_split, outfile, input_data)
+        clustering = filter_duplicate_xor(log, labels_to_split, clustering)
+
+        labels_to_original = {}
+
+        for label in labels_to_split:
+            labels_to_original[label] = label
+
+        outfile.write('\n Xixi refined log results:\n')
+        precision, final_net, initial_marking, final_marking = apply_im_without_noise_and_export(input_data.input_name, 'xixi',
+                                                                                                 log, original_log,
+                                                                                                 outfile,
+                                                                                                 labels_to_original=labels_to_original)
+
+        outfile.write('\n Xixi clustering:\n')
+        outfile.write(f'{str(clustering)}\n')
+    return precision, clustering
+

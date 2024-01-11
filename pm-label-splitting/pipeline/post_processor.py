@@ -34,6 +34,9 @@ class PostProcessor:
         :param net: Post-processed petri net
         :return: Petri net with original label names
         """
+        if self._short_labels_to_original_labels is None:
+            print('No mapping from short labels to original labels')
+            return net
         for transition in net.transitions:
             if transition.label in self._short_labels_to_original_labels.keys():
                 transition.label = self._short_labels_to_original_labels[transition.label]
