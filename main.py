@@ -3,10 +3,8 @@ import sys
 
 from pipeline.pipeline_runner import run_pipeline_for_artificial_event_logs, run_pipeline_for_real_log
 
-folder_index= 0
-directory = '../data/imprInLoop_adaptive_OD'
-#folder_index = int(sys.argv[1])
-#directory = sys.argv[2]
+folder_index = int(sys.argv[1])
+directory = sys.argv[2]
 
 
 def main() -> None:
@@ -16,9 +14,9 @@ def main() -> None:
 
     run_pipeline_for_artificial_event_logs([input_paths[folder_index]])
 
-    run_pipeline_for_real_log(input_name='real_logs/bpi_challenge_2017_3_cases_01_noise',
-                              log_path='./data/real_logs/bpi_challenge_2017_3_cases_per_variant_shortened_labels.xes.gz',
-                              folder_name='bpi_challenge_2017_3_cases_01_noise_missing_configs')
+    run_pipeline_for_real_log(input_name='name_to_identify_the_log_with',
+                              log_path='path_to_log',
+                              folder_name='folder_to_associate_with_the_log_for_the_outputs')
     return
 
 
