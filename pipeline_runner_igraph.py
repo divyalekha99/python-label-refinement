@@ -6,7 +6,7 @@ from pathlib import Path
 from pm4py.objects.log.importer.xes import importer as xes_importer
 
 import clustering_variant
-from apply_im import apply_im_with_noise_and_export, apply_im_without_noise
+from apply_im import apply_im_with_noise_and_export, apply_im_without_noise_and_evaluate
 from distance_metrics import DistanceVariant
 from file_writer_helper import get_config_string, write_summary_file, \
     write_summary_file_with_parameters, run_start_string
@@ -178,9 +178,13 @@ def apply_pipeline_multi_layer_igraph_to_log_with_multiple_parameters(input_data
                                                   window_size,
                                                   use_frequency=input_data.use_frequency))
                     except Exception as e:
+                        print('error in 2')
+
                         print('----------------Exception occurred while running pipeline ------------------------')
                         print(repr(e))
                         with open(f'./outputs/best_results/{input_data.summary_file_name}', 'a') as outfile:
+                            print('error in 3')
+
                             outfile.write(
                                 f'´\n----------------Exception occurred while running pipeline------------------------\n')
                             outfile.write(f'{repr(e)}\n')
@@ -264,7 +268,9 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
 
         if input_data.original_log_precision == 0:
             print('Starting to get original performance')
-            final_marking, initial_marking, final_net, original_precision, original_simplicity, original_generalization, original_fitness = apply_im_without_noise(labels_to_original,
+            # final_marking, initial_marking, final_net, original_precision, original_simplicity, original_generalization, original_fitness = apply_im_without_noise_and_evaluate(labels_to_original,
+            final_marking, initial_marking, final_net, original_precision, original_simplicity, original_generalization, original_fitness = apply_im_without_noise_and_evaluate(labels_to_original,
+
                                                                                       input_data.original_log,
                                                                                       input_data.original_log,
                                                                                       outfile,
@@ -275,7 +281,7 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
             input_data.original_log_fitness = original_fitness
             print('finished original log calculation')
 
-        final_marking, initial_marking, final_net, precision, simplicity, generalization, fitness = apply_im_without_noise(labels_to_original,
+        final_marking, initial_marking, final_net, precision, simplicity, generalization, fitness = apply_im_without_noise_and_evaluate(labels_to_original,
                                                                                       split_log,
                                                                                       input_data.original_log,
                                                                                       outfile,
@@ -293,9 +299,12 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
         print(f'\nAdjusted Rand Index:\n')
         print(f'{ari_score}')
 
+        print('Writing results to csv2', input_data.folder_name, input_data.pipeline_variant)
+
         with open(f'./results/{input_data.folder_name}_{input_data.pipeline_variant}_NEW.csv', 'a') as f:
             writer = csv.writer(f)
             if input_data.ground_truth_clustering:
+                print('input data 1', input_data)
                 row = [input_data.original_input_name, input_data.max_number_of_traces,
                        ' '.join(input_data.labels_to_split),
                        ', '.join(input_data.original_labels), input_data.original_log_precision,
@@ -306,6 +315,7 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
                        input_data.use_combined_context, input_data.use_frequency, window_size, distance_variant, threshold,
                        len(label_splitter.found_clustering), precision, ari_score, simplicity, generalization, fitness]
             else:
+                print('input data 11', input_data)
                 row = [input_data.original_input_name, input_data.max_number_of_traces,
                        ' '.join(input_data.labels_to_split),
                        '[]', input_data.original_log_precision,
@@ -333,6 +343,9 @@ def apply_pipeline_multi_layer_igraph_to_log(input_data: InputData,
             xes_exporter.apply(split_log,
                             f'./outputs/{outfile_name}_split_log.xes')
 
-            tree = inductive_miner.apply_tree(split_log)
+            # tree = inductive_miner.apply_tree(split_log)
+            tree = inductive_miner.apply(split_log)
+
             export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_data.input_name, f'{input_data.input_name}_{threshold}_{distance_variant}_{window_size}_split_log')
+        
         return ari_score, precision, f1_scores_refined

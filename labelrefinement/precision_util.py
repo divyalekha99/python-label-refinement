@@ -1,11 +1,12 @@
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
-from pm4py.evaluation.precision import evaluator as precision_evaluator
-from pm4py.visualization.petrinet import visualizer as pn_visualizer
+from pm4py.objects.conversion.process_tree import converter, variants
+from pm4py.algo.evaluation.precision import algorithm as precision_evaluator
+from pm4py.visualization.petri_net import visualizer as pn_visualizer
 import pm4py
 from time import time
 from pm4py.objects.log.exporter.xes import exporter as xes_exporter
-from pm4py.evaluation.generalization import evaluator as generalization_evaluator
-from pm4py.evaluation.simplicity import evaluator as simplicity_evaluator
+from pm4py.algo.evaluation.generalization import algorithm as generalization_evaluator
+from pm4py.algo.evaluation.simplicity import algorithm as simplicity_evaluator
 
 
 def get_precision(ref_log, event_log, imprecise_labels, graph_parameters):
@@ -24,14 +25,15 @@ def get_precision(ref_log, event_log, imprecise_labels, graph_parameters):
 
     # print("get_prec")
     # print("a")
-    net, initial_marking, final_marking = inductive_miner.apply(ref_log, parameters={
-        inductive_miner.Variants.IMf.value.Parameters.ACTIVITY_KEY: graph_parameters["ACTIVITY_KEY"]})
+    tree = inductive_miner.apply(ref_log, parameters={"ACTIVITY_KEY": graph_parameters["ACTIVITY_KEY"]})
+    net, initial_marking, final_marking = converter.apply(tree, variant=converter.Variants.TO_PETRI_NET)
     # gviz = pn_visualizer.apply(net, initial_marking, final_marking)
     # pn_visualizer.view(gviz)
 
     # print("b")
     for transition in net.transitions:
         if transition.label != None and transition.label.split("_X_", 1)[0] in imprecise_labels:
+            print("check", transition.label)
             transition.label = imprecise_labels[0]
     # print("c")
     # gviz = pn_visualizer.apply(net, initial_marking, final_marking)
@@ -84,9 +86,15 @@ def get_precision_of_original_model(net, initial_marking, final_marking, event_l
 
 def get_precision_of_precice_log(original_event_log, event_log, imprecise_labels, original_labels, graph_parameters):
     # print("get_prec_of_precise_log")
-    net, initial_marking, final_marking = inductive_miner.apply(original_event_log, parameters={
-        inductive_miner.Variants.IMf.value.Parameters.ACTIVITY_KEY: graph_parameters["ACTIVITY_KEY"]})
-
+    # net, initial_marking, final_marking = inductive_miner.apply(original_event_log, parameters={
+    #     inductive_miner.Variants.IMf.value.Parameters.ACTIVITY_KEY: graph_parameters["ACTIVITY_KEY"]})
+    tree = inductive_miner.apply(original_event_log, parameters={"ACTIVITY_KEY": graph_parameters["ACTIVITY_KEY"]})
+    net, initial_marking, final_marking = converter.apply(tree, variant=converter.Variants.TO_PETRI_NET)
+    
+    
+    
+    # net, initial_marking, final_marking = converter.apply(tree, variant=converter.Variants.TO_PETRI_NET)
+    
     for transition in net.transitions:
         if transition.label != None and transition.label in original_labels:
             transition.label = imprecise_labels[0]  # todo rework so that original_labels becomes dictionary

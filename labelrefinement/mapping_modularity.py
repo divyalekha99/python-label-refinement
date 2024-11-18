@@ -30,14 +30,23 @@ def get_mapping_modularity(log, egraphs, map_egraph_ID_to_trace_IDs, map_trace_I
 
 
     partition = {}
+    # synthetic data
+    # if True:
+    #     for case_id, case in enumerate(log):
+    #         for event_id, event in enumerate(case):
+    #             if event["OrgLabel"] not in partition.keys():
+    #                 partition[event["OrgLabel"]] = [(case_id, event_id)]
+    #             else:
+    #                 partition[event["OrgLabel"]].append((case_id, event_id))
 
     if True:
         for case_id, case in enumerate(log):
             for event_id, event in enumerate(case):
-                if event["OrgLabel"] not in partition.keys():
-                    partition[event["OrgLabel"]] = [(case_id, event_id)]
+                # print("check partition keys", partition.keys())
+                if event["concept:name"] not in partition.keys():
+                    partition[event["concept:name"]] = [(case_id, event_id)]
                 else:
-                    partition[event["OrgLabel"]].append((case_id, event_id))
+                    partition[event["concept:name"]].append((case_id, event_id))
 
 
 

@@ -8,7 +8,7 @@ import trace_util as graph_util
 from egraph_mapping_cost_recursive import default_labeling_function as labeling_function
 import networkx as nx
 import matplotlib.pyplot as plt
-import metis
+# import metis
 import community as community_louvain
 import matplotlib.cm as cm
 import weighted_cost_function

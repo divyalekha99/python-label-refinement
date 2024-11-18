@@ -2,6 +2,7 @@ import os
 from typing import TextIO, Dict, List
 
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
+from pm4py.objects.conversion.process_tree import converter, variants
 from pm4py.objects.log.obj import EventLog
 
 from evaluation.performance_evaluator import PerformanceEvaluator
@@ -27,7 +28,10 @@ def apply_im_without_noise_and_export(input_name: str, suffix: str, split_log: E
         original_log,
         outfile,
         short_labels_to_original_labels)
-    tree = inductive_miner.apply_tree(split_log)
+    print('IM without noise threshold successful')
+    # tree = inductive_miner.apply_tree(split_log)
+    tree = inductive_miner.apply(split_log)
+
 
     export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_name, suffix)
     return precision, final_net, initial_marking, final_marking
@@ -38,7 +42,11 @@ def apply_im_without_noise_and_evaluate(labels_to_original: Dict[str, str], spli
     """
     Applies the Inductive Miner without noise threshold and evaluates the result.
     """
-    net, initial_marking, final_marking = inductive_miner.apply(split_log)
+    # net, initial_marking, final_marking = inductive_miner.apply(split_log)
+    process_tree = inductive_miner.apply(split_log)
+    net, initial_marking, final_marking = converter.apply(process_tree, variant=converter.Variants.TO_PETRI_NET)
+
+
     post_processor = PostProcessor(labels_to_original, short_labels_to_original_labels)
     final_net = post_processor.post_process_petri_net(net)
 
@@ -67,10 +75,17 @@ def apply_im_with_noise_and_export(input_name: str, suffix: str, split_log: Even
         outfile.write(f'\nnoise_threshold: {noise_threshold}\n')
 
         try:
-            net, initial_marking, final_marking = inductive_miner.apply(split_log,
-                                                                        variant=inductive_miner.Variants.IMf,
-                                                                        parameters={
-                                                                            inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: noise_threshold})
+            process_tree = inductive_miner.apply(
+                                                    split_log,
+                                                    variant=inductive_miner.Variants.IMf,
+                                                    parameters={inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: noise_threshold}
+                                                )
+            net, initial_marking, final_marking = converter.apply(process_tree, variant=converter.Variants.TO_PETRI_NET)
+
+            # net, initial_marking, final_marking = inductive_miner.apply(split_log,
+            #                                                             variant=inductive_miner.Variants.IMf,
+            #                                                             parameters={
+            #                                                                 inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: noise_threshold})
         except Exception as e:
             print('Exception occurred while applying IM with noise')
             write_exception(e, outfile)
@@ -86,7 +101,12 @@ def apply_im_with_noise_and_export(input_name: str, suffix: str, split_log: Even
 
         f1_score = get_f1_score(performance_evaluator.precision, performance_evaluator.fitness)
         f1_scores.append(f1_score)
-        tree = inductive_miner.apply_tree(original_log,
+
+        # tree = inductive_miner.apply_tree(original_log,
+        #                                   variant=inductive_miner.Variants.IMf,
+        #                                   parameters={
+        #                                       inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: noise_threshold})
+        tree = inductive_miner.apply(original_log,
                                           variant=inductive_miner.Variants.IMf,
                                           parameters={
                                               inductive_miner.Variants.IMf.value.Parameters.NOISE_THRESHOLD: noise_threshold})
@@ -113,15 +133,18 @@ def write_data_from_original_log_with_imprecise_labels(input_name: str, original
 
 def get_xixi_metrics(labels_to_split, input_data: InputData):
     with open(f'./outputs/{input_data.input_name}.txt', 'a') as outfile:
+        print("In xixi metrics")
         original_log = xes_importer.apply(input_data.log_path)
         xixi_refined_log_path = input_data.log_path.replace('LogD', 'LogR', 1)
         if not os.path.isfile(xixi_refined_log_path):
             xixi_refined_log_path = xixi_refined_log_path.replace('LogR', 'LogR_IM', 1)
 
         log = xes_importer.apply(xixi_refined_log_path)
+        print('xixi log imported', xixi_refined_log_path)
 
         clustering = get_clustering_from_xixi_log(log, labels_to_split, outfile, input_data)
         clustering = filter_duplicate_xor(log, labels_to_split, clustering)
+        print('Clustering successful:', clustering)
 
         labels_to_original = {}
 

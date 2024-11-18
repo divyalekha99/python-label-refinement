@@ -1,6 +1,9 @@
 import re
 
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
+
+from pm4py.objects.conversion.process_tree import converter, variants
+from pm4py.algo.filtering.log.variants import variants_filter
 from pm4py.algo.filtering.log.attributes import attributes_filter
 from pm4py.objects.log.importer.xes import importer as xes_importer
 
@@ -37,7 +40,11 @@ class GoldenStandardModel:
 
             imprecise_labels = attributes_filter.get_attribute_values(self._imprecise_log, 'concept:name')
 
-            net, initial_marking, final_marking = inductive_miner.apply(log)
+            # net, initial_marking, final_marking = inductive_miner.apply(log)
+
+            process_tree = inductive_miner.apply(log)
+            
+            net, initial_marking, final_marking = converter.apply(process_tree, variant= converter.Variants.TO_PETRI_NET)
 
             rename_transitions_to_original_label(imprecise_labels, net, self._labels_to_split)
 
@@ -48,7 +55,9 @@ class GoldenStandardModel:
                                                          outfile, skip_fitness=True)
             performance_evaluator.evaluate_performance()
 
-            original_tree = inductive_miner.apply_tree(log)
+            # original_tree = inductive_miner.apply_tree(log)
+            original_tree = inductive_miner.apply(log)
+            
             export_models_and_pngs(final_marking, initial_marking, net, original_tree, self._input_name,
                                    'no_noise_golden')
 

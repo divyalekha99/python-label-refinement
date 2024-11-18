@@ -14,18 +14,17 @@ from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 import test_epoch
 
 log_size_parameter = int(sys.argv[1])
-# number_of_cores = int(sys.argv[2])
 batch_size_parameter = int(sys.argv[2])  # max 610
 experiment_nr_parameter = int(sys.argv[3])  # max 610
 start_data_set_size_parameter = int(sys.argv[4])  # max 610
 
 
-# end_data_set_size_parameter = int(sys.argv[4])  # max 610
 
 def main():
-    # directory = "xixi_files/noImprInLoop_default_OD" 23937<
-    directory = "../../../data/noImprInLoop_default_OD"
-    # directory = "../../../data/test"
+
+    directory = Path("/Users/divya.sarangapani/Documents/replication_new/Real_logs")
+
+
 
     data = {}
     setting_ids = []
@@ -34,18 +33,28 @@ def main():
 
         for file_name in log_folder_list:
             setting_id = '_'.join(file_name.split("_")[:2])
+            print("setting_id", setting_id)
             if setting_id not in setting_ids:
                 setting_ids.append((setting_id, folder_name))
                 data[(setting_id, folder_name)] = {}
+                print("data setting", data[(setting_id, folder_name)], setting_id, folder_name, file_name)
 
     m = 0
 
     for folder_name in os.listdir(directory):
         log_folder_list = os.listdir(os.path.join(directory, folder_name, "logs"))
-        model_folder_list = os.listdir(os.path.join(directory, folder_name, "models"))
+        # model_folder_list = os.listdir(os.path.join(directory, folder_name, "models"))
+        model_folder_path = os.path.join(directory, folder_name, "models")
+        if os.path.exists(model_folder_path):
+            model_folder_list = os.listdir(model_folder_path)
+            print("model_folder_list", model_folder_list)
+        else:
+            model_folder_list = []  # No models for this folder
+
         for log_file_name in log_folder_list:
             setting = ('_'.join(log_file_name.split("_")[:2]), folder_name)
             data[setting]["setting"] = setting  # TODO change data dictionary to list
+            # print(data[setting]["setting"])
             if "LogR" in log_file_name:
                 data[setting]["xixi_log_path"] = os.path.join(directory, folder_name, "logs", log_file_name)
             if "LogD" in log_file_name:
@@ -54,13 +63,25 @@ def main():
             if "LogR" not in log_file_name and "LogD" not in log_file_name:
                 # print('Ping')
                 data[setting]["original_log_path"] = os.path.join(directory, folder_name, "logs", log_file_name)
+                
+
 
         for model_file_name in model_folder_list:
             m = m + 1
+            print("model_file_name", model_file_name)
             # setting = (model_file_name[0] + "1", folder_name) #todo dangerous
-            setting = ('_'.join(model_file_name.split("_")[0]) + "1", folder_name)  # todo dangerous
+            # setting = ('_'.join(model_file_name.split("_")[0]) + "1", folder_name)
+            # Modify to handle prefixes of different lengths consistently
+            # setting = ('_'.join(model_file_name.split("_")[:1])+"1")
+            # setting = model_file_name.split("_")[0] + "_1" 
+            setting = (model_file_name.split("_")[0] + "_1", folder_name)
+
+            # todo dangerous
+            print("setting2", setting)
+            print("data", data.keys())
             if setting in data.keys():
                 data[setting]["model_path"] = os.path.join(directory, folder_name, "models", model_file_name)
+                print("model_path", data[setting]["model_path"])
 
     Path('../results/exp_' + str(experiment_nr_parameter)).mkdir(parents=True, exist_ok=True)
     Path('../results/exp_' + 'xixi_cd_' + str(experiment_nr_parameter)).mkdir(parents=True, exist_ok=True)
@@ -77,11 +98,16 @@ def main():
         'Refined Log ARI', 'Refined Log Simplicity', 'Refined Log Generalization'
     ]
 
-    if Path('../results/exp_' + 'xixi_cc_' + str(experiment_nr_parameter) + "/result_" + str(
-            start_data_set_size_parameter) + '.csv').is_file() or Path(
-        '../results/exp_' + 'xixi_cd_' + str(experiment_nr_parameter) + "/result_" + str(
-            start_data_set_size_parameter) + '.csv').is_file():
-        print('Warning: File already exists!')
+    # Generate the paths to check
+    path1 = Path('../results/exp_' + 'xixi_cc_' + str(experiment_nr_parameter) + "/result_" + str(start_data_set_size_parameter) + '.csv').resolve()
+    path2 = Path('../results/exp_' + 'xixi_cd_' + str(experiment_nr_parameter) + "/result_" + str(start_data_set_size_parameter) + '.csv').resolve()
+
+    # Print the absolute paths
+    print(f'Checking if the following absolute paths exist:\n{path1}\n{path2}')
+
+    # Check if the files exist
+    if path1.is_file() or path2.is_file():
+        print('Warning: One or both files already exist!')
         return
 
     with open(
@@ -139,9 +165,12 @@ def main():
 
     '''
     # print("position in files: ", list(data.values())[start_data_set_size_parameter:start_data_set_size_parameter+15])
+    print(list(data.values()))
     print(list(data.values())[start_data_set_size_parameter * batch_size_parameter:(start_data_set_size_parameter + 1) * batch_size_parameter])
+    print("data", data)
 
-    results = [inside_function(d) for d in list(data.values())[start_data_set_size_parameter * batch_size_parameter:(start_data_set_size_parameter + 1) * batch_size_parameter]]
+    # results = [inside_function(d) for d in list(data.values())[start_data_set_size_parameter * batch_size_parameter:(start_data_set_size_parameter + 1) * batch_size_parameter]]
+    results = [inside_function(d) for d in list(data.values())]
 
     time2 = time()
     print("overalltime: ", time2 - time1)
@@ -183,16 +212,31 @@ def inside_function(paths):
             xes_import_factory.Variants.ITERPARSE.value.Parameters.MAX_TRACES: log_size})
 
         if 'model_path' in paths.keys() and paths['model_path']:
+            print("MODEL PATH")
             original_tree = ptml_importer.apply(paths["model_path"])
             original_net, original_initial_marking, original_final_marking = pt_converter.apply(original_tree)
         else:
-            original_net, original_initial_marking, original_final_marking = inductive_miner.apply(original_event_log)
+            print('in else')
+        #     event_log = xes_import_factory.apply(paths["original_log_path"], parameters={
+        #         xes_import_factory.Variants.ITERPARSE.value.Parameters.MAX_TRACES: log_size})
+        #     xixi_log= []
+
+            # process_tree = inductive_miner.apply(original_event_log)
+        # print("no model path")
+            process_tree = inductive_miner.apply(event_log)
+
+            original_net, original_initial_marking, original_final_marking = pt_converter.apply(process_tree, variant= pt_converter.Variants.TO_PETRI_NET)
+
+            # original_net, original_initial_marking, original_final_marking = inductive_miner.apply(process_tree)
+
+
         print(original_net)
 
         time0 = time()
         print('experiment_nr_parameter')
         print(experiment_nr_parameter)
 
+        # synthetic data
         org_model_prec, precise_refined_log_prec, \
         imp_prec, xixi_prec, ref_log_prec, \
         ref_log_comdec_prec, ref_log_folding_prec, ref_log_semi_prec, ref_log_no_vertical_prec, \
@@ -208,6 +252,23 @@ def inside_function(paths):
                              original_final_marking, experiment_nr_parameter, start_data_set_size_parameter,
                              paths["setting"][0], paths["setting"][1],
                              use_adaptive_parameters=False)
+        
+        #Real logs
+        # org_model_prec, precise_refined_log_prec, \
+        # imp_prec, ref_log_prec, \
+        # ref_log_comdec_prec, ref_log_folding_prec, ref_log_semi_prec, ref_log_no_vertical_prec, \
+        # ref_log_all_prec, \
+        # ref_log_no_comdec_prec, ref_log_no_folding_prec, ref_log_no_semi_prec, ref_log_vertical_prec, \
+        # time_needed_for_all_extensions, \
+        # time_for_greedy_mapping, time_for_semi_greedy_mapping, \
+        # num_of_new_labels, num_of_new_labels_folding, num_of_new_labels_semi, num_of_new_labels_no_vertical, \
+        # mapping_quality, mapping_folding_quality, mapping_semi_quality, mapping_folding_semi_quality \
+        #     = test_epoch.run_real_log(event_log, original_net, original_initial_marking,
+        #                      original_final_marking, experiment_nr_parameter, start_data_set_size_parameter,
+        #                      paths["setting"][0], paths["setting"][1],
+        #                      use_adaptive_parameters=False)
+        
+
         time1 = time()
         # print("time not adaptive: ", time1 - time0)
         '''
@@ -223,30 +284,26 @@ def inside_function(paths):
         '''
         print(paths["setting"][0], paths["setting"][1], \
               org_model_prec, precise_refined_log_prec, \
-              imp_prec, xixi_prec, ref_log_prec, \
+              imp_prec, ref_log_prec, \
               ref_log_comdec_prec, ref_log_folding_prec, ref_log_semi_prec, ref_log_no_vertical_prec, \
               ref_log_all_prec, \
               ref_log_no_comdec_prec, ref_log_no_folding_prec, ref_log_no_semi_prec, ref_log_vertical_prec, \
-              number_of_different_original_labels, \
-              epoch_time, \
               time_needed_for_all_extensions, \
               time_for_greedy_mapping, time_for_semi_greedy_mapping, \
-              num_of_new_labels, num_of_new_labels_comdec, num_of_new_labels_folding, num_of_new_labels_semi,
+              num_of_new_labels, num_of_new_labels_folding, num_of_new_labels_semi,
               num_of_new_labels_no_vertical, \
               mapping_quality, mapping_folding_quality, mapping_semi_quality, mapping_folding_semi_quality
               )
 
         return paths["setting"][0], paths["setting"][1], \
                org_model_prec, precise_refined_log_prec, \
-               imp_prec, xixi_prec, ref_log_prec, \
+               imp_prec, ref_log_prec, \
                ref_log_comdec_prec, ref_log_folding_prec, ref_log_semi_prec, ref_log_no_vertical_prec, \
                ref_log_all_prec, \
                ref_log_no_comdec_prec, ref_log_no_folding_prec, ref_log_no_semi_prec, ref_log_vertical_prec, \
-               number_of_different_original_labels, \
-               epoch_time, \
                time_needed_for_all_extensions, \
                time_for_greedy_mapping, time_for_semi_greedy_mapping, \
-               num_of_new_labels, num_of_new_labels_comdec, num_of_new_labels_folding, num_of_new_labels_semi, num_of_new_labels_no_vertical, \
+               num_of_new_labels, num_of_new_labels_folding, num_of_new_labels_semi, num_of_new_labels_no_vertical, \
                mapping_quality, mapping_folding_quality, mapping_semi_quality, mapping_folding_semi_quality
 
 

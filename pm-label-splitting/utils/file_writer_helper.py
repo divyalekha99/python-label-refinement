@@ -13,7 +13,7 @@ from pipeline.pipeline_variant import PipelineVariant
 
 
 def write_summary_file_with_parameters(best_configs, best_score, best_precision, name, summary_file_name):
-    with open(f'./outputs/best_results/With_Parameters_{summary_file_name}', 'a') as outfile:
+    with open(f'../../outputs/best_results/With_Parameters_{summary_file_name}', 'a') as outfile:
         outfile.write(get_result_header(name))
         outfile.write(f'\nBest found configs for {name}:')
         for config in best_configs:
@@ -27,6 +27,7 @@ def write_summary_file_with_parameters(best_configs, best_score, best_precision,
 def setup_result_folder(folder_name: str, pipeline_variant: PipelineVariant):
     if not os.path.exists('../../outputs/best_results'):
         os.makedirs('../../outputs/best_results')
+        print('Created best_results folder')
 
     header = [
         'Name', 'max_number_of_traces', 'labels_to_split', 'original labels', 'original_precision',
@@ -98,7 +99,7 @@ Results for {name} from {date}
 
 
 def write_summary_file(best_score, best_precision, golden_standard_precision, name, summary_file_name, xixi_precision, xixi_ari):
-    with open(f'./outputs/best_results/{summary_file_name}', 'a') as outfile:
+    with open(f'../../outputs/best_results/{summary_file_name}', 'a') as outfile:
         outfile.write(f'\n\nBest score found for {name}:\n')
         outfile.write(f'{str(best_score)}\n')
         outfile.write(f'Precision of best_score model found for {name}:\n')

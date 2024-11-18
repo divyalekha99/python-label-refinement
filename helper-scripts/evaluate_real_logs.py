@@ -1,231 +1,103 @@
-# %%
-
-from pathlib import Path
-
-import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from pathlib import Path
 
-matplotlib.rcParams['mathtext.fontset'] = 'stix'
-matplotlib.rcParams['font.family'] = 'STIXGeneral'
-matplotlib.rcParams['font.size'] = 12
-matplotlib.rcParams['axes.labelsize'] = 12
-matplotlib.rcParams['legend.fontsize'] = 11
-matplotlib.pyplot.title(r'ABC123 vs $\mathrm{ABC123}^{123}$')
+# Paths to your result CSV files
+bpi_challenge_2013 = Path('/Users/divyalekhas/Documents/Masters/replication_new/results/BPI13_closed_VARIANTS_NEW.csv')
+road_traffic_fines = Path('/Users/divyalekhas/Documents/Masters/replication_new/results/Road_fine_short_VARIANTS_NEW.csv')
+road_traffic_fines_long = Path('/Users/divyalekhas/Documents/Masters/replication_new/results/Road_fine_VARIANTS_NEW.csv')
+environmental_permit = Path('/Users/divyalekhas/Documents/Masters/replication_new/results/Permit.csv')
 
-# %%
-bpi_challenge_2013 = Path(
-    r'C:\Users\Jonas\Desktop\real_logs\paper\results\bpi_challenge_2013_without_lifecycle_VARIANTS_NEW.csv')
 
-bpi_challenge_2012_2_cases = Path(
-    r'C:\Users\Jonas\Desktop\real_logs\paper\results\bpi_challenge_2012_2_cases_01_noise_VARIANTS_NEW.csv')
+def load_csv_data(path):
+    try:
+        df = pd.read_csv(path)
+        df['refined_f1_score'] = 2 * (df['Precision Align'] * df['Fitness']) / (df['Precision Align'] + df['Fitness'])
+        df['unrefined_f1_score'] = 2 * (df['original_precision'] * df['original_fitness']) / (df['original_precision'] + df['original_fitness'])
+        return df
+    except Exception as e:
+        print(f"Error loading {path}: {e}")
+        return pd.DataFrame()
 
-bpi_challenge_2012_3_cases = Path(
-    r'C:\Users\Jonas\Desktop\real_logs\paper\results\bpi_challenge_2012_3_cases_01_noise_VARIANTS_NEW.csv')
 
-bpi_challenge_2017_3_cases = Path(
-    r'C:\Users\Jonas\Desktop\real_logs\paper\results\bpi_challenge_2017_3_cases_01_noise_VARIANTS_NEW.csv')
+df_bpi_challenge_2013 = load_csv_data(bpi_challenge_2013)
+df_road_traffic_fines = load_csv_data(road_traffic_fines)
+df_road_traffic_fines_long = load_csv_data(road_traffic_fines_long)
+df_environmental_permit = load_csv_data(environmental_permit)
 
-road_traffic_fines = Path(
-    r'C:\Users\Jonas\Desktop\real_logs\paper\results\road_traffic_01_noise_VARIANTS_NEW.csv')
 
-environmental_permit = Path(
-    r'C:\Users\Jonas\Desktop\real_logs\paper\results\environmental_permit_01_noise_VARIANTS_NEW.csv')
+bpi_2013_runtime = df_bpi_challenge_2013['Runtime'].mean()
+road_fines_runtime = df_road_traffic_fines['Runtime'].mean()
+road_fines_long_runtime = df_road_traffic_fines_long['Runtime'].mean()
+environmental_permit_runtime = df_environmental_permit['Runtime'].mean()
 
-real_log_paths = [bpi_challenge_2013, bpi_challenge_2012_2_cases, bpi_challenge_2012_3_cases,
-                  bpi_challenge_2017_3_cases, road_traffic_fines, environmental_permit]
 
-xixi_bpi_challenge_2013 = Path(
-    r'C:\Users\Jonas\Desktop\real_logs\paper\results\exp_xixi_real_logs_cd_1\result_new_bpi_2013_challenge_final.csv')
+print("Average Runtime:")
+print(f"BPI Challenge 2013: {bpi_2013_runtime:.2f} seconds")
+print(f"Road Traffic Fines Short: {road_fines_runtime:.2f} seconds")
+print(f"Road Traffic Fines Long: {road_fines_long_runtime:.2f} seconds")
+print(f"Environmental Permit: {environmental_permit_runtime:.2f} seconds")
 
-xixi_road_traffic_fines = Path(
-    r'C:\Users\Jonas\Desktop\real_logs\paper\results\exp_xixi_real_logs_cd_1\result_new_road_traffic_01_noise_final.csv')
 
-xixi_environmental_permit = Path(
-    r'C:\Users\Jonas\Desktop\real_logs\paper\results\exp_xixi_real_logs_cd_1\result_env_permit_01_noise_fitness.csv')
+def print_metrics(df, label):
+    if not df.empty:
+        refined_max_precision = df['Precision Align'].max()
+        refined_avg_precision = df['Precision Align'].mean()
+        refined_max_f1_score = df['refined_f1_score'].max()
+        refined_avg_f1_score = df['refined_f1_score'].mean()
 
-xixi_real_logs_paths = [xixi_bpi_challenge_2013, xixi_road_traffic_fines, xixi_environmental_permit]
-# xixi_real_logs_paths = [xixi_environmental_permit]
+        unrefined_avg_precision = df['original_precision'].mean()
+        unrefined_max_precision = df['original_precision'].max()
+        unrefined_avg_f1_score = df['unrefined_f1_score'].mean()
+        unrefined_max_f1_score = df['unrefined_f1_score'].max()
 
-# %%
+        print(f"\nMetrics for {label}:")
+        print(f"Unrefined Average Precision: {unrefined_avg_precision:.4f}")
+        print(f"Unrefined Max Precision: {unrefined_max_precision:.4f}")
+        print(f"Unrefined Average F1-Score: {unrefined_avg_f1_score:.4f}")
+        print(f"Unrefined Max F1-Score: {unrefined_max_f1_score:.4f}")
+        print(f"Refined Max Precision: {refined_max_precision:.4f}")
+        print(f"Refined Average Precision: {refined_avg_precision:.4f}")
+        print(f"Refined Max F1-Score: {refined_max_f1_score:.4f}")
+        print(f"Refined Average F1-Score: {refined_avg_f1_score:.4f}")
 
-xixi_dfs_real_logs = []
-for path in xixi_real_logs_paths:
-    # if 'png' in path:
-    #     continue
-    temp = pd.read_csv(path)
-    temp['refined_f1_score'] = 2 * (temp['Refined Log Precision'] * temp['Refined Log Fitness']) / (
-            temp['Refined Log Precision'] + temp['Refined Log Fitness'])
 
-    print('path')
-    print(path)
-    print('Runtime')
-    print(temp['Runtime'].mean())
-    # print(temp['Runtime'].max())
+print_metrics(df_bpi_challenge_2013, "BPI Challenge 2013")
+print_metrics(df_road_traffic_fines, "Road Traffic Fines Short")
+print_metrics(df_road_traffic_fines_long, "Road Traffic Fines Long")
+print_metrics(df_environmental_permit, "Environmental Permit")
 
-    print('Precision')
-    print(temp['Refined Log Precision'].mean())
-    print(temp['Refined Log Precision'].max())
 
-    print('Refined Fitness')
-    print(temp['Refined Log Fitness'].mean())
-    print(temp['Refined Log Fitness'].max())
+unrefined_avg_precision_bpi = df_bpi_challenge_2013['original_precision'].mean()
+unrefined_avg_precision_road_fines = df_road_traffic_fines['original_precision'].mean()
+unrefined_avg_precision_road_fines_long = df_road_traffic_fines_long['original_precision'].mean()
+unrefined_avg_precision_environmental_permit = df_environmental_permit['original_precision'].mean()
 
-    print('F1-score')
-    print(temp['refined_f1_score'].mean())
-    print(temp['refined_f1_score'].max())
-
-    xixi_dfs_real_logs.append(temp)
-
-xixi_bpi_challenge_2013 = xixi_dfs_real_logs[0]
-xixi_road_traffic_fines = xixi_dfs_real_logs[1]
-xixi_environmental_permit = xixi_dfs_real_logs[2]
-
-xixi_df_real_logs_combined = pd.DataFrame(np.concatenate([df_temp.values for df_temp in xixi_dfs_real_logs]),
-                                     columns=xixi_dfs_real_logs[0].columns)
-# %%
-
-dfs_real_logs = []
-for path in real_log_paths:
-    # if 'png' in path:
-    #     continue
-    temp = pd.read_csv(path)
-    temp['refined_f1_score'] = 2 * (temp['Precision Align'] * temp['Fitness']) / (
-            temp['Precision Align'] + temp['Fitness'])
-    temp['unrefined_f1_score'] = 2 * (temp['original_precision'] * temp['original_fitness']) / (
-            temp['original_precision'] + temp['original_fitness'])
-
-    print('path')
-    print(path)
-    print('Runtime')
-    print(temp['Runtime'].mean())
-    # print(temp['Runtime'].max())
-
-    print('Precision')
-    print(temp['Precision Align'].mean())
-    print(temp['Precision Align'].max())
-    print('Original Precision')
-    print(temp['original_precision'].mean())
-    print('Fitness')
-    print(temp['Fitness'].mean())
-    print(temp['Fitness'].max())
-    print('Original Fitness')
-    print(temp['original_fitness'].mean())
-
-    print('F1-score')
-    print(temp['refined_f1_score'].mean())
-    print(temp['refined_f1_score'].max())
-    print('unrefined_f1_score')
-    print(temp['unrefined_f1_score'].mean())
-
-    dfs_real_logs.append(temp)
-
-df_bpi_challenge_2013 = dfs_real_logs[0]
-df_bpi_challenge_2012_2_cases = dfs_real_logs[1]
-df_bpi_challenge_2012_3_cases = dfs_real_logs[2]
-df_bpi_challenge_2017_3_cases = dfs_real_logs[3]
-df_road_traffic_fines = dfs_real_logs[4]
-df_environmental_permit = dfs_real_logs[5]
-
-df_real_logs_combined = pd.DataFrame(np.concatenate([df_temp.values for df_temp in dfs_real_logs]),
-                                     columns=dfs_real_logs[0].columns)
-
-# %%
 
 plt.figure()
 fig, ax = plt.subplots()
-bp1 = ax.boxplot(df_bpi_challenge_2012_3_cases['Precision Align'], positions=[1], patch_artist=True, boxprops=dict(facecolor="C0"))
-bp2 = ax.boxplot(df_bpi_challenge_2013['Precision Align'], positions=[2], patch_artist=True, boxprops=dict(facecolor="C2"))
-bp3 = ax.boxplot(xixi_bpi_challenge_2013['Refined Log Precision'], positions=[3], patch_artist=True, boxprops=dict(facecolor="C2"))
-bp4 = ax.boxplot(df_bpi_challenge_2017_3_cases['Precision Align'], positions=[4], patch_artist=True, boxprops=dict(facecolor="C6"))
-bp5 = ax.boxplot(df_road_traffic_fines['Precision Align'], positions=[5], patch_artist=True, boxprops=dict(facecolor="C7"))
-bp8 = ax.boxplot(xixi_road_traffic_fines['Refined Log Precision'], positions=[6], patch_artist=True, boxprops=dict(facecolor="C7"))
-bp6 = ax.boxplot(df_environmental_permit['Precision Align'], positions=[7], patch_artist=True, boxprops=dict(facecolor="C8"))
-bp7 = ax.boxplot(xixi_environmental_permit['Refined Log Precision'], positions=[8], patch_artist=True, boxprops=dict(facecolor="C8"))
+bp1 = ax.boxplot(df_bpi_challenge_2013['Precision Align'], positions=[1], patch_artist=True, boxprops=dict(facecolor="C0"))
+bp2 = ax.boxplot(df_road_traffic_fines['Precision Align'], positions=[2], patch_artist=True, boxprops=dict(facecolor="C2"))
+bp3 = ax.boxplot(df_environmental_permit['Precision Align'], positions=[3], patch_artist=True, boxprops=dict(facecolor="C3"))
 
 
-line_1 =ax.hlines(y=0.31, xmin=0.85, xmax=1.15, color='r') # BPI 2012 Precision
-ax.hlines(y=0.8, xmin=1.85, xmax=2.15, color='r') # BPI 2013
-ax.hlines(y=0.8, xmin=2.85, xmax=3.15, color='r') # BPI 2013 xixi
-ax.hlines(y=0.37, xmin=3.85, xmax=4.15, color='r') # BPI 2017
-ax.hlines(y=0.56, xmin=4.85, xmax=5.15, color='r') # Road Traffic Fines
-ax.hlines(y=0.56, xmin=5.85, xmax=6.15, color='r') # Road Traffic Fines Xixi
-ax.hlines(y=0.19, xmin=6.85, xmax=7.15, color='r') # Environmental Permit
-ax.hlines(y=0.19, xmin=7.85, xmax=8.15, color='r') # Environmental Permit Xixi
 
-ax.legend([bp1["boxes"][0], bp2["boxes"][0],
-           bp4["boxes"][0], bp5["boxes"][0], bp6["boxes"][0], line_1],
-          ['BPI Challenge 2012', 'BPI Challenge 2013',
-           'BPI Challenge 2017', 'Road Traffic Fines', 'Environmental Permit', 'Unrefined Log'],
-          loc='upper center', bbox_to_anchor=(0.5, 1.16),
-          ncol=3, fancybox=True
-          )
-plt.xticks(list(range(1, 9)), ['Context-\nbased', 'Context-\nbased', 'Case\nMapping',
-                               'Context-\nbased', 'Context-\nbased', 'Case\nMapping', 'Context-\nbased', 'Case\nMapping'])
-plt.subplots_adjust(bottom=0.15)
-
-plt.xlabel('Algorithm')
-plt.ylabel('Precision')
-plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\average_precision_real_logs.png', dpi=300)
-plt.show()
-
-# %%
-
-plt.figure()
-fig, ax = plt.subplots()
-bp3 = ax.boxplot(xixi_bpi_challenge_2013['Refined Log Precision'], positions=[1], patch_artist=True, boxprops=dict(facecolor="C0"))
-bp8 = ax.boxplot(xixi_road_traffic_fines['Refined Log Precision'], positions=[2], patch_artist=True, boxprops=dict(facecolor="C0"))
-bp7 = ax.boxplot(xixi_environmental_permit['Refined Log Precision'], positions=[3], patch_artist=True, boxprops=dict(facecolor="C0"))
+ax.hlines(y=unrefined_avg_precision_bpi, xmin=0.85, xmax=1.15, color='r', linestyles='dashed')  # BPI 2013
+ax.hlines(y=unrefined_avg_precision_road_fines, xmin=1.85, xmax=2.15, color='r', linestyles='dashed')
+ax.hlines(y=unrefined_avg_precision_environmental_permit, xmin=2.85, xmax=3.15, color='r', linestyles='dashed')  # Environmental Permit
 
 
-ax.hlines(y=0.8, xmin=0.85, xmax=1.15, color='r') # BPI 2013 xixi
-ax.hlines(y=0.56, xmin=1.85, xmax=2.15, color='r') # Road Traffic Fines Xixi
-ax.hlines(y=0.19, xmin=2.85, xmax=3.15, color='r') # Environmental Permit Xixi
-ax.set_yticks([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1])
-
-ax.legend([line_1],
-          ['Unrefined Event Log Precision'],
-          loc='upper center', bbox_to_anchor=(0.5, 1.16),
-          ncol=1, fancybox=True
-          )
-plt.xticks(list(range(1, 4)), ['BPI Challenge\n2013', 'Road Traffic\nFines', 'Environmental\nPermit'])
-plt.subplots_adjust(bottom=0.15)
-
-plt.xlabel('Event Log')
-plt.ylabel('Precision')
-plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\average_precision_real_logs_xixi.png', dpi=300)
-plt.show()
-
-
-# %%
-
-plt.figure()
-fig, ax = plt.subplots()
-bp1 = ax.boxplot(df_bpi_challenge_2012_3_cases['Precision Align'], positions=[1], patch_artist=True, boxprops=dict(facecolor="C0"))
-bp2 = ax.boxplot(df_bpi_challenge_2013['Precision Align'], positions=[2], patch_artist=True, boxprops=dict(facecolor="C0"))
-bp4 = ax.boxplot(df_bpi_challenge_2017_3_cases['Precision Align'], positions=[3], patch_artist=True, boxprops=dict(facecolor="C0"))
-bp5 = ax.boxplot(df_road_traffic_fines['Precision Align'], positions=[4], patch_artist=True, boxprops=dict(facecolor="C0"))
-bp6 = ax.boxplot(df_environmental_permit['Precision Align'], positions=[5], patch_artist=True, boxprops=dict(facecolor="C0"))
-
-ax.set_yticks([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1])
+ax.set_yticks(np.linspace(0, 1, 11))
 ax.set_ylim([0, 1])
-
-line_1 =ax.hlines(y=0.31, xmin=0.85, xmax=1.15, color='r') # BPI 2012 Precision
-ax.hlines(y=0.8, xmin=1.85, xmax=2.15, color='r') # BPI 2013
-ax.hlines(y=0.37, xmin=2.85, xmax=3.15, color='r') # BPI 2017
-ax.hlines(y=0.56, xmin=3.85, xmax=4.15, color='r') # Road Traffic Fines
-ax.hlines(y=0.19, xmin=4.85, xmax=5.15, color='r') # Environmental Permit
-
-ax.legend([line_1],
-          ['Unrefined Event Log Precision'],
-          loc='upper center', bbox_to_anchor=(0.5, 1.16),
-          ncol=3, fancybox=True
-          )
-plt.xticks(list(range(1, 6)), ['BPI Chall\n2012', 'BPI Chall\n2013', 'BPI Chall\n2017', 'Road Traffic\nFines', 'Environmental\nPermit'])
+ax.legend([bp1["boxes"][0], bp2["boxes"][0], bp3["boxes"][0]],
+          ['BPI Challenge 2013', 'Road Traffic Fines', 'Environmental Permit'],
+          loc='upper center', bbox_to_anchor=(0.5, 1.16), ncol=2, fancybox=True)
+plt.xticks(list(range(1, 4)), ['BPI 2013', 'Road Traffic Fines', 'Environmental Permit'])
 plt.subplots_adjust(bottom=0.15)
 
 plt.xlabel('Event Log')
 plt.ylabel('Precision')
-plt.savefig(r'C:\Users\Jonas\Desktop\real_logs\plot_pngs\average_precision_real_logs_paper.png', dpi=300)
+plt.title('Precision Comparison Across Event Logs')
+plt.savefig('/Users/divyalekhas/Documents/Masters/replication_new/average_precision_comparison.png', dpi=300)
 plt.show()
