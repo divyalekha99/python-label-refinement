@@ -8,10 +8,12 @@ from pm4py.objects.log.importer.xes import importer as xes_importer
 from pm4py.objects.log.exporter.xes import exporter as xes_exporter
 
 
-def main(args) -> None:
-    print(args)
+def main() -> None:
+    print()
     # log_path = args[1]
-    log_path = r'../real_logs/BPI Challenge 2017_3_cases_per_variant.xes.gz'
+    # log_path = r'../real_logs/BPI Challenge 2017_3_cases_per_variant.xes.gz'
+    log_path = r'/Users/divyalekhas/Documents/Masters/replication_new/data/logs/Receipt_phase_of_an_environmental_permit_application_process_CoSeLoG_project.xes'
+
     log = xes_importer.apply(log_path)
     label_mapping = {}
     i = 0
@@ -20,9 +22,10 @@ def main(args) -> None:
     #     for event in trace:
     #         event['concept:name'] = f"{event['concept:name']} {event['lifecycle:transition']}"
 
-    # for trace in log:
-    #     for event in trace:
-    #         event['concept:name'] = f"{event['concept:name']} {event['lifecycle:transition']}"
+    for trace in log:
+        for event in trace:
+            event['concept:name'] = f"{event['concept:name']} {event['lifecycle:transition']}"
+
     print('Before Convert')
     dataframe = pm4py.convert_to_dataframe(log)
     print('Converted')
@@ -47,7 +50,7 @@ def main(args) -> None:
     match = re.match(pattern, log_path)
 
     # new_log_path = re.sub(match.group(1), f'{match.group(1)}_shortened_labels', log_path)
-    new_log_path = '../real_logs/bpi_challenge_2017_3_cases_per_variant_shortened_labels.xes.gz'
+    new_log_path = '/Users/divyalekhas/Documents/Masters/replication_new/data/logs/Receipt_phase_of_an_environmental_permit_application_process_CoSeLoG_project.xes'
     print(log)
     print(new_log_path)
     print(json.dumps(label_mapping))
@@ -84,5 +87,6 @@ def rename_from_short_to_original(args) -> None:
     xes_exporter.apply(log, new_log_path)
 
 
-main(sys.argv)
+# main(sys.argv)
+main()
 # rename_from_short_to_original(sys.argv)

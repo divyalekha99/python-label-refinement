@@ -62,6 +62,8 @@ class LabelSplitter:
             print('Warning: Distance metric not found, fallback to default distance')
             self.get_distance = self.distance_calculator.get_edit_distance
 
+        print('Label Splitter initialized in init', self.distance_variant, self.clustering_variant, self._variant_to_label, self.labels_to_split, event_graphs_variant_based.event_graphs)
+
     def _write(self, log_entry: string) -> None:
         self.outfile.write(f'{log_entry}\n')
 
@@ -73,7 +75,7 @@ class LabelSplitter:
     def split_labels(self, log):
         print('Starting label splitting')
         event_graphs = copy.deepcopy(self.event_graphs)
-
+        print('event graphs deb:', event_graphs)
         self.calculate_edges(event_graphs)
         self.get_communities_leiden(event_graphs=event_graphs)
         self.set_split_labels(log)
@@ -124,6 +126,7 @@ class LabelSplitter:
 
     def get_communities_leiden(self, event_graphs) -> None:
         print('Starting community detection')
+        print('event graphss debg:', self.clustering_variant, event_graphs)
         for (label, graph) in event_graphs.items():
             print(f'Getting communities for {label}')
             partition = la.find_partition(graph, la.ModularityVertexPartition, weights=graph.es['weight'], seed=396482)

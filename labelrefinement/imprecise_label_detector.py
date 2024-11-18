@@ -4,11 +4,15 @@ import pm4py
 def oracle_detection(log):
     imprecise_labels = set()
     original_labels = set()
+    # synthetic data
     for trace in log:
         for event in trace:
             if event["OrgLabel"] != event["concept:name"]:
                 original_labels.add(event["OrgLabel"])
                 imprecise_labels.add(event["concept:name"])
+
+    # imprecise_labels.add("Payment")
+    # imprecise_labels.add("Payment")
 
     original_labels = list(original_labels)
     imprecise_labels = list(imprecise_labels)

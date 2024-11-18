@@ -1,8 +1,14 @@
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
+from pm4py.objects.conversion.process_tree import converter, variants
 
 def postprocess(event_log, imprecise_labels, label_refinements, parameters):
-    net, initial_marking, final_marking = inductive_miner.apply(event_log, parameters={
-        inductive_miner.Variants.IMf.value.Parameters.ACTIVITY_KEY: parameters["ACTIVITY_KEY"]})
+    # net, initial_marking, final_marking = inductive_miner.apply(event_log, parameters={
+    #     inductive_miner.Variants.IMf.value.Parameters.ACTIVITY_KEY: parameters["ACTIVITY_KEY"]})
+    
+    tree = inductive_miner.apply(event_log, parameters={"ACTIVITY_KEY": parameters["ACTIVITY_KEY"]})
+    
+    net, initial_marking, final_marking = converter.apply(tree, variant=converter.Variants.TO_PETRI_NET)
+    
 
     seen_transitions = []
     new_label_refinements = []

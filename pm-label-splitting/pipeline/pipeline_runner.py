@@ -31,7 +31,9 @@ def run_pipeline_for_artificial_event_logs(input_paths: List[Tuple[str, str]]) -
     """
     for path, prefix in input_paths:
         input_list = get_tuples_for_folder(path, prefix)[::-1]
-        apply_pipeline_to_folder(input_list, prefix, PipelineVariant.VARIANTS, labels_to_split=[], use_noise=False,
+        apply_pipeline_to_folder(input_list, prefix, PipelineVariant.EVENTS, 
+                                    real_or_synthetic='synthetic',
+                                 labels_to_split=[], use_noise=False,
                                  use_frequency=True)
 
 
@@ -43,14 +45,19 @@ def run_pipeline_for_real_log(input_name: str, log_path: str, folder_name: str) 
     :param log_path: path to the input event log
     :param folder_name: folder to associate with the log for the outputs
     """
+
     apply_pipeline_to_folder([(input_name, log_path)], folder_name,
                              PipelineVariant.VARIANTS,
-                             labels_to_split=['9'],
+                             real_or_synthetic='real',
+                            #  labels_to_split=["Accepted In Progress"],
+                             labels_to_split=["5"],
                              use_frequency=True,
-                             use_noise=False)
+                             use_noise=True,
+                             )
 
 
-def apply_pipeline_to_folder(input_list: List[Tuple[str, str]], folder_name: str, pipeline_variant: PipelineVariant,
+def apply_pipeline_to_folder(input_list: List[Tuple[str, str]], folder_name: str, pipeline_variant: PipelineVariant, 
+                             real_or_synthetic: str,
                              labels_to_split: List[str] = None, use_frequency: bool = True,
                              use_noise: bool = True) -> None:
     """
@@ -62,10 +69,10 @@ def apply_pipeline_to_folder(input_list: List[Tuple[str, str]], folder_name: str
 
     setup_result_folder(folder_name=folder_name, pipeline_variant=pipeline_variant)
 
-    print("Starting pipeline")
+    print("Starting pipeline, ", input_list)
     for (name, path) in input_list:
         input_data, input_preprocessor = set_up_input_data(folder_name, labels_to_split, name, path, pipeline_variant,
-                                                           use_frequency, use_noise)
+                                                           use_frequency, use_noise, real_or_synthetic)
 
         if input_preprocessor.has_duplicate_xor():
             print('############## Skipped ######################')
@@ -74,8 +81,10 @@ def apply_pipeline_to_folder(input_list: List[Tuple[str, str]], folder_name: str
                 outfile.write(
                     f'´\n----------------Skipped Model {input_data.input_name} because of duplicate label ------------------------\n')
             continue
+        print("inga vantan")
 
         best_score, best_precision, best_configs = run_pipeline_on_parameter_space(input_data)
+        print("inga vantan", best_score, best_precision, best_configs)
         try:
             write_summary_file_with_parameters(best_configs, best_score, best_precision, name,
                                                input_data.summary_file_name)
@@ -83,7 +92,7 @@ def apply_pipeline_to_folder(input_list: List[Tuple[str, str]], folder_name: str
                                input_data.summary_file_name,
                                input_data.xixi_precision, input_data.xixi_ari)
         except Exception as e:
-            with open(f'./outputs/best_results/{input_data.summary_file_name}', 'a') as outfile:
+            with open(f'../../outputs/best_results/{input_data.summary_file_name}', 'a') as outfile:
                 outfile.write(
                     f'´\n----------------Exception occurred while writing summary file------------------------\n')
                 outfile.write(f'{repr(e)}\n')
@@ -91,7 +100,7 @@ def apply_pipeline_to_folder(input_list: List[Tuple[str, str]], folder_name: str
 
 
 def set_up_input_data(folder_name: str, labels_to_split: List[str], name: str, path: str,
-                      pipeline_variant: PipelineVariant, use_frequency: bool, use_noise: bool) -> Tuple[
+                      pipeline_variant: PipelineVariant, use_frequency: bool, use_noise: bool, real_or_synthetic: str) -> Tuple[
     InputData, InputPreprocessor]:
     """
     Generates the input data used throughout the pipeline for one event log.
@@ -106,7 +115,8 @@ def set_up_input_data(folder_name: str, labels_to_split: List[str], name: str, p
                            use_frequency=use_frequency,
                            use_noise=use_noise,
                            max_number_of_traces=5000000,
-                           folder_name=folder_name)
+                           folder_name=folder_name, 
+                           real_or_synthetic=real_or_synthetic)
     input_data.original_log = xes_importer.apply(input_data.log_path, parameters={
         xes_importer.Variants.ITERPARSE.value.Parameters.MAX_TRACES: input_data.max_number_of_traces})
     input_data.input_name = f'{input_data.original_input_name}_{input_data.pipeline_variant}' if use_frequency else f'{input_data.original_input_name}_{input_data.pipeline_variant}'
@@ -137,6 +147,7 @@ def run_pipeline_on_parameter_space(input_data: InputData):
     input_data.use_frequency = True
 
     event_graphs_variant_based = get_event_graphs_from_event_log(input_data.original_log, input_data.labels_to_split)
+    print('event_graphs_variant_based', event_graphs_variant_based.event_graphs)
 
     for label in input_data.labels_to_split:
         for window_size in [1, 3, 5]:
@@ -146,6 +157,7 @@ def run_pipeline_on_parameter_space(input_data: InputData):
                 for threshold in [0, 0.25, 0.5, 0.75, 1]:
                     try:
                         log = copy.deepcopy(input_data.original_log)
+                        print(f'Running pipeline for {label} with window size {window_size}, distance {distance} and threshold {threshold}')
 
                         found_score, precision, f1_scores_refined = apply_pipeline_to_log(input_data, log, distance,
                                                                                           window_size, threshold,
@@ -164,6 +176,8 @@ def run_pipeline_on_parameter_space(input_data: InputData):
                         elif round(found_score, 2) == round(best_score, 2):
                             best_configs.append(config_string)
                     except Exception as e:
+                        print("error in 1")
+
                         print('----------------Exception occurred while running pipeline ------------------------')
                         print(repr(e))
 
@@ -203,8 +217,11 @@ def apply_pipeline_to_log(input_data: InputData,
                                             threshold, window_size, event_graphs_variant_based)
 
         split_log = label_splitter.split_labels(log)
+        print('split log successfully created')
+        print('label_splitter debg', label_splitter)
         split_log_clustering = filter_duplicate_xor(split_log, input_data.labels_to_split,
                                                     label_splitter.found_clustering)
+        print('split log clustering successfully created')
         end = time.time()
         runtime = end - start
         outfile.write(f'\nRuntime: {runtime}\n')
@@ -228,20 +245,26 @@ def apply_pipeline_to_log(input_data: InputData,
 
         f1_scores_refined = []
         if input_data.ground_truth_clustering:
+            print("yes ground truth clustering")
             ari_score = get_community_similarity(input_data.ground_truth_clustering, split_log_clustering)
         else:
+            print("no ground truth clustering")
             ari_score = precision
         outfile.write(f'\nAdjusted Rand Index:\n')
         outfile.write(f'{ari_score}\n\n')
 
+        print('Error before writing results to csv')
         write_results_to_csv(ari_score, distance_variant, fitness, generalization, input_data, label_splitter,
                              precision, runtime, simplicity, threshold, window_size)
+        print('Error after writing results to csv')
 
         if ari_score > best_score:
             # Export everything is new best model was found
             print(f'\nHigher Adjusted Rand Index found: {ari_score}')
             print(f'\nPrecision of found clustering: {precision}')
-            tree = inductive_miner.apply_tree(split_log)
+            # tree = inductive_miner.apply_tree(split_log)
+            tree = inductive_miner.apply(split_log)
+
             export_models_and_pngs(final_marking, initial_marking, final_net, tree, input_data.input_name,
                                    f'{input_data.input_name}_{threshold}_{distance_variant}_{window_size}_split_log')
 
@@ -267,9 +290,12 @@ def calculate_unrefined_log_precision(input_data, label_splitter, labels_to_orig
 def write_results_to_csv(ari_score: float, distance_variant: Distance, fitness: float, generalization: float,
                          input_data: InputData, label_splitter: LabelSplitterVariantBased, precision: float,
                          runtime: float, simplicity: float, threshold: float, window_size: int) -> None:
+    # print('Writing results to csv1', input_data.folder_name, input_data.pipeline_variant)
     with open(f'./results/{input_data.folder_name}_{input_data.pipeline_variant}_NEW.csv', 'a') as f:
         writer = csv.writer(f)
         if input_data.ground_truth_clustering:
+            print('input data 2', input_data)
+
             row = [input_data.original_input_name, input_data.max_number_of_traces,
                    ' '.join(input_data.labels_to_split),
                    ', '.join(input_data.original_labels), input_data.original_log_precision,
@@ -281,6 +307,7 @@ def write_results_to_csv(ari_score: float, distance_variant: Distance, fitness: 
                    len(label_splitter.found_clustering), precision, ari_score, simplicity, generalization, fitness,
                    runtime]
         else:
+
             row = [input_data.original_input_name, input_data.max_number_of_traces,
                    ' '.join(input_data.labels_to_split),
                    '[]', input_data.original_log_precision,
@@ -295,6 +322,7 @@ def write_results_to_csv(ari_score: float, distance_variant: Distance, fitness: 
 
 def get_label_splitter(distance_variant: Distance, input_data: InputData, outfile, threshold, window_size,
                        event_graphs_variant_based: EventGraphsVariantBased):
+    print('ls_check dbg, input_data.pipeline_variant', input_data.pipeline_variant, event_graphs_variant_based)
     if input_data.pipeline_variant == PipelineVariant.VARIANTS:
         label_splitter = LabelSplitterVariantBased(outfile,
                                                    input_data.labels_to_split,
@@ -306,6 +334,7 @@ def get_label_splitter(distance_variant: Distance, input_data: InputData, outfil
                                                    concurrent_labels=input_data.concurrent_labels,
                                                    use_combined_context=input_data.use_combined_context,
                                                    event_graphs_variant_based=event_graphs_variant_based)
+        print('label_splitter debg', label_splitter)
     elif input_data.pipeline_variant == PipelineVariant.VARIANTS_MULTIPLEX:
         label_splitter = LabelSplitterVariantMultiplex(outfile,
                                                        input_data.labels_to_split,

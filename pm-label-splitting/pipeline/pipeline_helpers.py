@@ -3,6 +3,10 @@ import re
 
 from igraph import Clustering, compare_communities
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
+# from pm4py.objects.conversion.process_tree import converter, variants
+from pm4py.objects.conversion.process_tree import converter, variants
+# from pm4py.objects.conversion.process_tree import variants
+# from pm4py.objects.conversion.process_tree.variants import to_petri_net
 from pm4py.algo.filtering.log.variants import variants_filter
 
 from utils.input_data import InputData
@@ -15,6 +19,7 @@ def get_clustering_from_xixi_log(log, labels_to_split, outfile, input_data: Inpu
     split_labels = []
 
     if input_data.pipeline_variant != PipelineVariant.EVENTS:
+        print('test clustering from Xixi log')
         for variant in variants:
             filtered_log = variants_filter.apply(log, [variant])
             for event in filtered_log[0]:
@@ -24,6 +29,7 @@ def get_clustering_from_xixi_log(log, labels_to_split, outfile, input_data: Inpu
                         split_labels.append(label)
                     clustering.append(int(next(re.finditer(r'\d+$', label)).group(0)))
     else:
+        print('else test clustering from Xixi log')
         for trace in log:
             for event in trace:
                 label = event['concept:name']
@@ -38,10 +44,17 @@ def get_clustering_from_xixi_log(log, labels_to_split, outfile, input_data: Inpu
 
 
 def get_tuples_for_folder(folder_path, prefix):
+    # import os
+    # print("Current Working Directory:", os.getcwd())
+
     log_list = []
     identifier_pattern = f'^(\w+_\d+)'
+    # identifier_pattern = f'^(.)'
+
     for f in os.listdir(folder_path):
+        print("folder_path: ", f,folder_path)
         if 'LogD' in f:
+        # and f.startswith('V'):
             log_list.append((f'{prefix}/{re.match(identifier_pattern, f).group(1)}', f'{folder_path}{f}'))
     return log_list
 
@@ -88,7 +101,26 @@ def get_concurrent_labels(input_data: InputData, threshold: float = 0.85):
 
 
 def filter_duplicate_xor(event_log, labels_to_split, clustering: Clustering):
-    net, initial_marking, final_marking = inductive_miner.apply(event_log)
+    
+
+
+    print('Filtering duplicate XOR transitions')
+
+    # Apply inductive miner to get a ProcessTree
+    process_tree = inductive_miner.apply(event_log)
+
+    # Convert ProcessTree to Petri net
+    # net, initial_marking, final_marking = pt_converter.apply(process_tree, variant=pt_converter.Variants.TO_PETRI_NET)
+    net, initial_marking, final_marking = converter.apply(process_tree, variant= converter.Variants.TO_PETRI_NET)
+    # Apply the inductive miner to the event log, generating a process tree
+    # process_tree = inductive_miner.apply(event_log)
+
+    # # Convert the process tree to a Petri net
+    # net, initial_marking, final_marking = to_petri_net.apply(process_tree)
+
+
+    print('Inductive miner applied')
+
 
     seen_transitions = []
     updated_label_mapping = {}
@@ -134,15 +166,20 @@ def filter_duplicate_xor(event_log, labels_to_split, clustering: Clustering):
             new_clustering.append(int(new_m))
         clustering = Clustering(new_clustering)
 
+    print('Updated log and clustering')
+
     return clustering
 
 
-def get_imprecise_labels(log):
+def get_imprecise_labels(log, real_or_synthetic):
     print('Getting imprecise labels')
     imprecise_labels = set()
+    # if real_or_synthetic == 'synthetic':
     for trace in log:
         for event in trace:
             if event['OrgLabel'] != event['concept:name']:
                 imprecise_labels.add(event['concept:name'])
+    # else:
+    #     imprecise_labels.add("Accepted In Progress")
     return list(imprecise_labels)
 

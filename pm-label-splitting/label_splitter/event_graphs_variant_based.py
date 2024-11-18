@@ -35,13 +35,29 @@ def get_event_graphs_from_event_log(log, labels_to_split):
             variant_to_sample_case[variant[1:]] = case
         for e in case:
             e['variant_raw'] = variant.replace(',', '')
+    print('Variants:', variants)
 
     for variant in variants:
         prefix = ''
         processed_events = []
         occurrence_counters = {}
-        for event in variant_to_sample_case[str(variant)]:
+        print('Variant:', variant)
+        # print('Variant to sample case:', variant_to_sample_case)
+        # for event in variant_to_sample_case[str(variant)]:
+        # print('Variant:', variant)
+        variant_str = ','.join(variant)  # Convert the variant tuple to a string
+    
+        print('Variant:', variant_str)  # Print the variant string
+        
+        if variant_str in variant_to_sample_case:  # Check if the string version of the variant is in the sample cases
+            print(f"Variant {variant_str} found in sample cases.")
+        else:
+            print(f"Variant {variant_str} not found in sample cases.")
+
+        for event in variant_to_sample_case.get(variant_str, []):
+            print("GOing in lable")
             label = event['concept:name']
+            print('Label:', label)
             if 'original_label' in event.keys():
                 short_label_to_original_label[label] = event['original_label']
 
@@ -66,8 +82,12 @@ def get_event_graphs_from_event_log(log, labels_to_split):
             prefix = prefix + label
         for event in processed_events:
             label = event['concept:name']
+            print('vanten', label, labels_to_split)
             if label in labels_to_split:
                 label_and_id_to_event[label].append(event)
+                print('Ebba')
                 event_graphs[label].add_vertices(1)
+
+        print("Event graphs:", event_graphs)
 
     return EventGraphsVariantBased(event_graphs, short_label_to_original_label, label_and_id_to_event, variants_to_count)

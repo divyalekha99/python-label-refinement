@@ -1,5 +1,5 @@
 from enum import Enum
-from functools import cache
+from functools import lru_cache as cache
 
 import editdistance
 
